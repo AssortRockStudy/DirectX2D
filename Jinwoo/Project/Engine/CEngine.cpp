@@ -2,6 +2,7 @@
 #include "CEngine.h"
 
 #include "CDevice.h"
+#include "Test.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(nullptr)
@@ -12,7 +13,7 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-
+	TestRelease();
 }
 
 int CEngine::init(HWND _hWnd, Vec2 _vResolution)
@@ -31,10 +32,15 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 		return E_FAIL;
 	}
 
+	if (FAILED(TestInit()))
+	{
+		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
 void CEngine::progress()
 {
-
+	TestProgress();
 }

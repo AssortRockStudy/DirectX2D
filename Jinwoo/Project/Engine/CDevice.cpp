@@ -48,6 +48,17 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 		return E_FAIL;
 	}
 
+	// ViewPort 설정
+	D3D11_VIEWPORT ViewportDesc = {};
+
+	ViewportDesc.MinDepth = 0;
+	ViewportDesc.MaxDepth = 1.f;
+
+	ViewportDesc.TopLeftX = 0;
+	ViewportDesc.TopLeftY = 0;
+	ViewportDesc.Width = m_vRenderResolution.x;
+	ViewportDesc.Height = m_vRenderResolution.y;
+
 	return S_OK;
 }
 
@@ -143,4 +154,15 @@ int CDevice::CreateTargetView()
 	m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
 
 	return S_OK;
+}
+
+void CDevice::ClearRenderTarget(float(&Color)[4])
+{
+	m_Context->ClearRenderTargetView(m_RTView.Get(), Color);
+	m_Context->ClearDepthStencilView(m_DSView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+}
+
+void CDevice::Present()
+{
+	m_SwapChain->Present(0, 0);
 }
