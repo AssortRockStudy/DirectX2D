@@ -19,11 +19,11 @@
     <Filter Include="Entity">
       <UniqueIdentifier>{e5685132-ffcc-4c72-85c6-0c618d37794c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Module">
-      <UniqueIdentifier>{01627796-654c-4e1c-944e-bc8897c4b000}</UniqueIdentifier>
+    <Filter Include="SimpleMath">
+      <UniqueIdentifier>{de071f22-f034-4862-ab4f-66aacf763939}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderCode">
-      <UniqueIdentifier>{c1e20b38-e6d0-4126-b7b2-ba2b18c9c695}</UniqueIdentifier>
+      <UniqueIdentifier>{f164458a-c4d4-4e1e-9c41-19d3d57497b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,9 @@
     <ClInclude Include="CLevel.h">
       <Filter>04.Level</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>SimpleMath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -79,5 +82,13 @@
     <ClCompile Include="CLevel.cpp">
       <Filter>04.Level</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>SimpleMath</Filter>
+    </None>
+    <None Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </None>
   </ItemGroup>
 </Project>
