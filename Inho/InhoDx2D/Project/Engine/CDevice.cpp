@@ -104,6 +104,13 @@ int CDevice::CreateTargetView()
     Desc.Width = (UINT)m_vRenderResolution.x;
     Desc.Height = (UINT)m_vRenderResolution.y;
 
+    // DepthStencil 용도의 텍스처
+    Desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+    // CPU 접근 불가
+    Desc.CPUAccessFlags = 0;
+    Desc.Usage = D3D11_USAGE_DEFAULT;
+
     Desc.SampleDesc.Count = 1;
     Desc.SampleDesc.Quality = 0;
 
@@ -120,5 +127,5 @@ int CDevice::CreateTargetView()
 
     m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
 
-    return 0;
+    return S_OK;
 }
