@@ -4,10 +4,22 @@
 #include "framework.h"
 #include "Dx2D.h"
 
+#include <Engine\global.h>
+#include <Engine\CEngine.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "Engine\\Engine_d.lib")
+#else
+#pragma comment(lib, "Engine\\Engine.lib")
+#endif
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HINSTANCE hInst;                             
+HWND hWnd;
+
+
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -42,13 +54,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+    if (FAILED(CEngine::GetInst()->init(hWnd, Vec2(1280, 768)))) {
+        MessageBox(nullptr, L"CEngine 초기화 실패", L"초기화 실패", MB_OK);
+        return 0;
+    }
+
+    
+    while (true) {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+            if (msg.message == WM_QUIT)
+                break;
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else {
+            CEngine::GetInst()->progress();
         }
     }
 
