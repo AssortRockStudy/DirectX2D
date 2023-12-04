@@ -40,7 +40,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
 
-    CEngine::GetInst()->init();
+    // CEngine 초기화 실패 -> 프로그램 종료
+    if (FAILED(CEngine::GetInst()->init(hWnd, Vec2(1280.f, 760.f))))
+    {
+        MessageBox(nullptr, L"CEngine 초기화 실패", L"초기화 실패", MB_OK);
+        return 0;
+    }
 
 
     while (true)
@@ -58,9 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            // Engine Code
-
-
+            CEngine::GetInst()->progress();
         }
 
 

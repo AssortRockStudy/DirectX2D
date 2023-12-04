@@ -10,6 +10,21 @@
     <Filter Include="02. Engine">
       <UniqueIdentifier>{31091915-2da6-4504-b058-a4442d93f2ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Device">
+      <UniqueIdentifier>{17dedd26-aa23-404d-94c5-6830ae166f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Level">
+      <UniqueIdentifier>{aa6a931e-1424-455d-9543-9bb17f953f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{25ca55d0-d2e0-4ebc-b0e9-3a9b2f9af02d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{955d422a-2ef8-4045-a59d-e245970f6bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode">
+      <UniqueIdentifier>{9c23c6f3-0047-4beb-a84f-16d32670ee01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -33,6 +48,19 @@
     <ClInclude Include="struct.h">
       <Filter>01. Header</Filter>
     </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>03.Device</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevel.h">
+      <Filter>04. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -44,5 +72,20 @@
     <ClCompile Include="CEngine.cpp">
       <Filter>02. Engine</Filter>
     </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>03.Device</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevel.cpp">
+      <Filter>04. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Module</Filter>
+    </None>
   </ItemGroup>
 </Project>
