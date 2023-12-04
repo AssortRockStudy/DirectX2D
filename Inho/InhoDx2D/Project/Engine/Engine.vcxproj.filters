@@ -17,6 +17,18 @@
     <Filter Include="01. Header">
       <UniqueIdentifier>{9bc88a26-d76d-454b-a769-babd6a46e1d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Level">
+      <UniqueIdentifier>{1a296230-ea49-48db-b1b9-b005dc95ab91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{5cd7a642-c3fe-445a-935e-5c5f660d9822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadeCode">
+      <UniqueIdentifier>{5ac77e52-b911-487c-a9dd-632cf68dc64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{642bebcf-5d9a-42db-8364-be5033293969}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -43,6 +55,16 @@
     <ClInclude Include="CDevice.h">
       <Filter>03. Device</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="CEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevel.h">
+      <Filter>04. Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -57,5 +79,22 @@
     <ClCompile Include="CDevice.cpp">
       <Filter>03. Device</Filter>
     </ClCompile>
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevel.cpp">
+      <Filter>04. Level</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShadeCode</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Module</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -2,6 +2,10 @@
 
 #include <stdlib.h>
 #include <Windows.h>
+#include <string>
+
+using std::wstring;
+using std::string;
 
 // 스마트 포인터 사용하기 위함
 #include <wrl.h>
@@ -15,6 +19,14 @@ using namespace DirectX;
 
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
+
+// SimpleMath
+#include "SimpleMath.h"
+using namespace DirectX::SimpleMath;
+
+typedef Vector2 Vec2;
+typedef Vector3 Vec3;
+typedef Vector4 Vec4;
 
 #include "singleton.h"
 #include "define.h"
