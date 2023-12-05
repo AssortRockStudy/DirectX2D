@@ -31,7 +31,7 @@ int TestInit()
     BufferDesc.StructureByteStride = sizeof(Vtx);
     BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
-    BufferDesc.CPUAccessFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
     BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 
     // g_Vtx 배열의 데이터를 초기 데이터로 설정
@@ -42,6 +42,7 @@ int TestInit()
         MessageBox(nullptr, L"버텍스 버퍼 생성 실패", L"TestInit 오류", MB_OK);
         return E_FAIL;
     }
+
 
     return S_OK;
 }
