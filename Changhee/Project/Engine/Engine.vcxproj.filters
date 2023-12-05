@@ -88,4 +88,9 @@
       <Filter>Module</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+  </ItemGroup>
 </Project>
