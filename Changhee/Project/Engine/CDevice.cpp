@@ -50,15 +50,17 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 	}
 
 	// ViewPort ¼³Á¤
-	D3D11_VIEWPORT ViewportDesc = {};
+	D3D11_VIEWPORT tViewportDesc = {};
 
-	ViewportDesc.MinDepth = 0.f;
-	ViewportDesc.MaxDepth = 1.f;
+	tViewportDesc.MinDepth = 0.f;
+	tViewportDesc.MaxDepth = 1.f;
 
-	ViewportDesc.TopLeftX = 0;
-	ViewportDesc.TopLeftY = 0;
-	ViewportDesc.Width = m_vRenderResolution.x;
-	ViewportDesc.Height = m_vRenderResolution.y;
+	tViewportDesc.TopLeftX = 0;
+	tViewportDesc.TopLeftY = 0;
+	tViewportDesc.Width = m_vRenderResolution.x;
+	tViewportDesc.Height = m_vRenderResolution.y;
+
+	CONTEXT->RSSetViewports(1, &tViewportDesc);
 
 
 	return S_OK;

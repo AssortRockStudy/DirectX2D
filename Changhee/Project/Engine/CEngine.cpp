@@ -2,8 +2,12 @@
 #include "CEngine.h"
 
 #include "CDevice.h"
-#include "Test.h"
 
+#include "CKeyMgr.h"
+#include "CTimeMgr.h"
+#include "CPathMgr.h"
+
+#include "Test.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(nullptr)
@@ -20,20 +24,30 @@ CEngine::~CEngine()
 
 int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 {
+	// Main Window, 해상도 저장
 	m_hMainWnd = _hWnd;
 	m_vResolution = _vResolution;
 
+	// 해상도 적용
 	RECT rt = { 0,0,(int)m_vResolution.x, (int)m_vResolution.y };
 
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
 	SetWindowPos(m_hMainWnd, nullptr, 10, 10, rt.right - rt.left, rt.bottom - rt.top, 0);
 
+	// Device 초기화
 	if (FAILED(CDevice::GetInst()->init(m_hMainWnd, m_vResolution)))
 	{
 		MessageBox(nullptr, L"Device 초기화 실패", L"초기화 실패", MB_OK);
 		return E_FAIL;
 	}
 
+	// Manager 초기화
+	CPathMgr::init();
+	CTimeMgr::GetInst()->init();
+	CKeyMgr::GetInst()->init();
+
+
+	// Test
 	if (FAILED(TestInit()))
 	{
 		return E_FAIL;
@@ -44,5 +58,10 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 
 void CEngine::progress()
 {
+	// Manager update
+	CTimeMgr::GetInst()->tick();
+	CKeyMgr::GetInst()->tick();
+
+
 	TestProgress();
 }
