@@ -13,9 +13,6 @@
     <Filter Include="00.Default">
       <UniqueIdentifier>{03ec82e5-f3ee-44a4-99bb-af87ded0b7e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Level">
-      <UniqueIdentifier>{02306903-43c9-4f0d-867c-147bdcd4e17b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{e5685132-ffcc-4c72-85c6-0c618d37794c}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,21 @@
     </Filter>
     <Filter Include="ShaderCode">
       <UniqueIdentifier>{f164458a-c4d4-4e1e-9c41-19d3d57497b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Level">
+      <UniqueIdentifier>{02306903-43c9-4f0d-867c-147bdcd4e17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{af64a063-198d-495b-9dcf-9a75488f8750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\KeyMgr">
+      <UniqueIdentifier>{b992aef2-ebab-4e67-84b0-44c511f4a829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\TimeMgr">
+      <UniqueIdentifier>{64657599-8530-48a6-9823-0eb3574474b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\PathMgr">
+      <UniqueIdentifier>{97b2c884-0a5d-4d1a-91a9-1539e2db077b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,10 +68,19 @@
     </ClInclude>
     <ClInclude Include="Test.h" />
     <ClInclude Include="CLevel.h">
-      <Filter>04.Level</Filter>
+      <Filter>05.Level</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
       <Filter>SimpleMath</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>04.Manager\KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>04.Manager\PathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>04.Manager\TimeMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +101,16 @@
     </ClCompile>
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="CLevel.cpp">
-      <Filter>04.Level</Filter>
+      <Filter>05.Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>04.Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>04.Manager\PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>04.Manager\TimeMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
