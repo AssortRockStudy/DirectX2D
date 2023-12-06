@@ -79,7 +79,6 @@ int TestInit()
 	// 버텍스 내부 Offset 12 바이트부터 출발하여 float 4개만큼의 크기는 COLOR의 이름을 가진다
 	arrElement[1].InputSlot = 0;
 	arrElement[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	arrElement[1].Format;
 	arrElement[1].SemanticName = "COLOR";
 	arrElement[1].SemanticIndex = 0;
 	arrElement[1].InstanceDataStepRate = 0;
@@ -89,7 +88,6 @@ int TestInit()
 	// 버텍스 내부 Offset 28 바이트부터 출발하여 float 2개만큼의 크기는 TEXCOORD의 이름을 가진다
 	arrElement[2].InputSlot = 0;
 	arrElement[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	arrElement[2].Format;
 	arrElement[2].SemanticName = "TEXCOORD";
 	arrElement[2].SemanticIndex = 0;
 	arrElement[2].InstanceDataStepRate = 0;
