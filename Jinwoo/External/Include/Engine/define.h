@@ -8,7 +8,7 @@
 #define DEVICE CDevice::GetInst()->GetDevice()
 #define CONTEXT CDevice::GetInst()->GetContext()
 
-#define KEY_CHECK(Key, State) MyKeyMgr::GetInst()->GetKeyState(KEY::Key) == KEY_STATE::State
+#define KEY_CHECK(Key, State) CKeyMgr::GetInst()->GetKeyState(KEY::Key) == KEY_STATE::State
 
 #define KEY_TAP(Key)		KEY_CHECK(Key, TAP)
 #define KEY_PRESSED(Key)	KEY_CHECK(Key, PRESSED)
@@ -17,4 +17,4 @@
 
 #define PI 3.14159265358979f
 
-#define DT MyTimeMgr::GetInst()->GetDeltaTime()
+#define DT CTimeMgr::GetInst()->GetDeltaTime()
