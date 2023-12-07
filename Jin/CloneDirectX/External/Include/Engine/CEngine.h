@@ -9,6 +9,9 @@ private:
 	Vec2		m_vResolution;			// 해상도 정보
 
 public:
+	HWND GetMainWind() { return m_hMainWnd; }
+
+public:
 	int init(HWND _hWnd, Vec2 _vResolution);
 	void progress(); // 매 프레임마다 호출돨
 };

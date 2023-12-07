@@ -38,6 +38,9 @@
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CLevel.h" />
     <ClInclude Include="Test.h" />
+    <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CPathMgr.h" />
+    <ClInclude Include="CTimeMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -53,8 +56,14 @@
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CLevel.cpp" />
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CPathMgr.cpp" />
+    <ClCompile Include="CTimeMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx" />
   </ItemGroup>
 </Project>

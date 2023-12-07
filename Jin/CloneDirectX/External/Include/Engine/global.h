@@ -7,6 +7,17 @@
 using std::wstring;
 using std::string;
 
+#include <vector>
+#include <list>
+#include <map>
+
+using std::vector;
+using std::list;
+using std::map;
+using std::make_pair;
+
+// ---------------------------------
+
 #include <wrl.h>
 using namespace Microsoft::WRL;
 
