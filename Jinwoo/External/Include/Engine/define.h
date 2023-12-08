@@ -18,3 +18,42 @@
 #define PI 3.14159265358979f
 
 #define DT CTimeMgr::GetInst()->GetDeltaTime()
+
+
+
+enum class ASSET_TYPE
+{
+	MESH,
+	MESHDATA,
+	TEXTURE,
+	MATERIAL,
+	SOUND,
+	COMPUTE_SHADER,
+	GRAPHICS_SHADER,
+};
+
+enum class COMPONENT_TYPE
+{
+	TRANSFORM,	// 오브젝트 위치, 크기, 회전
+
+	COLLIDER2D, // 2차원 충돌체
+	COLLIDER3D, // 3차원 충돌체
+
+	ANIMATOR2D, // 스트라이트 Animation
+	ANIMATOR3D, // Bone Skinning Animation
+
+	LIGHT2D,	// 2차원 광원
+	LIGHT3D,	// 3차원 광원
+
+	CAMERA,		// 카메라 기능
+
+	// Render Component
+	MESHRENDER,
+	TILEMAP,
+	PARTICLESYSTEM,
+	SKYBOX,
+	DECAL,
+	LANDSCAPE,
+
+	END,
+};
