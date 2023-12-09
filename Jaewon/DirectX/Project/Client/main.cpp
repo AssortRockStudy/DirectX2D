@@ -39,7 +39,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
     MSG msg;
-
+    if (FAILED(CEngine::GetInst()->init(hWnd, Vec2(1280, 768))))
+    {
+        MessageBox(nullptr, L"CEngine 초기화 실패", L"초기화 실패", MB_OK);
+        return 0;
+    }
 
 
     CEngine::GetInst()->init();
@@ -60,7 +64,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         else
         {
-
+            CEngine::GetInst()->progress();
         }
     }
 

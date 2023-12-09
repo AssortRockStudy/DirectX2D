@@ -154,14 +154,17 @@ call EngineCopy.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CDevice.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="singleton.h" />
+    <ClInclude Include="struct.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="pch.cpp">

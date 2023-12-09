@@ -8,15 +8,21 @@
       <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
-      <Filter>Default</Filter>
+      <Filter>01.Header</Filter>
     </ClInclude>
     <ClInclude Include="global.h">
-      <Filter>Default</Filter>
+      <Filter>01.Header</Filter>
     </ClInclude>
     <ClInclude Include="singleton.h">
-      <Filter>Default</Filter>
+      <Filter>01.Header</Filter>
     </ClInclude>
-    <ClInclude Include="CEngine.h" />
+    <ClInclude Include="CEngine.h">
+      <Filter>02.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CDevice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -25,11 +31,23 @@
     <ClCompile Include="pch.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="CEngine.cpp" />
+    <ClCompile Include="CEngine.cpp">
+      <Filter>02.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
       <UniqueIdentifier>{b9526f52-55fd-410c-8e9f-5a4dfc8ea491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Header">
+      <UniqueIdentifier>{364cadd7-b383-4ec1-9626-fba7e48cf97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Engine">
+      <UniqueIdentifier>{127180e2-ec30-47d3-a1ff-a30a47660235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Device">
+      <UniqueIdentifier>{00fbd052-d09e-42a5-99d4-00652062ac35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
