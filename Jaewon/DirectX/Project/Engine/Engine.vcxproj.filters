@@ -7,6 +7,16 @@
     <ClInclude Include="pch.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="CEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -15,6 +25,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Default</Filter>
     </ClCompile>
+    <ClCompile Include="CEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
