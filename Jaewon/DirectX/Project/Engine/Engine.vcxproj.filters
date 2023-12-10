@@ -30,6 +30,15 @@
       <Filter>Module</Filter>
     </ClInclude>
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -46,6 +55,15 @@
       <Filter>03.Device</Filter>
     </ClCompile>
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -65,6 +83,9 @@
     </Filter>
     <Filter Include="05.Level">
       <UniqueIdentifier>{c6b0a0e8-3eca-4ffb-898a-8f6d380c9e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{0d5dd34f-ffd0-4b07-8638-ebe51280b833}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
