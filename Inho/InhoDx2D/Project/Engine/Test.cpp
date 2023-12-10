@@ -8,11 +8,14 @@
 #include "CKeyMgr.h"
 
 
-// 삼각형 그리기
-Vtx g_vtx[3] = {};
+// 사각형 그리기
+Vtx g_vtx[6] = {};
 
 // 정점을 저장하는 정점버퍼
 ComPtr<ID3D11Buffer>	g_VB = nullptr;
+
+// 인덱스를 저장하는 버퍼
+ComPtr<ID3D11Buffer> g_IB = nullptr;
 
 // InputLayout 정점하나의 구조를 알리는 객체
 ComPtr<ID3D11InputLayout> g_Layout = nullptr;
@@ -33,26 +36,40 @@ int TestInit()
 	//      0(Red)
 	//    /    \
 	//  2(G) -- 1(Blue)
-	g_vtx[0].vPos = Vec3(0.f, 1.f, 0.f);
+	g_vtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	g_vtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 	g_vtx[0].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[1].vPos = Vec3(1.f, -1.f, 0.f);
+	g_vtx[1].vPos = Vec3(0.5f, -0.5f, 0.f);
 	g_vtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 	g_vtx[1].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[2].vPos = Vec3(-1.f, -1.f, 0.f);
+	g_vtx[2].vPos = Vec3(-0.5f, -0.5f, 0.f);
 	g_vtx[2].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 	g_vtx[2].vUV = Vec2(0.f, 0.f);
+
+
+	g_vtx[3].vPos = Vec3(-0.5f, 0.5f, 0.f);
+	g_vtx[3].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	g_vtx[3].vUV = Vec2(0.f, 0.f);
+
+	g_vtx[4].vPos = Vec3(0.5f, 0.5f, 0.f);
+	g_vtx[4].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	g_vtx[4].vUV = Vec2(0.f, 0.f);
+
+	g_vtx[5].vPos = Vec3(0.5f, -0.5f, 0.f);
+	g_vtx[5].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	g_vtx[5].vUV = Vec2(0.f, 0.f);
 
 
 	// 버텍스 버퍼 생성
 	D3D11_BUFFER_DESC BufferDesc = {};
 
-	BufferDesc.ByteWidth = sizeof(Vtx) * 3;
+	BufferDesc.ByteWidth = sizeof(Vtx) * 6;
 	BufferDesc.StructureByteStride = sizeof(Vtx);
 	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
+	// 버퍼에 데이터 쓰기 가능
 	BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 
@@ -149,8 +166,43 @@ int TestInit()
 	return S_OK;
 }
 
-void TestProgress()
+
+
+void Tick()
 {
+	if (KEY_PRESSED(KEY::LEFT)) {
+		for (int i = 0; i < 6; i++) {
+			g_vtx[i].vPos.x -= DT;
+		}
+	}
+
+	if (KEY_PRESSED(KEY::RIGHT)) {
+		for (int i = 0; i < 6; i++) {
+			g_vtx[i].vPos.x += DT;
+		}
+	}
+
+	if (KEY_PRESSED(KEY::UP)) {
+		for (int i = 0; i < 6; i++) {
+			g_vtx[i].vPos.y += DT;
+		}
+	}
+
+	if (KEY_PRESSED(KEY::DOWN)) {
+		for (int i = 0; i < 6; i++) {
+			g_vtx[i].vPos.y -= DT;
+		}
+	}
+
+	// 맵, 언맵
+	D3D11_MAPPED_SUBRESOURCE tSub = {};
+
+	CONTEXT->Map(g_VB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
+	memcpy(tSub.pData, g_vtx, sizeof(Vtx) * 6);
+	CONTEXT->Unmap(g_VB.Get(), 0);
+}
+
+void Render() {
 	float ClearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearRenderTarget(ClearColor);
 
@@ -166,12 +218,18 @@ void TestProgress()
 	CONTEXT->VSSetShader(g_VS.Get(), 0, 0);
 	CONTEXT->PSSetShader(g_PS.Get(), 0, 0);
 
-	CONTEXT->Draw(3, 0);
+	CONTEXT->Draw(6, 0);
 
 	CDevice::GetInst()->Present();
 }
 
+
 void TestRelease()
 {
+}
 
+void TestProgress()
+{
+	Tick();
+	Render();
 }
