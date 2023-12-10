@@ -17,9 +17,6 @@
     <Filter Include="01. Header">
       <UniqueIdentifier>{9bc88a26-d76d-454b-a769-babd6a46e1d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Level">
-      <UniqueIdentifier>{1a296230-ea49-48db-b1b9-b005dc95ab91}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Module">
       <UniqueIdentifier>{5cd7a642-c3fe-445a-935e-5c5f660d9822}</UniqueIdentifier>
     </Filter>
@@ -28,6 +25,51 @@
     </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{642bebcf-5d9a-42db-8364-be5033293969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Level">
+      <UniqueIdentifier>{1a296230-ea49-48db-b1b9-b005dc95ab91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{f1ffffa9-4216-429d-bd00-2fe01802bd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component">
+      <UniqueIdentifier>{6d5d2023-2413-4082-acce-ae98fc6aeebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. GameObject">
+      <UniqueIdentifier>{34b52ae8-57e1-4ae3-9400-b69132d967b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset">
+      <UniqueIdentifier>{c9774ee9-cd90-4bfb-9b4d-a80b4c647e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\KeyMgr">
+      <UniqueIdentifier>{b0219a40-b40e-4da2-9440-81a2cee99b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\PathMgr">
+      <UniqueIdentifier>{34b38029-5b38-4b43-a900-87d680205676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TimeMgr">
+      <UniqueIdentifier>{363e769a-194b-44a7-8bb5-4d829da1a55c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Mesh">
+      <UniqueIdentifier>{83664c5a-4333-4ae9-9daf-3eb44234e640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Shader">
+      <UniqueIdentifier>{ac2535c6-3019-4cc0-bd7b-1048c4805fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\01. Transform">
+      <UniqueIdentifier>{8edfa7be-0382-4b2e-a393-016043e21fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\02. Collider2D">
+      <UniqueIdentifier>{97dfbd0c-0a51-4d30-98e1-514838acc095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D">
+      <UniqueIdentifier>{8e8afc11-5274-45b7-8c7c-fdce8ab771cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\06. Light2D">
+      <UniqueIdentifier>{f38fbe18-b41b-40e3-bf14-4c760489e544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\08. Camera">
+      <UniqueIdentifier>{cf0bc81f-b310-4a12-859b-7f2d11b9a93e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +105,16 @@
       <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="CLevel.h">
-      <Filter>04. Level</Filter>
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>04. Manager\TimeMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>04. Manager\KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>04. Manager\PathMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +135,16 @@
       <Filter>Entity</Filter>
     </ClCompile>
     <ClCompile Include="CLevel.cpp">
-      <Filter>04. Level</Filter>
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>04. Manager\TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>04. Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>04. Manager\PathMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

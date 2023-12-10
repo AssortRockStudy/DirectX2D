@@ -2,7 +2,14 @@
 #include "CEngine.h"
 
 #include "CDevice.h"
+
+#include "CTimeMgr.h"
+#include "CKeyMgr.h"
+#include "CPathMgr.h"
+
 #include "Test.h"
+
+
 CEngine::CEngine()
     : m_hMainWnd(nullptr)
     , m_vResolution()
@@ -27,6 +34,12 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
         return E_FAIL;
     }
 
+    // 매니저 초기화
+    CPathMgr::init();
+    CTimeMgr::GetInst()->init();
+    CKeyMgr::GetInst()->init();
+
+
     if (FAILED(TestInit())) {
         return E_FAIL;
     }
@@ -36,5 +49,9 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 
 void CEngine::progress()
 {
+    // 매니저 업데이트
+    CTimeMgr::GetInst()->tick();
+    CKeyMgr::GetInst()->tick();
+
     TestProgress();
 }

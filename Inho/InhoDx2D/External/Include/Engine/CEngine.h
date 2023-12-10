@@ -8,6 +8,9 @@ private:
 	Vec2 m_vResolution;
 
 public:
+	HWND GetMainWind() { return m_hMainWnd; }
+
+public:
 	int init(HWND _hWnd, Vec2 _vResolution);
 	void progress();
 };
