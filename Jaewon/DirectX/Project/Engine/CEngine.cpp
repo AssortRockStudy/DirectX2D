@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "CEngine.h"
+#include "CDevice.h"
+#include "Test.h"
+
 
 CEngine::CEngine() 
 	: m_hMainWnd(nullptr)
@@ -10,10 +13,10 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-
+	TestRelease();
 }
 
-void CEngine::init(HWND _hWnd, Vec2 _vResolution)
+int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 {
 	m_hMainWnd = _hWnd;
 	m_vResolution = _vResolution;
@@ -28,9 +31,15 @@ void CEngine::init(HWND _hWnd, Vec2 _vResolution)
 		return E_FAIL;
 	}
 
+	if (FAILED(TestInit()))
+	{
+		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
 void CEngine::progress()
 {
+	TestProgress();
 }
