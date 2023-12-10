@@ -10,6 +10,7 @@
 
 // 사각형 그리기
 Vtx g_vtx[6] = {};
+UINT g_Idx[6] = {};
 
 // 정점을 저장하는 정점버퍼
 ComPtr<ID3D11Buffer>	g_VB = nullptr;
@@ -40,32 +41,25 @@ int TestInit()
 	g_vtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 	g_vtx[0].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[1].vPos = Vec3(0.5f, -0.5f, 0.f);
+	g_vtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
 	g_vtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 	g_vtx[1].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[2].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	g_vtx[2].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	g_vtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
+	g_vtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
 	g_vtx[2].vUV = Vec2(0.f, 0.f);
 
 
-	g_vtx[3].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	g_vtx[3].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	g_vtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
+	g_vtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 	g_vtx[3].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[4].vPos = Vec3(0.5f, 0.5f, 0.f);
-	g_vtx[4].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
-	g_vtx[4].vUV = Vec2(0.f, 0.f);
-
-	g_vtx[5].vPos = Vec3(0.5f, -0.5f, 0.f);
-	g_vtx[5].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-	g_vtx[5].vUV = Vec2(0.f, 0.f);
 
 
 	// 버텍스 버퍼 생성
 	D3D11_BUFFER_DESC BufferDesc = {};
 
-	BufferDesc.ByteWidth = sizeof(Vtx) * 6;
+	BufferDesc.ByteWidth = sizeof(Vtx) * 4;
 	BufferDesc.StructureByteStride = sizeof(Vtx);
 	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
@@ -83,6 +77,34 @@ int TestInit()
 		MessageBox(nullptr, L"버텍스 버퍼 생성 실패", L"TestInit 오류", MB_OK);
 		return E_FAIL;
 	}
+
+	g_Idx[0] = 0;
+	g_Idx[1] = 1;
+	g_Idx[2] = 2;
+
+	g_Idx[3] = 0;
+	g_Idx[4] = 2;
+	g_Idx[5] = 3;
+
+	BufferDesc = {};
+
+	BufferDesc.ByteWidth = sizeof(UINT) * 6;
+	BufferDesc.StructureByteStride = sizeof(UINT);
+	BufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	
+	// 버퍼에 데이터 쓰기 불가능
+	BufferDesc.CPUAccessFlags = 0;
+	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
+
+	tSubData = {};
+	tSubData.pSysMem = g_Idx;
+
+	if (FAILED(DEVICE->CreateBuffer(&BufferDesc, &tSubData, g_IB.GetAddressOf())))
+	{
+		MessageBox(nullptr, L"인덱스 버퍼 생성 실패", L"TestInit 오류", MB_OK);
+		return E_FAIL;
+	}
+
 
 	// 정점 구조정보(Layout) 생성
 	D3D11_INPUT_ELEMENT_DESC arrElement[3] = {};
@@ -171,25 +193,25 @@ int TestInit()
 void Tick()
 {
 	if (KEY_PRESSED(KEY::LEFT)) {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			g_vtx[i].vPos.x -= DT;
 		}
 	}
 
 	if (KEY_PRESSED(KEY::RIGHT)) {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			g_vtx[i].vPos.x += DT;
 		}
 	}
 
 	if (KEY_PRESSED(KEY::UP)) {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			g_vtx[i].vPos.y += DT;
 		}
 	}
 
 	if (KEY_PRESSED(KEY::DOWN)) {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			g_vtx[i].vPos.y -= DT;
 		}
 	}
@@ -212,11 +234,14 @@ void Render() {
 	UINT iOffset = 0;
 
 	CONTEXT->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &iStride, &iOffset);
+	CONTEXT->IASetIndexBuffer(g_IB.Get(), DXGI_FORMAT_R32_UINT, 0);
 	CONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CONTEXT->IASetInputLayout(g_Layout.Get());
 
 	CONTEXT->VSSetShader(g_VS.Get(), 0, 0);
 	CONTEXT->PSSetShader(g_PS.Get(), 0, 0);
+
+	CONTEXT->DrawIndexed(6, 0, 0);
 
 	CONTEXT->Draw(6, 0);
 
