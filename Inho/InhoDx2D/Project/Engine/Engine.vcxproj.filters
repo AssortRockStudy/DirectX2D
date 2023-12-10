@@ -71,6 +71,12 @@
     <Filter Include="08. Component\08. Camera">
       <UniqueIdentifier>{cf0bc81f-b310-4a12-859b-7f2d11b9a93e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Asset\Shader\GraphicsShader">
+      <UniqueIdentifier>{c90aa103-0f33-4707-8f59-55c780965de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Shader\ComputeShader">
+      <UniqueIdentifier>{ea3889bb-2522-44fb-94b5-24297a78fbae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -116,6 +122,25 @@
     <ClInclude Include="CPathMgr.h">
       <Filter>04. Manager\PathMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CAsset.h">
+      <Filter>06.Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponent.h">
+      <Filter>08. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>07. GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>06.Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h">
+      <Filter>06.Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicsShader.h">
+      <Filter>06.Asset\Shader\GraphicsShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -145,6 +170,27 @@
     </ClCompile>
     <ClCompile Include="CPathMgr.cpp">
       <Filter>04. Manager\PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsset.cpp">
+      <Filter>06.Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>08. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>07. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>06.Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp">
+      <Filter>06.Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicsShader.cpp">
+      <Filter>06.Asset\Shader\GraphicsShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>08. Component\01. Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

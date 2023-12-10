@@ -7,34 +7,19 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 
+#include "CMesh.h"
+#include "CGraphicsShader.h"
 
-// 사각형 그리기
-Vtx g_vtx[6] = {};
-UINT g_Idx[6] = {};
 
 tTransform g_Transform = { Vec4(0.f, 0.f, 0.f, 0.f), Vec4(1.f, 1.f, 1.f, 1.f) };
 
-// 정점을 저장하는 정점버퍼
-ComPtr<ID3D11Buffer>	g_VB = nullptr;
+CMesh* g_RectMesh = nullptr;
+CMesh* g_CircleMesh = nullptr;
 
-// 인덱스를 저장하는 버퍼
-ComPtr<ID3D11Buffer> g_IB = nullptr;
+CGraphicsShader* g_Shader = nullptr;
 
 // 상수 데이터를 전달하는 버퍼
 ComPtr<ID3D11Buffer> g_CB = nullptr;
-
-// InputLayout 정점하나의 구조를 알리는 객체
-ComPtr<ID3D11InputLayout> g_Layout = nullptr;
-
-ComPtr<ID3DBlob> g_VSBlob = nullptr;
-ComPtr<ID3DBlob> g_PSBlob = nullptr;
-ComPtr<ID3DBlob> g_ErrBlob = nullptr;
-
-
-ComPtr<ID3D11VertexShader> g_VS = nullptr;
-ComPtr<ID3D11PixelShader> g_PS = nullptr;
-
-
 
 int TestInit()
 {
@@ -42,73 +27,70 @@ int TestInit()
 	//      0(Red)
 	//    /    \
 	//  2(G) -- 1(Blue)
-	g_vtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	g_vtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	g_vtx[0].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	g_vtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-	g_vtx[1].vUV = Vec2(0.f, 0.f);
+	Vtx arrVtx[4] = {};
+	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
+	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arrVtx[0].vUV = Vec2(0.f, 0.f);
 
-	g_vtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	g_vtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
-	g_vtx[2].vUV = Vec2(0.f, 0.f);
+	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
+	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	arrVtx[1].vUV = Vec2(0.f, 0.f);
 
-
-	g_vtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	g_vtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
-	g_vtx[3].vUV = Vec2(0.f, 0.f);
+	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
+	arrVtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
+	arrVtx[2].vUV = Vec2(0.f, 0.f);
 
 
+	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
+	arrVtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	arrVtx[3].vUV = Vec2(0.f, 0.f);
 
-	// 버텍스 버퍼 생성
-	D3D11_BUFFER_DESC BufferDesc = {};
+	UINT arrIdx[6] = {};
 
-	BufferDesc.ByteWidth = sizeof(Vtx) * 4;
-	BufferDesc.StructureByteStride = sizeof(Vtx);
-	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	arrIdx[0] = 0;
+	arrIdx[1] = 1;
+	arrIdx[2] = 2;
 
-	// 버퍼에 데이터 쓰기 불가능
-	BufferDesc.CPUAccessFlags = 0;
-	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	arrIdx[3] = 0;
+	arrIdx[4] = 2;
+	arrIdx[5] = 3;
 
-	// g_Vtx 배열의 데이터를 초기 데이터로 설정
-	D3D11_SUBRESOURCE_DATA tSubData = {};
-	tSubData.pSysMem = g_vtx;
+	g_RectMesh = new CMesh;
+	g_RectMesh->Create(arrVtx, 4, arrIdx, 6);
 
-	// 버텍스 버퍼 생성
-	if (FAILED(DEVICE->CreateBuffer(&BufferDesc, &tSubData, g_VB.GetAddressOf())))
-	{
-		MessageBox(nullptr, L"버텍스 버퍼 생성 실패", L"TestInit 오류", MB_OK);
-		return E_FAIL;
+	// CircleMesh 만들기
+	vector<Vtx> vecVtx;
+	vector<UINT> vecIdx;
+	Vtx v;
+
+	v.vPos = Vec3(0.f, 0.f, 0.f);
+	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+	v.vUV = Vec2(0.5f, 0.5f);
+
+	UINT iSlice = 40;
+	float fTheta = 0.f;
+	float fRadius = 0.5f;
+
+	for (int i = 0; i <= iSlice; i++) {
+		fTheta = (XM_2PI / iSlice) * i;
+		v.vPos = Vec3(fRadius * cosf(fTheta), fRadius * sinf(fTheta), 0.f);
+		v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+		v.vUV = Vec2(0.f, 0.f);
+
+		vecVtx.push_back(v);
 	}
 
-	g_Idx[0] = 0;
-	g_Idx[1] = 1;
-	g_Idx[2] = 2;
-
-	g_Idx[3] = 0;
-	g_Idx[4] = 2;
-	g_Idx[5] = 3;
-
-	BufferDesc = {};
-
-	BufferDesc.ByteWidth = sizeof(UINT) * 6;
-	BufferDesc.StructureByteStride = sizeof(UINT);
-	BufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	
-	// 버퍼에 데이터 쓰기 불가능
-	BufferDesc.CPUAccessFlags = 0;
-	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
-
-	tSubData = {};
-	tSubData.pSysMem = g_Idx;
-
-	if (FAILED(DEVICE->CreateBuffer(&BufferDesc, &tSubData, g_IB.GetAddressOf())))
-	{
-		MessageBox(nullptr, L"인덱스 버퍼 생성 실패", L"TestInit 오류", MB_OK);
-		return E_FAIL;
+	for (int i = 0; i < iSlice; i++) {
+		vecIdx.push_back(0);
+		vecIdx.push_back(i + 2);
+		vecIdx.push_back(i + 1);
 	}
+
+	g_CircleMesh = new CMesh;
+	g_CircleMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
+
+	D3D11_BUFFER_DESC BufferDesc;
 
 	// 상수 버퍼 생성
 	BufferDesc = {};
@@ -128,85 +110,13 @@ int TestInit()
 		return E_FAIL;
 	}
 
-	// 정점 구조정보(Layout) 생성
-	D3D11_INPUT_ELEMENT_DESC arrElement[3] = {};
-
-	arrElement[0].InputSlot = 0;
-	arrElement[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	arrElement[0].SemanticName = "POSITION";
-	arrElement[0].SemanticIndex = 0;
-	arrElement[0].InstanceDataStepRate = 0;
-	arrElement[0].AlignedByteOffset = 0;
-	arrElement[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-
-	arrElement[1].InputSlot = 0;
-	arrElement[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	arrElement[1].SemanticName = "COLOR";
-	arrElement[1].SemanticIndex = 0;
-	arrElement[1].InstanceDataStepRate = 0;
-	arrElement[1].AlignedByteOffset = 12;
-	arrElement[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-
-	arrElement[2].InputSlot = 0;
-	arrElement[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-	arrElement[2].SemanticName = "TEXCOORD";
-	arrElement[2].SemanticIndex = 0;
-	arrElement[2].InstanceDataStepRate = 0;
-	arrElement[2].AlignedByteOffset = 28;
-	arrElement[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+	g_Shader = new CGraphicsShader;
+	g_Shader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
+	g_Shader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
 
 
 
-
-	// 버텍스 쉐이더
-	// HLSL 버텍스 쉐이더 함수 컴파일
-	wstring strFilePath = CPathMgr::GetContentPath();
-
-	if (FAILED(D3DCompileFromFile(wstring(strFilePath + L"shader\\std2d.fx").c_str()
-		, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "VS_Std2D", "vs_5_0", D3DCOMPILE_DEBUG, 0
-		, g_VSBlob.GetAddressOf(), g_ErrBlob.GetAddressOf())))
-	{
-		if (nullptr != g_ErrBlob)
-		{
-			char* pErrMsg = (char*)g_ErrBlob->GetBufferPointer();
-			MessageBoxA(nullptr, pErrMsg, "Shader Compile Failed!!", MB_OK);
-		}
-
-		return E_FAIL;
-	}
-
-	DEVICE->CreateVertexShader(g_VSBlob->GetBufferPointer()
-		, g_VSBlob->GetBufferSize(), nullptr
-		, g_VS.GetAddressOf());
-
-	// Layout 생성
-	DEVICE->CreateInputLayout(arrElement, 3
-		, g_VSBlob->GetBufferPointer()
-		, g_VSBlob->GetBufferSize()
-		, g_Layout.GetAddressOf());
-
-
-	// 픽셀 쉐이더 생성
-	// 픽셀 쉐이더 컴파일
-	if (FAILED(D3DCompileFromFile(wstring(strFilePath + L"shader\\std2d.fx").c_str()
-		, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "PS_Std2D", "ps_5_0", D3DCOMPILE_DEBUG, 0
-		, g_PSBlob.GetAddressOf(), g_ErrBlob.GetAddressOf())))
-	{
-		if (nullptr != g_ErrBlob)
-		{
-			char* pErrMsg = (char*)g_ErrBlob->GetBufferPointer();
-			MessageBoxA(nullptr, pErrMsg, "Shader Compile Failed!!", MB_OK);
-		}
-
-		return E_FAIL;
-	}
-
-	DEVICE->CreatePixelShader(g_PSBlob->GetBufferPointer()
-		, g_PSBlob->GetBufferSize(), nullptr
-		, g_PS.GetAddressOf());
-
+	
 	return S_OK;
 }
 
@@ -253,22 +163,11 @@ void Render() {
 
 
 	// 삼각형 그리기
-	UINT iStride = sizeof(Vtx);
-	UINT iOffset = 0;
-
-	CONTEXT->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &iStride, &iOffset);
-	CONTEXT->IASetIndexBuffer(g_IB.Get(), DXGI_FORMAT_R32_UINT, 0);
-	CONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	CONTEXT->IASetInputLayout(g_Layout.Get());
-
 	CONTEXT->VSSetConstantBuffers(0, 1, g_CB.GetAddressOf());
 
-	CONTEXT->VSSetShader(g_VS.Get(), 0, 0);
-	CONTEXT->PSSetShader(g_PS.Get(), 0, 0);
+	g_Shader->UpdateData();
+	g_RectMesh->render();
 
-	CONTEXT->DrawIndexed(6, 0, 0);
-
-	CONTEXT->Draw(6, 0);
 
 	CDevice::GetInst()->Present();
 }
@@ -276,6 +175,15 @@ void Render() {
 
 void TestRelease()
 {
+	if (nullptr != g_RectMesh) {
+		delete g_RectMesh;
+	}
+
+	if (nullptr != g_CircleMesh) {
+		delete g_CircleMesh;
+	}
+
+	delete g_Shader;
 }
 
 void TestProgress()
