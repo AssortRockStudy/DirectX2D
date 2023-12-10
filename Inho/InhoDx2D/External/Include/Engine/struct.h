@@ -5,3 +5,12 @@ struct Vtx {
 	Vec4 vColor;
 	Vec2 vUV;
 };
+
+// ==================
+// 상수버퍼 대응 구조체
+// ==================
+struct tTransform
+{
+	Vec4	vWorldPos;
+	Vec4    vWorldScale;
+};
