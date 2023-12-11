@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEngine.h">
+      <Filter>02.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h" />
+    <ClInclude Include="CDevice.h">
+      <Filter>03.Device</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CEngine.cpp">
+      <Filter>02.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="CDevice.cpp">
+      <Filter>03.Device</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Default">
+      <UniqueIdentifier>{b9526f52-55fd-410c-8e9f-5a4dfc8ea491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Header">
+      <UniqueIdentifier>{364cadd7-b383-4ec1-9626-fba7e48cf97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Engine">
+      <UniqueIdentifier>{127180e2-ec30-47d3-a1ff-a30a47660235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Device">
+      <UniqueIdentifier>{00fbd052-d09e-42a5-99d4-00652062ac35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{66761ab9-51de-4d74-ac61-5ca10beb4842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Level">
+      <UniqueIdentifier>{c6b0a0e8-3eca-4ffb-898a-8f6d380c9e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{0d5dd34f-ffd0-4b07-8638-ebe51280b833}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Module</Filter>
+    </None>
+  </ItemGroup>
+</Project>
