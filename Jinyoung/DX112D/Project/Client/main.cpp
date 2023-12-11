@@ -1,6 +1,17 @@
 ﻿#include "framework.h"
 #include "Client.h"
 
+//추가
+#include <Engine\global.h>
+#include <Engine\CEngine.h>
+
+//추가
+#ifdef _DEBUG
+#pragma comment(lib,"Engine\\Engine_d.lib")
+#else
+#pragma comment(lib,"Engine\\Engine.lib")
+#endif
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -45,6 +56,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+    //추가
+    // CEngine 초기화 실패 -> 프로그램 종료
+    if (FAILED(CEngine::GetInst()->init(hWnd, Vec2(1280, 768))))
+    {
+        MessageBox(nullptr, L"CEngine 초기화 실패", L"초기화 실패", MB_OK);
+        return 0;
+    }
+
     // 기본 메시지 루프입니다:
     // 변경1 getmessage->peekmessage
     while (true)
@@ -66,7 +85,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //엔진기능 수행
         else
         {
-
+            CEngine::GetInst()->progress();
         }
 
 
