@@ -8,8 +8,9 @@ CTimeMgr::CTimeMgr()
 	, m_PrevCount{}
 	, m_CurCount{}
 	, m_fTime(0.f)
+	, m_fDeltaTime(0.f)
+	, m_iCall(0)
 {	
-
 }
 
 CTimeMgr::~CTimeMgr()
@@ -18,7 +19,6 @@ CTimeMgr::~CTimeMgr()
 
 void CTimeMgr::init()
 {
-	// 초당 빈도
 	QueryPerformanceFrequency(&m_Frequency);
 
 	QueryPerformanceCounter(&m_PrevCount);
@@ -28,21 +28,19 @@ void CTimeMgr::tick()
 {
 	QueryPerformanceCounter(&m_CurCount);
 
-	m_DeltaTime = float(m_CurCount.QuadPart - m_PrevCount.QuadPart) / float(m_Frequency.QuadPart);
+	m_fDeltaTime = float(m_CurCount.QuadPart - m_PrevCount.QuadPart) / float(m_Frequency.QuadPart);
 
 	m_PrevCount = m_CurCount;
 
-	// DT 보정
-	if ((1.f / 60.f) < m_DeltaTime)
-		m_DeltaTime = (1.f / 60.f);
+	if ((1.f / 60.f) < m_fDeltaTime)
+		m_fDeltaTime = (1.f / 60.f);
 
 
-	// 시간 누적 ==> 1초마다 if 구문 실행
-	m_fTime += m_DeltaTime;
+	m_fTime += m_fDeltaTime;
 	if (1.f <= m_fTime)
 	{
 		wchar_t szText[50] = {};
-		swprintf_s(szText, 50, L"DeltaTime : %f, FPS : %d", m_DeltaTime, m_iCall);
+		swprintf_s(szText, 50, L"DeltaTime : %f, FPS : %d", m_fDeltaTime, m_iCall);
 		SetWindowText(CEngine::GetInst()->GetMainWind(), szText);
 
 		m_iCall = 0;
