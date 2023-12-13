@@ -41,6 +41,13 @@
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CTimeMgr.h" />
+    <ClInclude Include="CComponent.h" />
+    <ClInclude Include="CAsset.h" />
+    <ClInclude Include="CMesh.h" />
+    <ClInclude Include="CShader.h" />
+    <ClInclude Include="CGraphicsShader.h" />
+    <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -59,6 +66,13 @@
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="CComponent.cpp" />
+    <ClCompile Include="CAsset.cpp" />
+    <ClCompile Include="CMesh.cpp" />
+    <ClCompile Include="CShader.cpp" />
+    <ClCompile Include="CGraphicsShader.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />
