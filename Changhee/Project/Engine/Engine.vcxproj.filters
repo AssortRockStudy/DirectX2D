@@ -37,6 +37,42 @@
     <Filter Include="04. Manager\PathManager">
       <UniqueIdentifier>{8a71184e-9d5d-4e89-abd8-8d01f175486a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset">
+      <UniqueIdentifier>{4fbc99c7-2bc9-40cc-84fc-474d880ae423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. GameObject">
+      <UniqueIdentifier>{c0f593ae-9cd4-498b-862d-3ee09ebac578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component">
+      <UniqueIdentifier>{6857c79c-e882-4c9c-a7db-3116cf9b6778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Mesh">
+      <UniqueIdentifier>{849333f0-ebe1-4533-83c9-4f185f2ef0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Shader">
+      <UniqueIdentifier>{e0f27c6b-b41b-4821-a43a-2c131d0bf7aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\01. Transform">
+      <UniqueIdentifier>{11ff2dce-4a63-47be-b6cc-ea4a7ab5635b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\02. Collider2D">
+      <UniqueIdentifier>{208f022b-88ed-4612-b56c-1f95af7f7e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D">
+      <UniqueIdentifier>{f07399bd-240c-40e8-9983-3b7640a6767e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\06. Light2D">
+      <UniqueIdentifier>{473de1c8-6fdd-4637-8cda-7b2647121855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\08. Camera">
+      <UniqueIdentifier>{7e622fdc-8b3c-410e-819a-1f6bf4441960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Shader\ComputeShader">
+      <UniqueIdentifier>{d93ea78a-fdac-4999-9918-577efa8d65e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Shader\GraphicsShader">
+      <UniqueIdentifier>{3a914dbb-c88b-45a7-ad12-95f1d05519fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -82,6 +118,27 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>04. Manager\TimeManager</Filter>
     </ClInclude>
+    <ClInclude Include="CAsset.h">
+      <Filter>06. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>07. GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponent.h">
+      <Filter>08. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h">
+      <Filter>06. Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>06. Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicsShader.h">
+      <Filter>06. Asset\Shader\GraphicsShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CTansform.h">
+      <Filter>08. Component\01. Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -111,6 +168,27 @@
     </ClCompile>
     <ClCompile Include="CTimeMgr.cpp">
       <Filter>04. Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsset.cpp">
+      <Filter>06. Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>07. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>08. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp">
+      <Filter>06. Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>06. Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicsShader.cpp">
+      <Filter>06. Asset\Shader\GraphicsShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CTansform.cpp">
+      <Filter>08. Component\01. Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
