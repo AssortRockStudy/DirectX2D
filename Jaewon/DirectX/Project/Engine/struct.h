@@ -6,3 +6,9 @@ struct Vtx
 	Vec4 vColor;	 // 정점의 색상 정보
 	Vec2 vUV;		 // UV 좌표계 or Texture Coodinate
 };
+
+struct tTransform
+{
+	Vec4	vWorldPos;
+	Vec4    vWorldScale;
+};
