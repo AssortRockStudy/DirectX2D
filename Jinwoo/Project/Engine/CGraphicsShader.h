@@ -23,7 +23,7 @@ private:
     D3D11_PRIMITIVE_TOPOLOGY        m_Topology;
 
 public:
-    int CreateVertexShaer(const wstring& _strRelativePath, const string& _strFuncName);
+    int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
     int CreateHullShader();
     int CreateDomainShader();
     int CreateGeometryShader();

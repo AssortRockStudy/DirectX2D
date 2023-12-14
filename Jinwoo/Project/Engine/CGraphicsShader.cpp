@@ -15,7 +15,7 @@ CGraphicsShader::~CGraphicsShader()
 }
 
 
-int CGraphicsShader::CreateVertexShaer(const wstring& _strRelativePath, const string& _strFuncName)
+int CGraphicsShader::CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName)
 {
 	// 버텍스 쉐이더
 	// HLSL 버텍스 쉐이더 함수 컴파일

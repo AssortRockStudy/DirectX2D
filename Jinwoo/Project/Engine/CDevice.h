@@ -1,5 +1,6 @@
 #pragma once
 
+class CConstBuffer;
 
 class CDevice
 	: public CSingleton<CDevice>
@@ -19,9 +20,10 @@ private:
 	ComPtr<ID3D11Texture2D>			m_DSTex;		// 뎊스 스텐실 텍스쳐	
 	ComPtr<ID3D11DepthStencilView>	m_DSView;		// 뎊스 스텐실 뷰
 
-	HWND	m_hRenderWnd;
-	Vec2	m_vRenderResolution;
+	HWND							m_hRenderWnd;
+	Vec2							m_vRenderResolution;
 	
+	CConstBuffer*					m_arrCB[(UINT)CB_TYPE::END];
 
 public:
 	int init(HWND _hWnd, Vec2 _vResolution);
@@ -31,8 +33,11 @@ public:
 	ID3D11Device* GetDevice() { return m_Device.Get(); }
 	ID3D11DeviceContext* GetContext() { return m_Context.Get(); }
 
+	CConstBuffer* GetConstBuffer(CB_TYPE _Type) { return m_arrCB[(UINT)_Type]; }
+
 private:
 	int CreateSwapChain();
 	int CreateTargetView();
+	int CreateConstBuffer();
 };
 

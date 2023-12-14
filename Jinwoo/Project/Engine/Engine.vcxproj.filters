@@ -16,9 +16,6 @@
     <Filter Include="Entity">
       <UniqueIdentifier>{e5685132-ffcc-4c72-85c6-0c618d37794c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SimpleMath">
-      <UniqueIdentifier>{de071f22-f034-4862-ab4f-66aacf763939}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShaderCode">
       <UniqueIdentifier>{f164458a-c4d4-4e1e-9c41-19d3d57497b6}</UniqueIdentifier>
     </Filter>
@@ -73,6 +70,24 @@
     <Filter Include="08.Component\08.Camera">
       <UniqueIdentifier>{a58d0b2b-7fe1-40b1-a8bb-47beb865a3cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{de071f22-f034-4862-ab4f-66aacf763939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\RenderComponent">
+      <UniqueIdentifier>{2f7a45c1-f758-432b-b601-fb15d2ad8742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\RenderComponent\01.MeshRender">
+      <UniqueIdentifier>{410d2890-266e-4222-b70b-5d9233d3a48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\RenderComponent\02.TileMap">
+      <UniqueIdentifier>{1bf9bc80-6809-44ed-b94d-4c92ed6ca761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\RenderComponent\03.ParticleSystem">
+      <UniqueIdentifier>{10fe28d0-cf55-40e0-9fff-c96717380642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Device\ConstBuffer">
+      <UniqueIdentifier>{0e4b369a-a7d8-4e4c-a4ea-08fb0fd55f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -107,7 +122,7 @@
       <Filter>05.Level</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
-      <Filter>SimpleMath</Filter>
+      <Filter>Module</Filter>
     </ClInclude>
     <ClInclude Include="CKeyMgr.h">
       <Filter>04.Manager\KeyMgr</Filter>
@@ -135,6 +150,21 @@
     </ClInclude>
     <ClInclude Include="CMesh.h">
       <Filter>06.Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03.Device\ConstBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponent.h">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRender.h">
+      <Filter>08.Component\RenderComponent\01.MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>08.Component\01.Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +214,22 @@
     <ClCompile Include="CMesh.cpp">
       <Filter>06.Asset\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03.Device\ConstBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderComponent.cpp">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRender.cpp">
+      <Filter>08.Component\RenderComponent\01.MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>08.Component\01.Transform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
-      <Filter>SimpleMath</Filter>
+      <Filter>Module</Filter>
     </None>
     <None Include="std2d.fx">
       <Filter>ShaderCode</Filter>
