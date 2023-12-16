@@ -140,7 +140,15 @@
     <ClInclude Include="CGraphicsShader.h">
       <Filter>06.Asset\Shader\GraphicsShader</Filter>
     </ClInclude>
-    <ClInclude Include="CTransform.h" />
+    <ClInclude Include="func.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponent.h" />
+    <ClInclude Include="CMeshRender.h" />
+    <ClInclude Include="CConstBuffer.h" />
+    <ClInclude Include="CTransform.h">
+      <Filter>08. Component\01. Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -192,6 +200,9 @@
     <ClCompile Include="CTransform.cpp">
       <Filter>08. Component\01. Transform</Filter>
     </ClCompile>
+    <ClCompile Include="CRenderComponent.cpp" />
+    <ClCompile Include="CMeshRender.cpp" />
+    <ClCompile Include="CConstBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

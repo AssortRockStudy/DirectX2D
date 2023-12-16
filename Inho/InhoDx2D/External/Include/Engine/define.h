@@ -16,6 +16,12 @@ friend class CSingleton<classtype>;
 #define KEY_RELEASED(Key) KEY_CHECK(Key, RELEASED)
 #define KEY_NONE(Key) KEY_CHECK(Key, NONE)
 
+enum class DIR_TYPE {
+	RIGHT,
+	UP,
+	FRONT
+};
+
 enum class ASSET_TYPE {
 	MESH,
 	MESHDATA,
@@ -47,6 +53,15 @@ enum class COMPONENT_TYPE {
 	SKYBOX,
 	DECAL,
 	LANDSCAPE,
+
+	END,
+};
+
+enum class CB_TYPE {
+	TRANSFORM,
+	MATERIAL_CONST,
+	GLOBAL_DATA,
+	ANIMATION,
 
 	END,
 };

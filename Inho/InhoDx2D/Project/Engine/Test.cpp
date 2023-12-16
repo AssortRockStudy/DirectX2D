@@ -7,8 +7,14 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 
+#include "CGameObject.h"
+
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+
+#include "CTransform.h "
+
+CGameObject* g_Object = nullptr;
 
 
 tTransform g_Transform = { Vec4(0.f, 0.f, 0.f, 0.f), Vec4(1.f, 1.f, 1.f, 1.f) };
@@ -17,9 +23,6 @@ CMesh* g_RectMesh = nullptr;
 CMesh* g_CircleMesh = nullptr;
 
 CGraphicsShader* g_Shader = nullptr;
-
-// 상수 데이터를 전달하는 버퍼
-ComPtr<ID3D11Buffer> g_CB = nullptr;
 
 int TestInit()
 {
@@ -90,31 +93,15 @@ int TestInit()
 	g_CircleMesh = new CMesh;
 	g_CircleMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 
-	D3D11_BUFFER_DESC BufferDesc;
 
-	// 상수 버퍼 생성
-	BufferDesc = {};
-
-	BufferDesc.ByteWidth = sizeof(tTransform);
-	BufferDesc.StructureByteStride = sizeof(tTransform);
-	BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-
-	// 버퍼에 쓰기 가능
-	BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	BufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-
-	// 상수 버퍼 생성
-	if (FAILED(DEVICE->CreateBuffer(&BufferDesc, nullptr, g_CB.GetAddressOf())))
-	{
-		MessageBox(nullptr, L"상수 버퍼 생성 실패", L"TestInit 오류", MB_OK);
-		return E_FAIL;
-	}
 
 	g_Shader = new CGraphicsShader;
 	g_Shader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
 	g_Shader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
 
-
+	g_Object = new CGameObject;
+	
+	g_Object->AddComponent(new CTransform);
 
 	
 	return S_OK;
@@ -124,49 +111,16 @@ int TestInit()
 
 void Tick()
 {
-	if (KEY_PRESSED(KEY::LEFT)) {
-		g_Transform.vWorldPos.x -= DT;
-	}
-
-	if (KEY_PRESSED(KEY::RIGHT)) {
-		g_Transform.vWorldPos.x += DT;
-	}
-
-	if (KEY_PRESSED(KEY::UP)) {
-		g_Transform.vWorldPos.y += DT;
-	}
-
-	if (KEY_PRESSED(KEY::DOWN)) {
-		g_Transform.vWorldPos.y -= DT;
-	}
+	g_Object->tick();
+	g_Object->finaltick();
 	
-	if (KEY_PRESSED(KEY::_1)) {
-		g_Transform.vWorldScale += DT * Vec4(1.f, 1.f, 1.f, 1.f);
-	}
-
-	if (KEY_PRESSED(KEY::_2)) {
-		g_Transform.vWorldScale -= DT * Vec4(1.f, 1.f, 1.f, 1.f);
-	}
-	
-
-	// 맵, 언맵
-	D3D11_MAPPED_SUBRESOURCE tSub = {};
-
-	CONTEXT->Map(g_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
-	memcpy(tSub.pData, &g_Transform, sizeof(tTransform));
-	CONTEXT->Unmap(g_CB.Get(), 0);
 }
 
 void Render() {
 	float ClearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearRenderTarget(ClearColor);
 
-
-	// 삼각형 그리기
-	CONTEXT->VSSetConstantBuffers(0, 1, g_CB.GetAddressOf());
-
-	g_Shader->UpdateData();
-	g_RectMesh->render();
+	g_Object->render();
 
 
 	CDevice::GetInst()->Present();
@@ -184,6 +138,8 @@ void TestRelease()
 	}
 
 	delete g_Shader;
+
+	delete g_Object;
 }
 
 void TestProgress()
