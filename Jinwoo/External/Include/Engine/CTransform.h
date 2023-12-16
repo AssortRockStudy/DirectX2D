@@ -11,6 +11,7 @@ private:
     Vec3    m_vRelativeRotation;
     Vec3    m_arrDir[3];
 
+    // 상태 행렬 (4*4 크기를 가지는 행렬)
     Matrix  m_matWorld;
 
 public:

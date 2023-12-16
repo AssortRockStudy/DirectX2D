@@ -88,6 +88,27 @@
     <Filter Include="03.Device\ConstBuffer">
       <UniqueIdentifier>{0e4b369a-a7d8-4e4c-a4ea-08fb0fd55f31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08.Component\Script">
+      <UniqueIdentifier>{29968472-3ed7-4f22-a954-f50b8d0a89ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{7a346582-b154-4b17-8b29-2c8357501a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Material">
+      <UniqueIdentifier>{851182c5-1126-4b66-8cb9-33abe0e32813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\MeshData">
+      <UniqueIdentifier>{1fd19b6d-2a0d-4ee0-a84a-7771350f1ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Sound">
+      <UniqueIdentifier>{5d367e42-483e-46c1-b876-240d9d3d5fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\AssetMgr">
+      <UniqueIdentifier>{31c5338b-09ca-48a0-9361-a8128642cad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager\LevelMgr">
+      <UniqueIdentifier>{83cd2cd6-e7a4-4adc-9841-ff42e125e02b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,7 +138,6 @@
     <ClInclude Include="CEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h" />
     <ClInclude Include="CLevel.h">
       <Filter>05.Level</Filter>
     </ClInclude>
@@ -166,6 +186,27 @@
     <ClInclude Include="CTransform.h">
       <Filter>08.Component\01.Transform</Filter>
     </ClInclude>
+    <ClInclude Include="CScript.h">
+      <Filter>08.Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetMgr.h">
+      <Filter>04.Manager\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelMgr.h">
+      <Filter>04.Manager\LevelMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayer.h">
+      <Filter>05.Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>08.Component\08.Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -183,7 +224,6 @@
     <ClCompile Include="CEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="CLevel.cpp">
       <Filter>05.Level</Filter>
     </ClCompile>
@@ -225,6 +265,24 @@
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
       <Filter>08.Component\01.Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CScript.cpp">
+      <Filter>08.Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr.cpp">
+      <Filter>04.Manager\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelMgr.cpp">
+      <Filter>04.Manager\LevelMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayer.cpp">
+      <Filter>05.Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>08.Component\08.Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,8 +12,8 @@ struct Vtx
 
 // 상수버퍼 대응 구조체
 // 상수버퍼는 16바이트씩 데이터를 읽기 때문에 구조체 크기를 16바이트의 배수로 맞춰야 한다
+// 오브젝트의 상태값을 행렬에 모두 담는다
 struct tTransform
 {
-	Vec4 vWorldPos;
-	Vec4 vWorldScale;
+	Matrix matWorld;
 };

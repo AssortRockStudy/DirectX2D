@@ -19,6 +19,7 @@
 
 #define DT CTimeMgr::GetInst()->GetDeltaTime()
 
+#define LAYER_MAX 32
 
 
 enum class ASSET_TYPE
@@ -30,6 +31,7 @@ enum class ASSET_TYPE
 	SOUND,
 	COMPUTE_SHADER,
 	GRAPHICS_SHADER,
+	END,
 };
 
 enum class COMPONENT_TYPE
@@ -56,6 +58,8 @@ enum class COMPONENT_TYPE
 	LANDSCAPE,
 
 	END,
+
+	SCRIPT,
 };
 
 

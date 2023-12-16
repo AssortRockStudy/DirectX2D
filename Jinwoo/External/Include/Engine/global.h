@@ -3,8 +3,9 @@
 
 #include <stdlib.h>
 #include <Windows.h>
-#include <string>
+#include <typeinfo>
 
+#include <string>
 #include <vector>
 #include <list>
 #include <map>
