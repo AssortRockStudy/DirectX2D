@@ -2,8 +2,11 @@
 #include "CGameObject.h"
 
 #include "CComponent.h"
+#include "CRenderComponent.h"
+
 CGameObject::CGameObject()
 	: m_arrCom{}
+	, m_RenderCom(nullptr)
 {
 }
 
@@ -41,6 +44,9 @@ void CGameObject::finaltick()
 
 void CGameObject::render()
 {
+	if (nullptr != m_RenderCom) {
+		m_RenderCom->render();
+	}
 }
 
 void CGameObject::AddComponent(CComponent* _Component)
@@ -49,6 +55,8 @@ void CGameObject::AddComponent(CComponent* _Component)
 
 	m_arrCom[(UINT)type] = _Component;
 	_Component->m_Owner = this;
+
+	m_RenderCom = dynamic_cast<CRenderComponent*>(_Component);
 }
 
 

@@ -18,7 +18,6 @@ int CConstBuffer::Create(UINT _ElementSize, UINT _ElementCount)
     m_ElementCount = _ElementCount;
 
 	// 상수 버퍼 생성
-	m_Desc = {};
 
 	m_Desc.ByteWidth = sizeof(tTransform);
 	m_Desc.StructureByteStride = sizeof(tTransform);
@@ -49,7 +48,7 @@ void CConstBuffer::SetData(void* _Src, UINT _ElementCount)
 	D3D11_MAPPED_SUBRESOURCE tSub = {};
 
 	CONTEXT->Map(m_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
-	memcpy(tSub.pData, &_Src, m_ElementCount * m_ElementSize);
+	memcpy(tSub.pData, _Src, m_ElementSize * _ElementCount);
 	CONTEXT->Unmap(m_CB.Get(), 0);
 }
 

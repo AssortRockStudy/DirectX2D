@@ -17,6 +17,7 @@ public:
 
 public:
     COMPONENT_TYPE GetType() { return m_Type; }
+    CGameObject* GetOwner() { return m_Owner; }
 
 public:
     CComponent(COMPONENT_TYPE _Type);
