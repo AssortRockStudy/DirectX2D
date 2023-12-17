@@ -15,6 +15,8 @@
 //	}
 //};
 
+class CConstBuffer;
+
 class CDevice : public CSingleton<CDevice>
 {
 	SINGLETON(CDevice);
@@ -37,10 +39,11 @@ private:
 	ComPtr<ID3D11Texture2D>						m_DSTex;	 // ‰X½º ½ºÅÙ½Ç ÅØ½ºÃÄ	
 	ComPtr<ID3D11DepthStencilView>			m_DSView;	// ‰X½º ½ºÅÙ½Ç ºä
 
-
+	CConstBuffer* m_arrCB[(UINT)CB_TYPE::END];
 private:
 	int CreateSwapChain();
 	int CreateTargetView();
+	int CreateConstBuffer();
 
 public:
 	int init(HWND _hWnd, Vec2 _vResolution);
@@ -49,5 +52,7 @@ public:
 
 	ID3D11Device* GetDevice() { return m_Device.Get(); }
 	ID3D11DeviceContext* GetContext() { return m_Context.Get(); }
+	CConstBuffer* GetConstBuffer(CB_TYPE _type) { return m_arrCB[(UINT)_type]; }
+
 };
 

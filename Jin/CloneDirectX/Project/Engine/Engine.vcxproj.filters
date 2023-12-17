@@ -48,6 +48,10 @@
     <ClInclude Include="CGraphicsShader.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CTransform.h" />
+    <ClInclude Include="func.h" />
+    <ClInclude Include="CConstBuffer.h" />
+    <ClInclude Include="CRenderComponent.h" />
+    <ClInclude Include="CMeshRender.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -73,6 +77,9 @@
     <ClCompile Include="CGraphicsShader.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CTransform.cpp" />
+    <ClCompile Include="CConstBuffer.cpp" />
+    <ClCompile Include="CRenderComponent.cpp" />
+    <ClCompile Include="CMeshRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />

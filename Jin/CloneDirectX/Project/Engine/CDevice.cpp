@@ -1,15 +1,18 @@
 #include "pch.h"
 #include "CDevice.h"
 
+#include "CConstBuffer.h"
+
 CDevice::CDevice()
     : m_hRenderWnd(nullptr)
+    , m_arrCB{}
 {
 
 }
 
 CDevice::~CDevice()
 {
-
+    Delete_Array(m_arrCB);
 }
 
 int CDevice::init(HWND _hWnd, Vec2 _vResolution)
@@ -51,6 +54,10 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 
     CONTEXT->RSSetViewports(1, &ViewportDesc);
 
+    if (FAILED(CreateConstBuffer()))
+    {
+        MessageBox(nullptr,L"상수버퍼 생성 실패", L"Device 초기화 실패!!", MB_OK);
+    }
     return S_OK;
 }
 
@@ -126,6 +133,14 @@ int CDevice::CreateTargetView()
 
     m_Device->CreateDepthStencilView(m_DSTex.Get(), nullptr, m_DSView.GetAddressOf());
     m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
+
+    return S_OK;
+}
+
+int CDevice::CreateConstBuffer()
+{
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
 
     return S_OK;
 }
