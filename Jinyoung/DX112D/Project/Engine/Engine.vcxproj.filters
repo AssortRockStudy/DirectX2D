@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="01.Header">
+      <UniqueIdentifier>{3db60c15-adbb-44a4-8f49-b06aef7503c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Engine">
+      <UniqueIdentifier>{f88857e6-6d26-4e12-93b1-1cbb172240ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Device">
+      <UniqueIdentifier>{f33fdbc9-d5b0-4979-ab12-291543b4c0dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Default">
+      <UniqueIdentifier>{5f3cc523-6a98-4e54-bb48-1f2b307ee639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Level">
+      <UniqueIdentifier>{37a9969b-2a52-4fd2-8e39-720c8cf6d188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Entity">
+      <UniqueIdentifier>{7505aed6-4684-42b4-a8d5-c09f7c042c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Module">
+      <UniqueIdentifier>{1d98de52-385e-4739-b70b-35bc1a1af2ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>00.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEngine.h">
+      <Filter>02.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>03.Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="SimpleMath.h">
+      <Filter>00.Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevel.h">
+      <Filter>04.Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>00.Entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine.cpp">
+      <Filter>00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>00.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CEngine.cpp">
+      <Filter>02.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>03.Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="CLevel.cpp">
+      <Filter>04.Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.cpp">
+      <Filter>00.Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>00.Module</Filter>
+    </None>
+  </ItemGroup>
+</Project>
