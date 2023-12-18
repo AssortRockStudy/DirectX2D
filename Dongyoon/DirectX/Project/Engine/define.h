@@ -17,6 +17,8 @@
 #define KEY_NONE(Key) KEY_CHECK(Key, NONE)
 
 
+#define LAYER_MAX 32
+
 enum class DIR_TYPE
 {
 	RIGHT,
@@ -60,6 +62,8 @@ enum class COMPONENT_TYPE
 	LANDSCAPE,
 
 	END,
+
+	SCRIPT,
 };
 
 // 상수버퍼 종류

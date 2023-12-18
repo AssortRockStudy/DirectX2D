@@ -3,6 +3,7 @@
 //표준 라이브러리
 #include <stdlib.h>
 #include <Windows.h>
+#include <typeinfo>
 
 #include <wrl.h>
 using namespace Microsoft::WRL;

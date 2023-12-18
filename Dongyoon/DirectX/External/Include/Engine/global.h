@@ -3,6 +3,7 @@
 //표준 라이브러리
 #include <stdlib.h>
 #include <Windows.h>
+#include <typeinfo>
 
 #include <wrl.h>
 using namespace Microsoft::WRL;
@@ -43,3 +44,4 @@ typedef Vector4 Vec4;
 #include "CSingleton.h"
 #include "define.h"
 #include "struct.h"
+#include "func.h"

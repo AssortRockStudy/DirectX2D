@@ -88,6 +88,33 @@
     <Filter Include="03. Device\ConstBuffer">
       <UniqueIdentifier>{6076eeda-4145-4f3a-93f9-43e399b9254e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. Component\Script">
+      <UniqueIdentifier>{80ef9c47-119b-41cc-a484-7f524a49b1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{d788e6bc-5797-484c-a7c9-073f4b6a1bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr">
+      <UniqueIdentifier>{dbc65137-f1f2-4368-b9ed-ef28e546a1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\Mesh">
+      <UniqueIdentifier>{b0a37aa2-1f4f-4e57-a420-cc826948b671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\MeshData">
+      <UniqueIdentifier>{5e344a46-8059-4a58-9bc4-47fb63c4e3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\Material">
+      <UniqueIdentifier>{945db2ba-813f-4475-a4bc-5d210fa375b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\Sound">
+      <UniqueIdentifier>{f98e4b42-2407-466e-8cd5-6ba568741a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\Shader">
+      <UniqueIdentifier>{fd05a542-310b-44fc-bf59-e349dc84f267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\LevelMgr">
+      <UniqueIdentifier>{c18723aa-5077-495a-8599-ee35b238f4db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -120,7 +147,6 @@
     <ClInclude Include="CLevel.h">
       <Filter>05. Level</Filter>
     </ClInclude>
-    <ClInclude Include="test.h" />
     <ClInclude Include="SimpleMath.h">
       <Filter>Module</Filter>
     </ClInclude>
@@ -166,6 +192,27 @@
     <ClInclude Include="CMeshRender.h">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
     </ClInclude>
+    <ClInclude Include="CScript.h">
+      <Filter>08. Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetMgr.h">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayer.h">
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelMgr.h">
+      <Filter>04. Manager\LevelMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>08. Component\08. Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -186,7 +233,6 @@
     <ClCompile Include="CLevel.cpp">
       <Filter>05. Level</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="CKeyMgr.cpp">
       <Filter>04. Manager\KeyMgr</Filter>
     </ClCompile>
@@ -225,6 +271,24 @@
     </ClCompile>
     <ClCompile Include="CMeshRender.cpp">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CScript.cpp">
+      <Filter>08. Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr.cpp">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayer.cpp">
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelMgr.cpp">
+      <Filter>04. Manager\LevelMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>08. Component\08. Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
