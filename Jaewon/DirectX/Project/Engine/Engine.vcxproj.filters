@@ -56,7 +56,24 @@
     <ClInclude Include="CGraphicsShader.h">
       <Filter>06.Asset\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="CMesh.h" />
+    <ClInclude Include="func.h">
+      <Filter>01.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03.Device\ConstBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h">
+      <Filter>06.Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRender.h">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponent.h">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>08.Component\01.Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -99,7 +116,21 @@
     <ClCompile Include="CGraphicsShader.cpp">
       <Filter>06.Asset\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="CMesh.cpp" />
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03.Device\ConstBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp">
+      <Filter>06.Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRender.cpp">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderComponent.cpp">
+      <Filter>08.Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>08.Component\01.Transform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -155,6 +186,15 @@
     </Filter>
     <Filter Include="06.Asset\Sound">
       <UniqueIdentifier>{cd1140ed-2cf8-4a65-856d-13013bc3591b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Device\ConstBuffer">
+      <UniqueIdentifier>{3a9ee56a-aa96-4a60-800f-1709958169c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\RenderComponent">
+      <UniqueIdentifier>{edea8315-78f8-4292-9012-4a702c0d27a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\01.Transform">
+      <UniqueIdentifier>{8b23f84c-c4f5-4ce1-b161-5223131bedf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

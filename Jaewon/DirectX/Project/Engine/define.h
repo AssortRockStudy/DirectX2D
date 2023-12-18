@@ -53,3 +53,20 @@ enum class COMPONENT_TYPE
 
 	END,
 };
+
+enum class DIR_TYPE
+{
+	RIGHT,
+	UP,
+	FRONT,
+};
+
+enum class CB_TYPE
+{
+	TRANSFORM,
+	MATERIAL_CONST,
+	GLOBAL_DATA,
+	ANIMATION,
+
+	END,
+};
