@@ -8,7 +8,7 @@ CAssetMgr::CAssetMgr() {}
 
 CAssetMgr::~CAssetMgr() {
 	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; i++) {
-		for (auto const pair : m_mapAsset[i]) {
+		for (auto pair : m_mapAsset[i]) {
 			if (nullptr != pair.second) {
 				delete pair.second;
 			}

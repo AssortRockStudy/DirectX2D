@@ -1,29 +1,33 @@
 #include "pch.h"
-#include "Test.h"
+#include "CLevelMgr.h"
 
 #include "CDevice.h"
-
-#include "CPathMgr.h"
-#include "CTimeMgr.h"
-#include "CKeyMgr.h"
 #include "CAssetMgr.h"
 
+#include "CLevel.h"
 #include "CGameObject.h"
+#include "components.h"
+#include "CPlayerScript.h"
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
 
-#include "CTransform.h "
-#include "CMeshRender.h"
-#include "CPlayerScript.h"
-
-vector<CGameObject*> g_vecObj;
-
-int TestInit()
+CLevelMgr::CLevelMgr() 
+	:m_CurLevel(nullptr)
 {
-	
+
+}
+
+CLevelMgr::~CLevelMgr() {
+
+}
+
+void CLevelMgr::init()
+{
+	m_CurLevel = new CLevel;
+
 	CGameObject* pObj = nullptr;
-	pObj = new CGameObject;	
+	pObj = new CGameObject;
 	pObj->SetName(L"Player");
 
 	pObj->AddComponent(new CTransform);
@@ -36,43 +40,28 @@ int TestInit()
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
 
-	g_vecObj.push_back(pObj);
-
-	return S_OK;
+	m_CurLevel->AddObject(pObj, 0);
 }
 
-
-
-void Tick()
+void CLevelMgr::tick()
 {
-	for (size_t i = 0; i < g_vecObj.size(); i++) {
-		g_vecObj[i]->tick();
+	if (nullptr == m_CurLevel) {
+		return;
 	}
-	for (size_t i = 0; i < g_vecObj.size(); i++) {
-		g_vecObj[i]->finaltick();
-	}
+	m_CurLevel->tick();
+	m_CurLevel->finaltick();
 }
 
-void Render() {
+void CLevelMgr::render()
+{
+	if (nullptr == m_CurLevel) {
+		return;
+	}
+
 	float ClearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearRenderTarget(ClearColor);
 
-	
-	for (size_t i = 0; i < g_vecObj.size(); i++) {
-		g_vecObj[i]->render();
-	}
+	m_CurLevel->render();
 
 	CDevice::GetInst()->Present();
-}
-
-
-void TestRelease()
-{
-	Delete_Vec(g_vecObj);
-}
-
-void TestProgress()
-{
-	Tick();
-	Render();
 }

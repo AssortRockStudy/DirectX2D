@@ -106,7 +106,6 @@
     <ClInclude Include="SimpleMath.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h" />
     <ClInclude Include="CEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
@@ -153,6 +152,8 @@
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CAssetMgr.h" />
+    <ClInclude Include="CLayer.h" />
+    <ClInclude Include="CLevelMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -167,7 +168,6 @@
     <ClCompile Include="CDevice.cpp">
       <Filter>03. Device</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="CEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
@@ -210,6 +210,8 @@
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
     <ClCompile Include="CAssetMgr.cpp" />
+    <ClCompile Include="CLayer.cpp" />
+    <ClCompile Include="CLevelMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

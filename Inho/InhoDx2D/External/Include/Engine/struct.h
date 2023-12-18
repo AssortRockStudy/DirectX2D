@@ -11,6 +11,5 @@ struct Vtx {
 // ==================
 struct tTransform
 {
-	Vec4	vWorldPos;
-	Vec4    vWorldScale;
+	Matrix matWorld;
 };
