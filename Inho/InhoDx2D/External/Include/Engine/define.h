@@ -30,6 +30,7 @@ enum class ASSET_TYPE {
 	SOUND,
 	COMPUTE_SHADER,
 	GRAPHICS_SHADER,
+	END,
 };
 
 enum class COMPONENT_TYPE {
@@ -55,6 +56,8 @@ enum class COMPONENT_TYPE {
 	LANDSCAPE,
 
 	END,
+
+	SCRIPT,
 };
 
 enum class CB_TYPE {

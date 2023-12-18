@@ -6,6 +6,7 @@
 #include "CPathMgr.h"
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
+#include "CAssetMgr.h"
 
 #include "CGameObject.h"
 
@@ -14,115 +15,29 @@
 
 #include "CTransform.h "
 #include "CMeshRender.h"
+#include "CPlayerScript.h"
 
 vector<CGameObject*> g_vecObj;
 
-CMesh* g_RectMesh = nullptr;
-CMesh* g_CircleMesh = nullptr;
-
-CGraphicsShader* g_Shader = nullptr;
-
 int TestInit()
 {
-	// 전역변수에 삼각형 위치 설정
-	//      0(Red)
-	//    /    \
-	//  2(G) -- 1(Blue)
-
-	Vtx arrVtx[4] = {};
-	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	arrVtx[0].vUV = Vec2(0.f, 0.f);
-
-	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
-
-	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
-	arrVtx[2].vUV = Vec2(0.f, 0.f);
-
-
-	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
-	arrVtx[3].vUV = Vec2(0.f, 0.f);
-
-	UINT arrIdx[6] = {};
-
-	arrIdx[0] = 0;
-	arrIdx[1] = 1;
-	arrIdx[2] = 2;
-
-	arrIdx[3] = 0;
-	arrIdx[4] = 2;
-	arrIdx[5] = 3;
-
-	g_RectMesh = new CMesh;
-	g_RectMesh->Create(arrVtx, 4, arrIdx, 6);
-
-	// CircleMesh 만들기
-	vector<Vtx> vecVtx;
-	vector<UINT> vecIdx;
-	Vtx v;
-
-	v.vPos = Vec3(0.f, 0.f, 0.f);
-	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
-	v.vUV = Vec2(0.5f, 0.5f);
-
-	UINT iSlice = 40;
-	float fTheta = 0.f;
-	float fRadius = 0.5f;
-
-	for (int i = 0; i <= iSlice; i++) {
-		fTheta = (XM_2PI / iSlice) * i;
-		v.vPos = Vec3(fRadius * cosf(fTheta), fRadius * sinf(fTheta), 0.f);
-		v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
-		v.vUV = Vec2(0.f, 0.f);
-
-		vecVtx.push_back(v);
-	}
-
-	for (int i = 0; i < iSlice; i++) {
-		vecIdx.push_back(0);
-		vecIdx.push_back(i + 2);
-		vecIdx.push_back(i + 1);
-	}
-
-	g_CircleMesh = new CMesh;
-	g_CircleMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-
-
-
-	g_Shader = new CGraphicsShader;
-	g_Shader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
-	g_Shader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
-
+	
 	CGameObject* pObj = nullptr;
 	pObj = new CGameObject;	
+	pObj->SetName(L"Player");
+
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CPlayerScript);
 
 	pObj->Transform()->SetRelativePos(Vec3(-0.5f, 0.f, 0.f));
 	pObj->Transform()->SetRelativeScale(Vec3(1.5f, 1.5f, 1.5f));
 
-	pObj->MeshRender()->SetMesh(g_RectMesh);
-	pObj->MeshRender()->SetShader(g_Shader);
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
 
 	g_vecObj.push_back(pObj);
 
-	pObj = new CGameObject;
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->Transform()->SetRelativePos(Vec3(0.5f, 0.25f, 0.f));
-	pObj->Transform()->SetRelativeScale(Vec3(.5f, .5f, .5f));
-
-	pObj->MeshRender()->SetMesh(g_RectMesh);
-	pObj->MeshRender()->SetShader(g_Shader);
-
-	g_vecObj.push_back(pObj);
-
-	
 	return S_OK;
 }
 
@@ -132,9 +47,10 @@ void Tick()
 {
 	for (size_t i = 0; i < g_vecObj.size(); i++) {
 		g_vecObj[i]->tick();
+	}
+	for (size_t i = 0; i < g_vecObj.size(); i++) {
 		g_vecObj[i]->finaltick();
 	}
-	
 }
 
 void Render() {
@@ -152,16 +68,6 @@ void Render() {
 
 void TestRelease()
 {
-	if (nullptr != g_RectMesh) {
-		delete g_RectMesh;
-	}
-
-	if (nullptr != g_CircleMesh) {
-		delete g_CircleMesh;
-	}
-
-	delete g_Shader;
-
 	Delete_Vec(g_vecObj);
 }
 

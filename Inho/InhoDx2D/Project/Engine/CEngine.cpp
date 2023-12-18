@@ -6,6 +6,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CPathMgr.h"
+#include "CAssetMgr.h"
 
 #include "Test.h"
 
@@ -38,6 +39,7 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
     CPathMgr::init();
     CTimeMgr::GetInst()->init();
     CKeyMgr::GetInst()->init();
+    CAssetMgr::GetInst()->init();
 
 
     if (FAILED(TestInit())) {

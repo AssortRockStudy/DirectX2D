@@ -149,6 +149,10 @@
     <ClInclude Include="CTransform.h">
       <Filter>08. Component\01. Transform</Filter>
     </ClInclude>
+    <ClInclude Include="components.h" />
+    <ClInclude Include="CScript.h" />
+    <ClInclude Include="CPlayerScript.h" />
+    <ClInclude Include="CAssetMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -203,6 +207,9 @@
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="CConstBuffer.cpp" />
+    <ClCompile Include="CScript.cpp" />
+    <ClCompile Include="CPlayerScript.cpp" />
+    <ClCompile Include="CAssetMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

@@ -9,6 +9,8 @@ private:
     class CComponent* m_arrCom[(UINT)COMPONENT_TYPE::END];
     class CRenderComponent* m_RenderCom;
 
+    vector<class CScript*> m_vecScript;
+
 public:
     void begin();
     void tick();
