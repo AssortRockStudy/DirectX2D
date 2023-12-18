@@ -29,7 +29,6 @@
     <ClInclude Include="SimpleMath.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="CEntity.h" />
     <ClInclude Include="CKeyMgr.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
@@ -39,6 +38,25 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="CAsset.h">
+      <Filter>06.Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponent.h">
+      <Filter>08.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>07.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>06.Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicsShader.h">
+      <Filter>06.Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -54,7 +72,6 @@
     <ClCompile Include="CDevice.cpp">
       <Filter>03.Device</Filter>
     </ClCompile>
-    <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CKeyMgr.cpp">
       <Filter>04.Manager</Filter>
     </ClCompile>
@@ -64,6 +81,25 @@
     <ClCompile Include="CTimeMgr.cpp">
       <Filter>04.Manager</Filter>
     </ClCompile>
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsset.cpp">
+      <Filter>06.Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>08.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>07.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>06.Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicsShader.cpp">
+      <Filter>06.Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -87,10 +123,48 @@
     <Filter Include="04.Manager">
       <UniqueIdentifier>{0d5dd34f-ffd0-4b07-8638-ebe51280b833}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Asset">
+      <UniqueIdentifier>{dfaf1e86-711e-43d5-a099-3e276d4312b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07.GameObject">
+      <UniqueIdentifier>{bb3842dc-4209-4902-80a7-39f00d9ed617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component">
+      <UniqueIdentifier>{71fb9d69-419d-4b52-9eb5-cf0a3e1ffc77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{1b3a4ee4-a98f-41fb-96c2-3e5182a9b51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{b610468c-da64-44a4-b1d6-d34dd67d106f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode">
+      <UniqueIdentifier>{57f8d436-8d46-468c-8c6d-85e189bee1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Material">
+      <UniqueIdentifier>{a220ac7f-19d6-42a9-9a38-c346a73d0018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Mesh">
+      <UniqueIdentifier>{03f45c04-d2a1-4ab8-98ed-5b993d588482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\MeshData">
+      <UniqueIdentifier>{18c3fab8-d625-4a75-9345-fd585cffaf7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Shader">
+      <UniqueIdentifier>{becee2a0-b5c4-4449-bdd9-072b07da8a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Sound">
+      <UniqueIdentifier>{cd1140ed-2cf8-4a65-856d-13013bc3591b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
       <Filter>Module</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

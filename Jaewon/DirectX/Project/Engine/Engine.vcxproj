@@ -154,10 +154,16 @@ call EngineCopy.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAsset.h" />
+    <ClInclude Include="CComponent.h" />
     <ClInclude Include="CDevice.h" />
     <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CGraphicsShader.h" />
     <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CMesh.h" />
     <ClInclude Include="CPathMgr.h" />
+    <ClInclude Include="CShader.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="CEngine.h" />
@@ -170,11 +176,17 @@ call EngineCopy.bat</Command>
     <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAsset.cpp" />
+    <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CGraphicsShader.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
+    <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="pch.cpp">
@@ -187,6 +199,12 @@ call EngineCopy.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS_Std2D</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VS_Std2D</EntryPointName>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
