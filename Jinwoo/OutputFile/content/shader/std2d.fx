@@ -4,7 +4,9 @@
 // register 크기 제한 4096
 cbuffer TRANSFORM : register(b0)
 {
-    row_major float4x4 g_matWorld;
+    row_major matrix g_matWorld;
+    row_major matrix g_matView;
+    row_major matrix g_matProj;
 }
 
 struct VS_IN
@@ -27,7 +29,12 @@ VS_OUT VS_Std2D(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
-    output.vPosition = mul(float4(_in.vPos, 1.f), g_matWorld);
+    // 로컬(모델) 좌표 -> 월드 좌표 -> 뷰 좌표 -> 투영 좌표계 순서로 순차적으로 변환
+    float4 vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
+    float4 vViewPos = mul(vWorldPos, g_matView);
+    float4 vProjPos = mul(vViewPos, g_matProj);
+    
+    output.vPosition = vProjPos;
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
     

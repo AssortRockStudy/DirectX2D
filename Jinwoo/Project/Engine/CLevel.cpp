@@ -51,8 +51,5 @@ void CLevel::render()
 
 void CLevel::AddObject(CGameObject* _Object, int _LayerIdx)
 {
-	for (int i = 0; i < LAYER_MAX; ++i)
-	{
-		m_arrLayer[_LayerIdx]->AddObject(_Object);
-	}
+	m_arrLayer[_LayerIdx]->AddObject(_Object);
 }
