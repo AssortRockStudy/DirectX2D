@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 #include "CComponent.h"
 #include "CRenderComponent.h"
+#include "CScript.h"
 
 CGameObject::CGameObject()
 	: m_arrCom{}
@@ -30,6 +31,8 @@ void CGameObject::tick()
 		if (nullptr != m_arrCom[i])
 			m_arrCom[i]->tick();
 	}
+	for (size_t i = 0; i < m_vecScript.size(); ++i)
+		m_vecScript[i]->tick();
 }
 
 void CGameObject::finaltick()
@@ -50,7 +53,21 @@ void CGameObject::render()
 void CGameObject::AddComponent(CComponent* _Comonent)
 {
 	COMPONENT_TYPE type = _Comonent->GetType();
-	m_arrCom[(UINT)type] = _Comonent;
-	_Comonent->m_Owner = this;
-	m_RenderCom = dynamic_cast<CRenderComponent*>(_Comonent);
+	if (type == COMPONENT_TYPE::SCRIPT){
+		assert(dynamic_cast<CScript*>(_Comonent));
+		m_vecScript.push_back((CScript*)_Comonent);
+		_Comonent->m_Owner = this;
+	}
+	else{
+		assert(!m_arrCom[(UINT)type]);
+
+		m_arrCom[(UINT)type] = _Comonent;
+		_Comonent->m_Owner = this;
+
+		CRenderComponent* pRenderCom = dynamic_cast<CRenderComponent*>(_Comonent);
+		if (nullptr != pRenderCom){
+			assert(!m_RenderCom);
+			m_RenderCom = pRenderCom;
+		}
+	}
 }

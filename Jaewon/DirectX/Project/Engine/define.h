@@ -17,6 +17,8 @@
 #define KEY_RELEASED(Key) KEY_CHECK(Key, RELEASED)
 #define KEY_NONE(Key) KEY_CHECK(Key, NONE)
 
+#define LAYER_MAX 32
+
 enum class ASSET_TYPE
 {
 	MESH,
@@ -26,6 +28,7 @@ enum class ASSET_TYPE
 	SOUND,
 	COMPUTE_SHADER,
 	GRAPHICS_SHADER,
+	END,
 };
 
 enum class COMPONENT_TYPE
@@ -52,6 +55,8 @@ enum class COMPONENT_TYPE
 	LANDSCAPE,
 
 	END,
+
+	SCRIPT,
 };
 
 enum class DIR_TYPE
