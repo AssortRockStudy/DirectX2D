@@ -1,15 +1,17 @@
 #include "pch.h"
 #include "CDevice.h"
+#include "CConstBuffer.h"
 
 CDevice::CDevice()
     : m_hRenderWnd(nullptr)
+    , m_arrCB{}
 {
 
 }
 
 CDevice::~CDevice()
 {
-
+    Delete_Array(m_arrCB);
 }
 
 int CDevice::init(HWND _hWnd, Vec2 _vResolution)
@@ -28,7 +30,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
         , nullptr, 0, D3D11_SDK_VERSION
         , m_Device.GetAddressOf(), &eLevel, m_Context.GetAddressOf()) ))
     {
-        MessageBox(nullptr, L"Fail to Create Device", L"Fail to Initialize", MB_OK);
+        MessageBox(nullptr, L"Fail to Create Device", L"Fail to Initialize Device", MB_OK);
         return E_FAIL;
     }
 
@@ -38,7 +40,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
     // create swapChain
     if (FAILED(CreateSwapChain()))
     {
-        MessageBox(nullptr, L"Fail to Create SwapChain", L"Fail to Initialize", MB_OK);
+        MessageBox(nullptr, L"Fail to Create SwapChain", L"Fail to Initialize Device", MB_OK);
         return E_FAIL;
     }
 
@@ -50,7 +52,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
     // create render target, render target view, depth stencil, depth stencil view
     if (FAILED(CreateTargetView()))
     {
-        MessageBox(nullptr, L"Fail to Create Target&View", L"Fail to Initialize", MB_OK);
+        MessageBox(nullptr, L"Fail to Create Target&View", L"Fail to Initialize Device", MB_OK);
         return E_FAIL;
     }
 
@@ -67,6 +69,13 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
     ViewportDesc.Height = m_vRenderResolution.y;
 
     CONTEXT->RSSetViewports(1, &ViewportDesc);
+
+    // constant buffer 생성
+    if (FAILED(CreateConstBuffer()))
+    {
+        MessageBox(nullptr, L"Fail to Create ConstantBuffer", L"Fail to Initialize Device", MB_OK);
+        return E_FAIL;
+    }
 
     return S_OK;
 }
@@ -153,6 +162,14 @@ int CDevice::CreateTargetView()
 
     // Output Merge State(OM)에 Render Target Texture와 Depth Stencil Texture 전달
     m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
+
+    return S_OK;
+}
+
+int CDevice::CreateConstBuffer()
+{
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
 
     return S_OK;
 }

@@ -16,6 +16,8 @@
 #define KEY_RELEASED(Key) KEY_CHECK(Key, RELEASED)
 #define KEY_NONE(Key) KEY_CHECK(Key, NONE)
 
+#define LAYER_MAX 32
+
 enum class ASSET_TYPE
 {
 	MESH,
@@ -25,6 +27,8 @@ enum class ASSET_TYPE
 	SOUND,
 	COMPUTE_SHADER,
 	GRAPHICS_SHADER,
+
+	END,
 };
 
 enum class COMPONENT_TYPE
@@ -45,6 +49,22 @@ enum class COMPONENT_TYPE
 	SKYBOX,
 	DECAL,
 	LANDSCAPE,
+
+	END,
+	// End 이전: 기본 타입
+	// -------------------------------
+	// End 이후: 사용자가 추가적으로 생성한 타입
+
+	SCRIPT,
+};
+
+// 상수버퍼 종류
+enum class CB_TYPE
+{
+	TRANSFORM,
+	MATREIAL_CONST,
+	GLOBAL_DATA,
+	ANIMTATION,
 
 	END,
 };

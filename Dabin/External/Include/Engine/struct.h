@@ -14,6 +14,5 @@ struct Vtx
 // - constant buffer는 정렬을 위해 반드시 16Byte 크기 사용
 struct tTransform
 {
-	Vec4 vWorldPos;
-	Vec4 vWorldScale;
+	Matrix matWorld;
 };

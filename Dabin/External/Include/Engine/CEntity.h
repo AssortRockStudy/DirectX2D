@@ -19,6 +19,6 @@ public:
 
 public:
 	CEntity();
-	~CEntity();
+	virtual ~CEntity();
 };
 

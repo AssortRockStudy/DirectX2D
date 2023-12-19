@@ -7,11 +7,13 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <unordered_map>
 using std::wstring;
 using std::string;
 using std::vector;
 using std::list;
 using std::map;
+using std::unordered_map;
 using std::make_pair;
 
 #include <wrl.h>
@@ -39,3 +41,4 @@ typedef Vector4 Vec4;
 #include "singleton.h"
 #include "define.h"
 #include "struct.h"
+#include "func.h"

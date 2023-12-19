@@ -2,28 +2,30 @@
 #include "CEntity.h"
 
 // =======================================
-// CLevel: GameObject가 배치되는 Scene
+// Layer: Level에 올라가는 Object의 계층
 // =======================================
-class CLayer;
+
 class CGameObject;
 
-class CLevel :
+class CLayer :
     public CEntity
 {
 private:
-    CLayer* m_arrLayer[LAYER_MAX];
+    vector<CGameObject*>    m_vecObj;
 
-public:
+private:
     void begin();
     void tick();
     void finaltick();
     void render();
 
-public:
-    void AddObject(CGameObject* _Object, int _LayerIdx);
+private:
+    void AddObject(CGameObject* _Object) { m_vecObj.push_back(_Object); }
 
 public:
-    CLevel();
-    ~CLevel();
+    CLayer();
+    ~CLayer();
+
+    friend class CLevel;
 };
 
