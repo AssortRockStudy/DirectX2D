@@ -27,6 +27,7 @@ public:
     Vec3 GetRelativePos() { return m_vRelativePos; }
     Vec3 GetRelativeScale() { return m_vRelativeScale; }
     Vec3 GetRelativeRotation() { return m_vRelativeRotation; }
+    Vec3 GetDir(DIR_TYPE _Type) { return m_arrDir[(UINT)_Type]; }
     const Matrix& GetWorldMat() { return m_matWorld; }
 
 public:

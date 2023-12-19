@@ -156,6 +156,8 @@ call EngineCopy.bat</Command>
   <ItemGroup>
     <ClInclude Include="CAsset.h" />
     <ClInclude Include="CAssetMgr.h" />
+    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCameraMoveScript.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CDevice.h" />
@@ -178,6 +180,10 @@ call EngineCopy.bat</Command>
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
+    <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="extern.cpp">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="global.h" />
@@ -193,6 +199,7 @@ call EngineCopy.bat</Command>
   <ItemGroup>
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetMgr.cpp" />
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CDevice.cpp" />

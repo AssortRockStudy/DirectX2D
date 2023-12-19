@@ -41,4 +41,5 @@ public:
     ID3D11Device* GetDevice() { return m_Device.Get(); }
     ID3D11DeviceContext* GetContext() { return m_Context.Get(); }
     CConstBuffer* GetConstBuffer(CB_TYPE _Type) { return m_arrCB[(UINT)_Type]; }
+    Vec2 GetRenderResolution() { return m_vRenderResolution; }
 };

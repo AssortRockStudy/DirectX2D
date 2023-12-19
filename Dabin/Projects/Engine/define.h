@@ -51,14 +51,14 @@ enum class COMPONENT_TYPE
 	LANDSCAPE,
 
 	END,
-	// End 이전: 기본 타입
+	// Before End: basic type
 	// -------------------------------
-	// End 이후: 사용자가 추가적으로 생성한 타입
+	// After End: custom type (added by user)
 
 	SCRIPT,
 };
 
-// 상수버퍼 종류
+// type of constant buffer
 enum class CB_TYPE
 {
 	TRANSFORM,
@@ -67,4 +67,12 @@ enum class CB_TYPE
 	ANIMTATION,
 
 	END,
+};
+
+// type of direction vector
+enum class DIR_TYPE
+{
+	RIGHT,
+	UP,
+	FRONT
 };

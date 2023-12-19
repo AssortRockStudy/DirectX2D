@@ -33,6 +33,7 @@ public:
 
     GET_GOMPONENT(Transform, TRANSFORM);
     GET_GOMPONENT(MeshRender, MESHRENDER);
+    GET_GOMPONENT(Camera, CAMERA);
 
 public:
     CGameObject();

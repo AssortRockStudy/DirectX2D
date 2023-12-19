@@ -5,7 +5,7 @@
 #include "CTransform.h"
 
 CPlayerScript::CPlayerScript()
-	: m_Speed(2.f)
+	: m_Speed(100.f)
 {
 }
 
@@ -16,7 +16,7 @@ CPlayerScript::~CPlayerScript()
 void CPlayerScript::tick()
 {
 	Vec3 vPos = Transform()->GetRelativePos();
-
+	Vec3 vRot = Transform()->GetRelativeRotation();
 
 	if (KEY_PRESSED(KEY::A))
 	{
@@ -38,17 +38,21 @@ void CPlayerScript::tick()
 		vPos.y -= DT * m_Speed;
 	}
 
-	/*
-	if (KEY_PRESSED(KEY::UP))
+	if (KEY_PRESSED(KEY::X))
 	{
-		g_Transform.vWorldScale += DT * Vec4(1.f, 1.f, 1.f, 1.f);
+		vRot.x += DT * XM_PI;
 	}
 
-	if (KEY_PRESSED(KEY::DOWN))
+	if (KEY_PRESSED(KEY::Y))
 	{
-		g_Transform.vWorldScale -= DT * Vec4(1.f, 1.f, 1.f, 1.f);
+		vRot.y += DT * XM_PI;
 	}
-	*/
+	
+	if (KEY_PRESSED(KEY::Z))
+	{
+		vRot.z += DT * XM_PI;
+	}
 
 	Transform()->SetRelativePos(vPos);
+	Transform()->SetRelativeRotation(vRot);
 }

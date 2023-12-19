@@ -150,6 +150,9 @@ void CKeyMgr::tick()
 		POINT pt = {};
 		GetCursorPos(&pt);
 		ScreenToClient(CEngine::GetInst()->GetMainWind(), &pt);
+		
+		m_vMousePrevPos = m_vMousePos;
 		m_vMousePos = Vec2((float)pt.x, (float)pt.y);
+		m_vMouseDrag = m_vMousePos - m_vMousePrevPos; // 이동 방향
 	}
 }
