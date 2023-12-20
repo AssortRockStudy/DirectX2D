@@ -22,6 +22,8 @@ private:
     Matrix      m_matView; // view 행렬
     Matrix      m_matProj; // 투영 행렬
 
+public:
+    virtual void finaltick() override;
 
 public:
     CCamera();
