@@ -43,8 +43,11 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
+    _in.vColor.a = 0.4f;
+    
     // 픽셀로 들어올 때 정점의 위치에 맞게 보간된다
     return _in.vColor;
 }
+
 
 #endif

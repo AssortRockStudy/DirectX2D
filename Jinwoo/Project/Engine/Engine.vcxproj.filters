@@ -298,8 +298,10 @@
     <None Include="SimpleMath.inl">
       <Filter>Module</Filter>
     </None>
-    <None Include="std2d.fx">
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
       <Filter>ShaderCode</Filter>
-    </None>
+    </FxCompile>
   </ItemGroup>
 </Project>
