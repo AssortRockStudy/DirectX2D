@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "CEngine.h"
 #include "CDevice.h"
-#include "Test.h"
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CPathMgr.h"
@@ -40,9 +39,6 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 	CKeyMgr::GetInst()->init();
 	CAssetMgr::GetInst()->init();
 	CLevelMgr::GetInst()->init();
-
-	if (FAILED(TestInit()))
-		return E_FAIL;
 
 	return S_OK;
 }

@@ -10,4 +10,7 @@ struct Vtx
 struct tTransform
 {
 	Matrix	matWorld;
+	Matrix	matView;
+	Matrix	matProj;
 };
+extern tTransform g_Transform;
