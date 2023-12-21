@@ -12,6 +12,7 @@
 
 #include "CMesh.h"
 #include "CGraphicsShader.h" 
+#include "CTexture.h"
 
 CLevelMgr::CLevelMgr()
 	: m_CurLevel(nullptr)
@@ -31,6 +32,13 @@ void CLevelMgr::init()
 	// 초기 레벨 구성
 	m_CurLevel = new CLevel;
 	
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\player.png");
+
+	if (pTex != nullptr)
+	{
+		pTex->UpdateData(0);
+	}
+
 	// Camera 생성
 	CGameObject* pCamObj = nullptr;
 	pCamObj = new CGameObject;
