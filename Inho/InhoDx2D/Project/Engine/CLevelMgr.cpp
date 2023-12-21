@@ -8,6 +8,7 @@
 #include "CGameObject.h"
 #include "components.h"
 #include "CPlayerScript.h"
+#include "CCameraMoveScript.h"
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
@@ -26,7 +27,18 @@ void CLevelMgr::init()
 {
 	m_CurLevel = new CLevel;
 
+	CGameObject* pCamObj = new CGameObject;
+	pCamObj->AddComponent(new CTransform);
+	pCamObj->AddComponent(new CCamera);
+	pCamObj->AddComponent(new CCameraMoveScript);
+
+	pCamObj->Transform()->SetRelativePos(Vec3(0.5f, 0.f, 0.f));
+	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
+
+	m_CurLevel->AddObject(pCamObj, 0);
+
 	CGameObject* pObj = nullptr;
+
 	pObj = new CGameObject;
 	pObj->SetName(L"Player");
 

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Default">
       <UniqueIdentifier>{0658a859-afa4-4c87-8f52-676e078ad6b5}</UniqueIdentifier>
     </Filter>
@@ -77,6 +73,33 @@
     <Filter Include="06.Asset\Shader\ComputeShader">
       <UniqueIdentifier>{ea3889bb-2522-44fb-94b5-24297a78fbae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{eca5f55b-4b80-4299-80b6-a8b9c87d3e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\Script">
+      <UniqueIdentifier>{de1a5c34-4fd7-4130-a41c-a231d70bd51c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\RenderComponent">
+      <UniqueIdentifier>{dc149d48-faf9-4fb8-92f8-29de5d7d9b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\RenderComponent\01. MeshRender">
+      <UniqueIdentifier>{5d37227b-fec3-47a7-8251-8dee256ae870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\RenderComponent\02. TileMap">
+      <UniqueIdentifier>{e012d06a-8f83-450a-a28c-61c36b2e4d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\RenderComponent\03. ParticleSystem">
+      <UniqueIdentifier>{5d0150ed-aa27-44aa-92d6-b68531c1f510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr">
+      <UniqueIdentifier>{0273b4f6-a4c1-416b-a342-0666f3f17295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\LevelMgr">
+      <UniqueIdentifier>{15d3058b-5804-43ec-b2da-0521b5560fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\ConstBuffer">
+      <UniqueIdentifier>{e25430c7-4c72-4e5c-ad46-b6aa94e834ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -142,18 +165,42 @@
     <ClInclude Include="func.h">
       <Filter>01. Header</Filter>
     </ClInclude>
-    <ClInclude Include="CRenderComponent.h" />
-    <ClInclude Include="CMeshRender.h" />
-    <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CTransform.h">
       <Filter>08. Component\01. Transform</Filter>
     </ClInclude>
-    <ClInclude Include="components.h" />
-    <ClInclude Include="CScript.h" />
-    <ClInclude Include="CPlayerScript.h" />
-    <ClInclude Include="CAssetMgr.h" />
-    <ClInclude Include="CLayer.h" />
-    <ClInclude Include="CLevelMgr.h" />
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetMgr.h">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelMgr.h">
+      <Filter>04. Manager\LevelMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayer.h">
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CScript.h">
+      <Filter>08. Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRender.h">
+      <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponent.h">
+      <Filter>08. Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>08. Component\08. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraMoveScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -204,14 +251,39 @@
     <ClCompile Include="CTransform.cpp">
       <Filter>08. Component\01. Transform</Filter>
     </ClCompile>
-    <ClCompile Include="CRenderComponent.cpp" />
-    <ClCompile Include="CMeshRender.cpp" />
-    <ClCompile Include="CConstBuffer.cpp" />
-    <ClCompile Include="CScript.cpp" />
-    <ClCompile Include="CPlayerScript.cpp" />
-    <ClCompile Include="CAssetMgr.cpp" />
-    <ClCompile Include="CLayer.cpp" />
-    <ClCompile Include="CLevelMgr.cpp" />
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr.cpp">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelMgr.cpp">
+      <Filter>04. Manager\LevelMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayer.cpp">
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CScript.cpp">
+      <Filter>08. Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRender.cpp">
+      <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderComponent.cpp">
+      <Filter>08. Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="extern.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>08. Component\08. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

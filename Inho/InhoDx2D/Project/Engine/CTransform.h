@@ -18,7 +18,7 @@ public:
 public:
     void SetRelativePos(Vec3 _Pos) { m_vRelativePos = _Pos; }
     void SetRelativeScale(Vec3 _Scale) { m_vRelativeScale = _Scale; }
-    void SetReltaiveRotation(Vec3 _Rotation) { m_vRelativeRotation = _Rotation; }
+    void SetRelativeRotation(Vec3 _Rotation) { m_vRelativeRotation = _Rotation; }
 
     Vec3 GetRelativePos() { return m_vRelativePos; }
     Vec3 GetRelativeScale() { return m_vRelativeRotation; }
