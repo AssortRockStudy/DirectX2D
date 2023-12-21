@@ -24,12 +24,18 @@ CCamera::~CCamera()
 void CCamera::finaltick()
 {
 	Vec3 vCamPos = Transform()->GetRelativePos();
+	Matrix matTrans = XMMatrixTranslation(-vCamPos.x, -vCamPos.y, -vCamPos.z);
 
-	m_matView = XMMatrixIdentity();
+	Vec3 vRight = Transform()->GetDir(DIR_TYPE::RIGHT);
+	Vec3 vUp = Transform()->GetDir(DIR_TYPE::UP);
+	Vec3 vFront = Transform()->GetDir(DIR_TYPE::FRONT);
 
-	m_matView._41 = -vCamPos.x;
-	m_matView._42 = -vCamPos.y;
-	m_matView._43= -vCamPos.z;
+	Matrix matRotate = XMMatrixIdentity();
+	matRotate._11 = vRight.x;		matRotate._12 = vUp.x;		matRotate._13 = vFront.x;
+	matRotate._21 = vRight.y;		matRotate._22 = vUp.y;		matRotate._23 = vFront.y;
+	matRotate._31 = vRight.z;		matRotate._32 = vUp.z;		matRotate._33 = vFront.z;
+
+	m_matView = matTrans * matRotate;
 
 	m_matProj = XMMatrixIdentity();
 
