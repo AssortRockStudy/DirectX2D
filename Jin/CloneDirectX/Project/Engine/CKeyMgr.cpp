@@ -153,11 +153,15 @@ void CKeyMgr::tick()
 				m_vecKeyData[i].bPressed = false;
 			}
 		}
+		m_vMousePrevPos = m_vMousePos;
 
 		// 마우스 좌표 계산
 		POINT pt = {};
 		GetCursorPos(&pt);
 		ScreenToClient(CEngine::GetInst()->GetMainWind(), &pt);
 		m_vMousePos = Vec2((float)pt.x, (float)pt.y);
+
+
+		m_vMouseDrag = m_vMousePos - m_vMousePrevPos;
 	}
 }
