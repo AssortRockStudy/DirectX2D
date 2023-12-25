@@ -30,6 +30,14 @@ using namespace DirectX;
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
 
+#include <DirectXTex/DirectXTex.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex\\DirectXTex")
+#endif
+
 // SimpleMath
 #include "SimpleMath.h"
 using namespace DirectX::SimpleMath;

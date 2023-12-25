@@ -43,6 +43,8 @@ void CTransform::UpdateData()
 {
 	
 	g_Transform.matWorld = m_matWorld;
+	g_Transform.matWV = g_Transform.matWorld * g_Transform.matView;
+	g_Transform.matWVP = g_Transform.matWV * g_Transform.matProj;
 	
 	CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
 	pCB->SetData(&g_Transform);

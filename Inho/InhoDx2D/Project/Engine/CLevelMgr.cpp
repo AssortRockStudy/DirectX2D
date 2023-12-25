@@ -12,6 +12,7 @@
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CTexture.h"
 
 CLevelMgr::CLevelMgr() 
 	:m_CurLevel(nullptr)
@@ -26,6 +27,11 @@ CLevelMgr::~CLevelMgr() {
 void CLevelMgr::init()
 {
 	m_CurLevel = new CLevel;
+
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
+	if (nullptr != pTex) {
+		pTex->UpdateData(0);
+	}
 
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->AddComponent(new CTransform);
