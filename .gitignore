@@ -1,14 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode,c++
-/Changhee/InhoDx2D/External
-/Dabin/InhoDx2D/External
-/Dongyoon/InhoDx2D/External
-/Inho/InhoDx2D/External
-/Jaewon/InhoDx2D/External
-/Jin/InhoDx2D/External
-/Jinwoo/InhoDx2D/External
-/Jinyoung/InhoDx2D/External
-/Minseo/InhoDx2D/External
+/Inho/InhoDx2D/External/
+
 ### C++ ###
 # Prerequisites
 *.d
