@@ -11,6 +11,7 @@
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CCameraMoveScript.h"
 
 CLevelMgr::CLevelMgr()
 	: m_CurLevel(nullptr)
@@ -28,6 +29,17 @@ void CLevelMgr::init()
 	// 檬扁 饭骇 备己窍扁
 	m_CurLevel = new CLevel;
 
+	// Camera Object 积己
+	CGameObject* pCamObj = new CGameObject;
+	pCamObj->AddComponent(new CTransform);
+	pCamObj->AddComponent(new CCamera);
+	pCamObj->AddComponent(new CCameraMoveScript);
+
+	pCamObj->Transform()->SetRelativePos(Vec3(0.5f, 0.f, 0.f));
+	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
+
+	m_CurLevel->AddObject(pCamObj, 0);
+
 	// GameObject 积己
 	CGameObject* pObj = nullptr;
 
@@ -38,7 +50,7 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CMeshRender);
 	pObj->AddComponent(new CPlayerScript);
 
-	pObj->Transform()->SetRelativePos(Vec3(-0.5f, 0.f, 0.f));
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.5f));
 	pObj->Transform()->SetRelativeScale(Vec3(0.5f, 0.5f, 0.5f));
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));

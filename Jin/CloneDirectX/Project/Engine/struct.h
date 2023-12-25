@@ -9,8 +9,11 @@ struct Vtx
 };
 
 
-// 상수 버퍼 대응을 위한 구조체 constant Buffer
 struct tTransform
 {
 	Matrix	matWorld;
+	Matrix matView;
+	Matrix matProj;
 };
+
+extern tTransform g_Transform;

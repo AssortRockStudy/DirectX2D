@@ -58,6 +58,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CLayer.h" />
     <ClInclude Include="CLevelMgr.h" />
+    <ClInclude Include="CCameraMoveScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -91,6 +92,10 @@
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CLayer.cpp" />
     <ClCompile Include="CLevelMgr.cpp" />
+    <ClCompile Include="extern.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />
