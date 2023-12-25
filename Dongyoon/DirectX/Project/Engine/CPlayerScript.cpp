@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "CPlayerScript.h"
 
-#include "CTimeMgr.h"
-#include "CKeyMgr.h"
-//#include "CAssetMgr"
-
-#include "components.h"
 
 
 CPlayerScript::CPlayerScript()
@@ -22,22 +17,22 @@ void CPlayerScript::tick()
 	Vec3 vPos = Transform()->GetRelativePos();
 	Vec3 vRot = Transform()->GetRelativeRotation();
 
-	if (KEY_PRESSED(KEY::W))
+	if (KEY_PRESSED(KEY::UP))
 	{
 		vPos.y += DT * m_Speed;
 	}
 
-	if (KEY_PRESSED(KEY::S))
+	if (KEY_PRESSED(KEY::DOWN))
 	{
 		vPos.y -= DT * m_Speed;
 	}
 
-	if (KEY_PRESSED(KEY::A))
+	if (KEY_PRESSED(KEY::LEFT))
 	{
 		vPos.x -= DT * m_Speed;
 	}
 
-	if (KEY_PRESSED(KEY::D))
+	if (KEY_PRESSED(KEY::RIGHT))
 	{
 		vPos.x += DT * m_Speed;
 	}

@@ -4,6 +4,7 @@ class CCameraMoveScript :
     public CScript
 {
 private:
+    float m_Camspeed;
 
 public:
     virtual void tick();

@@ -29,7 +29,7 @@ void CLevelMgr::init()
 	// 檬扁 饭骇 备己窍扁
 	m_CurLevel = new CLevel;
 
-	//Camera Object 积己
+	// Camera Object 积己
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->AddComponent(new CTransform);
 	pCamObj->AddComponent(new CCamera);

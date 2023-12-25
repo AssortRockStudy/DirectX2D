@@ -5,8 +5,8 @@
 
 class CComponent;
 class CRenderComponent;
-
 class CScript;
+class CCamera;
 
 class CGameObject :
     public CEntity

@@ -294,8 +294,10 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>08. Component\08. Camera</Filter>
     </ClCompile>
-    <ClCompile Include="extern.cpp" />
     <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="extern.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
