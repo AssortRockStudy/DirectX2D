@@ -69,3 +69,29 @@ enum class CB_TYPE {
 
 	END,
 };
+
+enum class RS_TYPE {
+	CULL_BACK,
+	CULL_FRONT,
+	CULL_NONE,
+	WIRE_FRAME,
+	END,
+};
+
+enum class DS_TYPE {
+	LESS,
+	LESS_EQUAL,
+	GREATER,
+	GREATER_EQUAL,
+	NO_TEST,
+	NO_WRITE,
+	NO_TEST_NO_WRITE,
+	END,
+};
+
+enum class BS_TYPE {
+	DEFAULT,
+	ALPHA_BLEND,
+	ONE_ONE,
+	END,
+};
