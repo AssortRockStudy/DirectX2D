@@ -4,7 +4,7 @@
 
 
 CPlayerScript::CPlayerScript()
-	: m_Speed(2.f)
+	: m_Speed(1000.f)
 {
 }
 
@@ -19,12 +19,12 @@ void CPlayerScript::tick()
 
 	if (KEY_PRESSED(KEY::UP))
 	{
-		vPos.y += DT * m_Speed;
+		vPos.z += DT * m_Speed;
 	}
 
 	if (KEY_PRESSED(KEY::DOWN))
 	{
-		vPos.y -= DT * m_Speed;
+		vPos.z -= DT * m_Speed;
 	}
 
 	if (KEY_PRESSED(KEY::LEFT))
