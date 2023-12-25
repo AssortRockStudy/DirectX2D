@@ -12,10 +12,13 @@ class CGameObject :
     public CEntity
 {
 private:
-    CComponent*         m_arrCom[(UINT)COMPONENT_TYPE::END];
-    CRenderComponent*   m_RenderCom;
+    CComponent*             m_arrCom[(UINT)COMPONENT_TYPE::END];
+    CRenderComponent*       m_RenderCom;
 
-    vector<CScript*>    m_vecScript;
+    vector<CScript*>        m_vecScript;
+    vector<CGameObject*>    m_vecChild;
+
+    CGameObject*            m_Parent;
 
 public:
     void begin();
@@ -26,6 +29,10 @@ public:
 public:
     void AddComponent(CComponent* _Component);
     CComponent* GetComponent(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
+
+    CGameObject* GetParent() { return m_Parent; }
+    void DisconnectWithParent();
+    void AddChild(CGameObject* _Child);
 
     GET_COMPONENT(Transform, TRANSFORM);
     GET_COMPONENT(MeshRender, MESHRENDER);
