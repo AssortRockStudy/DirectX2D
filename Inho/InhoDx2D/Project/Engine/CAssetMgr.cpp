@@ -101,4 +101,14 @@ void CAssetMgr::init()
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
 
 	AddAsset(L"Std2dShader", pShader);
+
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
+	pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDSType(DS_TYPE::LESS);
+	pShader->SetBSType(BS_TYPE::ONE_ONE);
+
+	AddAsset(L"EffectShader", pShader);
 }

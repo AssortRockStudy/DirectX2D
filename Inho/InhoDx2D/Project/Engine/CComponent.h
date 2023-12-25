@@ -5,7 +5,6 @@
 
 #define GET_OTHER_COMPONENT(Type) C##Type* Type() { return m_Owner->Type(); }
 
-class CGameObject;
 class CComponent :
     public CEntity
 {

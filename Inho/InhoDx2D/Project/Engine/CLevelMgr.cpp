@@ -28,10 +28,14 @@ void CLevelMgr::init()
 {
 	m_CurLevel = new CLevel;
 
+
+
 	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
 	if (nullptr != pTex) {
 		pTex->UpdateData(0);
 	}
+
+
 
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->AddComponent(new CTransform);
@@ -42,6 +46,7 @@ void CLevelMgr::init()
 	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
 
 	m_CurLevel->AddObject(pCamObj, 0);
+
 
 	CGameObject* pObj = nullptr;
 
@@ -58,7 +63,25 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
 
+
+	CGameObject* pChildObj = new CGameObject;
+	pChildObj->SetName(L"Child");
+
+	pChildObj->AddComponent(new CTransform);
+	pChildObj->AddComponent(new CMeshRender);
+
+	pChildObj->Transform()->SetRelativePos(Vec3(20.0f, 0.f, -10.f));
+	pChildObj->Transform()->SetRelativeScale(Vec3(100.f, 150.f, 1.f));	
+	pChildObj->Transform()->SetAbsolute(true);
+
+	pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pChildObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
+
+	pObj->AddChild(pChildObj);
+
 	m_CurLevel->AddObject(pObj, 0);
+	//m_CurLevel->AddObject(pChildObj, 0);
+
 }
 
 void CLevelMgr::tick()
