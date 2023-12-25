@@ -37,7 +37,6 @@
     <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CLevel.h" />
-    <ClInclude Include="Test.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CTimeMgr.h" />
@@ -52,6 +51,13 @@
     <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CRenderComponent.h" />
     <ClInclude Include="CMeshRender.h" />
+    <ClInclude Include="components.h" />
+    <ClInclude Include="CScript.h" />
+    <ClInclude Include="CPlayerScript.h" />
+    <ClInclude Include="CAssetMgr.h" />
+    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CLayer.h" />
+    <ClInclude Include="CLevelMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -66,7 +72,6 @@
     <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CLevel.cpp" />
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
@@ -80,6 +85,12 @@
     <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
+    <ClCompile Include="CScript.cpp" />
+    <ClCompile Include="CPlayerScript.cpp" />
+    <ClCompile Include="CAssetMgr.cpp" />
+    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CLayer.cpp" />
+    <ClCompile Include="CLevelMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />

@@ -6,8 +6,9 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CPathMgr.h"
+#include "CAssetMgr.h"
+#include "CLevelMgr.h"
 
-#include "Test.h"
 
 CEngine::CEngine()
 	 : m_hMainWnd(nullptr)
@@ -18,7 +19,6 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-	TestRelease();
 }
 
 
@@ -42,12 +42,11 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 	CPathMgr::init();
 	CTimeMgr::GetInst()->init();
 	CKeyMgr::GetInst()->init();
+	CAssetMgr::GetInst()->init();
+	CLevelMgr::GetInst()->init();
 
+	return S_OK;
 
-	if (FAILED(TestInit()))
-	{
-		return E_FAIL;
-	}
 }
 
 void CEngine::progress()
@@ -55,8 +54,8 @@ void CEngine::progress()
 
 	CTimeMgr::GetInst()->tick();
 	CKeyMgr::GetInst()->tick();
-
-	TestProgress(); 
+	CLevelMgr::GetInst()->tick();
+	CLevelMgr::GetInst()->render();
 }
 
 

@@ -3,6 +3,7 @@
 
 #include "CComponent.h"
 #include "CRenderComponent.h"
+#include "CScript.h"
 
 CGameObject::CGameObject()
 	: m_arrCom{}
@@ -32,6 +33,11 @@ void CGameObject::tick()
 		if (nullptr != m_arrCom[i])
 			m_arrCom[i]->tick();
 	}
+
+	for (size_t i = 0; i < m_vecScript.size(); ++i)
+	{
+		m_vecScript[i]->tick();
+	}
 }
 
 void CGameObject::finaltick()
@@ -54,9 +60,27 @@ void CGameObject::render()
 void CGameObject::AddComponent(CComponent* _Component)
 {
 	COMPONENT_TYPE type = _Component->GetType();
-	m_arrCom[(UINT)type] = _Component;
-	_Component->m_Owner = this;
+	
+	if (type == COMPONENT_TYPE::SCRIPT)
+	{
+		assert(dynamic_cast<CScript*>(_Component));
+		m_vecScript.push_back((CScript*)_Component);
+		_Component->m_Owner = this;
+	}
+	else
+	{
+		assert(!m_arrCom[(UINT)type]);
 
-	m_RenderCom = dynamic_cast<CRenderComponent*>(_Component);
+		m_arrCom[(UINT)type] = _Component;
+		_Component->m_Owner = this;
+
+		CRenderComponent* pRenderCom = dynamic_cast<CRenderComponent*>(_Component);
+		if (nullptr != pRenderCom)
+		{
+			assert(!m_RenderCom); // 이미 한 종류 이상 갖고있다면
+
+			m_RenderCom = pRenderCom;
+		}
+	}
 }
 

@@ -10,7 +10,7 @@ private:
     Vec3    m_vRealtiveRotation;
     Vec3    m_arrDir[3];    // Right, Up, Front
 
-    Matrix  m_matWorld;
+    Matrix  m_matWorld; // 상태 행렬 !!
 
 public:
     virtual void finaltick() override;

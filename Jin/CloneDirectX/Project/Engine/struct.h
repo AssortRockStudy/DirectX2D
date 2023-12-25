@@ -12,6 +12,5 @@ struct Vtx
 // 상수 버퍼 대응을 위한 구조체 constant Buffer
 struct tTransform
 {
-	Vec4		vWorldPos;
-	Vec4     vWorldScale;
+	Matrix	matWorld;
 };
