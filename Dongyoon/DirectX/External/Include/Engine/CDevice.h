@@ -49,10 +49,14 @@ private:
 	ComPtr<ID3D11Texture2D>				m_DSTex;		// 뎁스 스텐실 텍스쳐
 	ComPtr<ID3D11DepthStencilView>		m_DSView;		// 뎁스 스텐실 뷰
 
-	HWND								m_hRenderWnd;
-	Vec2								m_vRenderResolution;
+	HWND								m_hRenderWnd;	// 윈도우 핸들
+	Vec2								m_vRenderResolution; // 해상도
 
-	CConstBuffer*						m_arrCB[(UINT)CB_TYPE::END];
+	CConstBuffer*						m_arrCB[(UINT)CB_TYPE::END]; // 상수버퍼
+
+	ComPtr<ID3D11RasterizerState>		m_arrRS[(UINT)RS_TYPE::END];
+	ComPtr<ID3D11DepthStencilState>		m_arrDS[(UINT)DS_TYPE::END];
+	ComPtr<ID3D11BlendState>			m_arrBS[(UINT)BS_TYPE::END];
 
 
 public:
@@ -68,10 +72,18 @@ public:
 
 	Vec2 GetRenderResolution() { return m_vRenderResolution; }
 
+	ComPtr<ID3D11RasterizerState> GetRSState(RS_TYPE _Type) { return m_arrRS[(UINT)_Type]; }
+	ComPtr<ID3D11DepthStencilState> GetDSState(DS_TYPE _Type) { return m_arrDS[(UINT)_Type]; }
+	ComPtr<ID3D11BlendState>GetBSState(BS_TYPE _Type) { return m_arrBS[(UINT)_Type]; }
+
 
 private:
 	int CreateSwapChain();
 	int CreateTargetView();
+	int CreateRasterizerState();
+	int CreateDepthStencilState();
+	int CreateBlendState();
+
 	int CreateConstBuffer();
 };
 

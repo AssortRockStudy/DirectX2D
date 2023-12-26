@@ -5,7 +5,7 @@
 
 
 CCameraMoveScript::CCameraMoveScript()
-	: m_Camspeed(500.f)
+	: m_Camspeed(300.f)
 {
 }
 
