@@ -15,8 +15,6 @@
 #define KEY_RELEASED(Key)	KEY_CHECK(Key, RELEASED)
 #define KEY_NONE(Key)		KEY_CHECK(Key, NONE)
 
-#define PI 3.14159265358979f
-
 #define DT CTimeMgr::GetInst()->GetDeltaTime()
 
 #define LAYER_MAX 32

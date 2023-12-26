@@ -10,10 +10,13 @@ class CLevelMgr :
 
 private:
     CLevel*     m_CurLevel;
-    
+
 public:
     void init();
     void tick();
     void render();
+   
+public:
+    CLevel* GetCurrentLevel() { return m_CurLevel; }
 };
 

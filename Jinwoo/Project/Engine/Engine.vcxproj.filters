@@ -112,6 +112,9 @@
     <Filter Include="06.Asset\Texture">
       <UniqueIdentifier>{714d7675-71ef-4915-8a18-91724fe75abf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Manager\TaskMgr">
+      <UniqueIdentifier>{4f2e4d37-8cc1-4c45-8f51-fd2521807ee7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -216,6 +219,12 @@
     <ClInclude Include="CTexture.h">
       <Filter>06.Asset\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04.Manager\TaskMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -301,6 +310,15 @@
     </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>06.Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04.Manager\TaskMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>01.Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
