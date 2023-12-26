@@ -39,6 +39,7 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
+    _in.vColor.a = 1.f;
     return _in.vColor;
 }
 
