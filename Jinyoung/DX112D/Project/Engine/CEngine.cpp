@@ -2,7 +2,13 @@
 #include "CEngine.h"
 
 #include "CDevice.h"
-#include "Test.h"
+
+#include "CTimeMgr.h"
+#include "CKeyMgr.h"
+#include "CPathMgr.h"
+#include "CAssetMgr.h"
+#include "CLevelMgr.h"
+
 
 CEngine::CEngine()
 	: m_hMainWnd(nullptr)
@@ -13,7 +19,7 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-	TestRelease();
+
 }
 
 int CEngine::init(HWND _hWnd, Vec2 _vResolution)
@@ -23,7 +29,7 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 
 	RECT rt = { 0, 0, (int)m_vResolution.x, (int)m_vResolution.y };
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
-	SetWindowPos(m_hMainWnd, nullptr, 10.f, 10.f, rt.right - rt.left, rt.bottom - rt.top, 0);
+	SetWindowPos(m_hMainWnd, nullptr, 10, 10, rt.right - rt.left, rt.bottom - rt.top, 0);
 
 	if (FAILED(CDevice::GetInst()->init(m_hMainWnd, m_vResolution)))
 	{
@@ -31,15 +37,23 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 		return E_FAIL;
 	}
 
-	if (FAILED(TestInit()))
-	{
-		return E_FAIL;
-	}
+	// Manager ÃÊ±âÈ­
+	CPathMgr::init();
+	CTimeMgr::GetInst()->init();
+	CKeyMgr::GetInst()->init();
+	CAssetMgr::GetInst()->init();
+	CLevelMgr::GetInst()->init();
 
 	return S_OK;
 }
 
 void CEngine::progress()
 {
-	TestProgress();
+	// Manager Update
+	CTimeMgr::GetInst()->tick();
+	CKeyMgr::GetInst()->tick();
+
+	// Level Update
+	CLevelMgr::GetInst()->tick();
+	CLevelMgr::GetInst()->render();
 }

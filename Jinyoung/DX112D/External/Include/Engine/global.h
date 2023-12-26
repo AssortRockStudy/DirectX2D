@@ -3,7 +3,18 @@
 
 #include <stdlib.h>
 #include <Windows.h>
+#include <typeinfo>
+
 #include <string>
+
+#include <vector>
+#include <list>
+#include <map>
+
+using std::vector;
+using std::list;
+using std::map;
+using std::make_pair;
 
 using std::wstring;
 using std::string;
@@ -23,6 +34,14 @@ using namespace DirectX;
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
 
+// DirectxTex
+#include <DirectXTex/DirectXTex.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex\\DirectXTex")
+#endif
 
 
 // SimpleMath
@@ -40,3 +59,4 @@ typedef Vector4 Vec4;
 #include "singleton.h"
 #include "define.h"
 #include "struct.h"
+#include "func.h"
