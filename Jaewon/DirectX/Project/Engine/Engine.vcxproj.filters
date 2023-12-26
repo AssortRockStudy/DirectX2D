@@ -97,7 +97,9 @@
     <ClInclude Include="CLevelMgr.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CCameraMoveScript.h" />
+    <ClInclude Include="CCameraMoveScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -172,13 +174,15 @@
     <ClCompile Include="CLayer.cpp">
       <Filter>05.Level</Filter>
     </ClCompile>
-    <ClCompile Include="extern.cpp">
-      <Filter>Default</Filter>
-    </ClCompile>
     <ClCompile Include="CLevelMgr.cpp">
       <Filter>04.Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="extern.cpp">
+      <Filter>01.Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">

@@ -2,7 +2,7 @@
 #include "CPlayerScript.h"
 
 CPlayerScript::CPlayerScript()
-	: m_Speed(2.f)
+	: m_Speed(1000.f)
 {
 }
 
@@ -15,16 +15,16 @@ void CPlayerScript::tick()
 	Vec3 vPos = Transform()->GetRelativePos();
 	Vec3 vRot = Transform()->GetRelativeRotation();
 
-	if (KEY_PRESSED(KEY::W))
-		vPos.y += DT * m_Speed;
+	if (KEY_PRESSED(KEY::UP))
+		vPos.z += DT * m_Speed;
 
-	if (KEY_PRESSED(KEY::S))
-		vPos.y -= DT * m_Speed;
+	if (KEY_PRESSED(KEY::DOWN))
+		vPos.z -= DT * m_Speed;
 
-	if (KEY_PRESSED(KEY::A))
+	if (KEY_PRESSED(KEY::LEFT))
 		vPos.x -= DT * m_Speed;
 
-	if (KEY_PRESSED(KEY::D))
+	if (KEY_PRESSED(KEY::RIGHT))
 		vPos.x += DT * m_Speed;
 
 	if (KEY_PRESSED(KEY::X))
