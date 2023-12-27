@@ -35,15 +35,15 @@ void CAssetMgr::init()
 
 	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
 	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
+	arrVtx[1].vUV = Vec2(1.f, 0.f);
 
 	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
 	arrVtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
-	arrVtx[2].vUV = Vec2(0.f, 0.f);
+	arrVtx[2].vUV = Vec2(1.f, 1.f);
 
 	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
 	arrVtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
-	arrVtx[3].vUV = Vec2(0.f, 0.f);
+	arrVtx[3].vUV = Vec2(0.f, 1.f);
 
 	UINT arrIdx[6] = {};
 	arrIdx[0] = 0;

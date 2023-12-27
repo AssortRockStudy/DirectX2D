@@ -100,6 +100,9 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>06.Asset\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -183,6 +186,9 @@
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>06.Asset\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -253,6 +259,9 @@
     </Filter>
     <Filter Include="08.Component\08.Camera">
       <UniqueIdentifier>{99d5604a-2ba8-4845-8126-19e6fea0f6fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Asset\Texture">
+      <UniqueIdentifier>{62f33c12-e5f4-4d9c-9b19-cfc4c66ff09e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
