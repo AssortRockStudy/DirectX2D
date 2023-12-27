@@ -9,6 +9,7 @@ CDevice::CDevice()
 	, m_arrRS{}
 	, m_arrDS{}
 	, m_arrBS{}
+	, m_arrSampler{}
 {
 
 }
@@ -68,6 +69,12 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 	if (FAILED(CreateBlendState()))
 	{
 		MessageBox(nullptr, L"BlendState 생성 실패", L"Device 초기화 실패", MB_OK);
+		return E_FAIL;
+	}
+
+	if (FAILED(CreateSamplerState()))
+	{
+		MessageBox(nullptr, L"SamplerState 생성 실패", L"Device 초기화 실패", MB_OK);
 		return E_FAIL;
 	}
 
@@ -189,8 +196,11 @@ int CDevice::CreateTargetView()
 
 int CDevice::CreateConstBuffer()
 {
-	m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
+	m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer(CB_TYPE::TRANSFORM);
 	m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
+
+	m_arrCB[(UINT)CB_TYPE::MATERIAL_CONST] = new CConstBuffer(CB_TYPE::MATERIAL_CONST);
+	m_arrCB[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(tMtrlConst), 1);
 
 	return S_OK;
 }
@@ -323,6 +333,45 @@ int CDevice::CreateBlendState()
 	tDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	DEVICE->CreateBlendState(&tDesc, m_arrBS[(UINT)BS_TYPE::ONE_ONE].GetAddressOf());
+
+	return S_OK;
+}
+
+int CDevice::CreateSamplerState()
+{
+	D3D11_SAMPLER_DESC tDesc = {};
+
+	tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+
+	tDesc.MinLOD = 0;
+	tDesc.MaxLOD = 1;
+
+	DEVICE->CreateSamplerState(&tDesc, m_arrSampler[0].GetAddressOf());
+
+	tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	tDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+	tDesc.MinLOD = 0;
+	tDesc.MaxLOD = 1;
+
+	DEVICE->CreateSamplerState(&tDesc, m_arrSampler[1].GetAddressOf());
+
+	CONTEXT->VSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->HSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->DSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->GSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->PSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+
+	CONTEXT->VSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->HSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->DSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->GSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
+	CONTEXT->PSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
 
 	return S_OK;
 }

@@ -22,6 +22,8 @@ private:
 
     int                     m_iLayerIdx;    // 오브젝트가 소속되어있는 레이어의 인덱스
 
+    bool                    m_bDead;
+
 public:
     void begin();
     void tick();
@@ -42,10 +44,13 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
+    bool IsDead() { return m_bDead; }
+
 public:
     CGameObject();
     ~CGameObject();
 
     friend class CLayer;
+    friend class CTaskMgr;
 };
 

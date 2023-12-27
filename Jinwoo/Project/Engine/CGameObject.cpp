@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CGameObject.h"
 
+#include "CGC.h"
 #include "CLevelMgr.h"
 #include "CLevel.h"
 #include "CLayer.h"
@@ -15,6 +16,7 @@ CGameObject::CGameObject()
 	, m_RenderCom(nullptr)
 	, m_Parent(nullptr)
 	, m_iLayerIdx(-1) // 어떠한 레벨 및 레이어에도 소속되어 있지 않다
+	, m_bDead(false)
 {
 }
 
@@ -75,6 +77,21 @@ void CGameObject::finaltick()
 
 	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
 	pCurLayer->RegisterGameObject(this);
+
+	vector<CGameObject*>::iterator iter = m_vecChild.begin();
+
+	for (; iter != m_vecChild.end();)
+	{
+		if ((*iter)->m_bDead)
+		{
+			CGC::GetInst()->Add(*iter);
+			iter = m_vecChild.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 
 	for (size_t i = 0; i < m_vecChild.size(); ++i)
 	{

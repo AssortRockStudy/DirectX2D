@@ -7,6 +7,7 @@
 #include "CMesh.h"
 #include "CGraphicsShader.h"
 #include "CTexture.h"
+#include "CMaterial.h"
 
 class CAssetMgr :
 	public CSingleton<CAssetMgr>
@@ -49,6 +50,10 @@ ASSET_TYPE GetAssetType()
 	else if (&info == &typeid(CGraphicsShader))
 	{
 		Type = ASSET_TYPE::GRAPHICS_SHADER;
+	}
+	else if (&info == &typeid(CMaterial))
+	{
+		Type = ASSET_TYPE::MATERIAL;
 	}
 
 	return Type;

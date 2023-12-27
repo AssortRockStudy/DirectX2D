@@ -3,6 +3,7 @@
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CMaterial.h"
 
 CAssetMgr::CAssetMgr()
 {
@@ -132,4 +133,14 @@ void CAssetMgr::init()
 	pShader->SetBSType(BS_TYPE::ONE_ONE);
 
 	AddAsset(L"EffectShader", pShader);
+
+
+	//======================
+
+	// 머테리얼 생성
+	CMaterial* pMtrl = nullptr;
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+	AddAsset(L"Std2DMtrl", pMtrl);
 }

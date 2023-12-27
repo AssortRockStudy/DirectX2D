@@ -17,6 +17,36 @@ cbuffer TRANSFORM : register(b0)
     row_major Matrix g_matWVP;
 }
 
+// 그냥 int arr[4]로 설정할 경우, 16바이트로 설정되어 있기 때문에
+// 4바이트 배열 4개를 만드는 것이 아닌 16바이트 배열 4개를 만든다
+cbuffer MATERIAL_CONST : register(b1)
+{
+    int g_int_0;
+    int g_int_1;
+    int g_int_2;
+    int g_int_3;
+    
+    float g_float_0;
+    float g_float_1;
+    float g_float_2;
+    float g_float_3;
+    
+    float2 g_vec2_0;
+    float2 g_vec2_1;
+    float2 g_vec2_2;
+    float2 g_vec2_3;
+    
+    float4 g_vec4_0;
+    float4 g_vec4_1;
+    float4 g_vec4_2;
+    float4 g_vec4_3;
+    
+    row_major matrix g_mat_0;
+    row_major matrix g_mat_1;
+    row_major matrix g_mat_2;
+    row_major matrix g_mat_3;
+}
+
 // register(t0)에 등록된 텍스처 객체
 Texture2D g_tex_0 : register(t0);
 
@@ -25,6 +55,7 @@ Texture2D g_tex_0 : register(t0);
 // 이미지 데이터를 저장하고 있는 텍스처를 텍스처 좌표(일반적으로 UV좌표)를 사용하여
 // 이미지의 특정 위치에 해당하는 색상 값을 가져오는 과정이다
 SamplerState g_sam_0 : register(s0);
+SamplerState g_sam_1 : register(s1);
 
 struct VS_IN
 {
@@ -65,8 +96,13 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     // vColor.rgb = float3(Aver, Aver, Aver);    
     // vColor.a = 1.f;
     
+    if (g_int_0)
+    {
+        vColor = float4(1.f, 1.f, 1.f, 1.f);
+    }
+    
     // 픽셀로 들어올 때 정점의 위치에 맞게 보간된다
-    return vColor;
+        return vColor;
 }
 
 

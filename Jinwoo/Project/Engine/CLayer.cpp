@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CLayer.h"
 
+#include "CGC.h"
 #include "CGameObject.h"
 
 
@@ -33,9 +34,21 @@ void CLayer::tick()
 
 void CLayer::finaltick()
 {
-	for (size_t i = 0; i < m_vecParent.size(); ++i)
+	vector<CGameObject*>::iterator iter = m_vecParent.begin();
+
+	for (; iter != m_vecParent.end(); )
 	{
-		m_vecParent[i]->finaltick();
+		(*iter)->finaltick();
+
+		if ((*iter)->IsDead())
+		{
+			CGC::GetInst()->Add(*iter);
+			iter = m_vecParent.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
 	}
 }
 
