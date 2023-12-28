@@ -45,10 +45,35 @@ cbuffer MATERIAL_CONST : register(b1)
     row_major matrix g_mat_1;
     row_major matrix g_mat_2;
     row_major matrix g_mat_3;
+    
+    int g_btex_0;
+    int g_btex_1;
+    int g_btex_2;
+    int g_btex_3;
+    int g_btex_4;
+    int g_btex_5;
+    
+    int g_btexcube_0;
+    int g_btexcube_1;
+    
+    int g_btexarr_0;
+    int g_btexarr_1;
 }
 
 // register(t0)에 등록된 텍스처 객체
 Texture2D g_tex_0 : register(t0);
+Texture2D g_tex_1 : register(t1);
+Texture2D g_tex_2 : register(t2);
+Texture2D g_tex_3 : register(t3);
+Texture2D g_tex_4 : register(t4);
+Texture2D g_tex_5 : register(t5);
+
+TextureCube g_texcube_0 : register(t6);
+TextureCube g_texcube_1 : register(t7);
+
+Texture2DArray g_texarr_0 : register(t8);
+Texture2DArray g_texarr_1 : register(t9);
+
 
 // register(s0)에 등록된 샘플러
 // 샘플링은 텍스처에서 특정 위치의 값을 읽어오는 과정으로
@@ -87,22 +112,39 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
+    // t9 이상에 텍스처를 등록하고 테스트할 땐
+    // 해상도만큼의 픽셀에서 정보를 가져오는 것이 더 편할 때가 있다
+    // uint width = 0;
+    // uint height = 0;
+    // g_tex_1.GetDimensions(width, height);
+    
     // 텍스처 g_tex_0에서 _in.vUV 좌표에 해당하는 픽셀을 샘플링하는 연산
     // vColor는 샘플링 이후의 픽셀이 가진 색상 값을 나타낸다
-    float4 vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    // float4 vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     
     // 흑백
     // float Aver = (vColor.r + vColor.g + vColor.b) / 3.f;
     // vColor.rgb = float3(Aver, Aver, Aver);    
     // vColor.a = 1.f;
     
-    if (g_int_0)
+    float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
+    
+    if(g_btex_0)
     {
-        vColor = float4(1.f, 1.f, 1.f, 1.f);
+        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        
+        // saturate : 0 ~ 1을 넘지않게 보정
+        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
+
+        if(fAlpha < 0.1f)
+        {
+            // 픽셀 셰이더를 중간에 폐기 처리
+            discard;    // clip(-1)로도 동일하게 작동 가능
+        }
     }
     
     // 픽셀로 들어올 때 정점의 위치에 맞게 보간된다
-        return vColor;
+    return vColor;
 }
 
 
