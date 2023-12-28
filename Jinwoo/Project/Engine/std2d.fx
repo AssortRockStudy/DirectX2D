@@ -52,7 +52,7 @@ cbuffer MATERIAL_CONST : register(b1)
     int g_btex_3;
     int g_btex_4;
     int g_btex_5;
-    
+   
     int g_btexcube_0;
     int g_btexcube_1;
     
