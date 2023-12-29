@@ -5,6 +5,7 @@
 #include "CAssetMgr.h"
 
 #include "CLevel.h"
+#include "CLayer.h"
 #include "CGameObject.h"
 #include "components.h"
 #include "CPlayerScript.h"
@@ -34,17 +35,42 @@ void CLevelMgr::init()
 {
 	// 초기 레벨 구성
 	m_CurLevel = new CLevel;
+	m_CurLevel->GetLayer(0)->SetName(L"Default");
+	m_CurLevel->GetLayer(1)->SetName(L"Background");
+	m_CurLevel->GetLayer(2)->SetName(L"Tile");
+	m_CurLevel->GetLayer(3)->SetName(L"Player");
+	m_CurLevel->GetLayer(4)->SetName(L"Monster");
+	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
-	// Camera 생성
-	CGameObject* pCamObj = nullptr;
-	pCamObj = new CGameObject;
-
+	// Main Camera 생성
+	CGameObject* pCamObj = new CGameObject;
+	pCamObj->SetName(L"MainCamera");
 	pCamObj->AddComponent(new CTransform);
 	pCamObj->AddComponent(new CCamera);
 	pCamObj->AddComponent(new CCameraMoveScript);
 
 	pCamObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
+
+	pCamObj->Camera()->SetCameraPriority(0);
+	pCamObj->Camera()->LayerCheckAll();
+	// 메인 카메라에 UI는 그리지 마라
+	// 즉, 메인카메라가 움직여도 UI에 해당하는 부분은 영향받지 않는다
+	pCamObj->Camera()->LayerCheck(L"UI", false);
+
+	m_CurLevel->AddObject(pCamObj, 0);
+
+	// UI Camera 생성
+	pCamObj = new CGameObject;
+	pCamObj->SetName(L"UICamera");
+	pCamObj->AddComponent(new CTransform);
+	pCamObj->AddComponent(new CCamera);
+
+	pCamObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
+
+	pCamObj->Camera()->SetCameraPriority(1);
+	pCamObj->Camera()->LayerCheck(L"UI", true);
 
 	m_CurLevel->AddObject(pCamObj, 0);
 
@@ -67,7 +93,7 @@ void CLevelMgr::init()
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-	// GameObject 생성
+	// 자식 GameObject 생성
 	CGameObject* pChildObj = new CGameObject;
 	pChildObj->SetName(L"Child");
 
@@ -83,7 +109,24 @@ void CLevelMgr::init()
 
 	pObj->AddChild(pChildObj);
 
-	m_CurLevel->AddObject(pObj, 0, false);
+	m_CurLevel->AddObject(pObj, L"Default", false);
+
+	// UI GameObject 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"UI");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->Transform()->SetRelativePos(Vec3(-590, 310.f, 500.f));
+	pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+
+	m_CurLevel->AddObject(pObj, L"UI", false);
+
+	GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 10.f);
 }
 
 void CLevelMgr::tick()
@@ -98,19 +141,4 @@ void CLevelMgr::tick()
 
 	m_CurLevel->tick();
 	m_CurLevel->finaltick();
-}
-
-void CLevelMgr::render()
-{
-	if (nullptr == m_CurLevel)
-	{
-		return;
-	}
-
-	float ClearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
-	CDevice::GetInst()->ClearRenderTarget(ClearColor);
-
-	m_CurLevel->render();
-
-	CDevice::GetInst()->Present();
 }

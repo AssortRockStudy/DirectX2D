@@ -35,6 +35,7 @@ public:
 
     Vec3 GetLocalDir(DIR_TYPE _Type) { return m_arrLocalDir[(UINT)_Type]; }
     Vec3 GetWorldDir(DIR_TYPE _Type) { return m_arrWorldDir[(UINT)_Type]; }
+    void SetWorldMat(const Matrix _matWorld) { m_matWorld = _matWorld; }
 
 public:
     CTransform();

@@ -14,13 +14,15 @@ public:
     void begin();
     void tick();
     void finaltick();
-    void render();
 
     void clear();
 
 public:
     void AddObject(CGameObject* _Object, int _LayerIdx, bool _bChildMove = true);
+    void AddObject(CGameObject* _Object, const wstring& _strLayerName, bool _bChildMove = true);
+
     CLayer* GetLayer(int _iLayerIdx) { return m_arrLayer[_iLayerIdx]; }
+    CLayer* GetLayer(const wstring& _strLayerName);
 
 public:
     CLevel();

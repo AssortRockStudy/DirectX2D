@@ -8,6 +8,7 @@
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
+#include "CRenderMgr.h"
 #include "CTaskMgr.h"
 #include "CGC.h"
 
@@ -44,6 +45,7 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 	CTimeMgr::GetInst()->init();
 	CKeyMgr::GetInst()->init();
 	CAssetMgr::GetInst()->init();
+	CRenderMgr::GetInst()->init();
 	CLevelMgr::GetInst()->init();
 
 	return S_OK;
@@ -57,7 +59,7 @@ void CEngine::progress()
 
 	// Level Update
 	CLevelMgr::GetInst()->tick();
-	CLevelMgr::GetInst()->render();
+	CRenderMgr::GetInst()->tick();
 
 	// GC
 	CGC::GetInst()->tick();

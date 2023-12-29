@@ -17,6 +17,11 @@ class CAssetMgr :
 private:
 	map<wstring, Ptr<CAsset>>   m_mapAsset[(UINT)ASSET_TYPE::END];
 
+private:
+	void CreateDefaultMesh();
+	void CreateDefaultGraphicsShader();
+	void CreateDefaultMaterial();
+
 public:
 	void init();
 

@@ -15,7 +15,18 @@ CAssetMgr::~CAssetMgr()
 }
 
 
+
 void CAssetMgr::init()
+{
+	CreateDefaultMesh();
+
+	CreateDefaultGraphicsShader();
+
+	CreateDefaultMaterial();
+}
+
+
+void CAssetMgr::CreateDefaultMesh()
 {
 	CMesh* pMesh = nullptr;
 
@@ -92,12 +103,13 @@ void CAssetMgr::init()
 	pMesh = new CMesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh);
+}
 
-	//======================
-
+void CAssetMgr::CreateDefaultGraphicsShader()
+{
 	// 셰이더 생성
 	CGraphicsShader* pShader = nullptr;
-	
+
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
 	pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
@@ -125,10 +137,32 @@ void CAssetMgr::init()
 
 	//======================
 
+	// 디버그쉐이프 셰이더 생성
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\debug.fx", "VS_DebugShape");
+	pShader->CreatePixelShader(L"shader\\debug.fx", "PS_DebugShape");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+
+	AddAsset(L"DebugShapeShader", pShader);
+}
+
+void CAssetMgr::CreateDefaultMaterial()
+{
 	// 머테리얼 생성
 	CMaterial* pMtrl = nullptr;
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
 
 	AddAsset<CMaterial>(L"Std2DMtrl", pMtrl);
+
+
+	//======================
+	
+	// 디버그쉐이프 머테리얼 생성
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
+
+	AddAsset<CMaterial>(L"DebugShapeMtrl", pMtrl);
 }

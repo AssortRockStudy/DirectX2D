@@ -42,3 +42,17 @@ struct tMtrlConst
 
 	int		iPadding[2];
 };
+
+struct tDebugShapeInfo
+{
+	DEBUG_SHAPE eShape;
+	
+	Vec3	vWorldPos;
+	Vec3	vWorldScale;
+	Vec3	vWorldRot;
+	Matrix	matWorld;
+
+	Vec3	vColor;
+	float	fDuration;
+	bool	bDepthTest;
+};
