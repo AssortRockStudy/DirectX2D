@@ -9,7 +9,7 @@ CGraphicsShader::CGraphicsShader()
 	, m_Topology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	, m_RSType(RS_TYPE::CULL_NONE)
 	, m_DSType(DS_TYPE::LESS)
-	, m_BSType(BS_TYPE::DEFAULT)
+	, m_BSType(BS_TYPE::ALPHA_BLEND)
 {
 }
 

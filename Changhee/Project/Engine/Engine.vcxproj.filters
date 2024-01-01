@@ -100,6 +100,15 @@
     <Filter Include="04. Manager\LevelManager">
       <UniqueIdentifier>{1a25e988-01d2-4dc8-920b-c086c5a40c97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset\Texture">
+      <UniqueIdentifier>{fd346f3e-b1bd-4065-bd6f-d7b7d2e4a426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Sound">
+      <UniqueIdentifier>{6e1cfd16-dac7-48bd-978a-9108c54a3240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\MeshData">
+      <UniqueIdentifier>{856b3682-3f84-4c7e-a9e5-6905c0e0404e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -201,6 +210,9 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Script</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>06. Asset\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -283,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>06. Asset\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

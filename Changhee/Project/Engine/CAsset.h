@@ -23,8 +23,12 @@ private:
     void AddRef() { ++m_RefCount; }
     void SubRef() { --m_RefCount; }
 
+    virtual int Load(const wstring& _strFilePath) { return E_FAIL; }
+
 public:
     CAsset(ASSET_TYPE _Type);
     ~CAsset();
+
+    friend class CAssetMgr;
 };
 
