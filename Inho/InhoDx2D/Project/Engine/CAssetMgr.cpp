@@ -105,6 +105,6 @@ void CAssetMgr::init()
 
 	CMaterial* pMtrl = nullptr;
 	pMtrl = new CMaterial;
-	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2dShader"));
 	AddAsset(L"Std2DMtrl", pMtrl);
 }
