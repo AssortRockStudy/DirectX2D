@@ -5,6 +5,7 @@
 
 class CComponent;
 class CRenderComponent;
+class CCamera;
 
 class CScript;
 
@@ -29,6 +30,7 @@ public:
 
     GET_COMPONENT(Transform, TRANSFORM);
     GET_COMPONENT(MeshRender, MESHRENDER);
+    GET_COMPONENT(Camera, CAMERA);
 
 
 public:
