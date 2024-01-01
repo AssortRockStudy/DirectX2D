@@ -1,6 +1,10 @@
 ﻿#include "framework.h"
 #include "Client.h"
 
+
+#include <crtdbg.h>
+
+
 //추가
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
@@ -27,6 +31,9 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+//_CrtSetBreakAlloc(433);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,

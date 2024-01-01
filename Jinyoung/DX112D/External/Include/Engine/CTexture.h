@@ -22,10 +22,13 @@ private:
 public:
     void UpdateData(int _RegisterNum);
 
+    static void Clear(int _RegisterNum);
 
 
 public:
     CTexture();
     ~CTexture();
+
+    friend class CAssetMgr;
 };
 

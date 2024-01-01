@@ -9,6 +9,20 @@ struct Vtx
 	Vec2 vUV;		 // UV 좌표계 or Texture Coodinate
 };
 
+struct tDebugShapeInfo
+{
+	DEBUG_SHAPE	eShape;
+
+	Vec3		vWorldPos;
+	Vec3		vWorldScale;
+	Vec3		vWorldRot;
+	Matrix		matWorld;
+
+	Vec3		vColor;
+	float		fDuration;
+	bool		bDepthTest;
+};
+
 
 // ==================
 // 상수버퍼 대응 구조체
@@ -27,5 +41,17 @@ struct tTransform
 	Matrix	matWV;
 	Matrix	matWVP;
 };
-
 extern tTransform g_Transform;
+
+struct tMtrlConst
+{
+	int iArr[4];
+	float fArr[4];
+	Vec2 v2Arr[4];
+	Vec4 v4Arr[4];
+	Matrix matArr[4];
+
+	int	bTex[TEX_PARAM::END];
+
+	int iPadding[2];
+};

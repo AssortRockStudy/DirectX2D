@@ -3,6 +3,7 @@
 
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CMaterial.h"
 
 CAssetMgr::CAssetMgr()
 {
@@ -11,20 +12,18 @@ CAssetMgr::CAssetMgr()
 
 CAssetMgr::~CAssetMgr()
 {
-	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; ++i)
-	{
-		for (auto pair : m_mapAsset[i])
-		{
-			if (nullptr != pair.second)
-			{
-				delete pair.second;
-			}
-		}
-		m_mapAsset[i].clear();
-	}
 }
 
 void CAssetMgr::init()
+{
+	CreateDefaultMesh();
+
+	CreateDefaultGraphicsShader();
+
+	CreateDefaultMaterial();
+}
+
+void CAssetMgr::CreateDefaultMesh()
 {
 	CMesh* pMesh = nullptr;
 
@@ -103,6 +102,10 @@ void CAssetMgr::init()
 	pMesh = new CMesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh);
+}
+
+void CAssetMgr::CreateDefaultGraphicsShader()
+{
 
 	// =================================
 	// Std2DShader
@@ -115,10 +118,9 @@ void CAssetMgr::init()
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::LESS);
-	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
 
 	AddAsset(L"Std2DShader", pShader);
-
 
 	// =================================
 	// EffectShader
@@ -132,4 +134,32 @@ void CAssetMgr::init()
 	pShader->SetBSType(BS_TYPE::ONE_ONE);
 
 	AddAsset(L"EffectShader", pShader);
+
+	// =================================
+	// DebugShape Shader
+	// =================================
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\debug.fx", "VS_DebugShape");
+	pShader->CreatePixelShader(L"shader\\debug.fx", "PS_DebugShape");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+
+	AddAsset(L"DebugShapeShader", pShader);
+
+}
+
+void CAssetMgr::CreateDefaultMaterial()
+{
+	CMaterial* pMtrl = nullptr;
+
+	// Std2DMtrl
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+	AddAsset<CMaterial>(L"Std2DMtrl", pMtrl);
+
+	// DebugShapeMtrl
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
+	AddAsset<CMaterial>(L"DebugShapeMtrl", pMtrl);
 }

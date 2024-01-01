@@ -14,6 +14,11 @@ class CScript :
 private:
     UINT        m_iScriptType;
 
+
+public:
+    void Destroy();
+
+
 public:
     virtual void finaltick() final {}
 

@@ -1,30 +1,7 @@
 #ifndef _STD2D
 #define _STD2D
 
-// 4096 크기제한
-cbuffer TRANSFORM : register(b0)
-{
-    row_major Matrix g_matWorld;
-    row_major Matrix g_matWorldInv;
-
-    row_major Matrix g_matView;
-    row_major Matrix g_matViewInv;
-
-    row_major Matrix g_matProj;
-    row_major Matrix g_matProjInv;
-
-    row_major Matrix g_matWV;
-    row_major Matrix g_matWVP;
-}
-
-
-Texture2D g_tex_0 : register(t0);
-
-
-SamplerState g_sam_0 : register(s0);
-
-
-
+#include "value.fx"
 
 struct VS_IN
 {
@@ -53,18 +30,25 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    float4 vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    //uint width = 0;
+    //uint height = 0;
+    //g_tex_1.GetDimensions(width, height);
     
+    float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
     
-    
-    //if (vColor.a <= 0.1f)
-    //{
-    //    vColor.rgba = float4(1.f, 0.f, 0.f, 1.f);
-    //}
-    
-    //float Aver = (vColor.r + vColor.g + vColor.b) / 3.f;
-    //vColor.rgb = float3(Aver, Aver, Aver);    
-    //vColor.a = 1.f;
+    if (g_btex_0)
+    {
+        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        
+        //saturate 0 ~ 1 을 넘지 않게 보정
+        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
+        
+        if (fAlpha < 0.1f)
+        {
+            // 픽셀 쉐이더를 중간에 폐기처리
+            discard; //clip(-1);            
+        }
+    }
     
     return vColor;
 }

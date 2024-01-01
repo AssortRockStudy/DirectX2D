@@ -4,9 +4,6 @@
 #define GET_COMPONENT(Type, TYPE) class C##Type* Type() { return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::##TYPE]; }
 
 
-
-
-
 class CComponent;
 class CRenderComponent;
 class CScript;
@@ -24,6 +21,9 @@ private:
 
     CGameObject* m_Parent;
 
+    int                     m_iLayerIdx;    // 오브젝트가 소속되어있는 Layer 의 Index
+
+    bool                    m_bDead;
 
 public:
     void begin();
@@ -40,10 +40,16 @@ public:
 
     CGameObject* GetParent() { return m_Parent; }
     void DisconnectWithParent();
+    void DisconnectWithLayer();
+
     void AddChild(CGameObject* _Child);
+    bool IsDead() { return m_bDead; }
 
 public:
     CGameObject();
     ~CGameObject();
+
+    friend class CLayer;
+    friend class CTaskMgr;
 };
 
