@@ -4,6 +4,8 @@
 #include "CComponent.h"
 #include "CRenderComponent.h"
 
+#include "CScript.h"
+
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
@@ -13,6 +15,7 @@ CGameObject::CGameObject()
 CGameObject::~CGameObject()
 {
 	Delete_Array(m_arrCom);
+	Delete_Vec(m_vecScript);
 }
 
 void CGameObject::begin()
@@ -34,6 +37,11 @@ void CGameObject::tick()
 		{
 			m_arrCom[i]->tick();
 		}
+	}
+
+	for (size_t i = 0; i < m_vecScript.size(); ++i)
+	{
+		m_vecScript[i]->tick();
 	}
 }
 
@@ -60,10 +68,29 @@ void CGameObject::AddComponent(CComponent* _Component)
 {
 	COMPONENT_TYPE type = _Component->GetType();
 
-	m_arrCom[(UINT)type] = _Component;
-	_Component->m_Owner = this;
+	if (type == COMPONENT_TYPE::SCRIPT)
+	{
+		assert(dynamic_cast<CScript*>(_Component));
 
-	m_RenderCom = dynamic_cast<CRenderComponent*>(_Component);
+		m_vecScript.push_back((CScript*)_Component);
+		_Component->m_Owner = this;
+	}
+	else
+	{
+		assert(!m_arrCom[(UINT)type]);
+
+		m_arrCom[(UINT)type] = _Component;
+		_Component->m_Owner = this;
+
+		CRenderComponent* pRenderCom = dynamic_cast<CRenderComponent*>(_Component);
+		if (nullptr != pRenderCom)
+		{
+			// 이미 한 종류 이상의 RenderComponent 를 보유하고 있는 경우
+			assert(!m_RenderCom);
+
+			m_RenderCom = pRenderCom;
+		}
+	}
 }
 
 

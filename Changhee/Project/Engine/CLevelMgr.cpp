@@ -1,0 +1,76 @@
+#include "pch.h"
+#include "CLevelMgr.h"
+
+#include "CDevice.h"
+
+#include "CAssetMgr.h"
+
+#include "CLevel.h"
+
+#include "CGameObject.h"
+
+#include "CTransform.h"
+#include "CMeshRender.h"
+#include "CPlayerScript.h"
+
+CLevelMgr::CLevelMgr()
+	:m_CurLevel(nullptr)
+{
+
+}
+
+CLevelMgr::~CLevelMgr()
+{
+	if(nullptr!= m_CurLevel)
+		delete m_CurLevel;
+}
+
+
+void CLevelMgr::init()
+{
+	// 檬扁 饭骇 备己
+	m_CurLevel = new CLevel;
+
+	// GameObject 积己
+	CGameObject* pObj = nullptr;
+
+	pObj = new CGameObject;
+	pObj->SetName(L"Player");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CPlayerScript);
+
+	pObj->Transform()->SetRelativePos(Vec3(-0.5f, 0.f, 0.f));
+	pObj->Transform()->SetRelativeScale(Vec3(0.5f, 0.5f, 0.5f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+	m_CurLevel->AddObject(pObj, 0);
+
+}
+
+void CLevelMgr::tick()
+{
+	if (nullptr == m_CurLevel)
+		return;
+
+	m_CurLevel->tick();
+	m_CurLevel->finaltick();
+
+}
+
+void CLevelMgr::render()
+{
+	if (nullptr == m_CurLevel)
+		return;
+
+	float ClearColor[4] = { 0.3f,0.3f,0.3f,1.f };
+	
+	CDevice::GetInst()->ClearRenderTarget(ClearColor);
+
+	m_CurLevel->render();
+
+	CDevice::GetInst()->Present();
+}

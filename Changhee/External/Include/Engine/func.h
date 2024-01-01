@@ -24,3 +24,6 @@ void Delete_Vec(vector<T*>& _vec)
 
 	_vec.clear();
 }
+
+
+

@@ -10,9 +10,6 @@
     <Filter Include="02. Engine">
       <UniqueIdentifier>{31091915-2da6-4504-b058-a4442d93f2ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Device">
-      <UniqueIdentifier>{17dedd26-aa23-404d-94c5-6830ae166f01}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{25ca55d0-d2e0-4ebc-b0e9-3a9b2f9af02d}</UniqueIdentifier>
     </Filter>
@@ -73,9 +70,6 @@
     <Filter Include="06. Asset\Shader\GraphicsShader">
       <UniqueIdentifier>{3a914dbb-c88b-45a7-ad12-95f1d05519fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Device\ConstBuffer">
-      <UniqueIdentifier>{dd09fc19-e7af-40ff-b5b9-2991e9d5a04b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. Component\RenderComponent">
       <UniqueIdentifier>{09743c1e-6053-4142-b59c-af97b690c497}</UniqueIdentifier>
     </Filter>
@@ -90,6 +84,21 @@
     </Filter>
     <Filter Include="08. Component\RenderComponent\03. ParticleSystem">
       <UniqueIdentifier>{75015215-18e8-499a-abde-8d35854b86c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{8ddf80dc-8024-4a7c-9fa1-622d492c825b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device">
+      <UniqueIdentifier>{17dedd26-aa23-404d-94c5-6830ae166f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\ConstBuffer">
+      <UniqueIdentifier>{dd09fc19-e7af-40ff-b5b9-2991e9d5a04b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetManager">
+      <UniqueIdentifier>{787c3543-c35d-4149-a4f0-6a8f89303394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\LevelManager">
+      <UniqueIdentifier>{1a25e988-01d2-4dc8-920b-c086c5a40c97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +124,7 @@
       <Filter>01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CDevice.h">
-      <Filter>03.Device</Filter>
+      <Filter>03. Device</Filter>
     </ClInclude>
     <ClInclude Include="CEntity.h">
       <Filter>Entity</Filter>
@@ -161,13 +170,31 @@
       <Filter>01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CConstBuffer.h">
-      <Filter>03.Device\ConstBuffer</Filter>
+      <Filter>03. Device\ConstBuffer</Filter>
     </ClInclude>
     <ClInclude Include="CRenderComponent.h">
       <Filter>08. Component\RenderComponent</Filter>
     </ClInclude>
     <ClInclude Include="CMeshRender.h">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CScript.h">
+      <Filter>08. Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetMgr.h">
+      <Filter>04. Manager\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayer.h">
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelMgr.h">
+      <Filter>04. Manager\LevelManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,7 +208,7 @@
       <Filter>02. Engine</Filter>
     </ClCompile>
     <ClCompile Include="CDevice.cpp">
-      <Filter>03.Device</Filter>
+      <Filter>03. Device</Filter>
     </ClCompile>
     <ClCompile Include="CEntity.cpp">
       <Filter>Entity</Filter>
@@ -221,13 +248,28 @@
       <Filter>08. Component\01. Transform</Filter>
     </ClCompile>
     <ClCompile Include="CConstBuffer.cpp">
-      <Filter>03.Device\ConstBuffer</Filter>
+      <Filter>03. Device\ConstBuffer</Filter>
     </ClCompile>
     <ClCompile Include="CRenderComponent.cpp">
       <Filter>08. Component\RenderComponent</Filter>
     </ClCompile>
     <ClCompile Include="CMeshRender.cpp">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CScript.cpp">
+      <Filter>08. Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr.cpp">
+      <Filter>04. Manager\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerScript.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayer.cpp">
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelMgr.cpp">
+      <Filter>04. Manager\LevelManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
