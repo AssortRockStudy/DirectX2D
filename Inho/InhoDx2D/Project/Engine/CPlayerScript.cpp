@@ -57,6 +57,8 @@ void CPlayerScript::tick()
 	Transform()->SetRelativeRotation(vRot);
 
 	if (KEY_TAP(KEY::SPACE)) {
+		Destroy();
+		/*
 		CGameObject* pObj = nullptr;
 
 		pObj = new CGameObject;
@@ -72,5 +74,6 @@ void CPlayerScript::tick()
 		pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
 
 		GamePlayStatic::SpawnGameObject(pObj, 0);
+		*/
 	}
 }

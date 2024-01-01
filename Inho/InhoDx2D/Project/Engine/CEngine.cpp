@@ -9,6 +9,7 @@
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
 #include "CTaskMgr.h"
+#include "CGC.h"
 
 CEngine::CEngine()
     : m_hMainWnd(nullptr)
@@ -51,6 +52,8 @@ void CEngine::progress()
 
     CLevelMgr::GetInst()->tick();
     CLevelMgr::GetInst()->render();
+    
+    CGC::GetInst()->tick();
 
     CTaskMgr::GetInst()->tick();
 }

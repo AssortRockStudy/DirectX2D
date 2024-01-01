@@ -52,7 +52,7 @@ void CAssetMgr::init()
 	arrIdx[4] = 2;
 	arrIdx[5] = 3;
 
-	CMesh* pMesh = new CMesh;
+	CMesh* pMesh = nullptr;
 	pMesh = new CMesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"RectMesh", pMesh);

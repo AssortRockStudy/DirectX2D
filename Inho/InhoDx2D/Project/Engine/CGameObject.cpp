@@ -10,11 +10,14 @@
 #include "CLevel.h"
 #include "CLayer.h"
 
+#include "CGC.h"
+
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
 	, m_Parent(nullptr)
 	, m_iLayerIdx(-1)
+	, m_bDead(false)
 {
 }
 
@@ -66,8 +69,17 @@ void CGameObject::finaltick()
 	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
 	pCurLayer->RegisterGameObject(this);
 
-	for (size_t i = 0; i < m_vecChild.size(); i++) {
-		m_vecChild[i]->finaltick();
+	vector<CGameObject*>::iterator iter = m_vecChild.begin();
+	for (; iter != m_vecChild.end();) {
+		(*iter)->finaltick();
+
+		if ((*iter)->m_bDead) {
+			CGC::GetInst()->Add(*iter);
+			iter = m_vecChild.erase(iter);
+		}
+		else {
+			++iter;
+		}
 	}
 }
 

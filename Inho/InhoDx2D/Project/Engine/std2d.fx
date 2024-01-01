@@ -19,6 +19,7 @@ cbuffer TRANSFORM : register(b0)
 Texture2D g_tex_0 : register(t0);
 
 SamplerState g_sam_0 : register(s0);
+SamplerState g_sam_1 : register(s1);
 
 struct VS_IN
 {
@@ -49,7 +50,7 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    float4 vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    float4 vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
     return vColor;
 }
 
