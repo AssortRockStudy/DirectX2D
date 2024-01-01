@@ -24,7 +24,7 @@ void CLevelMgr::init()
 {
 	// 초기 레벨 구성하기
 	m_CurLevel = new CLevel;
-	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Effect.png");
 	if (nullptr != pTex)
 		pTex->UpdateData(0);
 
@@ -49,6 +49,22 @@ void CLevelMgr::init()
 	pObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+	CGameObject* pChildObj = new CGameObject;
+	pChildObj->SetName(L"Child");
+
+	pChildObj->AddComponent(new CTransform);
+	pChildObj->AddComponent(new CMeshRender);
+
+	pChildObj->Transform()->SetRelativePos(Vec3(200.f, 0.f, 0.f));
+	pChildObj->Transform()->SetRelativeScale(Vec3(150.f, 150.f, 1.f));
+	pChildObj->Transform()->SetAbsolute(true);
+
+	pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pChildObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+	pObj->AddChild(pChildObj);
+
 	m_CurLevel->AddObject(pObj, 0);
 }
 

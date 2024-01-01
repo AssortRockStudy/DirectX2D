@@ -7,8 +7,10 @@ private:
     Vec3 m_vRelativePos;
     Vec3 m_vRelativeScale;
     Vec3 m_vRealtiveRotation;
-    Vec3 m_arrDir[3]; // Right, Up, Front ¿Þ¼Õ ÁÂÇ¥°è
+    Vec3 m_arrLocalDir[3];
+    Vec3 m_arrWorldDir[3];
     Matrix m_matWorld;
+    bool m_bAbsolute;
 
 public:
     virtual void finaltick() override;
@@ -22,7 +24,10 @@ public:
     Vec3 GetRelativeScale() { return m_vRelativeScale; }
     Vec3 GetRelativeRotation() { return m_vRealtiveRotation; }
     const Matrix& GetWorldMat() { return m_matWorld; }
-    Vec3 GetDir(DIR_TYPE _type) { return m_arrDir[(UINT)_type]; }
+    Vec3 GetLocalDir(DIR_TYPE _type) { return m_arrLocalDir[(UINT)_type]; }
+    Vec3 GetWorldDir(DIR_TYPE _type) { return m_arrWorldDir[(UINT)_type]; }
+
+    void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute; }
 
 public:
     CTransform();

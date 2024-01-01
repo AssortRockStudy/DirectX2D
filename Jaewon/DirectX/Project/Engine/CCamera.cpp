@@ -25,9 +25,9 @@ void CCamera::finaltick()
 	Vec3 vCamPos = Transform()->GetRelativePos();
 	Matrix matTrans = XMMatrixTranslation(-vCamPos.x, -vCamPos.y, -vCamPos.z);
 
-	Vec3 vRight = Transform()->GetDir(DIR_TYPE::RIGHT);
-	Vec3 vUp = Transform()->GetDir(DIR_TYPE::UP);
-	Vec3 vFront = Transform()->GetDir(DIR_TYPE::FRONT);
+	Vec3 vRight = Transform()->GetWorldDir(DIR_TYPE::RIGHT);
+	Vec3 vUp = Transform()->GetWorldDir(DIR_TYPE::UP);
+	Vec3 vFront = Transform()->GetWorldDir(DIR_TYPE::FRONT);
 
 	Matrix matRotate = XMMatrixIdentity();
 	matRotate._11 = vRight.x; matRotate._12 = vUp.x; matRotate._13 = vFront.x;

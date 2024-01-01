@@ -70,8 +70,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 
 	CONTEXT->RSSetViewports(1, &ViewportDesc);
 
-	if (FAILED(CreateConstBuffer()))
-	{
+	if (FAILED(CreateConstBuffer())){
 		MessageBox(nullptr, L"상수버퍼 생성 실패", L"Device 초기화 실패", MB_OK);
 		return E_FAIL;
 	}
@@ -255,7 +254,7 @@ int CDevice::CreateBlendState()
 
 	// AlphaBlend
 	tDesc.AlphaToCoverageEnable = false;
-	tDesc.IndependentBlendEnable = true;
+	tDesc.IndependentBlendEnable = false;
 
 	tDesc.RenderTarget[0].BlendEnable = true;
 	tDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
@@ -269,6 +268,22 @@ int CDevice::CreateBlendState()
 	tDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	DEVICE->CreateBlendState(&tDesc, m_arrBS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
+
+	tDesc.AlphaToCoverageEnable = false;
+	tDesc.IndependentBlendEnable = false;
+
+	tDesc.RenderTarget[0].BlendEnable = true;
+	tDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	tDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	tDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+
+	tDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	tDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	tDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+
+	tDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	DEVICE->CreateBlendState(&tDesc, m_arrBS[(UINT)BS_TYPE::ONE_ONE].GetAddressOf());
 
 	return S_OK;
 }
