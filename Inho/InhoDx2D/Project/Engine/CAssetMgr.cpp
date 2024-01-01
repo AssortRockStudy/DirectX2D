@@ -11,6 +11,15 @@ CAssetMgr::~CAssetMgr() {}
 
 void CAssetMgr::init()
 {
+	CreateDefaultMesh();
+
+	CreateDefaultGraphicsShader();
+
+	CreateDefaultMaterial();
+}
+
+void CAssetMgr::CreateDefaultMesh()
+{
 	// 전역변수에 삼각형 위치 설정
 	//      0(Red)
 	//    /    \
@@ -81,7 +90,10 @@ void CAssetMgr::init()
 	pMesh = new CMesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh);
+}
 
+void CAssetMgr::CreateDefaultGraphicsShader()
+{
 	CGraphicsShader* pShader = nullptr;
 
 	pShader = new CGraphicsShader;
@@ -103,8 +115,24 @@ void CAssetMgr::init()
 	pShader->SetBSType(BS_TYPE::ONE_ONE);
 	AddAsset(L"EffectShader", pShader);
 
+	// Debug Shader
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\debug.fx", "VS_DebugShape");
+	pShader->CreatePixelShader(L"shader\\debug.fx", "PS_DebugShape");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+	AddAsset(L"DebugShapeShader", pShader);
+}
+
+void CAssetMgr::CreateDefaultMaterial()
+{
 	CMaterial* pMtrl = nullptr;
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2dShader"));
 	AddAsset(L"Std2DMtrl", pMtrl);
+
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
+	AddAsset(L"DebugShapeMtrl", pMtrl);
 }
