@@ -7,16 +7,7 @@
 
 CAssetMgr::CAssetMgr() {}
 
-CAssetMgr::~CAssetMgr() {
-	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; i++) {
-		for (auto pair : m_mapAsset[i]) {
-			if (nullptr != pair.second) {
-				delete pair.second;
-			}
-		}
-		m_mapAsset[i].clear();
-	}
-}
+CAssetMgr::~CAssetMgr() {}
 
 void CAssetMgr::init()
 {
@@ -99,7 +90,7 @@ void CAssetMgr::init()
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::LESS);
-	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
 
 	AddAsset(L"Std2dShader", pShader);
 
@@ -115,5 +106,5 @@ void CAssetMgr::init()
 	CMaterial* pMtrl = nullptr;
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
-	AddAsset<CMaterial>(L"Std2DMtrl", pMtrl);
+	AddAsset(L"Std2DMtrl", pMtrl);
 }

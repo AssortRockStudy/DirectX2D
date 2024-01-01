@@ -320,7 +320,7 @@ int CDevice::CreateSamplerState()
     tDesc.MinLOD = 0;
     tDesc.MaxLOD = 1;
 
-    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[0].GetAddressOf());
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[1].GetAddressOf());
 
     CONTEXT->VSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
     CONTEXT->HSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
@@ -328,11 +328,11 @@ int CDevice::CreateSamplerState()
     CONTEXT->GSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
     CONTEXT->PSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
 
-    CONTEXT->VSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
-    CONTEXT->HSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
-    CONTEXT->DSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
-    CONTEXT->GSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
-    CONTEXT->PSSetSamplers(1, 1, m_arrSampler[0].GetAddressOf());
+    CONTEXT->VSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->HSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->DSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->GSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->PSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
 
     return S_OK;
 }
