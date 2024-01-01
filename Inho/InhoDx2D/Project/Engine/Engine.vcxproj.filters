@@ -212,6 +212,7 @@
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="CGC.h" />
+    <ClInclude Include="CMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -306,6 +307,7 @@
       <Filter>Scripts</Filter>
     </ClCompile>
     <ClCompile Include="CGC.cpp" />
+    <ClCompile Include="CMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
