@@ -22,6 +22,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -40,5 +41,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Default</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.inl" />
   </ItemGroup>
 </Project>

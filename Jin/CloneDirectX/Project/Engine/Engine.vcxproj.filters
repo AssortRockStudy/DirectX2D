@@ -59,6 +59,7 @@
     <ClInclude Include="CLayer.h" />
     <ClInclude Include="CLevelMgr.h" />
     <ClInclude Include="CCameraMoveScript.h" />
+    <ClInclude Include="CTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -96,6 +97,7 @@
       <Filter>01. Header</Filter>
     </ClCompile>
     <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="CTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl" />

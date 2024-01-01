@@ -25,6 +25,19 @@ using namespace Microsoft::WRL;
 // ---------------------------------
 #include <d3d11.h>
 #include <d3dcompiler.h>
+
+// DirectxTex
+#include <DirectXTex/DirectXTex.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex\\DirectXTex")
+#endif
+
+
+
+
 #include <DirectXMath.h>
 using namespace DirectX;
 #pragma comment(lib, "d3d11")
