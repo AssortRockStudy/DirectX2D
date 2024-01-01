@@ -100,6 +100,9 @@
     <Filter Include="03. Device\ConstBuffer">
       <UniqueIdentifier>{e25430c7-4c72-4e5c-ad46-b6aa94e834ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\TaskMgr">
+      <UniqueIdentifier>{6eb5176c-94bc-470e-803f-da89fc42b4ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -202,6 +205,12 @@
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04. Manager\TaskMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -286,6 +295,15 @@
       <Filter>Scripts</Filter>
     </ClCompile>
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="func.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04. Manager\TaskMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

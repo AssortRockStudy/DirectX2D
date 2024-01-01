@@ -6,10 +6,15 @@
 
 #include "CScript.h"
 
+#include "CLevelMgr.h"
+#include "CLevel.h"
+#include "CLayer.h"
+
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
 	, m_Parent(nullptr)
+	, m_iLayerIdx(-1)
 {
 }
 
@@ -57,6 +62,9 @@ void CGameObject::finaltick()
 			m_arrCom[i]->finaltick();
 		}
 	}
+
+	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
+	pCurLayer->RegisterGameObject(this);
 
 	for (size_t i = 0; i < m_vecChild.size(); i++) {
 		m_vecChild[i]->finaltick();
@@ -111,6 +119,16 @@ void CGameObject::DisconnectWithParent()
 	}
 
 	assert(nullptr);
+}
+
+void CGameObject::DisconnectWithLayer() {
+	if (-1 == m_iLayerIdx) {
+		return;
+	}
+
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+	CLayer* pCurLayer = pCurLevel->GetLayer(m_iLayerIdx);
+	pCurLayer->DetachGameObject(this);
 }
 
 void CGameObject::AddChild(CGameObject* _Child)

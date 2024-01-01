@@ -21,7 +21,9 @@ CLevelMgr::CLevelMgr()
 }
 
 CLevelMgr::~CLevelMgr() {
-
+	if (nullptr != m_CurLevel) {
+		delete m_CurLevel;
+	}
 }
 
 void CLevelMgr::init()
@@ -64,22 +66,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
 
 
-	CGameObject* pChildObj = new CGameObject;
-	pChildObj->SetName(L"Child");
-
-	pChildObj->AddComponent(new CTransform);
-	pChildObj->AddComponent(new CMeshRender);
-
-	pChildObj->Transform()->SetRelativePos(Vec3(20.0f, 0.f, -10.f));
-	pChildObj->Transform()->SetRelativeScale(Vec3(100.f, 150.f, 1.f));	
-	pChildObj->Transform()->SetAbsolute(true);
-
-	pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pChildObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2dShader"));
-
-	pObj->AddChild(pChildObj);
-
-	m_CurLevel->AddObject(pObj, 0);
+	m_CurLevel->AddObject(pObj, 0, false);
 	//m_CurLevel->AddObject(pChildObj, 0);
 
 }
@@ -89,6 +76,9 @@ void CLevelMgr::tick()
 	if (nullptr == m_CurLevel) {
 		return;
 	}
+
+	m_CurLevel->clear();
+
 	m_CurLevel->tick();
 	m_CurLevel->finaltick();
 }
