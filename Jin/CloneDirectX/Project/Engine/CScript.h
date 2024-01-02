@@ -17,6 +17,8 @@ private:
 public:
     virtual void finaltick() final {}
 
+    void Destroy();
+
 public:
     CScript();
     ~CScript();

@@ -225,9 +225,14 @@
     <ClInclude Include="CTransform.h">
       <Filter>08. Component\01. Transform</Filter>
     </ClInclude>
-    <ClInclude Include="CTaskMgr.h" />
     <ClInclude Include="CMissileScript.h">
       <Filter>Module\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04. Manager\TaskMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,9 +323,14 @@
     <ClCompile Include="func.cpp">
       <Filter>01. Header</Filter>
     </ClCompile>
-    <ClCompile Include="CTaskMgr.cpp" />
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Module\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04. Manager\TaskMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

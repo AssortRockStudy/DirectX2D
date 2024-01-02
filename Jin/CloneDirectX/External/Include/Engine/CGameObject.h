@@ -23,6 +23,8 @@ private:
 
     int m_iLayerIdx;
 
+    bool m_bDead;
+
 public:
     void begin();
     void tick();
@@ -43,10 +45,13 @@ public:
 
     void DisconnectWithLayer();
 
+    bool IsDead() { return m_bDead; }
+
 public:
     CGameObject();
     ~CGameObject();
 
     friend class CLayer;
+    friend class CTaskMgr;
 };
 

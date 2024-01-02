@@ -9,6 +9,7 @@ CDevice::CDevice()
     , m_arrRS{}
     , m_arrDS{}
     , m_arrBS{}
+    , m_arrSampler{} 
 {
 
 }
@@ -64,7 +65,12 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
         MessageBox(nullptr, L"Blend State 생성 실패", L"Device 초기화 실패", MB_OK);
         return E_FAIL;
     }
-
+    
+    if (FAILED(CreateSamplerState()))
+    {
+        MessageBox(nullptr, L"Sampler State 생성 실패", L"Device 초기화 실패", MB_OK);
+        return E_FAIL;
+    }
     D3D11_VIEWPORT ViewportDesc = {};
 
     ViewportDesc.MinDepth = 0;
@@ -296,3 +302,42 @@ int CDevice::CreateBlendState()
 
     return S_OK;
 }
+
+int CDevice::CreateSamplerState()
+{
+    D3D11_SAMPLER_DESC  tDesc = {};
+
+    tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressW= D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+
+    tDesc.MinLOD = 0;
+    tDesc.MaxLOD = 1;
+
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[0].GetAddressOf());
+
+    CONTEXT->VSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+    CONTEXT->HSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+    CONTEXT->DSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+    CONTEXT->GSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+    CONTEXT->PSSetSamplers(0, 1, m_arrSampler[0].GetAddressOf());
+
+    tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+    tDesc.MinLOD = 0;
+    tDesc.MaxLOD = 1;
+
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[1].GetAddressOf());
+
+    CONTEXT->VSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->HSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->DSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->GSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+    CONTEXT->PSSetSamplers(1, 1, m_arrSampler[1].GetAddressOf());
+
+    return S_OK;
+}                                                    
