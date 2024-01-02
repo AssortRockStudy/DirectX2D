@@ -216,14 +216,14 @@
     <ClInclude Include="CTimeMgr.h">
       <Filter>04. Manager\TimeMgr</Filter>
     </ClInclude>
-    <ClInclude Include="CTransform.h">
-      <Filter>01. Header</Filter>
-    </ClInclude>
     <ClInclude Include="func.h">
       <Filter>01. Header</Filter>
     </ClInclude>
     <ClInclude Include="SimpleMath.h">
       <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>08. Component\01. Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

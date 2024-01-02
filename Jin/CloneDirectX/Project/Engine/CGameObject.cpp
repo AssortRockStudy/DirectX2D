@@ -8,12 +8,15 @@
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
+	, m_Parent(nullptr)
 {
 }
 
 CGameObject::~CGameObject()
 {
 	Delete_Array(m_arrCom);
+	Delete_Vec(m_vecScript);
+	Delete_Vec(m_vecChild);
 }
 
 
@@ -23,6 +26,11 @@ void CGameObject::begin()
 	{
 		if (nullptr != m_arrCom[i])
 			m_arrCom[i]->begin();
+	}
+
+	for (size_t i = 0; i < m_vecChild.size(); ++i)
+	{
+		m_vecChild[i]->begin();
 	}
 }
 
@@ -38,6 +46,11 @@ void CGameObject::tick()
 	{
 		m_vecScript[i]->tick();
 	}
+
+	for (size_t i = 0; i < m_vecChild.size(); ++i)
+	{
+		m_vecChild[i]->tick();
+	}
 }
 
 void CGameObject::finaltick()
@@ -47,6 +60,12 @@ void CGameObject::finaltick()
 		if (nullptr != m_arrCom[i])
 			m_arrCom[i]->finaltick();
 	}
+
+	for (size_t i = 0; i < m_vecChild.size(); ++i)
+	{
+		m_vecChild[i]->finaltick();
+	}
+
 }
 
 void CGameObject::render()
@@ -54,6 +73,11 @@ void CGameObject::render()
 	if (nullptr != m_RenderCom)
 	{
 		m_RenderCom->render();
+	}
+
+	for (size_t i = 0; i < m_vecChild.size(); ++i)
+	{
+		m_vecChild[i]->render();
 	}
 }
 
@@ -84,3 +108,27 @@ void CGameObject::AddComponent(CComponent* _Component)
 	}
 }
 
+void CGameObject::DisconnectWithParent()
+{
+	vector<CGameObject*>::iterator iter = m_Parent->m_vecChild.begin();
+	for (; iter != m_Parent->m_vecChild.end(); ++iter)
+	{
+		if (*iter == this)
+		{
+			m_Parent->m_vecChild.erase(iter);
+			m_Parent = nullptr;
+			return;
+		}
+	}
+	assert(nullptr);
+}
+
+void CGameObject::AddChild(CGameObject* _Child)
+{
+	if (_Child->m_Parent)
+	{
+		_Child->DisconnectWithParent();
+	}
+	_Child->m_Parent = this;
+	m_vecChild.push_back(_Child);
+}
