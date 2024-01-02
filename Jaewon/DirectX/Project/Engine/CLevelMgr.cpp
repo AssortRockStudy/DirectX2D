@@ -18,6 +18,8 @@ CLevelMgr::CLevelMgr()
 
 CLevelMgr::~CLevelMgr()
 {
+	if (nullptr != m_CurLevel)
+		delete m_CurLevel;
 }
 
 void CLevelMgr::init()
@@ -65,14 +67,14 @@ void CLevelMgr::init()
 
 	pObj->AddChild(pChildObj);
 
-	m_CurLevel->AddObject(pObj, 0);
+	m_CurLevel->AddObject(pObj, false);
 }
 
 void CLevelMgr::tick()
 {
 	if (nullptr == m_CurLevel)
 		return;
-
+	m_CurLevel->clear();
 	m_CurLevel->tick();
 	m_CurLevel->finaltick();
 }

@@ -16,6 +16,7 @@ private:
     vector<CScript*> m_vecScript;
     vector<CGameObject*> m_vecChild;
     CGameObject* m_Parent;
+    int m_iLayerIdx;
 
 public:
     void begin();
@@ -32,10 +33,12 @@ public:
 
     CGameObject* GetParent() { return m_Parent; }
     void DisconnectWithParent();
+    void DisconnectWithLayer();
     void AddChild(CGameObject* _Child);
 
 public:
     CGameObject();
     ~CGameObject();
+    friend class CLayer;
 };
 
