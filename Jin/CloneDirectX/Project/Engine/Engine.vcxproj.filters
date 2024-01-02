@@ -238,6 +238,9 @@
       <Filter>06. Asset\Material</Filter>
     </ClInclude>
     <ClInclude Include="Ptr.h" />
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -339,11 +342,21 @@
     <ClCompile Include="CMaterial.cpp">
       <Filter>06. Asset\Material</Filter>
     </ClCompile>
+    <ClCompile Include="CRenderMgr_Init.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
