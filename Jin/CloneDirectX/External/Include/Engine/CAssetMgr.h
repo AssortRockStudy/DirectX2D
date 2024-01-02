@@ -7,6 +7,7 @@
 #include "CTexture.h"
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CMaterial.h"
 
 class CMesh;
 class CGraphicsShader;
@@ -45,6 +46,8 @@ ASSET_TYPE GetAssetType()
 		Type = ASSET_TYPE::TEXTURE;
 	else if (&info == &typeid(CGraphicsShader))
 		Type = ASSET_TYPE::GRAPHICS_SHADER;
+	else if (&info == &typeid(CMaterial))
+		Type = ASSET_TYPE::MATERIAL;
 
 	return Type;
 }

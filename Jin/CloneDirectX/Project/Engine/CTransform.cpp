@@ -79,5 +79,5 @@ void CTransform::UpdateData()
 
 	CConstBuffer* pCB = CDevice::GetInst()-> GetConstBuffer(CB_TYPE::TRANSFORM);
 	pCB->SetData(&g_Transform);
-	pCB->UpdateData(0);
+	pCB->UpdateData();
 }
