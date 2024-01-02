@@ -21,6 +21,8 @@ private:
     vector<CGameObject*> m_vecChild;
     CGameObject* m_Parent;
 
+    int m_iLayerIdx;
+
 public:
     void begin();
     void tick();
@@ -39,8 +41,12 @@ public:
     void DisconnectWithParent();
     void AddChild(CGameObject* _Child);
 
+    void DisconnectWithLayer();
+
 public:
     CGameObject();
     ~CGameObject();
+
+    friend class CLayer;
 };
 

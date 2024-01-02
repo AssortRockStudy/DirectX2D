@@ -1,5 +1,17 @@
 #pragma once
 
+
+class CGameObject;
+
+namespace GamePlayStatic
+{
+	void SpawnGameObject(CGameObject* _Target, int _LayerIdx);
+	void DestroyGameObject(CGameObject* _Target);
+}
+
+
+
+
 template<typename T, UINT SIZE>
 void Delete_Array(T* (&Arr)[SIZE])
 {
