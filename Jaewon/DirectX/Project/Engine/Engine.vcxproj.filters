@@ -109,6 +109,9 @@
     <ClInclude Include="CMissileScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

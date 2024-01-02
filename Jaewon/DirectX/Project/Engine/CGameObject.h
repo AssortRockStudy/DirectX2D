@@ -17,6 +17,7 @@ private:
     vector<CGameObject*> m_vecChild;
     CGameObject* m_Parent;
     int m_iLayerIdx;
+    bool m_bDead;
 
 public:
     void begin();
@@ -35,10 +36,12 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
     void AddChild(CGameObject* _Child);
+    bool IsDead() { return m_bDead; }
 
 public:
     CGameObject();
     ~CGameObject();
     friend class CLayer;
+    friend class CTaskMgr;
 };
 

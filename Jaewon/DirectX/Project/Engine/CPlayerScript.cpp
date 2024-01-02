@@ -43,8 +43,9 @@ void CPlayerScript::tick()
 
 	if (KEY_TAP(KEY::SPACE))
 	{
+		Destroy();
 		// GameObject »ý¼º
-		CGameObject* pObj = nullptr;
+		/*CGameObject* pObj = nullptr;
 
 		pObj = new CGameObject;
 		pObj->SetName(L"Missile");
@@ -58,6 +59,6 @@ void CPlayerScript::tick()
 		pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 		pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
 
-		GamePlayStatic::SpawnGameObject(pObj, 0);
+		GamePlayStatic::SpawnGameObject(pObj, 0);*/
 	}
 }

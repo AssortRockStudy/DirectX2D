@@ -26,7 +26,7 @@ void CLevelMgr::init()
 {
 	// 초기 레벨 구성하기
 	m_CurLevel = new CLevel;
-	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Effect.png");
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp");
 	if (nullptr != pTex)
 		pTex->UpdateData(0);
 
@@ -48,7 +48,7 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CMeshRender);
 	pObj->AddComponent(new CPlayerScript);
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	pObj->Transform()->SetRelativeScale(Vec3(1000.f, 1000.f, 1.f));
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
 
