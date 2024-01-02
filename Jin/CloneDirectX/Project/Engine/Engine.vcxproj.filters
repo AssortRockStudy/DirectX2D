@@ -237,6 +237,7 @@
     <ClInclude Include="CMaterial.h">
       <Filter>06. Asset\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Ptr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">

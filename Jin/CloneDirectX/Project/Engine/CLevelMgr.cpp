@@ -32,11 +32,6 @@ void CLevelMgr::init()
 	// 초기 레벨 구성하기
 	m_CurLevel = new CLevel;
 
-	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Effect.png");
-	if (nullptr != pTex)
-		pTex->UpdateData(0);
-
-
 	// Camera Object 생성
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->AddComponent(new CTransform);
@@ -63,8 +58,10 @@ void CLevelMgr::init()
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->m_Const.iArr[0] = 1;
+	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
+	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Effect.png");
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, 0, false);
 	// ------------------------------
