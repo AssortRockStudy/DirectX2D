@@ -57,7 +57,7 @@ void CPlayerScript::tick()
 
 	if (KEY_TAP(SPACE))
 	{
-		//Destroy();
+		Destroy();
 
 		CGameObject* pObj = nullptr;
 

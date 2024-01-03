@@ -7,6 +7,7 @@ class CComponent;
 class CRenderComponent;
 class CScript;
 class CCamera;
+class CCollider2D;
 
 class CGameObject :
     public CEntity
@@ -33,6 +34,7 @@ public:
     GET_COMPONENT(Transform, TRANSFORM);
     GET_COMPONENT(MeshRender, MESHRENDER);
     GET_COMPONENT(Camera, CAMERA);
+    GET_COMPONENT(Collider2D, COLLIDER2D);
 
 public:
     void AddComponent(CComponent* _Component);

@@ -3,6 +3,7 @@
 
 #include "CDevice.h"
 #include "CAssetMgr.h"
+#include "CCollisionMgr.h"
 
 #include "CLevel.h"
 #include "CLayer.h"
@@ -42,6 +43,10 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
+	// 충돌 설정
+	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
+	CCollisionMgr::GetInst()->LayerCheck(L"Monster", L"Monster");
+
 	// Main Camera 생성
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->SetName(L"MainCamera");
@@ -54,7 +59,7 @@ void CLevelMgr::init()
 
 	pCamObj->Camera()->SetCameraPriority(0);
 	pCamObj->Camera()->LayerCheckAll();
-	// 메인 카메라에 UI는 그리지 마라
+	// '메인 카메라에 UI는 그리지 마라'라는 뜻
 	// 즉, 메인카메라가 움직여도 UI에 해당하는 부분은 영향받지 않는다
 	pCamObj->Camera()->LayerCheck(L"UI", false);
 
@@ -81,10 +86,15 @@ void CLevelMgr::init()
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CCollider2D);
 	pObj->AddComponent(new CPlayerScript);
 
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
-	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
+	pObj->Transform()->SetRelativePos(Vec3(100.f, 100.f, 300.f));
+	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+
+	pObj->Collider2D()->SetAbsolute(true);
+	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
@@ -93,23 +103,44 @@ void CLevelMgr::init()
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-	// 자식 GameObject 생성
-	CGameObject* pChildObj = new CGameObject;
-	pChildObj->SetName(L"Child");
+	//// 자식 GameObject 생성
+	//CGameObject* pChildObj = new CGameObject;
+	//pChildObj->SetName(L"Child");
 
-	pChildObj->AddComponent(new CTransform);
-	pChildObj->AddComponent(new CMeshRender);
+	//pChildObj->AddComponent(new CTransform);
+	//pChildObj->AddComponent(new CMeshRender);
 
-	pChildObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
-	pChildObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
-	pChildObj->Transform()->SetAbsolute(true);
+	//pChildObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
+	//pChildObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	//pChildObj->Transform()->SetAbsolute(true);
 
-	pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pChildObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	//pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pChildObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
-	pObj->AddChild(pChildObj);
+	//pObj->AddChild(pChildObj);
 
-	m_CurLevel->AddObject(pObj, L"Default", false);
+	m_CurLevel->AddObject(pObj, L"Player", false);
+
+	// Monster 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Monster");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CCollider2D);
+
+	pObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 300.f));
+	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+
+	pObj->Collider2D()->SetAbsolute(true);
+	pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+
+	m_CurLevel->AddObject(pObj, L"Monster", false);
 
 	// UI GameObject 생성
 	pObj = new CGameObject;
@@ -125,8 +156,6 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
-
-	GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 10.f);
 }
 
 void CLevelMgr::tick()

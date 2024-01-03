@@ -24,7 +24,7 @@ void CMeshRender::UpdateData()
 		GetMaterial()->UpdateData();
 	}
 
-	GetOwner()->Transform()->UpdateData();
+	Transform()->UpdateData();
 }
 
 void CMeshRender::render()

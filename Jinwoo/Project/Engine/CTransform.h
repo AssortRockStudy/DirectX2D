@@ -37,6 +37,10 @@ public:
     Vec3 GetWorldDir(DIR_TYPE _Type) { return m_arrWorldDir[(UINT)_Type]; }
     void SetWorldMat(const Matrix _matWorld) { m_matWorld = _matWorld; }
 
+    Vec3 GetWorldPos() { return m_matWorld.Translation(); }
+    Vec3 GetWorldScale();
+    //Vec3 GetWorldRot();
+
 public:
     CTransform();
     ~CTransform();

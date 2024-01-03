@@ -8,6 +8,7 @@
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
+#include "CCollisionMgr.h"
 #include "CRenderMgr.h"
 #include "CTaskMgr.h"
 #include "CGC.h"
@@ -59,6 +60,7 @@ void CEngine::progress()
 
 	// Level Update
 	CLevelMgr::GetInst()->tick();
+	CCollisionMgr::GetInst()->tick();
 	CRenderMgr::GetInst()->tick();
 
 	// GC
