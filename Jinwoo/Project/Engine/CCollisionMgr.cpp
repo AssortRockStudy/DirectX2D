@@ -26,9 +26,11 @@ void CCollisionMgr::tick()
 		for (UINT iCol = iRow; iCol < LAYER_MAX; ++iCol)
 		{
 			if (!(m_matrix[iRow] & (1 << iCol)))
+			{
 				continue;
+			}
 
-			// iRow 레이어와 iCol 레이어는 서로 충돌검사를 진행한다.
+			// iRow 레이어와 iCol 레이어는 서로 충돌검사를 진행한다
 			CollisionBtwLayer(iRow, iCol);
 		}
 	}
@@ -75,10 +77,14 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 	{
 		// 충돌체가 없는 경우
 		if (nullptr == vecLeft[i]->Collider2D())
+		{
 			continue;
-
+		}
+	
 		size_t j = 0;
-		if (_left == _right) // Left, Right 동일 레이어인 경우, 이중 검사를 피하기 위함
+
+		// Left, Right 동일 레이어인 경우, 이중 검사를 피하기 위함
+		if (_left == _right) 
 		{
 			j = i + 1;
 		}
@@ -86,8 +92,10 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 		for (; j < vecRight.size(); ++j)
 		{
 			// 충돌체를 보유하고 있지 않거나, 충돌을 진행시킬 두 대상이 동일한 오브젝트인 경우
-			if (nullptr == vecRight[j]->Collider2D())// || vecLeft[i] == vecRight[j] )
+			if (nullptr == vecRight[j]->Collider2D())
+			{
 				continue;
+			}
 
 			// 두 충돌체의 아이디를 조합
 			CollisionID ID = {};
@@ -96,6 +104,7 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 
 			// 이전 프레임 충돌 확인
 			map<UINT_PTR, bool>::iterator iter = m_mapPrevInfo.find(ID.id);
+
 			if (iter == m_mapPrevInfo.end())
 			{
 				m_mapPrevInfo.insert(make_pair(ID.id, false));
@@ -105,10 +114,10 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 
 			bool bDead = vecLeft[i]->IsDead() || vecRight[j]->IsDead();
 
-			// 지금 겹쳐있다.
+			// 지금 충돌 상태
 			if (CollisionBtwCollider(vecLeft[i]->Collider2D(), vecRight[j]->Collider2D()))
 			{
-				// 이전에도 겹쳐있었다.
+				// 이전에도 충돌했었음
 				if (iter->second)
 				{
 					if (bDead)
@@ -123,10 +132,10 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 					}
 				}
 
-				// 이전에 충돌한 적이 없다.
+				// 이전에 충돌한 적이 없다
 				else
 				{
-					// 둘중 하나라도 Dead 상태면, 충돌을 없었던 것으로 한다.
+					// 둘중 하나라도 Dead 상태면, 충돌을 없었던 것으로 간주
 					if (!bDead)
 					{
 						vecLeft[i]->Collider2D()->BeginOverlap(vecRight[j]->Collider2D());
@@ -136,10 +145,10 @@ void CCollisionMgr::CollisionBtwLayer(UINT _left, UINT _right)
 				}
 			}
 
-			// 지금 떨어져 있다.
+			// 지금 충돌하고 있지 않다
 			else
 			{
-				// 이전에는 겹쳐있었다.
+				// 이전에는 충돌하고 있었다
 				if (iter->second)
 				{
 					vecLeft[i]->Collider2D()->EndOverlap(vecRight[j]->Collider2D());
@@ -187,19 +196,19 @@ bool CCollisionMgr::CollisionBtwRectCollider(CCollider2D* _pLeft, CCollider2D* _
 
 	Vec3 vCenter = XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matRight) - XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matLeft);
 
-	// i 번째 투영축으로 4개의 표면벡터를 투영시킨다.
+	// i 번째 투영축으로 4개의 표면벡터를 투영시킴
 	for (int i = 0; i < 4; ++i)
 	{
 		// i 번째 표면백터를 투영축으로 삼는다
 		Vec3 vProj = arrProj[i];
 
-		// 단위벡터로 만들어서 내적할 경우 투영된 길이를 구할 수 있게 한다.
+		// 단위벡터로 만들어서 내적할 경우 투영된 길이를 구할 수 있게 한다
 		vProj.Normalize();
 
 		// 투영된 길이를 누적시킬 변수
 		float ProjAcc = 0.f;
 
-		// 반복문 돌면서 4개의 표면벡터를 지정된 투영축으로 투영시켜서 길이를 누적받는다.
+		// 반복문 돌면서 4개의 표면벡터를 지정된 투영축으로 투영시켜서 길이를 누적받는다
 		for (int j = 0; j < 4; ++j)
 		{
 			ProjAcc += abs(vProj.Dot(arrProj[j]));
@@ -208,23 +217,23 @@ bool CCollisionMgr::CollisionBtwRectCollider(CCollider2D* _pLeft, CCollider2D* _
 		// 투영된 길이의 절반씩 합친 길이가 필요하기 때문에 전체 합친길이를 2 로 나눈다
 		ProjAcc /= 2.f;
 
-		// 두 충돌체의 중심을 이은 벡터도 투영시킨다.
+		// 두 충돌체의 중심을 이은 벡터도 투영시킨다
 		float fCenterDist = abs(vProj.Dot(vCenter));
 
-		// 중심을 이은 벡터를 투영시킨 길이가, 표면을 투영시킨 길이의 절반보다 크다면 
-		// 둘을 분리시킬 수 있다.
+		// 중심을 이은 벡터를 투영시킨 길이가, 표면을 투영시킨 길이의 절반보다 크다면 둘을 분리시킬 수 있음
+		// 즉, 충돌상태가 아님
 		if (ProjAcc < fCenterDist)
 		{
 			return false;
 		}
 	}
 
-	// 4번의 테스트동안 분리할 수 없었다.
+	// 4번의 테스트동안 분리할 수 없었으면 충돌 상태
 	return true;
 }
 
 bool CCollisionMgr::CollisionBtwCirCleCollider(CCollider2D* _pLeft, CCollider2D* _pRight)
-{
+{	
 	const Matrix& matLeft = _pLeft->GetColliderWorldMat();
 	const Matrix& matRight = _pRight->GetColliderWorldMat();
 
@@ -235,6 +244,8 @@ bool CCollisionMgr::CollisionBtwCirCleCollider(CCollider2D* _pLeft, CCollider2D*
 
 	float fCenterDist = sqrtf(powf(vCenter.x, 2) + powf(vCenter.y, 2));
 
+	// 타원이 아니라는 전제하에 두 충돌체의 반지름의 합보다
+	// 두 충돌체의 중점 사이의 거리가 작거나 같다면 충돌 상태
 	if ((LeftRadius.x + RightRadius.x) / 2 >= fCenterDist)
 	{
 		return true;
