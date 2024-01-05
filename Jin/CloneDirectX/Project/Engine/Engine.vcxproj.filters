@@ -356,7 +356,9 @@
     <FxCompile Include="value.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
-    <FxCompile Include="debug.fx" />
+    <FxCompile Include="debug.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

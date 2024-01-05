@@ -16,7 +16,7 @@ struct VS_OUT
     float2 vUV : TEXCOORD;
 };
 
-VS_OUT VS_DebufShape(VS_IN _in)
+VS_OUT VS_DebugShape(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
@@ -30,16 +30,9 @@ static float g_Thickness = 0.1f;
 
 float4 PS_DebugShape(VS_OUT _in) : SV_Target
 {
-    float vOutColor = (float4) 0.f;
-    
-    if (g_Thickness <= _in.vUV.x && _in.vUV.x <= (1.f - g_Thickness)
-        && g_Thickness <= _in.vUV.y && _in.vUV.y <= (1.f - g_Thickness))
-    {
-        discard;
-    }
-    
-    vOutColor = float4(1.f, 1.f, 0.f, 1.f);
-    
+    float4 vOutColor = (float4) 0.f;
+    vOutColor = g_vec4_0;
+    vOutColor.a = 1.f;
     return vOutColor;
 }
 
