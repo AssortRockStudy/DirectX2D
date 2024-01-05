@@ -87,9 +87,10 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
 	pObj->AddComponent(new CCollider2D);
+	pObj->AddComponent(new CAnimator2D);
 	pObj->AddComponent(new CPlayerScript);
 
-	pObj->Transform()->SetRelativePos(Vec3(100.f, 100.f, 300.f));
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
 	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
 
 	pObj->Collider2D()->SetAbsolute(true);
@@ -102,6 +103,10 @@ void CLevelMgr::init()
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+
+	Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
+	pObj->Animator2D()->Create(L"Explosion", pAtlasTex, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 1.f);
+	pObj->Animator2D()->Play(L"Explosion");
 
 	//// 자식 GameObject 생성
 	//CGameObject* pChildObj = new CGameObject;

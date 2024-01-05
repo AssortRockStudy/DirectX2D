@@ -35,6 +35,7 @@ public:
     GET_COMPONENT(MeshRender, MESHRENDER);
     GET_COMPONENT(Camera, CAMERA);
     GET_COMPONENT(Collider2D, COLLIDER2D);
+    GET_COMPONENT(Animator2D, ANIMATOR2D);
 
 public:
     void AddComponent(CComponent* _Component);
@@ -43,10 +44,28 @@ public:
     CComponent* GetComponent(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
     CGameObject* GetParent() { return m_Parent; }
 
+    const vector<CScript*>& GetScripts() { return m_vecScript; }
+
+    template<typename T>
+    T* GetScript()
+    {
+        for (size_t i = 0; i < m_vecScript.size(); ++i)
+        {
+            if (dynamic_cast<T*>(m_vecScript[i]))
+            {
+                return (T*)m_vecScript[i];
+            }
+
+            return nullptr;
+        }
+    }
+
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
     bool IsDead() { return m_bDead; }
+
+    void Destroy();
 
 public:
     CGameObject();

@@ -13,6 +13,7 @@ private:
     vector<CCamera*>        m_vecCam;
     list<tDebugShapeInfo>   m_DbgShapeInfo;
     CGameObject*            m_pDebugObj;
+    bool                    m_DebugPosition;
 
 public:
     void RegisterCamera(CCamera* _Cam, int _Idx);
@@ -20,6 +21,9 @@ public:
     {
         m_DbgShapeInfo.push_back(_Info);
     }
+
+    void SetDebugPosition(bool _IsValid) { m_DebugPosition = _IsValid; }
+    bool IsDebugPosition() { return m_DebugPosition; }
 
 public:
     void init();

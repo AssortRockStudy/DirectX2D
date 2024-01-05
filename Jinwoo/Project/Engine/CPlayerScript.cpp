@@ -2,6 +2,7 @@
 #include "CPlayerScript.h"
 
 #include "CAssetMgr.h"
+#include "CGameObject.h"
 #include "CMissileScript.h"
 
 CPlayerScript::CPlayerScript()
@@ -57,7 +58,7 @@ void CPlayerScript::tick()
 
 	if (KEY_TAP(SPACE))
 	{
-		Destroy();
+		GetOwner()->Destroy();
 
 		CGameObject* pObj = nullptr;
 
@@ -78,4 +79,17 @@ void CPlayerScript::tick()
 
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeRotation(vRot);
+}
+
+void CPlayerScript::BeginOverlap(CCollider2D* _Collider, CGameObject* _OtherObj, CCollider2D* _OtherCollider)
+{
+	_OtherObj->Destroy();
+}
+
+void CPlayerScript::Overlap(CCollider2D* _Collider, CGameObject* _OtherObj, CCollider2D* _OtherCollider)
+{
+}
+
+void CPlayerScript::EndOverlap(CCollider2D* _Collider, CGameObject* _OtherObj, CCollider2D* _OtherCollider)
+{
 }

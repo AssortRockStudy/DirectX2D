@@ -124,6 +124,9 @@
     <Filter Include="04.Manager\CollisionMgr">
       <UniqueIdentifier>{1d85f2a5-2c8e-4cac-91bc-a4cd4586fbc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08.Component\04.Animator2D\Anim">
+      <UniqueIdentifier>{a0936ef6-4569-4c65-a2a1-2d587b5d08f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -252,6 +255,12 @@
     <ClInclude Include="CCollisionMgr.h">
       <Filter>04.Manager\CollisionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
+      <Filter>08.Component\04.Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnim.h">
+      <Filter>08.Component\04.Animator2D\Anim</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -364,6 +373,12 @@
     </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>04.Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
+      <Filter>08.Component\04.Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnim.cpp">
+      <Filter>08.Component\04.Animator2D\Anim</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -57,3 +57,13 @@ struct tDebugShapeInfo
 	float	fDuration;
 	bool	bDepthTest;
 };
+
+struct tAnimData2D
+{
+	Vec2	vLeftTop;
+	Vec2	vSliceSize;
+	Vec2	vOffset;
+	Vec2	vBackground;
+	int		UseAnim2D;
+	Vec3	iPadding;
+};

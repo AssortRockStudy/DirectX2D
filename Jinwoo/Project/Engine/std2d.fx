@@ -50,17 +50,37 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     
     float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
     
-    if(g_btex_0)
+    if(g_UseAnim2D)
     {
-        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        float2 vBackgroundLeftTop = g_vLeftTop + (g_vSliceSize / 2.f) - (g_vBackground / 2.f);
+        vBackgroundLeftTop -= g_vOffset;
+        float2 vUV = vBackgroundLeftTop + (g_vBackground * _in.vUV);
         
-        // saturate : 0 ~ 1을 넘지않게 보정
-        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
-
-        if(fAlpha < 0.1f)
+        if (vUV.x < g_vLeftTop.x || (g_vLeftTop.x + g_vSliceSize.x) < vUV.x
+            || vUV.y < g_vLeftTop.y || (g_vLeftTop.y + g_vSliceSize.y) < vUV.y)
         {
+            discard;
+        }
+        else
+        {
+            vColor = g_anim2d_tex.Sample(g_sam_1, vUV);
+        }
+
+    }
+    else
+    {
+        if (g_btex_0)
+        {
+            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        
+            // saturate : 0 ~ 1을 넘지않게 보정
+            float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
+
+            if (fAlpha < 0.1f)
+            {
             // 픽셀 셰이더를 중간에 폐기 처리
-            discard;    // clip(-1)로도 동일하게 작동 가능
+                discard; // clip(-1)로도 동일하게 작동 가능
+            }
         }
     }
     
