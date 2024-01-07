@@ -96,6 +96,19 @@ void CAssetMgr::CreateDefaultMesh()
 	pMesh = new CMesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh);
+
+	// CircleMesh_Debug
+	vecIdx.clear();
+	for (int i = 1; i < vecVtx.size(); ++i)
+	{
+		vecIdx.push_back(i);
+	}
+
+	pMesh = new CMesh;
+	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
+	AddAsset(L"CircleMesh_Debug", pMesh);
+	vecVtx.clear();
+	vecIdx.clear();
 }
 
 void CAssetMgr::CreateDefaultGraphicsShader()

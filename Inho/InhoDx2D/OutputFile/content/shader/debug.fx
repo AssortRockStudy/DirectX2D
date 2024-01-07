@@ -30,8 +30,6 @@ float4 PS_DebugShape(VS_OUT _in) : SV_Target
 {
     float4 vOutColor = (float4) 0.f;
     
-
-    
     vOutColor = g_vec4_0;
     vOutColor.a = 1.f;
     
