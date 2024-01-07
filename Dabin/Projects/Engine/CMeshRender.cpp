@@ -26,7 +26,7 @@ void CMeshRender::render()
 void CMeshRender::UpdateData()
 {
 	if (GetShader())
-		GetShader()->UpdateData();
+		GetShader()->UpdatePipeline();
 
 	GetOwner()->Transform()->UpdateData();
 }

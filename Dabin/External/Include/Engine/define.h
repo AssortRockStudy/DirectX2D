@@ -18,6 +18,14 @@
 
 #define LAYER_MAX 32
 
+// Direction Vector
+enum class DIR_TYPE
+{
+	RIGHT,
+	UP,
+	FRONT
+};
+
 enum class ASSET_TYPE
 {
 	MESH,
@@ -58,7 +66,7 @@ enum class COMPONENT_TYPE
 	SCRIPT,
 };
 
-// type of constant buffer
+// Constant Buffer Type
 enum class CB_TYPE
 {
 	TRANSFORM,
@@ -69,10 +77,39 @@ enum class CB_TYPE
 	END,
 };
 
-// type of direction vector
-enum class DIR_TYPE
+// Rasterizer State Type
+enum class RS_TYPE
 {
-	RIGHT,
-	UP,
-	FRONT
+	CULL_BACK,	// CCW(Counter Clock Wise) - default
+	CULL_FRONT,	// CW
+	CULL_NONE,
+	WIRE_FRAME,	// outline
+
+	END,
+};
+
+// DepthStencil State Type
+enum class DS_TYPE
+{
+	LESS,				// 더 가까우면 통과			, 깊이 기록 O
+	LESS_EQUAL,			// 더 가깝거나 같으면 통과	, 깊이 기록 O
+
+	GREATER,			// 더 멀면 통과				, 깊이 기록 O
+	GREATER_EQAUL,		// 더 멀거나 같으면 통과	, 깊이 기록 O
+
+	NO_TEST,			// 깊이 테스트 X			, 깊이 기록 O
+	NO_WRITE,			// 깊이 테스트 O			, 깊이 기록 X
+	NO_TEST_NO_WRITE,	// 깊이 테스트 X			, 깊이 기록 X
+
+	END,
+};
+
+// Blend State Type
+enum class BS_TYPE
+{
+	DEFAULT,
+	ALPHA_BLEND,
+	ONE_ONE,
+
+	END,
 };

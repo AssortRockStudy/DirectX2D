@@ -15,8 +15,16 @@ struct Vtx
 struct tTransform
 {
 	Matrix matWorld;
+	Matrix matWorldInv;
+
 	Matrix matView;
+	Matrix matViewInv;
+
 	Matrix matProj;
+	Matrix matProjInv;
+
+	Matrix matWV;	// World * View
+	Matrix matWVP;	// World * View * Proj
 };
 
 extern tTransform g_Transform;	// 외부 변수 (전역 변수)

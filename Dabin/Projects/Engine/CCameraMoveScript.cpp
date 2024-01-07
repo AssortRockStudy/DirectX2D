@@ -44,8 +44,8 @@ void CCameraMoveScript::MoveOrthographic()
 void CCameraMoveScript::MovePerspective()
 {
 	Vec3 vPos = Transform()->GetRelativePos();
-	Vec3 vFront = Transform()->GetDir(DIR_TYPE::FRONT);	// 카메라의 현재 방향으로 이동해야 하므로
-	Vec3 vRight = Transform()->GetDir(DIR_TYPE::RIGHT);
+	Vec3 vFront = Transform()->GetLocalDir(DIR_TYPE::FRONT);	// 카메라의 현재 방향으로 이동해야 하므로
+	Vec3 vRight = Transform()->GetLocalDir(DIR_TYPE::RIGHT);
 
 	if (KEY_PRESSED(KEY::UP))
 	{

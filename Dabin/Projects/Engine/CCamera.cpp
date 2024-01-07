@@ -24,9 +24,9 @@ void CCamera::finaltick()
 {
 	// view matrix
 	Vec3 vCamPos = Transform()->GetRelativePos();
-	Vec3 vRight = Transform()->GetDir(DIR_TYPE::RIGHT);
-	Vec3 vUp	= Transform()->GetDir(DIR_TYPE::UP);
-	Vec3 vFront = Transform()->GetDir(DIR_TYPE::FRONT);
+	Vec3 vRight = Transform()->GetLocalDir(DIR_TYPE::RIGHT);
+	Vec3 vUp	= Transform()->GetLocalDir(DIR_TYPE::UP);
+	Vec3 vFront = Transform()->GetLocalDir(DIR_TYPE::FRONT);
 
 	Matrix matTrans = XMMatrixTranslation(-vCamPos.x, -vCamPos.y, -vCamPos.z);
 	Matrix matRot = XMMatrixIdentity(); // cam dir의 역행렬 (cam dir을 coord에 일치시킴)

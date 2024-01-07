@@ -98,6 +98,15 @@
     <Filter Include="08. Component\08. Camera">
       <UniqueIdentifier>{b360927b-265c-4287-a021-639ac0f46d59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset\Material">
+      <UniqueIdentifier>{a165f601-af7f-4702-b4d6-7304ecd2cfa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Texture">
+      <UniqueIdentifier>{13bd9428-1732-40ad-87c8-e75d2f22b6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Ptr">
+      <UniqueIdentifier>{2d1b4763-5b55-4cac-b76b-cb691048377a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -200,6 +209,12 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>06. Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Ptr.h">
+      <Filter>06. Asset\Ptr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -283,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>06. Asset\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

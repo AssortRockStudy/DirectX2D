@@ -8,6 +8,7 @@
 #include "CDevice.h"
 #include "CCamera.h"
 #include "CCameraMoveScript.h"
+#include "CTexture.h"
 
 CLevelMgr::CLevelMgr()
 	: m_CurLevel(nullptr)
@@ -24,6 +25,11 @@ void CLevelMgr::init()
 {
 	// 초기 레벨 생성
 	m_CurLevel = new CLevel;
+
+	// Texture Load
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
+	if (nullptr != pTex)
+		pTex->UpdatePipeline(0); // 일단 reg0번으로 등록하는듯?
 
 	// Create Camera
 	CGameObject* pCamObj = new CGameObject;
@@ -50,6 +56,21 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
 
+	// child
+	CGameObject* pChild = new CGameObject;
+	pChild->SetName(L"Child");
+
+	pChild->AddComponent(new CTransform);
+	pChild->AddComponent(new CMeshRender);
+
+	pChild->Transform()->SetRelativePos(Vec3(200.f, 0.f, 0.f));
+	pChild->Transform()->SetRelativePos(Vec3(150.f, 150.f, 0.f));
+	pChild->Transform()->SetAbsolute(true);
+
+	pChild->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pChild->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+	pObj->AddChild(pChild);
 	m_CurLevel->AddObject(pObj, 0);
 }
 

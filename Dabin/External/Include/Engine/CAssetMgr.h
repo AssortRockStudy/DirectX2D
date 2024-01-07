@@ -2,14 +2,18 @@
 #include "singleton.h"
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CPathMgr.h"
+#include "CTexture.h"
 
 // =======================================
 // AssetMgr: Asset(resource) 생성, 관리
 // =======================================
+// - Asset load: Asset mgr를 통해서만 가능
 
 class CAsset;
 class CMesh;
 class CGraphicsShader;
+class CTexture;
 
 class CAssetMgr :
     public CSingleton<CAssetMgr>
@@ -22,7 +26,9 @@ private:
 public:
     void init();
 
-public:
+    template<typename T>
+    T* Load(const wstring& _strKey, const wstring& _strRelativePath); // asset load: asset mgr로 관리
+    
     template<typename T>
     void AddAsset(const wstring& _strKey, T* _Asset);
 
@@ -38,10 +44,44 @@ ASSET_TYPE GetAssetType()
 
     if (&info == &typeid(CMesh))
         Type = ASSET_TYPE::MESH;
+    else if (&info == &typeid(CTexture))
+        Type = ASSET_TYPE::TEXTURE;
     else if (&info == &typeid(CGraphicsShader))
         Type = ASSET_TYPE::GRAPHICS_SHADER;
 
     return Type;
+}
+
+
+
+// ----------------------
+// template imp.
+// ----------------------
+template<typename T>
+inline T* CAssetMgr::Load(const wstring& _strKey, const wstring& _strRelativePath)
+{
+    // 1. find asset
+    CAsset* pAsset = FindAsset<T>(_strKey);
+
+    if (pAsset)
+        return (T*)pAsset;
+
+    // 2. load asset
+    pAsset = new T;
+    wstring strFilePath = CPathMgr::GetContentPath() + _strRelativePath;
+
+    if (FAILED(pAsset->Load(strFilePath)))
+    {
+        MessageBox(nullptr, L"Failed to Load Asset", L"Failed to Load Asset", MB_OK);
+        pAsset = nullptr;
+        return nullptr;
+    }
+
+    pAsset->SetKey(_strKey);
+    pAsset->SetRelativePath(_strRelativePath);
+    AddAsset<T>(_strKey, (T*)pAsset);
+
+    return (T*)pAsset;
 }
 
 template<typename T>

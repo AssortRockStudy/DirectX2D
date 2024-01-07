@@ -6,6 +6,9 @@
 CGraphicsShader::CGraphicsShader()
 	: CShader(ASSET_TYPE::GRAPHICS_SHADER)
 	, m_Topology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	, m_RasterizerType(RS_TYPE::CULL_BACK)
+	, m_BlendType(BS_TYPE::DEFAULT)
+	, m_DSType(DS_TYPE::LESS)
 {
 
 }
@@ -141,13 +144,17 @@ int CGraphicsShader::CreatePixelShader(const wstring& _strRelativePath, const st
 	return S_OK;
 }
 
-void CGraphicsShader::UpdateData()
+void CGraphicsShader::UpdatePipeline()
 {
 	// rendering pipeline
 	// - 세팅하지 않은 shader도 무조건 set
 	// - 이전에 세팅된 shader를 밀어야 하기 때문
 	CONTEXT->IASetInputLayout(m_Layout.Get());
 	CONTEXT->IASetPrimitiveTopology(m_Topology);	// Vertex의 구조정보
+
+	CONTEXT->RSSetState(CDevice::GetInst()->GetRState(m_RasterizerType).Get());
+	CONTEXT->OMSetDepthStencilState(CDevice::GetInst()->GetDSState(m_DSType).Get(), 0);
+	CONTEXT->OMSetBlendState(CDevice::GetInst()->GetBState(m_BlendType).Get(), nullptr, 0xffffffff);
 
 	CONTEXT->VSSetShader(m_VS.Get(), nullptr, 0);
 	CONTEXT->HSSetShader(m_HS.Get(), nullptr, 0);

@@ -22,13 +22,21 @@ using namespace Microsoft::WRL;
 // C runtime header
 #include <stdlib.h>
 
-// Dirext 11
+// DirectX 11
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
 using namespace DirectX;
+
+// DirectXTex
+#include <DirectXTex/DirectXTex.h>
+#ifdef  _DEBUG
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex\\DirectXTex")
+#endif
 
 // SimpleMath
 #include "SimpleMath.h"

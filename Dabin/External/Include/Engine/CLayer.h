@@ -11,7 +11,7 @@ class CLayer :
     public CEntity
 {
 private:
-    vector<CGameObject*>    m_vecObj;
+    vector<CGameObject*>    m_vecParent;
 
 private:
     void begin();
@@ -20,7 +20,7 @@ private:
     void render();
 
 private:
-    void AddObject(CGameObject* _Object) { m_vecObj.push_back(_Object); }
+    void AddObject(CGameObject* _Object) { m_vecParent.push_back(_Object); }
 
 public:
     CLayer();

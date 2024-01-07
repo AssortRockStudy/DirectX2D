@@ -22,11 +22,16 @@ private:
     ComPtr<ID3D11PixelShader>   m_PS;
     
     ComPtr<ID3D11InputLayout>   m_Layout;	// Input Layout: vertex의 구조 알림
-    
     D3D11_PRIMITIVE_TOPOLOGY    m_Topology;
 
+    RS_TYPE m_RasterizerType;   // Restarizer State
+    
+    // OM
+    DS_TYPE m_DSType;   // DepthStencil State
+    BS_TYPE m_BlendType;   // Blend State
+
 public:
-    virtual void UpdateData();
+    virtual void UpdatePipeline();
 
     int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
     int CreateHullShader();
@@ -36,6 +41,9 @@ public:
 
 public:
     void SetTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology) { m_Topology = _Topology; }
+    void SetRSType(RS_TYPE _Type) { m_RasterizerType = _Type; }
+    void SetDSType(DS_TYPE _Type) { m_DSType = _Type; }
+    void SetBSType(BS_TYPE _Type) { m_BlendType = _Type; }
 
 public:
     CGraphicsShader();
