@@ -18,6 +18,12 @@ private:
 public:
     void init();
 
+private:
+    void CreateDefaultMesh();
+    void CreateDefaultGraphicsShader();
+    void CreateDefaultMaterial();
+
+
 public:
     template<typename T>
     void AddAsset(const wstring& _strKey, T* _Asset);
