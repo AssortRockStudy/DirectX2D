@@ -34,13 +34,6 @@ void CLevelMgr::init()
 	// 檬扁 饭骇 备己
 	m_CurLevel = new CLevel;
 
-	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
-	if (nullptr != pTex)
-	{
-		pTex->UpdateData(0);
-	}
-
-
 
 	// Camera Object 积己
 	CGameObject* pCamObj = new CGameObject;
@@ -69,6 +62,11 @@ void CLevelMgr::init()
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+
+	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+
+	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, 0, false);
 }

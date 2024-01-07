@@ -1,6 +1,8 @@
 #pragma once
 #include "CEntity.h"
 
+#include "Ptr.h"
+
 class CAsset :
     public CEntity
 {
@@ -21,7 +23,14 @@ private:
     void SetRelativePath(const wstring& _RelativePath) { m_RelativePath = _RelativePath; }
 
     void AddRef() { ++m_RefCount; }
-    void SubRef() { --m_RefCount; }
+    void Release()
+    {
+        --m_RefCount;
+        if (0 >= m_RefCount)
+        {
+            delete this;
+        }
+    }
 
     virtual int Load(const wstring& _strFilePath) { return E_FAIL; }
 
@@ -30,5 +39,8 @@ public:
     ~CAsset();
 
     friend class CAssetMgr;
+
+    template<typename T>
+    friend class Ptr;
 };
 
