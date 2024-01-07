@@ -34,7 +34,7 @@ void CLevelMgr::init()
 	// 초기 레벨 구성
 	m_CurLevel = new CLevel;
 
-	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
+	CTexture* pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Effect.png");
 	if (nullptr != pTex)
 	{
 		pTex->UpdateData(0);
@@ -85,7 +85,7 @@ void CLevelMgr::init()
 
 	pObj->AddChild(pChildObj);
 
-	m_CurLevel->AddObject(pObj, 0);
+	m_CurLevel->AddObject(pObj, 0, false);
 
 }
 
@@ -93,6 +93,10 @@ void CLevelMgr::tick()
 {
 	if (nullptr == m_CurLevel)
 		return;
+
+	// 이전 프레임에 등록된 오브젝트들 clear
+	m_CurLevel->clear();
+
 
 	m_CurLevel->tick();
 	m_CurLevel->finaltick();

@@ -6,7 +6,7 @@
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
-	, m_ProjType(PROJ_TYPE::PERSPECTIVE)
+	, m_ProjType(PROJ_TYPE::ORTHOGRAPHIC)
 	, m_FOV(XM_PI / 2.f)
 	, m_Width(0.f)
 	, m_Scale(1.f)

@@ -8,6 +8,9 @@ class CLayer :
 {
 private:
     vector<CGameObject*>        m_vecParent;
+    vector<CGameObject*>        m_vecObjects;
+
+    int                         m_iLayerIdx;
 
 private:
     void begin();
@@ -16,11 +19,15 @@ private:
     void render();
 
 public:
+    void DetachGameObject(CGameObject* _Object);
+    void RegisterGameObejct(CGameObject* _Object) { m_vecObjects.push_back(_Object); }
+
+public:
     CLayer();
     ~CLayer();
 
 private:
-    void AddObject(CGameObject* _Object) { m_vecParent.push_back(_Object); }
+    void AddObject(CGameObject* _Object, bool _bMove);
 
     friend class CLevel;
 };

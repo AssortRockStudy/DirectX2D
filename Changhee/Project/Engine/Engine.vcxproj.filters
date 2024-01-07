@@ -109,6 +109,9 @@
     <Filter Include="06. Asset\MeshData">
       <UniqueIdentifier>{856b3682-3f84-4c7e-a9e5-6905c0e0404e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\TaskManager">
+      <UniqueIdentifier>{a713d47c-af69-486d-9e45-cde4f2d20799}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -213,6 +216,12 @@
     <ClInclude Include="CTexture.h">
       <Filter>06. Asset\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04. Manager\TaskManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -298,6 +307,15 @@
     </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>06. Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04. Manager\TaskManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

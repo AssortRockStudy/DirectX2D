@@ -21,6 +21,8 @@ private:
 
     CGameObject*            m_Parent;
 
+    int                     m_iLayerIdx;        // ¼Ò¼Ó Layer Index
+
 public:
     void begin();
     void tick();
@@ -37,10 +39,14 @@ public:
 
     CGameObject* GetParent() { return m_Parent; }
     void DisconnectWithParent();
+    void DisconnectWithLayer();
+
     void AddChild(CGameObject* _Child);
 
 public:
     CGameObject();
     ~CGameObject();
+
+    friend class CLayer;
 };
 
