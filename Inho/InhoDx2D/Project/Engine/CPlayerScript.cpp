@@ -75,4 +75,17 @@ void CPlayerScript::tick()
 
 		GamePlayStatic::SpawnGameObject(pObj, 0);
 	}
+
+	if (KEY_PRESSED(KEY::SPACE)) {
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl) {
+			pMtrl->SetScalarParam(INT_0, 1);
+		}
+	}
+	else if (KEY_RELEASED(KEY::SPACE)) {
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl) {
+			pMtrl->SetScalarParam(INT_0, 0);
+		}
+	}
 }

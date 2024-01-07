@@ -21,8 +21,6 @@ VS_OUT VS_Std2D(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
-    
-    
     output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
@@ -46,7 +44,12 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
         }
     }
     
-    return vColor;
+    if (g_int_0)
+    {
+        vColor.r *= 2.f;
+    }
+    
+        return vColor;
 }
 
 #endif
