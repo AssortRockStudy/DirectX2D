@@ -12,6 +12,7 @@
 
 #include "CGC.h"
 #include "CRenderMgr.h"
+#include "CCollisionMgr.h"
 
 
 CEngine::CEngine()
@@ -56,16 +57,19 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 
 void CEngine::progress()
 {
-
+	// Manager Update !!
 	CTimeMgr::GetInst()->tick();
 	CKeyMgr::GetInst()->tick();
 
+	// Level Update !!
 	CLevelMgr::GetInst()->tick();
+	CCollisionMgr::GetInst()->tick();
 	CRenderMgr::GetInst()->tick();
 
+	// GC..
 	CGC::GetInst()->tick();
 
-
+	// Task !! 
 	CTaskMgr::GetInst()->tick();
 }
 

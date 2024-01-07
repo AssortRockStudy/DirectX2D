@@ -55,6 +55,10 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
             discard;
     }
     
+    if (g_int_0)
+        vColor.r *= 2.f;
+    
+    
         return vColor;
 }
 
