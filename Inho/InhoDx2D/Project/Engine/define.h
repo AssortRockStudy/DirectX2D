@@ -152,4 +152,5 @@ enum class DEBUG_SHAPE
 
 	CUBE,
 	SPHERE,
+	CROSS,
 };
