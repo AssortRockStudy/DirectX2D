@@ -216,6 +216,7 @@
     <ClInclude Include="Ptr.h" />
     <ClInclude Include="CRenderMgr.h" />
     <ClInclude Include="CCollider2D.h" />
+    <ClInclude Include="CCollisionMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -314,6 +315,7 @@
     <ClCompile Include="CRenderMgr.cpp" />
     <ClCompile Include="CRenderMgr_Init.cpp" />
     <ClCompile Include="CCollider2D.cpp" />
+    <ClCompile Include="CCollisionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

@@ -11,6 +11,7 @@
 #include "CTaskMgr.h"
 #include "CGC.h"
 #include "CRenderMgr.h"
+#include "CCollisionMgr.h"
 
 CEngine::CEngine()
     : m_hMainWnd(nullptr)
@@ -53,6 +54,7 @@ void CEngine::progress()
     CKeyMgr::GetInst()->tick();
 
     CLevelMgr::GetInst()->tick();
+    CCollisionMgr::GetInst()->tick();
     CRenderMgr::GetInst()->tick();
     CGC::GetInst()->tick();
 

@@ -57,7 +57,7 @@ void CPlayerScript::tick()
 	Transform()->SetRelativeRotation(vRot);
 
 	if (KEY_TAP(KEY::SPACE)) {
-		//Destroy();
+		Destroy();
 		
 		CGameObject* pObj = nullptr;
 
