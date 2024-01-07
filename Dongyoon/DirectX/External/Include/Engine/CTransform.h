@@ -7,13 +7,15 @@ class CTransform :
     public CComponent
 {
 private:
-    Vec3 m_vRelativePos;        // 위치
-    Vec3 m_vRelativeScale;      // 크기
-    Vec3 m_vRelativeRotation;   // 회전량
-    Vec3 m_arrDir[3];           // 물체의 현재 방향   Ringt, Up, Front
+    Vec3        m_vRelativePos;             // 위치
+    Vec3        m_vRelativeScale;           // 크기
+    Vec3        m_vRelativeRotation;        // 회전량
+    Vec3        m_arrLocalDir[3];           // 물체의 현재 방향   Ringt, Up, Front(로컬)
+    Vec3        m_arrWorldDir[3];           // Right, Up, Front(월드)
 
 
-    Matrix m_matWorld;          // 물체의 상태 행렬(변환 이동행렬)
+    Matrix      m_matWorld;          // 물체의 상태 행렬(변환 이동행렬)
+    bool        m_bAbsolute;
 
 public:
     virtual void finaltick() override;
@@ -28,9 +30,12 @@ public:
     Vec3 GetRelativeScale() { return  m_vRelativeScale; }
     Vec3 GetRelativeRotation() { return  m_vRelativeRotation; }
 
+    void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute; }
+
     const Matrix& GetWorldMat() { return m_matWorld; }
 
-    Vec3 GetDIR(DIR_TYPE _type) { return m_arrDir[(UINT)_type]; }
+    Vec3 GetLocalDIR(DIR_TYPE _type) { return m_arrLocalDir[(UINT)_type]; }
+    Vec3 GetWorldDir(DIR_TYPE _type) { return m_arrWorldDir[(UINT)_type]; }
 
 public:
     CTransform();

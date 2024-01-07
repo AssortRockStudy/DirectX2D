@@ -32,6 +32,17 @@ using std::make_pair;
 
 using namespace DirectX;
 
+
+// DirectxTex
+#include <DirectXTex/DirectXTex.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex\\DirectXTex")
+#endif
+
+
 //Simple Math
 #include "SimpleMath.h"
 using namespace DirectX::SimpleMath;

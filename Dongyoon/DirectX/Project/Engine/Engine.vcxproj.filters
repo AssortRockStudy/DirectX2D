@@ -118,6 +118,9 @@
     <Filter Include="04. Manager\RenderMgr">
       <UniqueIdentifier>{df2bba78-1ab9-4834-a91f-fdbf7fbbc67f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset\Texture">
+      <UniqueIdentifier>{ef8c16af-c8fc-4764-a9cc-aa91be9b4d69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -219,6 +222,9 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>06. Asset\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -301,6 +307,9 @@
     </ClCompile>
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>06. Asset\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
