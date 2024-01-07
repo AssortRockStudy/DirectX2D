@@ -2,6 +2,8 @@
 #include "CMeshRender.h"
 
 #include "CMesh.h"
+#include "CMaterial.h"
+
 #include "CGraphicsShader.h"
 
 #include "CGameObject.h"
@@ -19,9 +21,9 @@ CMeshRender::~CMeshRender()
 
 void CMeshRender::UpdateData()
 {
-	if (nullptr != GetShader())
+	if (nullptr != GetMaterial())
 	{
-		GetShader()->UpdateData();
+		GetMaterial()->UpdateData();
 	}
 
 	GetOwner()->Transform()->UpdateData();
@@ -30,7 +32,7 @@ void CMeshRender::UpdateData()
 
 void CMeshRender::render()
 {
-	if (nullptr == GetMesh() || nullptr == GetShader())
+	if (nullptr == GetMesh() || nullptr == GetMaterial())
 		return;
 
 	UpdateData();

@@ -5,6 +5,7 @@
 
 #include "CTexture.h"
 #include "CMesh.h"
+#include "CMaterial.h"
 #include "CGraphicsShader.h"
 
 class CAssetMgr :
@@ -38,6 +39,8 @@ ASSET_TYPE GetAssetType()
 
     if (&info == &typeid(CMesh))
         Type = ASSET_TYPE::MESH;
+    else if (&info == &typeid(CMaterial))
+        Type = ASSET_TYPE::MATERIAL;
     else if (&info == &typeid(CTexture))
         Type = ASSET_TYPE::TEXTURE;
     else if (&info == &typeid(CGraphicsShader))

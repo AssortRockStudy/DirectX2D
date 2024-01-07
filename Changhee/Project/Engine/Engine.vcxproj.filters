@@ -112,6 +112,12 @@
     <Filter Include="04. Manager\TaskManager">
       <UniqueIdentifier>{a713d47c-af69-486d-9e45-cde4f2d20799}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\CGCMgr">
+      <UniqueIdentifier>{35ddbce6-ef1e-4d02-af53-e3ff63edfcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Material">
+      <UniqueIdentifier>{64848d48-546c-41fe-971a-59c9136c9651}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -222,6 +228,12 @@
     <ClInclude Include="CMissileScript.h">
       <Filter>Script</Filter>
     </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>06. Asset\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -316,6 +328,12 @@
     </ClCompile>
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>06. Asset\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

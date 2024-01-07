@@ -23,6 +23,8 @@ private:
 
     int                     m_iLayerIdx;        // ¼Ò¼Ó Layer Index
 
+    bool                    m_bDead;
+
 public:
     void begin();
     void tick();
@@ -33,20 +35,22 @@ public:
     void AddComponent(CComponent* _Component);
     CComponent* GetComponent(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
 
-    GET_COMPONENT(Transform, TRANSFORM);
-    GET_COMPONENT(MeshRender, MESHRENDER);
-    GET_COMPONENT(Camera, CAMERA);
-
     CGameObject* GetParent() { return m_Parent; }
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
     void AddChild(CGameObject* _Child);
+    bool IsDead() { return m_bDead; }
 
 public:
     CGameObject();
     ~CGameObject();
 
+    GET_COMPONENT(Transform, TRANSFORM);
+    GET_COMPONENT(MeshRender, MESHRENDER);
+    GET_COMPONENT(Camera, CAMERA);
+
     friend class CLayer;
+    friend class CTaskMgr;
 };
 
