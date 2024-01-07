@@ -217,6 +217,8 @@
     <ClInclude Include="CRenderMgr.h" />
     <ClInclude Include="CCollider2D.h" />
     <ClInclude Include="CCollisionMgr.h" />
+    <ClInclude Include="CAnimator2D.h" />
+    <ClInclude Include="CAnim.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -316,6 +318,8 @@
     <ClCompile Include="CRenderMgr_Init.cpp" />
     <ClCompile Include="CCollider2D.cpp" />
     <ClCompile Include="CCollisionMgr.cpp" />
+    <ClCompile Include="CAnimator2D.cpp" />
+    <ClCompile Include="CAnim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
