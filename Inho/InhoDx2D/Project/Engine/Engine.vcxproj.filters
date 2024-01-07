@@ -103,6 +103,30 @@
     <Filter Include="06. Asset\Shader\ComputeShader">
       <UniqueIdentifier>{ea3889bb-2522-44fb-94b5-24297a78fbae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset\Material">
+      <UniqueIdentifier>{2b2865e0-b9a7-432f-b913-97d1409eb64f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\MeshData">
+      <UniqueIdentifier>{02f13445-3b19-41e5-b996-58d84b09747c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Sound">
+      <UniqueIdentifier>{48f68ae5-67d7-441b-ac67-7964122e7cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Texture">
+      <UniqueIdentifier>{19120dcc-1df2-4b23-b5d8-1e13503e2d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\RenderMgr">
+      <UniqueIdentifier>{1fa7c637-2b9b-4e5d-a44a-ea049a831bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\GCMgr">
+      <UniqueIdentifier>{158e3853-174f-4817-87b5-3e16201d4f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CollisionMgr">
+      <UniqueIdentifier>{8ac7466b-9cb7-41c6-9848-62895c8d1467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D\Anim">
+      <UniqueIdentifier>{681b9a7a-85a7-4b34-9b48-acb6c191a0f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -204,21 +228,39 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTaskMgr.h">
       <Filter>04. Manager\TaskMgr</Filter>
     </ClInclude>
     <ClInclude Include="CMissileScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="CGC.h" />
-    <ClInclude Include="CMaterial.h" />
-    <ClInclude Include="Ptr.h" />
-    <ClInclude Include="CRenderMgr.h" />
-    <ClInclude Include="CCollider2D.h" />
-    <ClInclude Include="CCollisionMgr.h" />
-    <ClInclude Include="CAnimator2D.h" />
-    <ClInclude Include="CAnim.h" />
+    <ClInclude Include="Ptr.h">
+      <Filter>06. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>06. Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>06. Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04. Manager\GCMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>04. Manager\CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider2D.h">
+      <Filter>08. Component\02. Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnim.h">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
+      <Filter>08. Component\04. Animator2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -302,7 +344,6 @@
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="func.cpp">
       <Filter>01. Header</Filter>
     </ClCompile>
@@ -312,21 +353,44 @@
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="CGC.cpp" />
-    <ClCompile Include="CMaterial.cpp" />
-    <ClCompile Include="CRenderMgr.cpp" />
-    <ClCompile Include="CRenderMgr_Init.cpp" />
-    <ClCompile Include="CCollider2D.cpp" />
-    <ClCompile Include="CCollisionMgr.cpp" />
-    <ClCompile Include="CAnimator2D.cpp" />
-    <ClCompile Include="CAnim.cpp" />
+    <ClCompile Include="CTexture.cpp">
+      <Filter>06. Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr_Init.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>06. Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04. Manager\GCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>04. Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider2D.cpp">
+      <Filter>08. Component\02. Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnim.cpp">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
+      <Filter>08. Component\04. Animator2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
       <Filter>ShadeCode</Filter>
     </FxCompile>
-    <FxCompile Include="value.fx" />
-    <FxCompile Include="debug.fx" />
+    <FxCompile Include="debug.fx">
+      <Filter>ShadeCode</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShadeCode</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
