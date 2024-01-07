@@ -115,6 +115,12 @@
     <ClInclude Include="CMaterial.h">
       <Filter>06.Asset\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Ptr.h">
+      <Filter>06.Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -216,6 +222,9 @@
     <ClCompile Include="CMaterial.cpp">
       <Filter>06.Asset\Material</Filter>
     </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04.Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -298,6 +307,12 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

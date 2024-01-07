@@ -7,6 +7,20 @@ struct Vtx
 	Vec2 vUV;		 // UV ÁÂÇ¥°è or Texture Coodinate
 };
 
+struct tDebugShapeInfo
+{
+	DEBUG_SHAPE	eShape;
+
+	Vec3		vWorldPos;
+	Vec3		vWorldScale;
+	Vec3		vWorldRot;
+	Matrix		matWorld;
+
+	Vec3		vColor;
+	float		fDuration;
+	bool		bDepthTest;
+};
+
 struct tTransform
 {
 	Matrix	matWorld;
@@ -27,4 +41,6 @@ struct tMtrlConst
 	Vec2 v2Arr[4];
 	Vec4 v4Arr[4];
 	Matrix matArr[4];
+	int	bTex[TEX_PARAM::END];
+	int iPadding[2];
 };
