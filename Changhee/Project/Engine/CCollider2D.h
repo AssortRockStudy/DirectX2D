@@ -1,6 +1,7 @@
 #pragma once
 #include "CComponent.h"
 
+
 enum class COLLIDER2D_TYPE
 {
     RECT,
