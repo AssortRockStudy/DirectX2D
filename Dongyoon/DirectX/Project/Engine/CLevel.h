@@ -9,9 +9,7 @@ class CLevel :
 {
 private:
     CLayer* m_arrLayer[LAYER_MAX];
-
-public:
-    void AddObject(CGameObject* _Object, int _LayerIdx);
+    
 
 public:
     void begin();
@@ -19,8 +17,17 @@ public:
     void finaltick();
     void render();
 
+    void AddObject(CGameObject* _Object, int _LayerIdx, bool _bChildMove = true);
+    CLayer* GetLayer(int _iLayerIdx) { return m_arrLayer[_iLayerIdx]; }
+
+
+private:
+    void clear();
+
 public:
     CLevel();
     ~CLevel();
+
+    friend class CLevelMgr;
 };
 

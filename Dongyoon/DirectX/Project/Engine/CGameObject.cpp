@@ -5,12 +5,16 @@
 #include "CRenderComponent.h"
 
 #include "CScript.h"
+#include "CLevel.h"
+#include "CLevelMgr.h"
+#include "CLayer.h"
 
 
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
 	, m_Parent(nullptr)
+	, m_iLayerIdx(-1) //어떠한 레벨(레이어)에도 소속되어있지 않는다. 
 {
 }
 
@@ -106,6 +110,9 @@ void CGameObject::finaltick()
 		}
 	}
 
+	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
+	pCurLayer->RegisterGameObject(this);
+
 	for (size_t i = 0; i < m_vecChild.size(); ++i)
 	{
 		m_vecChild[i]->finaltick();
@@ -143,6 +150,16 @@ void CGameObject::DisconnectWithParent()
 	// 부모가 없는 Obj에 이 함수를 호출했거나
 	// 부모는 자식을 가리키고 있지 않는데, 자식은 부모를 가리키는 경우
 	assert(nullptr);
+}
+
+void CGameObject::DisconnectWithLayer()
+{
+	if (m_iLayerIdx == -1)
+		return;
+
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+	CLayer* pCurLayer = pCurLevel->GetLayer(m_iLayerIdx);
+	pCurLayer->DetachGameObject(this);
 }
 
 void CGameObject::AddChild(CGameObject* _Child)

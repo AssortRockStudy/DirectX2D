@@ -8,6 +8,7 @@
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
+#include "CTaskMgr.h"
 
 
 CEngine::CEngine()
@@ -63,4 +64,7 @@ void CEngine::progress()
 	CLevelMgr::GetInst()->tick();
 	CLevelMgr::GetInst()->render();
 
+
+	//Task
+	CTaskMgr::GetInst()->tick();
 }

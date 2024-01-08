@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "CPlayerScript.h"
+#include "CAssetMgr.h"
+
+#include "CMissileScript.h"
 
 
 
 CPlayerScript::CPlayerScript()
-	: m_Speed(1000.f)
+	: m_Speed(500.f)
 {
 }
 
@@ -19,12 +22,12 @@ void CPlayerScript::tick()
 
 	if (KEY_PRESSED(KEY::UP))
 	{
-		vPos.z += DT * m_Speed;
+		vPos.y += DT * m_Speed;
 	}
 
 	if (KEY_PRESSED(KEY::DOWN))
 	{
-		vPos.z -= DT * m_Speed;
+		vPos.y -= DT * m_Speed;
 	}
 
 	if (KEY_PRESSED(KEY::LEFT))
@@ -54,4 +57,29 @@ void CPlayerScript::tick()
 
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeRotation(vRot);
+
+
+
+
+	if (KEY_TAP(KEY::SPACE))
+	{
+
+		//GameObject »ý¼º
+		CGameObject* pObj = nullptr;
+
+		pObj = new CGameObject;
+		pObj->SetName(L"Missile");
+		pObj->AddComponent(new CTransform);
+		pObj->AddComponent(new CMeshRender);
+		pObj->AddComponent(new CMissileScript);
+
+		pObj->Transform()->SetRelativePos(Transform()->GetRelativePos());
+		pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
+
+		pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+		pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
+
+		GamePlayStatic::SpawnGameObject(pObj, 0);
+
+	}
 }

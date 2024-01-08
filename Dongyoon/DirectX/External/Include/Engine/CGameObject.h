@@ -19,6 +19,9 @@ private:
     vector<CGameObject*>    m_vecChild;
 
     CGameObject*            m_Parent;
+
+    int                     m_iLayerIdx;   // 오브젝트가 소속되어있는 Layer 의 Index
+
 public:
     void AddComponent(CComponent* _Component);
 
@@ -32,7 +35,10 @@ public:
     GET_COMPONENT(Camera, CAMERA);
 
     CGameObject* GetParent() { return m_Parent; }
+    
     void DisconnectWithParent();
+    void DisconnectWithLayer();
+    
     void AddChild(CGameObject* _CHild);
 
 public:
@@ -47,4 +53,6 @@ public:
 public:
     CGameObject();
     ~CGameObject();
+
+    friend class CLayer;
 };
