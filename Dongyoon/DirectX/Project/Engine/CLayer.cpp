@@ -54,15 +54,6 @@ void CLayer::finaltick()
 
 }
 
-void CLayer::render()
-{
-	for (size_t i = 0; i < m_vecObjects.size(); ++i)
-	{
-		m_vecObjects[i]->render();
-	}
-}
-
-
 void CLayer::DetachGameObject(CGameObject* _Object)
 {
 	assert(!(_Object->m_iLayerIdx == -1 || _Object->m_iLayerIdx != m_iLayerIdx));

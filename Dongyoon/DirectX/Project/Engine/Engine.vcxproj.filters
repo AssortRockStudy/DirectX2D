@@ -127,6 +127,12 @@
     <Filter Include="04. Manager\CGCMgr">
       <UniqueIdentifier>{1a1f2024-9c5e-4d38-92b1-24567b0bccc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\CRenderMgr">
+      <UniqueIdentifier>{53914118-2265-47ab-af3c-86776c975d2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Asset\Material">
+      <UniqueIdentifier>{0a3a09b4-8f45-478f-85d4-5f9769768721}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -240,9 +246,14 @@
     <ClInclude Include="CGC.h">
       <Filter>04. Manager\CGCMgr</Filter>
     </ClInclude>
-    <ClInclude Include="CMaterial.h" />
     <ClInclude Include="Ptr.h">
       <Filter>06. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04. Manager\CRenderMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>06. Asset\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -342,7 +353,15 @@
     <ClCompile Include="CGC.cpp">
       <Filter>04. Manager\CGCMgr</Filter>
     </ClCompile>
-    <ClCompile Include="CMaterial.cpp" />
+    <ClCompile Include="CRenderMgr_Init.cpp">
+      <Filter>04. Manager\CRenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04. Manager\CRenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>06. Asset\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -351,6 +370,12 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

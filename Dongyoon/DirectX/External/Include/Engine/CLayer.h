@@ -16,13 +16,18 @@ public:
     void begin();
     void tick();
     void finaltick();
-    void render();
+
     
 public:
     //특정 obj를 layer에서 제거
     void DetachGameObject(CGameObject* _Object);
 
     void RegisterGameObject(CGameObject* _Object) { m_vecObjects.push_back(_Object); }
+
+    int GetLayerIdx() { return m_iLayerIdx; }
+
+    const vector<CGameObject*>& GetParentObjects() { return m_vecParent; }
+    const vector<CGameObject*>& GetLayerObjects() { return m_vecObjects; }
 
 private:
     void AddObject(CGameObject* _Object, bool _bMove);
