@@ -2,6 +2,7 @@
 
 #include "CEntity.h"
 
+#include "Ptr.h"
 
 class CAsset :
     public CEntity
@@ -21,8 +22,19 @@ private:
     void SetKey(const wstring& _Key) { m_Key = _Key; }
     void SetRelativePath(const wstring& _RelativePath) { m_RelativePath = _RelativePath; }
 
-    void AddRef() { ++m_RefCount; }
-    void SubRef() { --m_RefCount; }
+    void AddRef() 
+    {
+        ++m_RefCount;
+    }
+
+    void Release() 
+    { 
+        --m_RefCount; 
+        if (0 >= m_RefCount)
+        {
+            delete this;
+        }
+    }
 
     int GetRefCount() { return m_RefCount; }
     ASSET_TYPE GetTYPE() { return m_Type; }
@@ -34,5 +46,8 @@ public:
     ~CAsset();
 
     friend class CAssetMgr;
+
+    template<typename T>
+    friend class Ptr;
 };
 

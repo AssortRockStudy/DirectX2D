@@ -124,7 +124,7 @@ enum class BS_TYPE
 
 
 // Scalar Param
-enum SCARAR_PARAM
+enum SCALAR_PARAM
 {
 	INT_0,
 	INT_1,

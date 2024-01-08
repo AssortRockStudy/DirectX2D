@@ -37,5 +37,8 @@ struct tMtrlConst
 	Vec4 v4Arr[4];
 	Matrix matArr[4];
 
+	int bTex[TEX_PARAM::END];
+
+	int iPadding[2];
 
 };

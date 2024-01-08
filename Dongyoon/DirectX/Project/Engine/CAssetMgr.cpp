@@ -13,17 +13,7 @@ CAssetMgr::CAssetMgr()
 
 CAssetMgr::~CAssetMgr()
 {
-	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; ++i)
-	{
-		for (auto const pair : m_mapAsset[i])
-		{
-			if (nullptr != pair.second)
-			{
-				delete pair.second;
-			}
-		}
-		m_mapAsset[i].clear();
-	}
+
 }
 
 void CAssetMgr::init()
@@ -111,7 +101,7 @@ void CAssetMgr::init()
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::LESS);
-	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
 
 	AddAsset(L"Std2DShader", pShader);
 
