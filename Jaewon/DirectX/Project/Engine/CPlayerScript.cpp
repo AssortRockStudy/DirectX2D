@@ -43,6 +43,7 @@ void CPlayerScript::tick()
 
 	if (KEY_TAP(KEY::SPACE))
 	{
+		Destroy();
 		// GameObject »ý¼º
 		CGameObject* pObj = nullptr;
 
@@ -59,5 +60,18 @@ void CPlayerScript::tick()
 		pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
 		GamePlayStatic::SpawnGameObject(pObj, 0);
+	}
+
+	if (KEY_PRESSED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+			pMtrl->SetScalarParam(INT_0, 1);
+	}
+	else if (KEY_RELEASED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+			pMtrl->SetScalarParam(INT_0, 0);
 	}
 }

@@ -62,7 +62,6 @@ void CTransform::finaltick()
 	}
 }
 
-
 void CTransform::UpdateData()
 {
 	g_Transform.matWorld = m_matWorld;
@@ -73,4 +72,16 @@ void CTransform::UpdateData()
 	CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
 	pCB->SetData(&g_Transform);
 	pCB->UpdateData();
+}
+
+Vec3 CTransform::GetWorldScale()
+{
+	CGameObject* pParent = GetOwner()->GetParent();
+	Vec3 vWorldScale = m_vRelativeScale;
+	while (pParent)
+	{
+		vWorldScale *= pParent->Transform()->GetRelativeScale();
+		pParent = pParent->GetParent();
+	}
+	return vWorldScale;
 }

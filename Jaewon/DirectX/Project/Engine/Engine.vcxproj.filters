@@ -121,6 +121,10 @@
     <ClInclude Include="CRenderMgr.h">
       <Filter>04.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CCollider2D.h">
+      <Filter>08.Component\02.Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -225,6 +229,10 @@
     <ClCompile Include="CRenderMgr.cpp">
       <Filter>04.Manager</Filter>
     </ClCompile>
+    <ClCompile Include="CCollider2D.cpp">
+      <Filter>08.Component\02.Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -298,6 +306,9 @@
     </Filter>
     <Filter Include="06.Asset\Texture">
       <UniqueIdentifier>{62f33c12-e5f4-4d9c-9b19-cfc4c66ff09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Component\02.Collider2D">
+      <UniqueIdentifier>{7f0a9b48-e20b-4194-98ea-6a9dea80f32d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

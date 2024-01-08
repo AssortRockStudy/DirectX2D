@@ -33,8 +33,7 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     if (g_int_0)
         vColor = float4(1.f, 0.f, 1.f, 1.f);
     
-    if (g_btex_0)
-    {
+    if (g_btex_0){
         vColor = float4(1.f, 1.f, 1.f, 1.f);
         vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
         
@@ -42,11 +41,12 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
         float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
         
         if (fAlpha < 0.1f)
-        {
-            // ÇÈ¼¿ ½¦ÀÌ´õ¸¦ Áß°£¿¡ Æó±âÃ³¸®
-            discard; //clip(-1);            
-        }
+            discard;
     }
+    
+    if (g_int_0)
+        vColor.r *= 2.f;
+    
     return vColor;
 }
 

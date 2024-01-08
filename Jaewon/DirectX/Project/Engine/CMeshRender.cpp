@@ -20,7 +20,7 @@ void CMeshRender::UpdateData()
 	if (nullptr != GetMaterial())
 		GetMaterial()->UpdateData();
 
-	GetOwner()->Transform()->UpdateData();
+	Transform()->UpdateData();
 }
 
 void CMeshRender::render()
