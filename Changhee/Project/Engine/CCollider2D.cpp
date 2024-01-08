@@ -52,3 +52,17 @@ void CCollider2D::finaltick()
 	}
 
 }
+
+void CCollider2D::BeginOverlap(CCollider2D* _OtherCollider)
+{
+	++m_iCollisionCount;
+}
+
+void CCollider2D::Overlap(CCollider2D* _OtherCollider)
+{
+}
+
+void CCollider2D::EndOverlap(CCollider2D* _OtherCollider)
+{
+	--m_iCollisionCount;
+}

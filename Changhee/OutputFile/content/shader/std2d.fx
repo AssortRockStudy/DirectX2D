@@ -30,9 +30,6 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    //uint width = 0;
-    //uint height = 0;
-    //g_tex_1.GetDimensions(width, height);
     
     float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
     
@@ -48,6 +45,11 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
             // «»ºø Ω¶¿Ã¥ı∏¶ ¡ﬂ∞£ø° ∆Û±‚√≥∏Æ
             discard; //clip(-1);            
         }
+    }
+    
+    if (g_int_0)
+    {
+        vColor.r *= 2.f;
     }
     
     return vColor;

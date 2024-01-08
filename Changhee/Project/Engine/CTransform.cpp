@@ -50,7 +50,7 @@ void CTransform::finaltick()
 	}
 
 	// 부모 오브젝트가 있다면
-	if (GetOwner()->GetParent())
+	while (GetOwner()->GetParent())
 	{
 		const Matrix& matParentWorld = GetOwner()->GetParent()->Transform()->GetWorldMat();
 

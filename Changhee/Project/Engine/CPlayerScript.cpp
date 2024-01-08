@@ -59,23 +59,40 @@ void CPlayerScript::tick()
 
 	if (KEY_TAP(KEY::SPACE))
 	{
-		//Destroy();
+		Destroy();
 		// GameObject »ý¼º
-		CGameObject* pObj = nullptr;
+		//CGameObject* pObj = nullptr;
 
-		pObj = new CGameObject;
-		pObj->SetName(L"Missile");
-		pObj->AddComponent(new CTransform);
-		pObj->AddComponent(new CMeshRender);
-		pObj->AddComponent(new CMissileScript);
+		//pObj = new CGameObject;
+		//pObj->SetName(L"Missile");
+		//pObj->AddComponent(new CTransform);
+		//pObj->AddComponent(new CMeshRender);
+		//pObj->AddComponent(new CMissileScript);
 
-		pObj->Transform()->SetRelativePos(Transform()->GetRelativePos());
-		pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
+		//pObj->Transform()->SetRelativePos(Transform()->GetRelativePos());
+		//pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
 
-		pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-		pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+		//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+		//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
-		GamePlayStatic::SpawnGameObject(pObj, 0);
+		//GamePlayStatic::SpawnGameObject(pObj, 0);
+	}
+
+	if (KEY_PRESSED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+		{
+			pMtrl->SetScalarParam(INT_0, 1);
+		}
+	}
+	else if (KEY_RELEASED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+		{
+			pMtrl->SetScalarParam(INT_0, 0);
+		}
 	}
 
 	//GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 20);
