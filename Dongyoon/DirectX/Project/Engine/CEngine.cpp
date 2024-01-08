@@ -9,6 +9,7 @@
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
 #include "CTaskMgr.h"
+#include "CGC.h"
 
 
 CEngine::CEngine()
@@ -64,6 +65,8 @@ void CEngine::progress()
 	CLevelMgr::GetInst()->tick();
 	CLevelMgr::GetInst()->render();
 
+	//GC
+	CGC::GetInst()->tick();
 
 	//Task
 	CTaskMgr::GetInst()->tick();

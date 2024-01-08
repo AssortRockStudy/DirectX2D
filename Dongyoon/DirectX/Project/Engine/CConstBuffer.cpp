@@ -3,8 +3,9 @@
 
 #include "CDevice.h"
 
-CConstBuffer::CConstBuffer()
+CConstBuffer::CConstBuffer(CB_TYPE _Type)
 	: m_Desc{}
+	, m_Type(_Type)
 {
 }
 
@@ -42,7 +43,6 @@ int CConstBuffer::Create(UINT _ElemetSize, UINT _ElementCount)
 
 void CConstBuffer::SetData(void* _Src, UINT _ElementCount)
 {
-
 	if (0 == _ElementCount)
 	{
 		_ElementCount = m_ElementCount;
@@ -58,14 +58,14 @@ void CConstBuffer::SetData(void* _Src, UINT _ElementCount)
 	CONTEXT->Unmap(m_CB.Get(), 0);
 }
 
-void CConstBuffer::UpdateData(UINT _RegisterNum)
+void CConstBuffer::UpdateData()
 {
 	//위치 정보를 Transform 상수 버퍼에 보내고, B0 레지스터에 바인딩 해둔다.
-	CONTEXT->VSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());
-	CONTEXT->HSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());
-	CONTEXT->DSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());
-	CONTEXT->GSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());
-	CONTEXT->PSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());
+	CONTEXT->VSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->HSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->DSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->GSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->PSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
 }
 
 

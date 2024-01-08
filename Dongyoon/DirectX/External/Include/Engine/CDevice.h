@@ -57,6 +57,7 @@ private:
 	ComPtr<ID3D11RasterizerState>		m_arrRS[(UINT)RS_TYPE::END];
 	ComPtr<ID3D11DepthStencilState>		m_arrDS[(UINT)DS_TYPE::END];
 	ComPtr<ID3D11BlendState>			m_arrBS[(UINT)BS_TYPE::END];
+	ComPtr<ID3D11SamplerState>			m_arrSampler[2];
 
 
 public:
@@ -83,6 +84,7 @@ private:
 	int CreateRasterizerState();
 	int CreateDepthStencilState();
 	int CreateBlendState();
+	int CreateSamplerState();
 
 	int CreateConstBuffer();
 };

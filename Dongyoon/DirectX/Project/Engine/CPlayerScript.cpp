@@ -6,6 +6,7 @@
 
 
 
+
 CPlayerScript::CPlayerScript()
 	: m_Speed(500.f)
 {
@@ -64,7 +65,10 @@ void CPlayerScript::tick()
 	if (KEY_TAP(KEY::SPACE))
 	{
 
-		//GameObject 持失
+		Destroy();
+
+
+		/*GameObject 持失
 		CGameObject* pObj = nullptr;
 
 		pObj = new CGameObject;
@@ -79,7 +83,8 @@ void CPlayerScript::tick()
 		pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 		pObj->MeshRender()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicsShader>(L"Std2DShader"));
 
-		GamePlayStatic::SpawnGameObject(pObj, 0);
+		GamePlayStatic::SpawnGameObject(pObj, 0);*/
 
 	}
+
 }

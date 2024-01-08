@@ -124,6 +124,9 @@
     <Filter Include="04. Manager\CTaskMgr">
       <UniqueIdentifier>{5648332f-5c2d-42ce-aa6a-e4871bef44e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\CGCMgr">
+      <UniqueIdentifier>{1a1f2024-9c5e-4d38-92b1-24567b0bccc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -234,6 +237,10 @@
     <ClInclude Include="CMissileScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -329,6 +336,10 @@
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

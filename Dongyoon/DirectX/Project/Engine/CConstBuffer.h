@@ -12,13 +12,15 @@ private:
     UINT                    m_ElementSize;
     UINT                    m_ElementCount;
 
-public:
-    int Create(UINT _ElemetSize, UINT _ElementCount);
-    void SetData(void* _Src, UINT _Element);
-    void UpdateData(UINT _RegisterNum);
+    CB_TYPE                 m_Type;
 
 public:
-    CConstBuffer();
+    int Create(UINT _ElemetSize, UINT _ElementCount);
+    void SetData(void* _Src, UINT _ElementCount = 0);
+    void UpdateData();
+
+public:
+    CConstBuffer(CB_TYPE _Type);
     ~CConstBuffer();
 };
 

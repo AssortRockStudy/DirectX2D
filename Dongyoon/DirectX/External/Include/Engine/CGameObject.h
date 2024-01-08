@@ -22,6 +22,8 @@ private:
 
     int                     m_iLayerIdx;   // 오브젝트가 소속되어있는 Layer 의 Index
 
+    bool                    m_bDead;
+
 public:
     void AddComponent(CComponent* _Component);
 
@@ -40,6 +42,7 @@ public:
     void DisconnectWithLayer();
     
     void AddChild(CGameObject* _CHild);
+    bool IsDead() { return m_bDead; }
 
 public:
     void begin();
@@ -55,4 +58,5 @@ public:
     ~CGameObject();
 
     friend class CLayer;
+    friend class CTaskMgr;
 };
