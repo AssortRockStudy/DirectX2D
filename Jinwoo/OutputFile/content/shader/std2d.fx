@@ -3,6 +3,9 @@
 
 #include "value.fx"
 
+// 구조화 버퍼 선언 예시
+StructuredBuffer<float4> g_Data : register(t14);
+
 struct VS_IN
 {
     float4 vColor : COLOR;
@@ -52,10 +55,12 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     
     if(g_UseAnim2D)
     {
+        // vBackground의 좌상단 좌표
         float2 vBackgroundLeftTop = g_vLeftTop + (g_vSliceSize / 2.f) - (g_vBackground / 2.f);
         vBackgroundLeftTop -= g_vOffset;
         float2 vUV = vBackgroundLeftTop + (g_vBackground * _in.vUV);
         
+        // vBackground 기준 자르려는 영역 외부는 출력 X
         if (vUV.x < g_vLeftTop.x || (g_vLeftTop.x + g_vSliceSize.x) < vUV.x
             || vUV.y < g_vLeftTop.y || (g_vLeftTop.y + g_vSliceSize.y) < vUV.y)
         {
@@ -71,8 +76,10 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     {
         if (g_btex_0)
         {
-            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
-        
+            //vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            vColor = g_Data[2];
+            vColor.a = 1.f;
+            
             // saturate : 0 ~ 1을 넘지않게 보정
             float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
 

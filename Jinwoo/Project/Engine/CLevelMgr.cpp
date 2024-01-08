@@ -105,8 +105,8 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
-	pObj->Animator2D()->Create(L"Explosion", pAtlasTex, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 1.f);
-	pObj->Animator2D()->Play(L"Explosion");
+	pObj->Animator2D()->Create(L"walk", pAtlasTex, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 1.f);
+	pObj->Animator2D()->Play(L"walk");
 
 	//// 자식 GameObject 생성
 	//CGameObject* pChildObj = new CGameObject;
