@@ -13,8 +13,9 @@ private:
 
     list<tDebugShapeInfo>   m_DbgShapeInfo;
 
-    CGameObject* m_pDebugObj;
+    CGameObject*            m_pDebugObj;
 
+    bool                    m_bDebugPosition;
 
 
 
@@ -24,6 +25,9 @@ public:
     {
         m_DbgShapeInfo.push_back(_info);
     }
+
+    void SetDebugPosition(bool _OnOff) { m_bDebugPosition = _OnOff; }
+    bool IsDebugPosition() { return m_bDebugPosition; }
 public:
     void init();
     void tick();

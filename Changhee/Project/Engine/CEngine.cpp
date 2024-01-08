@@ -25,6 +25,7 @@ CEngine::~CEngine()
 {
 }
 
+
 int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 {
 	// Main Window, 해상도 저장
@@ -73,4 +74,14 @@ void CEngine::progress()
 
 	// Task
 	CTaskMgr::GetInst()->tick();
+
+	DebugFunctionCheck();
+}
+
+void CEngine::DebugFunctionCheck()
+{
+	if (KEY_TAP(KEY::O))
+	{
+		CRenderMgr::GetInst()->IsDebugPosition() ? CRenderMgr::GetInst()->SetDebugPosition(false) : CRenderMgr::GetInst()->SetDebugPosition(true);
+	}
 }
