@@ -4,6 +4,7 @@
 class CCamera;
 class CGameObject;
 class CStructuredBuffer;
+class CLight2D;
 
 class CRenderMgr :
     public CSingleton<CRenderMgr>
@@ -14,6 +15,7 @@ private:
     vector<CCamera*>        m_vecCam;
 
     CStructuredBuffer*      m_Light2DBuffer;    // 2차원 광원 구조화 버퍼
+    vector<CLight2D*>       m_vecLight2D;
 
     list<tDebugShapeInfo>   m_DbgShapeInfo;
     CGameObject*            m_pDebugObj;
@@ -29,6 +31,8 @@ public:
     void SetDebugPosition(bool _IsValid) { m_DebugPosition = _IsValid; }
     bool IsDebugPosition() { return m_DebugPosition; }
 
+    void RegisterLight2D(CLight2D* _Light2D) { m_vecLight2D.push_back(_Light2D); }
+
 public:
     void init();
     void tick();
@@ -36,5 +40,11 @@ public:
 private:
     void render();
     void render_debug();
+    
+    // 리소스 바인딩
+    void UpdateData();
+    
+    // 리소스 클리어
+    void Clear();
 };
 

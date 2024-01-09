@@ -85,11 +85,15 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
 
             if (fAlpha < 0.1f)
             {
-            // 픽셀 셰이더를 중간에 폐기 처리
+                // 픽셀 셰이더를 중간에 폐기 처리
                 discard; // clip(-1)로도 동일하게 작동 가능
             }
         }
     }
+    
+    // 광원 처리
+    // 광원의 타입별 처리 필요
+    vColor.rgb *= g_Light2D[0].vAmbient.rgb;
     
     // 픽셀로 들어올 때 정점의 위치에 맞게 보간된다
     return vColor;

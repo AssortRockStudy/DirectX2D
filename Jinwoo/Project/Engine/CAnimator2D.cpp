@@ -16,11 +16,26 @@ CAnimator2D::~CAnimator2D()
 
 void CAnimator2D::finaltick()
 {
+	if (nullptr == m_CurAnim)
+	{
+		return;
+	}
+
+	if (m_CurAnim->IsFinish() && m_bRepeat)
+	{
+		m_CurAnim->Reset();
+	}
+
 	m_CurAnim->finaltick();
 }
 
 void CAnimator2D::UpdateData()
 {
+	if (nullptr == m_CurAnim)
+	{
+		return;
+	}
+
 	m_CurAnim->UpdateData();
 }
 
@@ -42,7 +57,7 @@ void CAnimator2D::Create(const wstring& _strKey, Ptr<CTexture> _AtlasTex, Vec2 _
 
 CAnim* CAnimator2D::FindAnim(const wstring& _strKey)
 {
-	map<wstring, CAnim*>::iterator iter = m_mapAnim.begin();
+	map<wstring, CAnim*>::iterator iter = m_mapAnim.find(_strKey);
 
 	if (iter == m_mapAnim.end())
 	{
@@ -52,7 +67,7 @@ CAnim* CAnimator2D::FindAnim(const wstring& _strKey)
 	return iter->second;
 }
 
-void CAnimator2D::Play(const wstring& _strAnimName)
+void CAnimator2D::Play(const wstring& _strAnimName, bool _bRepeat)
 {
 	CAnim* pAnim = FindAnim(_strAnimName);
 	
@@ -61,5 +76,8 @@ void CAnimator2D::Play(const wstring& _strAnimName)
 		return;
 	}
 
+	m_bRepeat = _bRepeat;
+
 	m_CurAnim = pAnim;
+	m_CurAnim->Reset();
 }

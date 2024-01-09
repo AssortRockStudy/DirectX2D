@@ -1,6 +1,8 @@
 #ifndef _VALUE
 #define _VALUE
 
+#include "struct.fx"
+
 // register 크기 제한 4096
 cbuffer TRANSFORM : register(b0)
 {
@@ -85,6 +87,9 @@ Texture2DArray g_texarr_0 : register(t8);
 Texture2DArray g_texarr_1 : register(t9);
 
 Texture2D g_anim2d_tex : register(t10);
+
+StructuredBuffer<tLightInfo> g_Light2D : register(t11);
+StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
 
 // register(s0)에 등록된 샘플러
