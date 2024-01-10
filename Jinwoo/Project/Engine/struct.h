@@ -83,3 +83,15 @@ struct tLightInfo
 	
 	Vec3	vPadding;
 };
+
+struct tGlobalData
+{
+	Vec2	g_RenderResolution;		// 렌더링 해상도
+	float	g_dt;					// 델타 타임
+	float	g_time;					// 누적 시간
+	int		g_Light2DCount;			// 2D 광원 개수
+	int		g_Light3DCount;			// 3D 광원 개수
+	Vec2	g_vPadding;
+};
+
+extern tGlobalData g_global;

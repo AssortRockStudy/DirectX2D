@@ -2,6 +2,7 @@
 #define _STD2D
 
 #include "value.fx"
+#include "func.fx"
 
 // 구조화 버퍼 선언 예시
 StructuredBuffer<float4> g_Data : register(t14);
@@ -20,6 +21,8 @@ struct VS_OUT
     float4 vPosition : SV_Position;
     float4 vColor : COLOR;
     float2 vUV : TEXCOORD;
+    
+    float3 vWorldPos : POSITION;
 };
 
 VS_OUT VS_Std2D(VS_IN _in)
@@ -30,6 +33,8 @@ VS_OUT VS_Std2D(VS_IN _in)
     output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
+    
+    output.vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     return output;
 }
@@ -76,9 +81,8 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     {
         if (g_btex_0)
         {
-            //vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
-            vColor = g_Data[2];
-            vColor.a = 1.f;
+            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            
             
             // saturate : 0 ~ 1을 넘지않게 보정
             float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
@@ -92,8 +96,15 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     }
     
     // 광원 처리
-    // 광원의 타입별 처리 필요
-    vColor.rgb *= g_Light2D[0].vAmbient.rgb;
+    tLightColor LightColor = (tLightColor)0.f;
+    
+    for (int i = 0; i < g_Light2DCount; ++i)
+    {
+        CalLight2D(_in.vWorldPos, i, LightColor);
+    }
+    
+    vColor.rgb *= (LightColor.vColor.rgb + LightColor.vAmbient.rgb);
+    
     
     // 픽셀로 들어올 때 정점의 위치에 맞게 보간된다
     return vColor;

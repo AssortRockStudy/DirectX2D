@@ -11,6 +11,7 @@
 #include "components.h"
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
+#include "CBackgroundScript.h"
 
 #include "CMesh.h"
 #include "CGraphicsShader.h" 
@@ -85,15 +86,18 @@ void CLevelMgr::init()
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
+	pLight->AddComponent(new CBackgroundScript);
 
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::SPOT);
 	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
-	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.3f, 0.3f));
+	pLight->Light2D()->SetRadius(500.f);
+	pLight->Light2D()->SetAngle(XM_PI / 6.f);
+	pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");
 
-	// GameObject  생성
+	// Player 생성
 	CGameObject* pObj = nullptr;
 	pObj = new CGameObject;
 	pObj->SetName(L"Player");
@@ -118,25 +122,26 @@ void CLevelMgr::init()
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-
-
-	//// 자식 GameObject 생성
-	//CGameObject* pChildObj = new CGameObject;
-	//pChildObj->SetName(L"Child");
-
-	//pChildObj->AddComponent(new CTransform);
-	//pChildObj->AddComponent(new CMeshRender);
-
-	//pChildObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
-	//pChildObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
-	//pChildObj->Transform()->SetAbsolute(true);
-
-	//pChildObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pChildObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-
-	//pObj->AddChild(pChildObj);
-
 	m_CurLevel->AddObject(pObj, L"Player", false);
+	
+	// background  생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Background");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 600.f));
+	pObj->Transform()->SetRelativeScale(Vec3(1800.f, 800.f, 1.f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
+	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+
+	pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+
+	m_CurLevel->AddObject(pObj, L"Background", false);
 
 	// Monster 생성
 	pObj = new CGameObject;

@@ -208,8 +208,12 @@ void CAssetMgr::CreateDefaultMaterial()
 	CMaterial* pMtrl = nullptr;
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
-
 	AddAsset<CMaterial>(L"Std2DMtrl", pMtrl);
+
+	// 배경머테리얼 생성
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+	AddAsset<CMaterial>(L"BackgroundMtrl", pMtrl);
 
 
 	//======================
@@ -217,6 +221,5 @@ void CAssetMgr::CreateDefaultMaterial()
 	// 디버그쉐이프 머테리얼 생성
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
-
 	AddAsset<CMaterial>(L"DebugShapeMtrl", pMtrl);
 }

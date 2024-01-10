@@ -2,6 +2,7 @@
 #include "CRenderMgr.h"
 
 #include "CDevice.h"
+#include "CConstBuffer.h"
 #include "CStructuredBuffer.h"
 #include "CTimeMgr.h"
 #include "CAssetMgr.h"
@@ -115,6 +116,15 @@ void CRenderMgr::render_debug()
 
 void CRenderMgr::UpdateData()
 {
+	g_global.g_Light2DCount = (int)m_vecLight2D.size();
+	//g_global.g_Light3DCount = (int)m_vecLight3D.size();
+
+	// 전역 데이터 업데이트
+	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL_DATA);
+	pCB->SetData(&g_global);
+	pCB->UpdateData();
+
+	// 2D 광원정보 업데이트
 	static vector<tLightInfo> vecLight2DInfo;
 
 	for (size_t i = 0; i < m_vecLight2D.size(); ++i)

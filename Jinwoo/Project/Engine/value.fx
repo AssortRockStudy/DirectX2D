@@ -3,6 +3,8 @@
 
 #include "struct.fx"
 
+#define PI 3.14159265358979f
+
 // register 크기 제한 4096
 cbuffer TRANSFORM : register(b0)
 {
@@ -70,6 +72,16 @@ cbuffer ANIM_DATA2D : register(b2)
     float2  g_vBackground;
     int     g_UseAnim2D;
     float3  padding;
+}
+
+cbuffer GLOBAL_DATA : register(b3)
+{
+    float2  g_RenderResolution;
+    float   g_dt;
+    float   g_time;
+    int     g_Light2DCount;
+    int     g_Light3DCount;
+    float2  g_vPadding;
 }
 
 // register(t0)에 등록된 텍스처 객체
