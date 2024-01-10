@@ -41,10 +41,11 @@ void CalLight2D(float3 _WorldPos, int _LightIdx, inout tLightColor _output)
         float fAttenu = 1.f;    // 각도 감쇠
         float fAttenu2 = 1.f;   // 거리 감쇠
         
+        float fDist = distance(info.vWorldPos.xy, _WorldPos.xy);
+        
         float2 lightDir = normalize(info.vWorldDir.xy);                 // 초기 광원의 방향 벡터
         float2 targetDir = normalize(_WorldPos.xy - info.vWorldPos.xy); // 타겟 벡터
         
-        float fDist = distance(info.vWorldPos.xy, _WorldPos.xy);
         
         // 광원 방향과 타겟 방향 사이의 각도를 계산
         float fTheta = acos(dot(lightDir, targetDir));

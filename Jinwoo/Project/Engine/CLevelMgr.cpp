@@ -91,7 +91,7 @@ void CLevelMgr::init()
 	pLight->Light2D()->SetLightType(LIGHT_TYPE::SPOT);
 	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
 	pLight->Light2D()->SetRadius(500.f);
-	pLight->Light2D()->SetAngle(XM_PI / 6.f);
+	pLight->Light2D()->SetAngle(XM_PI / 2.f);
 	pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
