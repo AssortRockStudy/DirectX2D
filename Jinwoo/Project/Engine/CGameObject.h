@@ -43,6 +43,7 @@ public:
     void AddComponent(CComponent* _Component);
     void AddChild(CGameObject* _Child);
    
+    CRenderComponent* GetRenderComponent() { return m_RenderCom; }
     CComponent* GetComponent(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
     CGameObject* GetParent() { return m_Parent; }
 

@@ -88,11 +88,11 @@ void CLevelMgr::init()
 	pLight->AddComponent(new CLight2D);
 	pLight->AddComponent(new CBackgroundScript);
 
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::SPOT);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
 	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
 	pLight->Light2D()->SetRadius(500.f);
-	pLight->Light2D()->SetAngle(XM_PI / 2.f);
-	pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
+	//pLight->Light2D()->SetAngle(XM_PI / 2.f);
+	//pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");
@@ -178,6 +178,19 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
+
+	// PostProcess 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"GrayFilter");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+
+	m_CurLevel->AddObject(pObj, L"Default", false);
+
 
 	m_CurLevel->begin();
 }

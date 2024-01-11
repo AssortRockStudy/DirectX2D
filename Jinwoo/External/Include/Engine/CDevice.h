@@ -1,5 +1,7 @@
 #pragma once
 
+#include "CTexture.h"
+
 class CConstBuffer;
 
 class CDevice
@@ -17,8 +19,9 @@ private:
 	ComPtr<ID3D11Texture2D>			m_RTTex;		// 렌더타겟 텍스쳐
 	ComPtr<ID3D11RenderTargetView>	m_RTView;		// 렌더타겟 뷰
 
-	ComPtr<ID3D11Texture2D>			m_DSTex;		// 뎊스 스텐실 텍스쳐	
-	ComPtr<ID3D11DepthStencilView>	m_DSView;		// 뎊스 스텐실 뷰
+	Ptr<CTexture>					m_DSTex;
+	//ComPtr<ID3D11Texture2D>			m_DSTex;		// 뎊스 스텐실 텍스쳐	
+	//ComPtr<ID3D11DepthStencilView>	m_DSView;		// 뎊스 스텐실 뷰
 
 	HWND							m_hRenderWnd;
 	Vec2							m_vRenderResolution;

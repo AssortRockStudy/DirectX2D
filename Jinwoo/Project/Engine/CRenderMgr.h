@@ -1,6 +1,8 @@
 #pragma once
 #include "singleton.h"
 
+#include "CTexture.h"
+
 class CCamera;
 class CGameObject;
 class CStructuredBuffer;
@@ -13,6 +15,8 @@ class CRenderMgr :
 
 private:
     vector<CCamera*>        m_vecCam;
+
+    Ptr<CTexture>           m_PostProcessTex;
 
     CStructuredBuffer*      m_Light2DBuffer;    // 2차원 광원 구조화 버퍼
     vector<CLight2D*>       m_vecLight2D;

@@ -52,6 +52,7 @@ void CRenderMgr::render()
 {
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
+		m_vecCam[i]->SortObject();
 		m_vecCam[i]->render();
 	}
 }
@@ -133,7 +134,11 @@ void CRenderMgr::UpdateData()
 		vecLight2DInfo.push_back(info);
 	}
 
-	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	if (!vecLight2DInfo.empty())
+	{
+		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
+	}
+
 	m_Light2DBuffer->UpdateData(11);
 
 	vecLight2DInfo.clear();

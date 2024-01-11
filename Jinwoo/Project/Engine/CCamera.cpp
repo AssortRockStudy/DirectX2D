@@ -7,6 +7,7 @@
 #include "CLevelMgr.h"
 #include "CLevel.h"
 #include "CLayer.h"
+#include "CRenderComponent.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -70,6 +71,15 @@ void CCamera::render()
 	g_Transform.matView = m_matView;
 	g_Transform.matProj = m_matProj;
 
+	// 도메인 순서대로 렌더링
+	render(m_vecOpaque);
+	render(m_vecMasked);
+	render(m_vecTransparent);
+	render(m_vecPostProcess);
+}
+
+void CCamera::SortObject()
+{
 	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 
 	for (int i = 0; i < LAYER_MAX; ++i)
@@ -83,11 +93,48 @@ void CCamera::render()
 		CLayer* pLayer = pCurLevel->GetLayer(i);
 		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
 
-		for (size_t i = 0; i < vecObjects.size(); ++i)
+		for (size_t j = 0; j < vecObjects.size(); ++j)
 		{
-			vecObjects[i]->render();
+			// 메쉬, 재잴, 셰이더 확인
+			if (!(vecObjects[j]->GetRenderComponent()
+				&& vecObjects[j]->GetRenderComponent()->GetMesh().Get()
+				&& vecObjects[j]->GetRenderComponent()->GetMaterial().Get()
+				&& vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader().Get()))
+			{
+				continue;
+			}
+
+			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader()->GetDomain();
+
+			switch (domain)
+			{
+			case SHADER_DOMAIN::DOMAIN_OPAQUE:
+				m_vecOpaque.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_MASKED:
+				m_vecMasked.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+				m_vecTransparent.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+				m_vecPostProcess.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_DEBUG:
+				break;
+			}
 		}
 	}
+}
+
+void CCamera::render(vector<CGameObject*>& _vecObj)
+{
+	for (size_t i = 0; i < _vecObj.size(); ++i)
+	{
+		_vecObj[i]->render();
+	}
+
+	_vecObj.clear();
 }
 
 
