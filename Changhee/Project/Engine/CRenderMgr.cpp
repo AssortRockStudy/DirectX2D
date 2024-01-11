@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CRenderMgr.h"
 
+#include "CStructuredBuffer.h"
+
 #include "CTimeMgr.h"
 
 #include "CDevice.h"
@@ -10,15 +12,21 @@
 #include "CTransform.h"
 
 CRenderMgr::CRenderMgr()
-	: m_pDebugObj(nullptr)
+	: m_Light2DBuffer(nullptr)
+	, m_DebugObj(nullptr)
+	, m_bDebugPosition(true)
 {
 
 }
 
 CRenderMgr::~CRenderMgr()
 {
-	if (nullptr != m_pDebugObj)
-		delete m_pDebugObj;
+	if (nullptr != m_DebugObj)
+		delete m_DebugObj;
+
+	if (nullptr != m_Light2DBuffer)
+		delete m_Light2DBuffer;
+
 }
 
 void CRenderMgr::tick()
@@ -52,39 +60,39 @@ void CRenderMgr::render_debug()
 		switch ((*iter).eShape)
 		{
 		case DEBUG_SHAPE::RECT:
-			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh_Debug"));
+			m_DebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh_Debug"));
 			break;
 		case DEBUG_SHAPE::CIRCLE:
-			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CircleMesh_Debug"));
+			m_DebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CircleMesh_Debug"));
 			break;
 		case DEBUG_SHAPE::CROSS:
-			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CrossMesh"));
+			m_DebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CrossMesh"));
 			break;
 		case DEBUG_SHAPE::CUBE:
-			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CubeMesh"));
+			m_DebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CubeMesh"));
 			break;
 		case DEBUG_SHAPE::SPHERE:
-			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"SphereMesh"));
+			m_DebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"SphereMesh"));
 			break;
 		default:
 			break;
 		}
 
-		m_pDebugObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DebugShapeMtrl"));
-		m_pDebugObj->MeshRender()->GetMaterial()->SetScalarParam(VEC4_0, (*iter).vColor);
+		m_DebugObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DebugShapeMtrl"));
+		m_DebugObj->MeshRender()->GetMaterial()->SetScalarParam(VEC4_0, (*iter).vColor);
 
-		D3D11_PRIMITIVE_TOPOLOGY PrevTopology = m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->GetTopology();
+		D3D11_PRIMITIVE_TOPOLOGY PrevTopology = m_DebugObj->MeshRender()->GetMaterial()->GetShader()->GetTopology();
 		if (DEBUG_SHAPE::CROSS == (*iter).eShape)
 		{
-			m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST);
+			m_DebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST);
 		}
 
-		m_pDebugObj->Transform()->SetWorldMat((*iter).matWorld);
-		m_pDebugObj->Transform()->UpdateData();
+		m_DebugObj->Transform()->SetWorldMat((*iter).matWorld);
+		m_DebugObj->Transform()->UpdateData();
 
-		m_pDebugObj->render();
+		m_DebugObj->render();
 
-		m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(PrevTopology);
+		m_DebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(PrevTopology);
 
 		(*iter).fLifeTime += DT;
 		if ((*iter).fDuration <= (*iter).fLifeTime)
