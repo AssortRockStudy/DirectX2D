@@ -75,6 +75,12 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
         return E_FAIL;
     }
 
+    if (FAILED(CreateSamplerState()))
+    {
+        MessageBox(nullptr, L"Fail to Create Sampler State", L"Fail to Initialize Device", MB_OK);
+        return E_FAIL;
+    }
+
     // --------------------------
     // (5) Viewport setting
     // --------------------------
@@ -312,10 +318,53 @@ int CDevice::CreateBlendState()
     return S_OK;
 }
 
+int CDevice::CreateSamplerState()
+{
+    D3D11_SAMPLER_DESC tDesc = {};
+
+    // anisotropic 이방성 필터링
+    tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+    tDesc.MinLOD = 0;
+    tDesc.MaxLOD = 1;
+
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+
+    // mimap 밉맵 필터링
+    tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+    tDesc.MinLOD = 0;
+    tDesc.MaxLOD = 1;
+
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+
+    // pipeline sampler update
+    CONTEXT->VSSetSamplers(0, 1, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+    CONTEXT->HSSetSamplers(0, 1, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+    CONTEXT->DSSetSamplers(0, 1, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+    CONTEXT->GSSetSamplers(0, 1, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+    CONTEXT->PSSetSamplers(0, 1, m_arrSampler[(UINT)SAMPLER_TYPE::ANIS].GetAddressOf());
+    
+    CONTEXT->VSSetSamplers(1, 1, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+    CONTEXT->HSSetSamplers(1, 1, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+    CONTEXT->DSSetSamplers(1, 1, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+    CONTEXT->GSSetSamplers(1, 1, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+    CONTEXT->PSSetSamplers(1, 1, m_arrSampler[(UINT)SAMPLER_TYPE::MIPMAP].GetAddressOf());
+
+    return 0;
+}
+
 int CDevice::CreateConstBuffer()
 {
-    m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer(CB_TYPE::TRANSFORM);
     m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
+
+    m_arrCB[(UINT)CB_TYPE::MATREIAL_CONST] = new CConstBuffer(CB_TYPE::MATREIAL_CONST);
+    m_arrCB[(UINT)CB_TYPE::MATREIAL_CONST]->Create(sizeof(tMtrlConst), 1);
 
     return S_OK;
 }

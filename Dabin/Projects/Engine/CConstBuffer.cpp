@@ -2,9 +2,11 @@
 #include "CConstBuffer.h"
 #include "CDevice.h"
 
-CConstBuffer::CConstBuffer()
-	: m_CB{}
-	, m_Desc{}
+CConstBuffer::CConstBuffer(CB_TYPE _Type)
+	: m_Desc{}
+	, m_ElementCount(0)
+	, m_ElementSize(0)
+	, m_Type(_Type)
 {
 }
 
@@ -49,12 +51,13 @@ void CConstBuffer::SetData(void* _Src, UINT _ElementCount)
 	CONTEXT->Unmap(m_CB.Get(), 0);
 }
 
-void CConstBuffer::UpdateData(UINT _RegisterNum)
+void CConstBuffer::UpdatePipeline()
 {
 	// 모든 shader에 등록
-	CONTEXT->VSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
-	CONTEXT->HSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
-	CONTEXT->DSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
-	CONTEXT->GSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
-	CONTEXT->PSSetConstantBuffers(_RegisterNum, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
+	// type을 idx로 register 자동 등록
+	CONTEXT->VSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
+	CONTEXT->HSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
+	CONTEXT->DSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
+	CONTEXT->GSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
+	CONTEXT->PSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
 }

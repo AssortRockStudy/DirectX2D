@@ -1,30 +1,30 @@
 #pragma once
 #include "CComponent.h"
+#include "CMaterial.h"
+#include "CMesh.h"
+#include "Ptr.h"
 
 // =======================================
 // CRenderComponent: renderComponents가 상속하는 parent class
 // =======================================
 
-class CMesh;
-class CGraphicsShader;
-
 class CRenderComponent :
     public CComponent
 {
 private:
-    CMesh*              m_Mesh;
-    CGraphicsShader*    m_Shader;
+    Ptr<CMesh>              m_Mesh;
+    Ptr<CMaterial>          m_Mat;
 
 public:
     virtual void finaltick() {};
-    virtual void UpdateData() = 0;
+    virtual void UpdatePipeline() = 0;
     virtual void render() = 0;
 
 public:
-    CMesh* GetMesh() { return m_Mesh; }
-    CGraphicsShader* GetShader() { return m_Shader; }
-    void SetMesh(CMesh* _Mesh) { m_Mesh = _Mesh; }
-    void SetShader(CGraphicsShader* _Shader) { m_Shader = _Shader; }
+    Ptr<CMesh> GetMesh() { return m_Mesh; }
+    Ptr<CMaterial> GetMaterial() { return m_Mat; }
+    void SetMesh(Ptr<CMesh> _Mesh) { m_Mesh = _Mesh; }
+    void SetMaterial(Ptr<CMaterial> _Mat) { m_Mat = _Mat; }
 
 public:
     CRenderComponent(COMPONENT_TYPE _Type);

@@ -10,7 +10,7 @@ class CMeshRender :
 {
 public: 
     virtual void render() override;
-    virtual void UpdateData() override;
+    virtual void UpdatePipeline() override;
 
 public:
     CMeshRender();

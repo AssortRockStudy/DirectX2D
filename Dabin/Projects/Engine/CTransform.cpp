@@ -87,7 +87,7 @@ void CTransform::finaltick()
 	}
 }
 
-void CTransform::UpdateData()
+void CTransform::UpdatePipeline()
 {
 	g_Transform.matWorld = m_matWorld;
 	g_Transform.matWV = g_Transform.matWorld * g_Transform.matView;
@@ -96,5 +96,5 @@ void CTransform::UpdateData()
 	// 위치정보를 Transform Constant Buffer로 보내고, B0 Register에 binding
 	CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
 	pCB->SetData(&g_Transform);
-	pCB->UpdateData(0);
+	pCB->UpdatePipeline();
 }

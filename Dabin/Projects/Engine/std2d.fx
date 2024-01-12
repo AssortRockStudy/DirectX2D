@@ -1,26 +1,7 @@
 #ifndef _STD2D
 #define _STD2D
 
-// constant buffer (~2^12 == 4096 크기제한)
-cbuffer TRANSFORM : register(b0)
-{
-    //row_major float4x4 g_matWorld;  // row_major type: 행렬 전치시켜 저장
-    row_major matrix g_matWorld;
-    row_major matrix g_matWorldInv;
-    
-    row_major matrix g_matView;
-    row_major matrix g_matViewInv;
-    
-    row_major matrix g_matProj;
-    row_major matrix g_matProjInv;
-    
-    row_major matrix g_matWV;
-    row_major matrix g_matWVP;
-}
-
-Texture2D g_tex_0 : register(t0);
-
-SamplerState g_sam_0 : register(s0);
+#include "value.fx"
 
 struct VS_IN
 {
@@ -59,7 +40,22 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    float4 vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
+    
+    // alpha blending (magenta background delete)
+    if(g_btex_0)
+    {
+        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f); // saturate: 0~1 넘지 않게 보정
+
+        if (fAlpha<0.1f)
+        {
+            // 픽셀 쉐이더 중간에 폐기
+            // clip(-1);
+            discard;
+        }
+    }
+    
     return vColor;
 }
 

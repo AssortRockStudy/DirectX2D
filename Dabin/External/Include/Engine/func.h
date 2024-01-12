@@ -1,5 +1,21 @@
 #pragma once
 
+class CGameObject;
+
+namespace GamePlayStatic
+{
+	void SpawnGameObject(CGameObject* _Target, int _LayerIdx);
+	void DestroyGameObject(CGameObject* _Target);
+
+	void DrawDebugRect(const Matrix& _WorldMat, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
+	void DrawDebugRect(Vec3 _vWorldPos, Vec3 _vWorldScale, Vec3 _WorldRot, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
+
+	//void DrawDebugCircle();
+	//void DrawDebugCube();
+	//void DrawDebugSphere();
+}
+
+
 template<typename T, UINT SIZE>
 void Delete_Array(T* (&Arr)[SIZE])
 {
@@ -20,7 +36,6 @@ void Delete_Vec(vector<T*>& _vec)
 	{
 		if (_vec[i])
 			delete _vec[i];
-
-		_vec.clear();
 	}
+	_vec.clear();
 }

@@ -13,17 +13,24 @@ class CLevel :
 private:
     CLayer* m_arrLayer[LAYER_MAX];
 
+private:
+    void clear();
+
 public:
     void begin();
     void tick();
     void finaltick();
-    void render();
 
 public:
-    void AddObject(CGameObject* _Object, int _LayerIdx);
+    void AddObject(CGameObject* _Object, int _LayerIdx, bool _bChildMove = true);
+    void AddObject(CGameObject* _Object, const wstring& _LayerName, bool _bChildMove = true);
+    CLayer* GetLayer(int _iLayerIdx) { return m_arrLayer[_iLayerIdx]; }
+    CLayer* GetLayer(const wstring& _strLayerName);
 
 public:
     CLevel();
     ~CLevel();
+
+    friend class CLevelMgr;
 };
 

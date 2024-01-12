@@ -20,13 +20,14 @@ private:
 
 public:
     virtual void finaltick() override;
-    virtual void UpdateData() override;
+    virtual void UpdatePipeline() override;
 
 public:    
     void SetRelativePos(Vec3 _Pos) { m_vRelativePos = _Pos; }
     void SetRelativeScale(Vec3 _Scale) { m_vRelativeScale = _Scale; }
     void SetRelativeRotation(Vec3 _Rotation) { m_vRelativeRotation = _Rotation; }
     void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute; }
+    void SetWorldMat(const Matrix& _mat) { m_matWorld = _mat; }
     Vec3 GetRelativePos() { return m_vRelativePos; }
     Vec3 GetRelativeScale() { return m_vRelativeScale; }
     Vec3 GetRelativeRotation() { return m_vRelativeRotation; }

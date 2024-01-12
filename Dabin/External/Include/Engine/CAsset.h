@@ -1,10 +1,13 @@
 #pragma once
 #include "CEntity.h"
+#include "Ptr.h"
 
 // =======================================
 // CAsset: 모든 Asset이 상속하는 parent class
 // =======================================
 // - model 등 재활용 가능한 resource는 asset으로 취급
+// - 메모리 관리: reference count 관리
+// -- ref count가 1(자기자신)이 되면 날리며 실시간으로 최소한의 메모리 유지
 
 class CAsset :
     public CEntity
@@ -18,10 +21,7 @@ private:
 private:
     virtual int Load(const wstring& _strFilePath) { return E_FAIL; } // private: Asset Mgr로만 공개
     void AddRef() { ++m_RefCount; }
-    void SubRef() { --m_RefCount; }
-    void Release() { --m_RefCount;
-        if (m_RefCount <= 0) delete this;
-    }
+    void Release() { if (--m_RefCount <= 0) delete this; }
 
     // getter & setter
 public:
@@ -39,4 +39,7 @@ public:
     ~CAsset();
 
     friend class CAssetMgr;
+
+    template <typename T>
+    friend class Ptr;
 };

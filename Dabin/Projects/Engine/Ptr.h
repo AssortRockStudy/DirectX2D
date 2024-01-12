@@ -1,7 +1,9 @@
 #pragma once
 // =======================================
-// Ptr: Ref Ptr 관리하기 위한 smart pointer
+// Ptr: Asset의 Ref Ptr 관리하기 위한 smart pointer
 // =======================================
+// 주의: 현 클래스에서 다른 클래스에 대한 Ptr을 사용하는 경우
+// Ptr 헤더를 참조하기 전, 해당 클래스에 대한 include가 필요함
 
 template<typename T>
 class Ptr
@@ -26,7 +28,7 @@ public:
 			Asset->AddRef();
 	}
 
-	void operator = (const T* _Asset)
+	void operator = (T* _Asset)
 	{
 		if (nullptr != Asset)
 			Asset->Release();
@@ -76,7 +78,7 @@ public:
 			Asset->AddRef();
 	}
 
-	Ptr(const T* _Asset)
+	Ptr( T* _Asset)
 		:Asset(_Asset)
 	{
 		if (Asset != nullptr)

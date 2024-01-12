@@ -2,6 +2,7 @@
 #include "CAssetMgr.h"
 #include "CMesh.h"
 #include "CGraphicsShader.h"
+#include "CMaterial.h"
 
 CAssetMgr::CAssetMgr()
 {
@@ -10,25 +11,15 @@ CAssetMgr::CAssetMgr()
 
 CAssetMgr::~CAssetMgr()
 {
-	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; ++i)
-	{
-		for (auto pair : m_hashAsset[i])
-			if (pair.second)
-				delete pair.second;
-
-		m_hashAsset[i].clear();
-	}
+	// Ptr 사용해 refcount 1이 되면 할당 해제하므로 AssetMgr가 종료시 처리하지 않아도 됨
 }
 
-void CAssetMgr::init()
+void CAssetMgr::CreateDefaultMesh()
 {
 	CMesh* rectMesh = nullptr;
 	CMesh* circleMesh = nullptr;
-	CGraphicsShader* pShader = nullptr;
 
-	// --------------------------
-	// (0) Square
-	// --------------------------
+	// Square
 	// Vertex Buffer에 vertex 위치 설정
 	// - 시계방향
 	// - NDC좌표계
@@ -57,9 +48,7 @@ void CAssetMgr::init()
 	arrIdx[0] = 0; arrIdx[1] = 1; arrIdx[2] = 2;
 	arrIdx[3] = 0; arrIdx[4] = 2; arrIdx[5] = 3;
 
-	// --------------------------
-	// (0) Circle
-	// --------------------------
+	// Circle
 	vector<Vtx> vecVtx;
 	vector<UINT> vecIdx;
 	Vtx v = { Vec3(0.f, 0.f, 0.f), Vec4(1.f, 1.f, 1.f, 1.f), Vec2(0.5f, 0.5f) }; // 중심점
@@ -93,11 +82,18 @@ void CAssetMgr::init()
 	rectMesh = new CMesh;
 	rectMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"RectMesh", rectMesh);
-	
-	//circleMesh = new CMesh;
-	//circleMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-	//AddAsset(L"RectMesh", circleMesh);
 
+	circleMesh = new CMesh;
+	circleMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
+	AddAsset(L"CircleMesh", circleMesh);
+}
+
+void CAssetMgr::CreateDefaultGraphicsShader()
+{
+	CGraphicsShader* pShader = nullptr;
+
+	// shader 생성 위한, pipeline buffer 생성
+	
 	// --------------------------
 	// (2) Vertex Shader 생성
 	// --------------------------
@@ -119,5 +115,52 @@ void CAssetMgr::init()
 	pShader->SetDSType(DS_TYPE::LESS);
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
 
+
+
+	// --------------------------
+	// Shader 생성
+	// --------------------------
+	// Std2DShader
 	AddAsset(L"Std2DShader", pShader);
+
+	// EffectShader
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
+	pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDSType(DS_TYPE::LESS);
+	pShader->SetBSType(BS_TYPE::ONE_ONE);
+
+	AddAsset(L"EffetShader", pShader);
+
+	// DebugShape Shader
+	pShader = new CGraphicsShader();
+	pShader->CreateVertexShader(L"shader\\debug.fx", "VS_DebugShape");
+	pShader->CreatePixelShader(L"shader\\debug.fx", "PS_DebugShape");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+
+	AddAsset(L"DebugShapeShader", pShader);
+}
+
+void CAssetMgr::CreateDefaultMaterial()
+{
+	CMaterial* pMat;
+
+	// Std2D Mat
+	pMat = new CMaterial;
+	pMat->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+	AddAsset(L"Std2DMat", pMat);
+
+	// DebugShape Mat
+	pMat = new CMaterial;
+	pMat->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
+	AddAsset(L"DebugShapeMat", pMat);
+}
+
+void CAssetMgr::init()
+{
+	CreateDefaultMesh();
+	CreateDefaultGraphicsShader();
+	CreateDefaultMaterial();
 }

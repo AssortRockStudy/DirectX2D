@@ -6,6 +6,9 @@
 #include "CDevice.h"
 #include "CAssetMgr.h"
 #include "CLevelMgr.h"
+#include "CTaskMgr.h"
+#include "CGC.h"
+#include "CRenderMgr.h"
 
 
 CEngine::CEngine()
@@ -41,6 +44,7 @@ int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 	CKeyMgr::GetInst()->init();
 	CAssetMgr::GetInst()->init();
 	CLevelMgr::GetInst()->init();
+	CRenderMgr::GetInst()->init();
 
 	return S_OK;
 }
@@ -55,5 +59,11 @@ void CEngine::progress()
 	CLevelMgr::GetInst()->tick();
 
 	// rendering
-	CLevelMgr::GetInst()->render();
+	CRenderMgr::GetInst()->tick();
+
+	// GC
+	CGC::GetInst()->tick();
+
+	// Task
+	CTaskMgr::GetInst()->tick();
 }

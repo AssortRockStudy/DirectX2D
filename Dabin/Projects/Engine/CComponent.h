@@ -22,7 +22,7 @@ public:
     virtual void begin() {};
     virtual void tick() {};
     virtual void finaltick() = 0;
-    virtual void UpdateData() {};
+    virtual void UpdatePipeline() {};
 
 public:
     COMPONENT_TYPE GetType() { return m_Type; }

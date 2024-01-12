@@ -15,6 +15,10 @@ CMesh::CMesh()
 
 CMesh::~CMesh()
 {
+	if (m_VtxSysMem)
+		delete m_VtxSysMem;
+	if (m_IdxSysMem)
+		delete m_IdxSysMem;
 }
 
 void CMesh::UpdateData()

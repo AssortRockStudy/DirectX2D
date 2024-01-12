@@ -8,12 +8,19 @@ CLevel::CLevel()
 	for (UINT i = 0; i < LAYER_MAX; ++i)
 	{
 		m_arrLayer[i] = new CLayer;
+		m_arrLayer[i]->m_iLayerIdx = i;
 	}
 }
 
 CLevel::~CLevel()
 {
 	Delete_Array(m_arrLayer);
+}
+
+void CLevel::clear()
+{
+	for (UINT i = 0; i < LAYER_MAX; ++i)
+		m_arrLayer[i]->m_vecObjects.clear();
 }
 
 void CLevel::begin()
@@ -34,14 +41,26 @@ void CLevel::finaltick()
 		m_arrLayer[i]->finaltick();
 }
 
-void CLevel::render()
+void CLevel::AddObject(CGameObject* _Object, int _LayerIdx, bool _bChildMove)
 {
-	for (size_t i = 0; i < LAYER_MAX; ++i)
-		m_arrLayer[i]->render();
+	m_arrLayer[_LayerIdx]->AddObject(_Object, _bChildMove);
 }
 
-void CLevel::AddObject(CGameObject* _Object, int _LayerIdx)
+void CLevel::AddObject(CGameObject* _Object, const wstring& _LayerName, bool _bChildMove)
 {
-	m_arrLayer[_LayerIdx]->AddObject(_Object);
+	CLayer* pLayer = GetLayer(_LayerName);
+	if (!pLayer)
+		return;
+
+	pLayer->AddObject(_Object, _bChildMove);
 }
 
+CLayer* CLevel::GetLayer(const wstring& _strLayerName)
+{
+	for (int i = 0; i < LAYER_MAX; ++i)
+	{
+		if (m_arrLayer[i]->GetName() == _strLayerName)
+			return m_arrLayer[i];
+	}
+	return nullptr;
+}

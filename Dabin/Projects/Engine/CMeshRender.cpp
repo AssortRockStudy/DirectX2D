@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CMeshRender.h"
 #include "CMesh.h"
-#include "CGraphicsShader.h"
+#include "CMaterial.h"
 #include "CGameObject.h"
 #include "CTransform.h"
 
@@ -16,17 +16,17 @@ CMeshRender::~CMeshRender()
 
 void CMeshRender::render()
 {
-	if (GetMesh() == nullptr || GetShader() == nullptr)
+	if (GetMesh() == nullptr || GetMaterial() == nullptr)
 		return;
 
-	UpdateData();
+	UpdatePipeline();
 	GetMesh()->render();
 }
 
-void CMeshRender::UpdateData()
+void CMeshRender::UpdatePipeline()
 {
-	if (GetShader())
-		GetShader()->UpdatePipeline();
+	if (GetMaterial().Get())
+		GetMaterial()->UpdatePipeline();
 
-	GetOwner()->Transform()->UpdateData();
+	GetOwner()->Transform()->UpdatePipeline();
 }

@@ -1,6 +1,8 @@
 ﻿#include "framework.h"
 #include "Client.h"
 
+#include <crtdbg.h> // memory lick check
+
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
 #ifdef _DEBUG
@@ -25,6 +27,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
+    // memory lick check
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(775);
+
     MyRegisterClass(hInstance);
 
     // 애플리케이션 초기화를 수행합니다:

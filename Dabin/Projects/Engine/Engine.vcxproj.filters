@@ -83,9 +83,6 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{fc474b2b-8cac-41f1-8b35-cf1b0695ac94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. Asset\Script">
-      <UniqueIdentifier>{125a7e8e-2052-424e-ab19-618fa356cf79}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. Component\Script">
       <UniqueIdentifier>{b15357e1-de41-4410-b194-a654220671b0}</UniqueIdentifier>
     </Filter>
@@ -104,8 +101,14 @@
     <Filter Include="06. Asset\Texture">
       <UniqueIdentifier>{13bd9428-1732-40ad-87c8-e75d2f22b6b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. Asset\Ptr">
-      <UniqueIdentifier>{2d1b4763-5b55-4cac-b76b-cb691048377a}</UniqueIdentifier>
+    <Filter Include="04. Manager\TaskMgr">
+      <UniqueIdentifier>{ed82e763-be13-4982-9e82-a46ba417c5f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CGCMgr">
+      <UniqueIdentifier>{9d20f400-e9f4-4c78-ae76-9d9f65770239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\RenderMgr">
+      <UniqueIdentifier>{f27e517c-96cd-487e-b8f0-11aba96b4c55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -212,8 +215,23 @@
     <ClInclude Include="CTexture.h">
       <Filter>06. Asset\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04. Manager\TaskMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CGC.h">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>06. Asset\Material</Filter>
+    </ClInclude>
     <ClInclude Include="Ptr.h">
-      <Filter>06. Asset\Ptr</Filter>
+      <Filter>06. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04. Manager\RenderMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +320,36 @@
     <ClCompile Include="CTexture.cpp">
       <Filter>06. Asset\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04. Manager\TaskMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CGC.cpp">
+      <Filter>04. Manager\CGCMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>06. Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr_init.cpp">
+      <Filter>04. Manager\RenderMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>
