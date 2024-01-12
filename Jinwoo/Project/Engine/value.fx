@@ -103,6 +103,8 @@ Texture2D g_anim2d_tex : register(t10);
 StructuredBuffer<tLightInfo> g_Light2D : register(t11);
 StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
+Texture2D g_postprocess : register(t13);
+
 
 // register(s0)에 등록된 샘플러
 // 샘플링은 텍스처에서 특정 위치의 값을 읽어오는 과정으로

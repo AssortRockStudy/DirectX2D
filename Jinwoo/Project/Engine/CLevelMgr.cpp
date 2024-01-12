@@ -83,18 +83,13 @@ void CLevelMgr::init()
 
 	// 광원 추가
 	CGameObject* pLight = new CGameObject;
+	pLight->SetName(L"Directional Light");
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
-	pLight->AddComponent(new CBackgroundScript);
 
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
-	pLight->Light2D()->SetRadius(500.f);
-	//pLight->Light2D()->SetAngle(XM_PI / 2.f);
-	//pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
-
-	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.8f, 0.8f));
 	m_CurLevel->AddObject(pLight, L"Light");
 
 	// Player 생성
@@ -179,15 +174,32 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
 
+	//// PostProcess 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"GrayFilter");
+
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
+
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+
+	//m_CurLevel->AddObject(pObj, L"Default", false);
+
 	// PostProcess 생성
 	pObj = new CGameObject;
-	pObj->SetName(L"GrayFilter");
+	pObj->SetName(L"Distortion");
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
 
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
+
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMtrl"));
+
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
 
 	m_CurLevel->AddObject(pObj, L"Default", false);
 

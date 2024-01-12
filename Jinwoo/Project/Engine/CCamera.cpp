@@ -4,6 +4,7 @@
 #include "CDevice.h"
 #include "CTransform.h"
 #include "CRenderMgr.h"
+#include "CAssetMgr.h"
 #include "CLevelMgr.h"
 #include "CLevel.h"
 #include "CLayer.h"
@@ -75,7 +76,9 @@ void CCamera::render()
 	render(m_vecOpaque);
 	render(m_vecMasked);
 	render(m_vecTransparent);
-	render(m_vecPostProcess);
+
+	// 후처리 작업
+	render_postprocess();
 }
 
 void CCamera::SortObject()
@@ -137,7 +140,6 @@ void CCamera::render(vector<CGameObject*>& _vecObj)
 	_vecObj.clear();
 }
 
-
 void CCamera::SetCameraPriority(int _Priority)
 {
 	CRenderMgr::GetInst()->RegisterCamera(this, _Priority);
@@ -170,3 +172,23 @@ void CCamera::LayerCheck(const wstring& _strLayerName, bool _bCheck)
 	int idx = pLayer->GetLayerIdx();
 	LayerCheck(idx, _bCheck);
 }
+
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); ++i)
+	{
+		// 최종 렌더링 이미지를 후처리 타겟에 복사
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+
+		// 복사받은 후처리 텍스처를 t13 레지스터에 바인딩
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+		
+		// 후처리 오브젝트 렌더링
+		m_vecPostProcess[i]->render();
+	}
+
+	m_vecPostProcess.clear();
+}
+

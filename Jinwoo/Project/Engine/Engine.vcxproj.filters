@@ -130,6 +130,12 @@
     <Filter Include="03.Device\StructuredBuffer">
       <UniqueIdentifier>{defc4c11-ca64-486b-b2bd-0aef8b68aa73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode\Render">
+      <UniqueIdentifier>{0441eaf5-ff0d-4b64-ad0e-23e128a954fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Util">
+      <UniqueIdentifier>{8c915c9a-2d01-48af-952a-1df129b43630}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -401,6 +407,9 @@
     <ClCompile Include="CBackgroundScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CAssetMgr_Init.cpp">
+      <Filter>04.Manager\AssetMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -408,23 +417,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
     <FxCompile Include="std2d.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="value.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="debug.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="struct.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Util</Filter>
     </FxCompile>
-    <FxCompile Include="func.fx">
-      <Filter>ShaderCode</Filter>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="postprocess.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
