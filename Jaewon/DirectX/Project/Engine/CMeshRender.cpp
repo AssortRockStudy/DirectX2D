@@ -5,6 +5,7 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CMaterial.h"
+#include "CAnimator2D.h"
 
 CMeshRender::CMeshRender()
 	: CRenderComponent(COMPONENT_TYPE::MESHRENDER)
@@ -27,6 +28,11 @@ void CMeshRender::render()
 {
 	if (nullptr == GetMesh() || nullptr == GetMaterial())
 		return;
+
+	if (Animator2D())
+		Animator2D()->UpdateData();
+	else
+		Animator2D()->Clear();
 
 	UpdateData();
 

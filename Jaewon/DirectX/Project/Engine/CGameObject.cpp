@@ -134,3 +134,8 @@ void CGameObject::AddChild(CGameObject* _Child)
 	_Child->m_Parent = this;
 	m_vecChild.push_back(_Child);
 }
+
+void CGameObject::Destroy()
+{
+	GamePlayStatic::DestroyGameObject(this);
+}

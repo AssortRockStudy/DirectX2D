@@ -45,3 +45,12 @@ struct tMtrlConst
 	int	bTex[TEX_PARAM::END];
 	int iPadding[2];
 };
+
+struct tAnimData2D
+{
+	Vec2 vLeftTop;
+	Vec2 vSlizeSize;
+	Vec2 vOffset;
+	int  UseAnim2D;
+	int	 iPadding;
+};

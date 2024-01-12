@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CCollider2D.h"
 #include "CTransform.h"
+#include "CScript.h"
 
 CCollider2D::CCollider2D()
 	: CComponent(COMPONENT_TYPE::COLLIDER2D)
@@ -39,14 +40,22 @@ void CCollider2D::finaltick()
 void CCollider2D::BeginOverlap(CCollider2D* _OtherCollider)
 {
 	++m_CollisionCount;
+	const vector<CScript*>& vecScript = GetOwner()->GetScripts();
+	for (int i = 0; i < vecScript.size(); ++i)
+		vecScript[i]->BeginOverlap(this, _OtherCollider->GetOwner(), _OtherCollider);
 }
 
 void CCollider2D::Overlap(CCollider2D* _OtherCollider)
 {
-
+	const vector<CScript*>& vecScript = GetOwner()->GetScripts();
+	for (int i = 0; i < vecScript.size(); ++i)
+		vecScript[i]->Overlap(this, _OtherCollider->GetOwner(), _OtherCollider);
 }
 
 void CCollider2D::EndOverlap(CCollider2D* _OtherCollider)
 {
 	--m_CollisionCount;
+	const vector<CScript*>& vecScript = GetOwner()->GetScripts();
+	for (int i = 0; i < vecScript.size(); ++i)
+		vecScript[i]->EndOverlap(this, _OtherCollider->GetOwner(), _OtherCollider);
 }

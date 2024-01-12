@@ -29,23 +29,18 @@ VS_OUT VS_Std2D(VS_IN _in)
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
     float4 vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
-    
-    if (g_int_0)
-        vColor = float4(1.f, 0.f, 1.f, 1.f);
-    
-    if (g_btex_0){
-        vColor = float4(1.f, 1.f, 1.f, 1.f);
-        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
-        
-        //saturate 0 ~ 1 을 넘지 않게 보정
-        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
-        
-        if (fAlpha < 0.1f)
-            discard;
+    if (g_UseAnim2D){
+        float2 vUV = g_vLeftTop + (g_vSlizeSize * _in.vUV);
+        vColor = g_anim2d_tex.Sample(g_sam_1, vUV);
     }
-    
-    if (g_int_0)
-        vColor.r *= 2.f;
+    else{
+        if (g_btex_0){
+            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
+            if (fAlpha < 0.1f)
+                discard;
+        }
+    }
     
     return vColor;
 }
