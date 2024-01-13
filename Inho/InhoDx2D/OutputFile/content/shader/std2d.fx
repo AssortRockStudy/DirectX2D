@@ -2,6 +2,9 @@
 #define _STD2D
 
 #include "value.fx"
+#include "func.fx"
+
+StructuredBuffer<float4> g_Data : register(t14);
 
 struct VS_IN
 {
@@ -15,6 +18,8 @@ struct VS_OUT
     float4 vPosition : SV_Position;
     float4 vColor : COLOR;
     float2 vUV : TEXCOORD;
+    
+    float3 vWorldPos: POSITION;
 };
 
 VS_OUT VS_Std2D(VS_IN _in)
@@ -24,6 +29,8 @@ VS_OUT VS_Std2D(VS_IN _in)
     output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
+    
+    output.vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     return output;
 }
@@ -53,6 +60,7 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
         if (g_btex_0)
         {
             vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            
         
             //saturate 0 ~ 1 을 넘지 않게 보정
             float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
@@ -64,6 +72,15 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
             }
         }
     }
+    
+    tLightColor LightColor = (tLightColor) 0.f;
+    for (int i = 0; i < g_Light2DCount; ++i)
+    {
+        CalLight2D(_in.vWorldPos, i, LightColor);
+    }
+    
+    vColor.rgb *= (LightColor.vColor.rgb + LightColor.vAmbient.rgb);
+    
     return vColor;
 }
 

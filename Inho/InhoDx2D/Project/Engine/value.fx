@@ -3,6 +3,8 @@
 
 #include "struct.fx"
 
+#define PI 3.1415926535f
+
 cbuffer TRANSFORM : register(b0)
 {
     row_major Matrix g_matWorld;

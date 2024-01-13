@@ -180,6 +180,12 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2dShader"));
 	AddAsset(L"Std2DMtrl", pMtrl);
 
+	// backgroundMtrl
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2dShader"));
+	AddAsset(L"BackgroundMtrl", pMtrl);
+
+	// DebugMtrl
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
 	AddAsset(L"DebugShapeMtrl", pMtrl);

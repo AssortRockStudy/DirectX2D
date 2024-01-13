@@ -2,6 +2,7 @@
 #define _STD2D
 
 #include "value.fx"
+#include "func.fx"
 
 StructuredBuffer<float4> g_Data : register(t14);
 
@@ -72,22 +73,13 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
         }
     }
     
-    if (0 == g_Light2D[0].LightType)
+    tLightColor LightColor = (tLightColor) 0.f;
+    for (int i = 0; i < g_Light2DCount; ++i)
     {
-        vColor.rgb *= g_Light2D[0].vAmbient;
+        CalLight2D(_in.vWorldPos, i, LightColor);
     }
-    else if (1 == g_Light2D[0].LightType)
-    {
-        float fDist = distance(g_Light2D[0].vWorldPos, _in.vWorldPos);
-        if (fDist < g_Light2D[0].fRadius)
-        {
-            vColor.rgb *= g_Light2D[0].vColor;
-        }
-        else
-        {
-            vColor.rgb *= 0.f;
-        }
-    }
+    
+    vColor.rgb *= (LightColor.vColor.rgb + LightColor.vAmbient.rgb);
     
     return vColor;
 }

@@ -263,6 +263,7 @@
     </ClInclude>
     <ClInclude Include="CStructuredBuffer.h" />
     <ClInclude Include="CLight2D.h" />
+    <ClInclude Include="CBackgroundScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -384,6 +385,7 @@
     </ClCompile>
     <ClCompile Include="CStructuredBuffer.cpp" />
     <ClCompile Include="CLight2D.cpp" />
+    <ClCompile Include="CBackgroundScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
@@ -396,6 +398,7 @@
       <Filter>ShadeCode</Filter>
     </FxCompile>
     <FxCompile Include="struct.fx" />
+    <FxCompile Include="func.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
