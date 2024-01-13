@@ -1,5 +1,7 @@
 #pragma once
 
+#include "CTexture.h"
+
 class CConstBuffer;
 class CDevice
 	: public CSingleton<CDevice>
@@ -15,8 +17,7 @@ private:
 	ComPtr<ID3D11Texture2D> m_RTTex; // ·»´õ Å¸°Ù ÅØ½ºÃÄ
 	ComPtr<ID3D11RenderTargetView> m_RTView; // ·»´õ Å¸°Ù ºä
 
-	ComPtr<ID3D11Texture2D> m_DSTex; // µª½º ½ºÅÙ½Ç ÅØ½ºÃÄ
-	ComPtr<ID3D11DepthStencilView> m_DSView; // µª½º ½ºÅÙ½Ç ºä
+	Ptr<CTexture> m_DSTex;
 
 	HWND  m_hRenderWnd;
 	Vec2 m_vRenderResolution;

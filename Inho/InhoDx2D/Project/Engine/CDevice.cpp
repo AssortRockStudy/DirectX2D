@@ -2,6 +2,7 @@
 #include "CDevice.h"
 
 #include "CConstBuffer.h"
+#include "CAssetMgr.h"
 
 CDevice::CDevice()
     : m_hRenderWnd(nullptr)
@@ -98,7 +99,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 void CDevice::ClearRenderTarget(float(&Color)[4])
 {
     m_Context->ClearRenderTargetView(m_RTView.Get(), Color);
-    m_Context->ClearDepthStencilView(m_DSView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+    m_Context->ClearDepthStencilView(m_DSTex->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
 void CDevice::Present()
@@ -152,35 +153,12 @@ int CDevice::CreateTargetView()
 
     m_Device->CreateRenderTargetView(m_RTTex.Get(), nullptr, m_RTView.GetAddressOf());
 
-    D3D11_TEXTURE2D_DESC Desc = {};
+    m_DSTex = CAssetMgr::GetInst()->CreatTexture((UINT)m_vRenderResolution.x
+                                                                                                    , (UINT)m_vRenderResolution.y
+                                                                                                    , DXGI_FORMAT_D24_UNORM_S8_UINT
+                                                                                                    , D3D11_BIND_DEPTH_STENCIL);
 
-    Desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-
-    Desc.Width = (UINT)m_vRenderResolution.x;
-    Desc.Height = (UINT)m_vRenderResolution.y;
-
-    // DepthStencil 용도의 텍스처
-    Desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-
-    // CPU 접근 불가
-    Desc.CPUAccessFlags = 0;
-    Desc.Usage = D3D11_USAGE_DEFAULT;
-
-    Desc.SampleDesc.Count = 1;
-    Desc.SampleDesc.Quality = 0;
-
-    Desc.MipLevels = 1;
-    Desc.MiscFlags = 0;
-
-    Desc.ArraySize = 1;
-
-    if (FAILED(m_Device->CreateTexture2D(&Desc, nullptr, m_DSTex.GetAddressOf()))) {
-        return E_FAIL;
-    }
-
-    m_Device->CreateDepthStencilView(m_DSTex.Get(), nullptr, m_DSView.GetAddressOf());
-
-    m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
+    m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSTex->GetDSV().Get());
 
     return S_OK;
 }

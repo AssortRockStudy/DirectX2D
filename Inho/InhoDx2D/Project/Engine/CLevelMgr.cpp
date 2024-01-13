@@ -75,31 +75,31 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pCamObj, 0);
 
 	// 첫 번째 광원 추가
-	//CGameObject* pLight = new CGameObject;
-	//pLight->AddComponent(new CTransform);
-	//pLight->AddComponent(new CMeshRender);
-	//pLight->AddComponent(new CLight2D);
+	CGameObject* pLight = new CGameObject;
+	pLight->AddComponent(new CTransform);
+	pLight->AddComponent(new CMeshRender);
+	pLight->AddComponent(new CLight2D);
 
-	//pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	//pLight->Light2D()->SetLightColor(Vec3(1.f, 0.3f, 0.3f));
-	//pLight->Light2D()->SetRadius(300.f);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLight->Light2D()->SetLightColor(Vec3(1.f, 0.3f, 0.3f));
+	pLight->Light2D()->SetRadius(300.f);
 
-	//pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
-	//m_CurLevel->AddObject(pLight, L"Light");
+	pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
+	m_CurLevel->AddObject(pLight, L"Light");
 
-	//// 두 번째 광원 추가
-	//pLight = new CGameObject;
+	// 두 번째 광원 추가
+	pLight = new CGameObject;
 
-	//pLight->AddComponent(new CTransform);
-	//pLight->AddComponent(new CMeshRender);
-	//pLight->AddComponent(new CLight2D);
+	pLight->AddComponent(new CTransform);
+	pLight->AddComponent(new CMeshRender);
+	pLight->AddComponent(new CLight2D);
 
-	//pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	//pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.0f));
-	//pLight->Light2D()->SetRadius(300.f);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.0f));
+	pLight->Light2D()->SetRadius(300.f);
 
-	//pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
-	//m_CurLevel->AddObject(pLight, L"Light");
+	pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
+	m_CurLevel->AddObject(pLight, L"Light");
 
 	CGameObject* pObj = nullptr;
 
@@ -184,6 +184,16 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pObj, L"UI", false);
 
 	//GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 20);
+
+	pObj = new CGameObject;
+	pObj->SetName(L"GrayFilter");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	m_CurLevel->begin();
 }

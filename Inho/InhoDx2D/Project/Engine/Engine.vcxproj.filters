@@ -399,6 +399,7 @@
     </FxCompile>
     <FxCompile Include="struct.fx" />
     <FxCompile Include="func.fx" />
+    <FxCompile Include="postprocess.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

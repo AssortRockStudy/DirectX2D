@@ -173,6 +173,17 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_DEBUG);
 	AddAsset(L"DebugShapeShader", pShader);
+
+	// grayFilter Shader
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\postprocess.fx", "VS_GrayFilter");
+	pShader->CreatePixelShader(L"shader\\postprocess.fx", "PS_GrayFilter");
+
+	pShader->SetRSType(RS_TYPE::CULL_BACK);
+	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
+
+	AddAsset(L"GrayFilterShader", pShader);
 }
 
 void CAssetMgr::CreateDefaultMaterial()
@@ -187,8 +198,25 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2dShader"));
 	AddAsset(L"BackgroundMtrl", pMtrl);
 
+	// GrayFilterMtrl
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"GrayFilterShader"));
+	AddAsset(L"GrayFilterMtrl", pMtrl);
+
 	// DebugMtrl
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
 	AddAsset(L"DebugShapeMtrl", pMtrl);
+}
+
+Ptr<CTexture> CAssetMgr::CreatTexture(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage)
+{
+	Ptr<CTexture> pTex = new CTexture;
+
+	if (FAILED(pTex->Create(_Width, _Height, _Format, _Flag, _Usage))) {
+		MessageBox(nullptr, L"텍스쳐 생성 실패", L"리소스 생성 실패", MB_OK);
+		return nullptr;
+	}
+
+	return pTex;
 }
