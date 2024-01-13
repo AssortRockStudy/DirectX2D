@@ -78,9 +78,9 @@ void CLevelMgr::init()
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
 
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
 	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
-	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.3f, 0.4f));
+	pLight->Light2D()->SetRadius(500.f);
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");

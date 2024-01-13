@@ -2,8 +2,9 @@
 #include "CRenderMgr.h"
 
 #include "CStructuredBuffer.h"
-
 #include "CDevice.h"
+#include "CConstBuffer.h"
+
 #include "CCamera.h"
 #include "CMeshRender.h"
 #include "CAssetMgr.h"
@@ -106,6 +107,12 @@ void CRenderMgr::render_debug()
 
 void CRenderMgr::UpdateData()
 {
+	g_global.g_Light2DCount = (int)m_vecLight2D.size();
+
+	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL_DATA);
+	pCB->SetData(&g_global);
+	pCB->UpdateData();
+
 	static vector<tLightInfo> vecLight2DInfo;
 	
 	for (size_t i = 0; i < m_vecLight2D.size(); i++) {

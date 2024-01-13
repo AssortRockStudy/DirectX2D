@@ -76,3 +76,13 @@ struct tAnimData2D {
 	int UseAnim2D;
 	Vec3 vPadding;
 };
+
+struct tGlobalData {
+	Vec2 g_RenderResolution;
+	float g_dt;
+	float g_time;
+	int g_Light2DCount;
+	int g_Light3DCount;
+	Vec2 g_vPaading;
+};
+extern tGlobalData g_global;
