@@ -3,6 +3,8 @@
 
 #include "value.fx"
 
+StructuredBuffer<float4> g_Data : register(t14);
+
 struct VS_IN
 {
     float4 vColor : COLOR;
@@ -52,7 +54,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     {
         if (g_btex_0)
         {
-            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            // vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            vColor = g_Data[2];
+            vColor.a = 1.f;
         
             //saturate 0 ~ 1 을 넘지 않게 보정
             float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
