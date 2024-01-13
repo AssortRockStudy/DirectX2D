@@ -386,6 +386,9 @@
     <ClCompile Include="CStructuredBuffer.cpp" />
     <ClCompile Include="CLight2D.cpp" />
     <ClCompile Include="CBackgroundScript.cpp" />
+    <ClCompile Include="CAssetMgr_init.cpp">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

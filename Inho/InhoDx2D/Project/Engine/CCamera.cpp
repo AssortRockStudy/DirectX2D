@@ -11,6 +11,8 @@
 #include "CGameObject.h"
 #include "CRenderComponent.h"
 
+#include "CAssetMgr.h"
+
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
 	, m_ProjType(PROJ_TYPE::ORTHOGRAPHIC)
@@ -139,7 +141,8 @@ void CCamera::render()
 	render(m_vecOpaque);
 	render(m_vecMasked);
 	render(m_vecTransparent);
-	render(m_vecPostProcess);
+	
+	render_postprocess();
 }
 
 void CCamera::render(vector<CGameObject*>& _vecObj)
@@ -149,4 +152,17 @@ void CCamera::render(vector<CGameObject*>& _vecObj)
 	}
 
 	_vecObj.clear();
+}
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); i++) {
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+
+		m_vecPostProcess[i]->render();
+	}
+	m_vecPostProcess.clear();
 }

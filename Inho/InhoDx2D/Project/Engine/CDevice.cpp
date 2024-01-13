@@ -98,7 +98,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 
 void CDevice::ClearRenderTarget(float(&Color)[4])
 {
-    m_Context->ClearRenderTargetView(m_RTView.Get(), Color);
+    m_Context->ClearRenderTargetView(m_RTTex->GetRTV().Get(), Color);
     m_Context->ClearDepthStencilView(m_DSTex->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
@@ -149,16 +149,18 @@ int CDevice::CreateSwapChain()
 
 int CDevice::CreateTargetView()
 {
-    m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)m_RTTex.GetAddressOf());
+    ComPtr<ID3D11Texture2D> tex2D;
+    m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)tex2D.GetAddressOf());
 
-    m_Device->CreateRenderTargetView(m_RTTex.Get(), nullptr, m_RTView.GetAddressOf());
+    m_RTTex = CAssetMgr::GetInst()->CreatTexture(L"RenderTargetTex", tex2D);
 
-    m_DSTex = CAssetMgr::GetInst()->CreatTexture((UINT)m_vRenderResolution.x
+    m_DSTex = CAssetMgr::GetInst()->CreatTexture( L"DepthStencilTex"
+                                                                                                    , (UINT)m_vRenderResolution.x
                                                                                                     , (UINT)m_vRenderResolution.y
                                                                                                     , DXGI_FORMAT_D24_UNORM_S8_UINT
                                                                                                     , D3D11_BIND_DEPTH_STENCIL);
 
-    m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSTex->GetDSV().Get());
+    m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
 
     return S_OK;
 }
@@ -295,6 +297,16 @@ int CDevice::CreateSamplerState()
     tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
     tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
     tDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+
+    tDesc.MinLOD = 0;
+    tDesc.MaxLOD = 1;
+
+    DEVICE->CreateSamplerState(&tDesc, m_arrSampler[0].GetAddressOf());
+
+    tDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    tDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
     tDesc.MinLOD = 0;
     tDesc.MaxLOD = 1;

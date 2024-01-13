@@ -29,14 +29,15 @@ private:
 
 public:
     void RegisterCamera(CCamera* _Cam, int _Idx);
-    void AddDebugShapeInfo(const tDebugShapeInfo& _info) {
-        m_DbgShapeInfo.push_back(_info);
-    }
+    void AddDebugShapeInfo(const tDebugShapeInfo& _info) { m_DbgShapeInfo.push_back(_info); }
 
     void SetDebugPosition(bool _OnOff) { m_DebugPosition = _OnOff; }
     bool IsDebugPosition() { return m_DebugPosition; }
 
     void RegisterLight2D(CLight2D* _Light2D) { m_vecLight2D.push_back(_Light2D); }
+
+    void CopyRenderTargetToPostProcessTarget();
+    Ptr<CTexture> GetPostProcessTex() { return m_PostProcessTex; }
 
 public:
     void init();
