@@ -10,6 +10,7 @@
 #include "CTransform.h"
 
 #include "CTimeMgr.h"
+#include "components.h"
 
 CRenderMgr::CRenderMgr()
 	: m_pDebugObj(nullptr)
@@ -32,7 +33,11 @@ void CRenderMgr::tick()
 	Vec4 vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
 
+	UpdateData();
+
 	render();
+
+	Clear();
 
 	render_debug();
 
@@ -97,6 +102,26 @@ void CRenderMgr::render_debug()
 			++iter;
 		}
 	}
+}
+
+void CRenderMgr::UpdateData()
+{
+	static vector<tLightInfo> vecLight2DInfo;
+	
+	for (size_t i = 0; i < m_vecLight2D.size(); i++) {
+		const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
+		vecLight2DInfo.push_back(info);
+	}
+
+	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	m_Light2DBuffer->UpdateData(11);
+
+	vecLight2DInfo.clear();
+}
+
+void CRenderMgr::Clear()
+{
+	m_vecLight2D.clear();
 }
 
 void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)

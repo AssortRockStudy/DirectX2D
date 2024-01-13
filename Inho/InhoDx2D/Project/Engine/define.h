@@ -154,3 +154,9 @@ enum class DEBUG_SHAPE
 	SPHERE,
 	CROSS,
 };
+
+enum class LIGHT_TYPE {
+	DIRECTIONAL,
+	POINT,
+	SPOT,
+};

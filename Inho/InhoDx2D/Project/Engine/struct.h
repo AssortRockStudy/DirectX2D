@@ -21,6 +21,21 @@ struct tDebugShapeInfo {
 
 };
 
+struct tLightInfo {
+	Vec4 vColor;
+	Vec4 vSpecular;
+	Vec4 vAmbient;
+
+	Vec3 vWorldPos;
+	Vec3 vWorldDir;
+	float fRadius;
+	float fAngle;
+
+	int LightType;
+
+	Vec3 vPadding;
+};
+
 // ==================
 // 상수버퍼 대응 구조체
 // ==================
