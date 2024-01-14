@@ -65,7 +65,7 @@ void CPlayerScript::tick()
 	if (KEY_TAP(KEY::SPACE))
 	{
 
-		//Destroy();
+		Destroy();
 
 
 		//GameObject »ý¼º
@@ -88,6 +88,23 @@ void CPlayerScript::tick()
 
 	}
 
+
+	if (KEY_PRESSED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+		{
+			pMtrl->SetScalarParam(INT_0, 1);
+		}
+	}
+	else if (KEY_RELEASED(KEY::SPACE))
+	{
+		Ptr<CMaterial> pMtrl = MeshRender()->GetMaterial();
+		if (nullptr != pMtrl)
+		{
+			pMtrl->SetScalarParam(INT_0, 0);
+		}
+	}
 	//GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 0);
 	//GamePlayStatic::DrawDebugCircle(Vec3(0.f, 0.f, 0.f), 200.f, Vec3(0.f, 1.f, 1.f), true);
 

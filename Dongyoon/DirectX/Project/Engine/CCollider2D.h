@@ -31,8 +31,16 @@ public:
     Vec2 GetOffsetScale() { return Vec2(m_vOffsetScale.x, m_vOffsetScale.y); }
     COLLIDER2D_TYPE GetType() { return m_Type; }
 
+    const Matrix& GetColliderWorldMat() { return m_matColWorld; }
+
 public:
     virtual void finaltick() override;
+
+
+public:
+    void BeginOverlap(CCollider2D* _OtherCollider);
+    void Overlap(CCollider2D* _OtherCollider);
+    void EndOverlap(CCollider2D* _OtherCollider);
 
 public:
     CCollider2D();
