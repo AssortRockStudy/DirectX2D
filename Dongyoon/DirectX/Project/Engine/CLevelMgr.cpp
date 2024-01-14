@@ -79,10 +79,16 @@ void CLevelMgr::init()
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CCollider2D);
 	pObj->AddComponent(new CPlayerScript);
 
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
 	pObj->Transform()->SetRelativeScale(Vec3(200.0f, 200.0f, 1.0f));
+
+	pObj->Collider2D()->SetAbsolute(true);
+	pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(100.f, 0.f));
+
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
@@ -90,6 +96,7 @@ void CLevelMgr::init()
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+	
 	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	pObj = new CGameObject;
@@ -106,7 +113,7 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
 
-	GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 20);
+	
 }
 
 void CLevelMgr::tick()

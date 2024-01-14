@@ -41,7 +41,7 @@ void CMaterial::SetScalarParam(SCALAR_PARAM _ParamType, const T& _Value)
     case INT_3:
         /*if constexpr (std::is_same_v<T, int>) {}*/
 
-        m_Const.iArr[_ParamType - FLOAT_0] = *((float*)pValue);
+        m_Const.iArr[_ParamType] = *((int*)pValue);
         break;
 
     case FLOAT_0:
