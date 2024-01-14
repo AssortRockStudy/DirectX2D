@@ -59,4 +59,12 @@ void CEngine::progress()
 
 	CGC::GetInst()->tick();
 	CTaskMgr::GetInst()->tick();
+	DebugFunctionCheck();
+}
+
+
+void CEngine::DebugFunctionCheck()
+{
+	if (KEY_TAP(KEY::O))
+		CRenderMgr::GetInst()->IsDebugPosition() ? CRenderMgr::GetInst()->SetDebugPosition(false) : CRenderMgr::GetInst()->SetDebugPosition(true);
 }

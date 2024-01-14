@@ -30,6 +30,7 @@ void CCollider2D::finaltick()
 	}
 	else
 		m_matColWorld *= matObjWorld;
+	return;
 
 	if (0 == m_CollisionCount)
 		GamePlayStatic::DrawDebugRect(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);

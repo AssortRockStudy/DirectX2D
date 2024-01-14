@@ -50,7 +50,8 @@ struct tAnimData2D
 {
 	Vec2 vLeftTop;
 	Vec2 vSlizeSize;
+	Vec2 vBackGround;
 	Vec2 vOffset;
 	int  UseAnim2D;
-	int	 iPadding;
+	Vec3 vPadding;
 };
