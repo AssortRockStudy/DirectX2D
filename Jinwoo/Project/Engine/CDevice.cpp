@@ -163,8 +163,6 @@ int CDevice::CreateTargetView()
 													(UINT)m_vRenderResolution.x, (UINT)m_vRenderResolution.y,
 													DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_DEPTH_STENCIL);
 
-	// OM(Output Merge State)에 렌더타겟 뷰와 뎁스스텐실 텍스처를 전달
-	m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
 
 	return S_OK;
 }

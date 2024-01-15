@@ -138,41 +138,59 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
-	// Monster 생성
-	pObj = new CGameObject;
-	pObj->SetName(L"Monster");
+	//// Monster 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"Monster");
 
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-	pObj->AddComponent(new CCollider2D);
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
+	//pObj->AddComponent(new CCollider2D);
 
-	pObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 300.f));
-	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+	//pObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 300.f));
+	//pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
 
-	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
+	//pObj->Collider2D()->SetAbsolute(true);
+	//pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
+	//pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
 
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	//pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
-	m_CurLevel->AddObject(pObj, L"Monster", false);
+	//m_CurLevel->AddObject(pObj, L"Monster", false);
 
-	// UI GameObject 생성
-	pObj = new CGameObject;
-	pObj->SetName(L"UI");
+	//// tv 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"TV");
 
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
 
-	pObj->Transform()->SetRelativePos(Vec3(-590, 310.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
+	//pObj->Transform()->SetRelativePos(Vec3(100.f, 0.f, 300.f));
+	//pObj->Transform()->SetRelativeScale(Vec3(900.f, 480.f, 1.f));
 
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	//
+	//pTex = CAssetMgr::GetInst()->Load<CTexture>(L"TVTex", L"texture\\tv.png");
+	//pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-	m_CurLevel->AddObject(pObj, L"UI", false);
+	//m_CurLevel->AddObject(pObj, L"Monster", false);
+
+	//// UI GameObject 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"UI");
+
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
+
+	//pObj->Transform()->SetRelativePos(Vec3(-590, 310.f, 500.f));
+	//pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
+
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+
+	//m_CurLevel->AddObject(pObj, L"UI", false);
 
 	//// PostProcess 생성
 	//pObj = new CGameObject;
@@ -186,22 +204,22 @@ void CLevelMgr::init()
 
 	//m_CurLevel->AddObject(pObj, L"Default", false);
 
-	// PostProcess 생성
-	pObj = new CGameObject;
-	pObj->SetName(L"Distortion");
+	//// PostProcess 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"Distortion");
 
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
 
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
-	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
+	//pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	//pObj->Transform()->SetRelativeScale(Vec3(600.f, 400.f, 1.f));
 
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMtrl"));
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"VCRDistortionMtrl"));
 
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
+	//pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
 
-	m_CurLevel->AddObject(pObj, L"Default", false);
+	//m_CurLevel->AddObject(pObj, L"Default", false);
 
 
 	m_CurLevel->begin();

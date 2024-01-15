@@ -216,6 +216,23 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 
 	//======================
+	// VCR Distortion Shader 생성
+	// RS_TYPE	:	CULL_NONE
+	// DS_TYPE	:	NO_TEST_NO_WRITE
+	// BS_TYPE	:	DEFAULT
+	// Domain	:	DOMAIN_POSTPROCESS
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\postprocess.fx", "VS_VCRDistortion");
+	pShader->CreatePixelShader(L"shader\\postprocess.fx", "PS_VCRDistortion");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
+
+	AddAsset(L"VCRDistortionShader", pShader);
+
+
+	//======================
 	// 디버그쉐이프 셰이더 생성
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\debug.fx", "VS_DebugShape");
@@ -253,6 +270,11 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DistortionShader"));
 	AddAsset<CMaterial>(L"DistortionMtrl", pMtrl);
+
+	// VCRDistortionMtrl
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"VCRDistortionShader"));
+	AddAsset<CMaterial>(L"VCRDistortionMtrl", pMtrl);
 
 	// 디버그쉐이프 머테리얼 생성
 	pMtrl = new CMaterial;
