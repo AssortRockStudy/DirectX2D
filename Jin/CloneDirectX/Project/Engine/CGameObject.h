@@ -49,7 +49,7 @@ public:
     {
         for (size_t i = 0; i < m_vecScript.size(); ++i)
         {
-            if (dynamic_cast<T*> m_vecScript[i];)
+            if (dynamic_cast<T*>( m_vecScript[i]))
                 return (T*)m_vecScript[i];
             return nullptr;
         }
