@@ -104,14 +104,14 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CPlayerScript);
 
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
-	pObj->Transform()->SetRelativeScale(Vec3(500.f, 600.f, 1.f));
+	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
 
 	pObj->Collider2D()->SetAbsolute(true);
 	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
 	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"OutlineMtrl"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\playerportraitbig_01_isaac.png");
@@ -204,22 +204,22 @@ void CLevelMgr::init()
 
 	//m_CurLevel->AddObject(pObj, L"Default", false);
 
-	//// PostProcess 생성
-	//pObj = new CGameObject;
-	//pObj->SetName(L"Distortion");
+	// PostProcess 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Distortion");
 
-	//pObj->AddComponent(new CTransform);
-	//pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
 
-	//pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
-	//pObj->Transform()->SetRelativeScale(Vec3(600.f, 400.f, 1.f));
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
 
-	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"VCRDistortionMtrl"));
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"OutlineMtrl"));
 
-	//pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
 
-	//m_CurLevel->AddObject(pObj, L"Default", false);
+	m_CurLevel->AddObject(pObj, L"Default", false);
 
 
 	m_CurLevel->begin();

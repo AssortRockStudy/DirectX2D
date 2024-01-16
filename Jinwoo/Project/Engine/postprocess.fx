@@ -91,8 +91,6 @@ VS_OUT VS_VCRDistortion(VS_IN _in)
     //return output;
     
     VS_OUT output = (VS_OUT) 0.f;
-    
-    // 로컬 스페이스에 2배를 하면 전체화면의 해상도와 같다
     output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vUV = _in.vUV;
     
@@ -191,47 +189,42 @@ VS_OUT VS_Outline(VS_IN _in)
     output.vUV = _in.vUV;
     
     return output;
+    
+    //VS_OUT output = (VS_OUT) 0.f;
+    
+    //// 로컬 스페이스에 2배를 하면 전체화면의 해상도와 같다
+    //output.vPosition = float4(_in.vPos * 2.f, 1.f);
+    //output.vUV = _in.vUV;
+    
+    //return output;
 }
 
 
 float4 PS_Outline(VS_OUT _in) : SV_Target
 {    
+    float Thick = 0.003f;
+    
     float4 vColor = (float4) 0.f;
     
-    vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    float2 vScreenUV = _in.vPosition.xy / g_RenderResolution;
     
-    float alpha = vColor.a;
+    vColor = g_postprocess.Sample(g_sam_0, vScreenUV);
+    
+    float3 vColorUp = g_postprocess.Sample(g_sam_0, vScreenUV - float2(0.f, Thick));
+    float3 vColorDown = g_postprocess.Sample(g_sam_0, vScreenUV + float2(0.f, Thick));
+    float3 vColorLeft = g_postprocess.Sample(g_sam_0, vScreenUV - float2(Thick, 0.f));
+    float3 vColorRight = g_postprocess.Sample(g_sam_0, vScreenUV + float2(Thick, 0.f));
+    
+    float fColor = (vColor.r + vColor.g + vColor.b) / 3.f;
+    float fColorUp = fColor - ((vColorUp.r + vColorUp.g + vColorUp.b) / 3.f);
+    float fColorDown = fColor - ((vColorDown.r + vColorDown.g + vColorDown.b) / 3.f);
+    float fColorLeft = fColor - ((vColorLeft.r + vColorLeft.g + vColorLeft.b) / 3.f);
+    float fColorRight = fColor - ((vColorRight.r + vColorRight.g + vColorRight.b) / 3.f);
 
-    // 상하좌우 픽셀의 알파값
-    float alpha_up = g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.0, 0.005)).a;
-    float alpha_down = g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.0, 0.005)).a;
-    float alpha_left = g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.005, 0.0)).a;
-    float alpha_right = g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.005, 0.0)).a;
-
-    // 픽셀 주위의 알파값 차이 계산
-    float diff_up = alpha - alpha_up;
-    float diff_down = alpha - alpha_down;
-    float diff_left = alpha - alpha_left;
-    float diff_right = alpha - alpha_right;
-
-    // 외곽선의 기준값 설정
-    float threshold = 0.2f;
-         
-    // 외곽선 여부 결정
-    if (diff_up > threshold || diff_down > threshold || diff_left > threshold || diff_right > threshold)
+    
+    if (fColorUp > 0.09f || fColorDown > 0.09f || fColorLeft > 0.09f || fColorRight > 0.09f)
     {
-        // 외곽선이라면 빨간색으로 설정
-        vColor = float4(1.0, 0.0, 0.0, 1.0);
-    }
-    else
-    {
-        // 외곽선이 아니면 원래의 색상 사용
-        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
-        
-        if (alpha < 0.3)
-        {
-            discard;
-        }
+        vColor = float4(1.f, 0.f, 0.f, 1.f);
     }
     
     return vColor;
