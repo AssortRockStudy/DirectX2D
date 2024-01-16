@@ -2,6 +2,8 @@
 #define _STD2D
 #include "value.fx"
 
+StructuredBuffer<float4> g_Data : register(t14);
+
 struct VS_IN
 {
     float4 vColor : COLOR;
@@ -41,7 +43,8 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     }
     else{
         if (g_btex_0){
-            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+            vColor = g_Data[2];
+            vColor.a = 1.f;
             float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
             if (fAlpha < 0.1f)
                 discard;
