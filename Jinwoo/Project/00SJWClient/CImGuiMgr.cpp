@@ -1,9 +1,17 @@
 #include "pch.h"
 #include "CImGuiMgr.h"
 
+#include <Engine\CLevelMgr.h>
+#include <Engine\CLevel.h>
+#include <Engine\CGameObject.h>
+
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+
+#include "Inspector.h"
+#include "Content.h"
+#include "Outliner.h"
 
 CImGuiMgr::CImGuiMgr()
 {
@@ -16,6 +24,9 @@ CImGuiMgr::~CImGuiMgr()
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
+
+    // UI 삭제
+    Delete_Map(m_mapUI);
 }
 
 void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11DeviceContext> _Context)
@@ -68,6 +79,12 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != nullptr);
+
+    create_UI();
+
+    CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+    CGameObject* pObject = pCurLevel->FindObjectByName(L"Player");
+    ((Inspector*)FindUI("##Inspector"))->SetTaretObject(pObject);
 }
 
 void CImGuiMgr::progress()
@@ -83,18 +100,20 @@ void CImGuiMgr::tick()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("MyWindow 0##aa");
-    ImVec2 vSize = ImGui::GetWindowSize();
-    ImGui::Button("Test Button", ImVec2(vSize.x, 0));
-    ImGui::End();
-
-    ImGui::Begin("MyWindow 0##bb");
-    ImGui::End();
+    for (const auto& pair : m_mapUI)
+    {
+        pair.second->tick();
+    }
 
 }
 
 void CImGuiMgr::render()
 {   
+    for (const auto& pair : m_mapUI)
+    {
+        pair.second->render();
+    }
+
     // Rendering
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -105,6 +124,43 @@ void CImGuiMgr::render()
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
     }
+}
+
+void CImGuiMgr::create_UI()
+{
+    UI* pUI = nullptr;
+
+    // Inspector
+    pUI = new Inspector;
+    AddUI(pUI->GetID(), pUI);
+
+    // Content
+    pUI = new Content;
+    AddUI(pUI->GetID(), pUI);
+
+    // Outliner
+    pUI = new Outliner;
+    AddUI(pUI->GetID(), pUI);
+}
+
+UI* CImGuiMgr::FindUI(const string& _strUIName)
+{
+    map<string, UI*>::iterator iter = m_mapUI.find(_strUIName);
+
+    if (iter == m_mapUI.end())
+    {
+        return nullptr;
+    }
+
+    return iter->second;
+}
+
+void CImGuiMgr::AddUI(const string& _strKey, UI* _UI)
+{
+    UI* pUI = FindUI(_strKey);
+    assert(!pUI);
+
+    m_mapUI.insert(make_pair(_strKey, _UI));
 }
 
 
