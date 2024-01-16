@@ -198,19 +198,41 @@ float4 PS_Outline(VS_OUT _in) : SV_Target
 {    
     float4 vColor = (float4) 0.f;
     
-    float4 alpha = g_tex_0.Sample(g_sam_0, _in.vUV);
+    vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     
-    float falpha = 1.f - saturate(dot(alpha.rgb, alpha.rgb) / 2.f);
+    float alpha = vColor.a;
 
-    if(falpha >= 0.f && falpha < 0.1f)
+    // 상하좌우 픽셀의 알파값
+    float alpha_up = g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.0, 0.005)).a;
+    float alpha_down = g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.0, 0.005)).a;
+    float alpha_left = g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.005, 0.0)).a;
+    float alpha_right = g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.005, 0.0)).a;
+
+    // 픽셀 주위의 알파값 차이 계산
+    float diff_up = alpha - alpha_up;
+    float diff_down = alpha - alpha_down;
+    float diff_left = alpha - alpha_left;
+    float diff_right = alpha - alpha_right;
+
+    // 외곽선의 기준값 설정
+    float threshold = 0.2f;
+         
+    // 외곽선 여부 결정
+    if (diff_up > threshold || diff_down > threshold || diff_left > threshold || diff_right > threshold)
     {
-        vColor = float4(1.f, 0.f, 0.f, 1.f);
+        // 외곽선이라면 빨간색으로 설정
+        vColor = float4(1.0, 0.0, 0.0, 1.0);
     }
-    else if (falpha >= 1.f)
+    else
     {
-        discard;
+        // 외곽선이 아니면 원래의 색상 사용
+        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+        
+        if (alpha < 0.3)
+        {
+            discard;
+        }
     }
-    
     
     return vColor;
 }
@@ -218,23 +240,3 @@ float4 PS_Outline(VS_OUT _in) : SV_Target
 
 
 #endif
-
-
-
-    //float left = alpha - g_tex_0.Sample(g_sam_0, _in.vUV - float2(1.f, 0.f)).a;
-    //float right = alpha - g_tex_0.Sample(g_sam_0, _in.vUV + float2(1.f, 0.f)).a;
-    //float up = alpha - g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.f, 1.f)).a;
-    //float down = alpha - g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.f, 1.f)).a;
-    
-    //if (left < 0 || right < 0 || up < 0 || down < 0)
-    //{
-    //    vColor = float4(1.f, 0.f, 0.f, 1.f);
-    //}
-    //else if (left == 0 && right == 0 && up == 0 && down == 0)
-    //{
-    //    vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
-    //}
-    //else
-    //{
-    //    discard;
-    //}
