@@ -133,6 +133,10 @@ int CDevice::CreateSwapChain()
     {
         return E_FAIL;
     }
+
+    // 전역 데이터에 렌더링 해상도 기록
+    g_global.g_RenderResolution = m_vRenderResolution;
+
     return S_OK;
 }
 

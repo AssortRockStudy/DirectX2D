@@ -50,4 +50,6 @@ void CTimeMgr::tick()
 	}
 
 	++m_iCall;
+	g_global.g_dt = m_DeltaTime;
+	g_global.g_time += m_DeltaTime;
 }
