@@ -182,8 +182,59 @@ float4 PS_VCRDistortion(VS_OUT _in) : SV_Target
 }
 
 
+// Outline
+VS_OUT VS_Outline(VS_IN _in)
+{
+    VS_OUT output = (VS_OUT) 0.f;
+    
+    output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
+    output.vUV = _in.vUV;
+    
+    return output;
+}
 
+
+float4 PS_Outline(VS_OUT _in) : SV_Target
+{    
+    float4 vColor = (float4) 0.f;
+    
+    float4 alpha = g_tex_0.Sample(g_sam_0, _in.vUV);
+    
+    float falpha = 1.f - saturate(dot(alpha.rgb, alpha.rgb) / 2.f);
+
+    if(falpha >= 0.f && falpha < 0.1f)
+    {
+        vColor = float4(1.f, 0.f, 0.f, 1.f);
+    }
+    else if (falpha >= 1.f)
+    {
+        discard;
+    }
+    
+    
+    return vColor;
+}
 
 
 
 #endif
+
+
+
+    //float left = alpha - g_tex_0.Sample(g_sam_0, _in.vUV - float2(1.f, 0.f)).a;
+    //float right = alpha - g_tex_0.Sample(g_sam_0, _in.vUV + float2(1.f, 0.f)).a;
+    //float up = alpha - g_tex_0.Sample(g_sam_0, _in.vUV - float2(0.f, 1.f)).a;
+    //float down = alpha - g_tex_0.Sample(g_sam_0, _in.vUV + float2(0.f, 1.f)).a;
+    
+    //if (left < 0 || right < 0 || up < 0 || down < 0)
+    //{
+    //    vColor = float4(1.f, 0.f, 0.f, 1.f);
+    //}
+    //else if (left == 0 && right == 0 && up == 0 && down == 0)
+    //{
+    //    vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    //}
+    //else
+    //{
+    //    discard;
+    //}
