@@ -163,3 +163,8 @@ void CGameObject::DisconnectWithLayer()
 	CLayer* pCurLayer = pCurLevel->GetLayer(m_iLayerIdx);
 	pCurLayer->DetachGameObject(this);
 }
+
+void CGameObject::Destroy()
+{
+	GamePlayStatic::DestroyGameObject(this);
+}
