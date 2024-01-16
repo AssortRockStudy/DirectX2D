@@ -8,7 +8,7 @@
 CAnim::CAnim()
 	: m_Animator(nullptr)
 	, m_CurFrmIdx(0)
-	, m_bFinished(false)
+	, m_bFinish(false)
 	, m_AccTime(0.f)
 {
 }
@@ -46,7 +46,8 @@ void CAnim::finaltick()
 		++m_CurFrmIdx;
 		if (m_vecFrm.size() <= m_CurFrmIdx)
 		{
-			m_CurFrmIdx = 0;
+			m_CurFrmIdx = m_vecFrm.size() - 1;
+			m_bFinish = true;
 		}
 		m_AccTime = 0.f;
 	}

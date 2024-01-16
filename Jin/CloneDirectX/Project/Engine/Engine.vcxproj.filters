@@ -257,6 +257,7 @@
       <Filter>08. Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="CStructuredBuffer.h" />
+    <ClInclude Include="CLight2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -377,6 +378,7 @@
       <Filter>08. Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="CStructuredBuffer.cpp" />
+    <ClCompile Include="CLight2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
@@ -386,6 +388,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="debug.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

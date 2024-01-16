@@ -74,7 +74,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
                 discard;
         }
     }
-        return vColor;
+    
+    vColor.rgb *= g_Light2D[0].vAmbient.rgb;
+    return vColor;
 }
 
 #endif

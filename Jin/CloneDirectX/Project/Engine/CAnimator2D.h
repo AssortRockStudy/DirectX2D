@@ -20,7 +20,7 @@ public:
     void Create(const wstring& _strKey, Ptr<CTexture> _AtlasTex, Vec2 _LeftTop, Vec2 _vSliceSize, Vec2 _OffsetSize, Vec2 _Background, int _FrmCount, float _FPS);
 
     CAnim* FindAnim(const wstring& _strAnimName);
-    void Play(const wstring& _strAnimName);
+    void Play(const wstring& _strAnimName, bool bRepeat = true);
 
     void UpdateData();
     static void Clear();

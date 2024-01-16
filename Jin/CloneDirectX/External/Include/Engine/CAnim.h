@@ -21,7 +21,7 @@ private:
     CAnimator2D* m_Animator;
     vector<tAnimFrm> m_vecFrm;
     int             m_CurFrmIdx;
-    bool            m_bFinished;
+    bool            m_bFinish;
     Ptr<CTexture>   m_AtlasTex;
     float           m_AccTime;
 
@@ -31,6 +31,15 @@ public:
 
     void finaltick();
     void UpdateData();
+
+    bool IsFinish() { return m_bFinish; }
+    void Reset()
+    {
+        m_bFinish = false;
+        m_CurFrmIdx = 0;
+        m_AccTime = 0.f;
+    }
+
     static void Clear();
 
 public:
