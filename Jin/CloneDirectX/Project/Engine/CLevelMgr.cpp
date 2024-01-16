@@ -14,6 +14,7 @@
 #include "CMesh.h"
 #include "CGraphicsShader.h"
 #include "CCameraMoveScript.h"
+#include "CBackgroundScript.h"
 
 #include "CTexture.h"
 #include "CCollisionMgr.h"
@@ -70,13 +71,45 @@ void CLevelMgr::init()
 	pLight->AddComponent(new CLight2D);
 
 	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
-	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.3f, 0.4f));
-	pLight->Light2D()->SetRadius(500.f);
+	pLight->Light2D()->SetLightColor(Vec3(1.f, 0.3f, 0.3f));
+	pLight->Light2D()->SetRadius(300.f);
 
-
-	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");
+
+	// 두번째 광원 추가
+	pLight = new CGameObject;
+	pLight->AddComponent(new CTransform);
+	pLight->AddComponent(new CMeshRender);
+	pLight->AddComponent(new CLight2D);
+
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.f));
+	pLight->Light2D()->SetRadius(300.f);
+
+	pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
+	m_CurLevel->AddObject(pLight, L"Light");
+
+	CGameObject* pObj = nullptr;
+
+	// Backgruond Object 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Background");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CBackgroundScript);
+
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 600.f));
+	pObj->Transform()->SetRelativeScale(Vec3(1600.f, 800.f, 1.f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
+
+	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+
+	m_CurLevel->AddObject(pObj, L"Background", false);
 
 	// UI Cam
 	 pCamObj = new CGameObject;
@@ -93,7 +126,7 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pCamObj, 0);
 
 	// ------- Player Object 생성
-	CGameObject* pObj = nullptr;
+	pObj = nullptr;
 
 	pObj = new CGameObject;
 	pObj->SetName(L"Player");
@@ -113,12 +146,7 @@ void CLevelMgr::init()
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
-
-	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
-
-	pObj->Animator2D()->Play(L"Explosion");
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\link.png"));
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
 	

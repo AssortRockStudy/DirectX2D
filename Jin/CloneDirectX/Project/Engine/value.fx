@@ -2,6 +2,8 @@
 #define _VALUE
 
 #include "struct.fx"
+#define PI 3.1415926535f
+
 
 cbuffer TRANSFORM : register(b0)
 {
