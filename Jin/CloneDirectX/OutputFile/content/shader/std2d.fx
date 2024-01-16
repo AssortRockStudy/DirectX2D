@@ -41,8 +41,20 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     
     if (g_UseAnim2D)
     {
-        float2 vUV = g_vLeftTop + (g_vSlizeSize * _in.vUV);
-        vColor = g_anim2D_tex.Sample(g_sam_1, vUV);
+        float2 vBackgroundLeftTop = g_vLeftTop + (g_vSlizeSize / 2.f) - (g_vBackground / 2.f);
+        vBackgroundLeftTop -= g_vOffset;
+        float2 vUV = vBackgroundLeftTop + (g_vBackground * _in.vUV);
+        
+        if (vUV.x < g_vLeftTop.x || (g_vLeftTop.x + g_vSlizeSize.x) < vUV.x
+            || vUV.y < g_vLeftTop.y || (g_vLeftTop.y + g_vSlizeSize.y) < vUV.y)
+        {
+            //vColor = float4(1.f, 1.f, 0.f, 1.f);
+            discard;
+        }
+        else
+        {
+            vColor = g_anim2d_tex.Sample(g_sam_1, vUV);
+        }
     }
     else
     {

@@ -256,6 +256,7 @@
     <ClInclude Include="CAnim.h">
       <Filter>08. Component\04. Animator2D</Filter>
     </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -375,6 +376,7 @@
     <ClCompile Include="CAnim.cpp">
       <Filter>08. Component\04. Animator2D</Filter>
     </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

@@ -11,6 +11,8 @@
 
 CRenderMgr::CRenderMgr()
 	: m_pDebugObj(nullptr)
+	, m_Light2DBuffer(nullptr)
+	, m_DebugPosition(true)
 {
 
 }
@@ -18,6 +20,9 @@ CRenderMgr::~CRenderMgr()
 {
 	if (nullptr != m_pDebugObj)
 		delete m_pDebugObj;
+
+	if (nullptr != m_Light2DBuffer)
+		delete m_Light2DBuffer;
 }
 
 void CRenderMgr::tick()
