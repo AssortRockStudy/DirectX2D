@@ -27,6 +27,12 @@ CEngine::~CEngine()
 }
 
 
+void CEngine::DebugFunctionCheck()
+{
+	if (KEY_TAP(KEY::O))
+		CRenderMgr::GetInst()->IsDebugPosition() ? CRenderMgr::GetInst()->SetDebugPosition(false) : CRenderMgr::GetInst()->SetDebugPosition(true);
+}
+
 int CEngine::init(HWND _hWnd, Vec2 _vResolution)
 {
 	m_hMainWnd = _hWnd;
@@ -71,6 +77,8 @@ void CEngine::progress()
 
 	// Task !! 
 	CTaskMgr::GetInst()->tick();
+
+	DebugFunctionCheck();
 }
 
 

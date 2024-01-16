@@ -10,6 +10,8 @@
 #include "CTransform.h"
 #include "CMaterial.h"
 
+#include "CRenderMgr.h"
+
 CMeshRender::CMeshRender()
 	: CRenderComponent(COMPONENT_TYPE::MESHRENDER)
 {
@@ -26,6 +28,12 @@ void CMeshRender::UpdateData()
 		GetMaterial()->UpdateData();
 	}
 	Transform()->UpdateData();
+}
+
+void CMeshRender::finaltick()
+{
+	if (CRenderMgr::GetInst()->IsDebugPosition())
+		GamePlayStatic::DrawDebugCross(Transform()->GetWorldPos(), 20.f, Vec3(0.f, 1.f, 0.f), true);
 }
 
 void CMeshRender::render()
