@@ -64,32 +64,32 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pCamObj, 0);
 
-	//// 광원 추가
+	// 광원 추가
 	CGameObject* pLight = new CGameObject;
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
 
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
-	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
-	pLight->Light2D()->SetAmbient(Vec3(1.f, 1.f, 1.f));
-	
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLight->Light2D()->SetLightColor(Vec3(1.f, 0.3f, 0.3f));
+	pLight->Light2D()->SetRadius(300.f);
 
 	pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");
 
-	//// 두번째 광원 추가
-	//pLight = new CGameObject;
-	//pLight->AddComponent(new CTransform);
-	//pLight->AddComponent(new CMeshRender);
-	//pLight->AddComponent(new CLight2D);
+	// 두번째 광원 추가
+	pLight = new CGameObject;
+	pLight->AddComponent(new CTransform);
+	pLight->AddComponent(new CMeshRender);
+	pLight->AddComponent(new CLight2D);
 
-	//pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	//pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.f));
-	//pLight->Light2D()->SetRadius(300.f);
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.f));
+	pLight->Light2D()->SetRadius(300.f);
 
-	//pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
-	//m_CurLevel->AddObject(pLight, L"Light");
+	pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
+	m_CurLevel->AddObject(pLight, L"Light");
+
 
 	CGameObject* pObj = nullptr;
 
@@ -124,6 +124,20 @@ void CLevelMgr::init()
 	pCamObj->Camera()->SetCameraPriority(1);
 	pCamObj->Camera()->LayerCheck(L"UI", true);
 
+	// PostProcess 오브젝트 추가
+	pObj = new CGameObject;
+	pObj->SetName(L"GrayFilter");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+
+	m_CurLevel->AddObject(pObj, L"Default", false);
+
+
+	// 레벨 시작 ~!!!!!!!!!!!!!!!!!!!!
 	m_CurLevel->AddObject(pCamObj, 0);
 
 	// ------- Player Object 생성

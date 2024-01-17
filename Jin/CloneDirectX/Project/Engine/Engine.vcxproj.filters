@@ -396,6 +396,7 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="func.fx" />
+    <FxCompile Include="postprocess.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

@@ -123,7 +123,7 @@ void CRenderMgr::UpdateData()
 	}
 
 	if (!vecLight2DInfo.empty())
-		m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
 
 	m_Light2DBuffer->UpdateData(11);
 
