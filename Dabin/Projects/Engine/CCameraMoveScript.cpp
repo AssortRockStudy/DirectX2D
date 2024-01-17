@@ -87,17 +87,17 @@ void CCameraMoveScript::tick()
 	// switch projection type
 	if (KEY_TAP(KEY::P))
 	{
-		if (ProjType == PROJ_TYPE::ORTHGRAPHIC)
+		if (ProjType == PROJ_TYPE::ORTHOGRAPHIC)
 			Camera()->SetProjType(PROJ_TYPE::PERSEPECTIVE);
 		else
 		{
-			Camera()->SetProjType(PROJ_TYPE::ORTHGRAPHIC);
+			Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
 			Transform()->SetRelativeRotation(Vec3());	// camera dir ÃÊ±âÈ­
 		}
 	}
 
 	// camera control
-	if (ProjType == PROJ_TYPE::ORTHGRAPHIC)
+	if (ProjType == PROJ_TYPE::ORTHOGRAPHIC)
 		MoveOrthographic();
 	else
 		MovePerspective();
@@ -105,7 +105,7 @@ void CCameraMoveScript::tick()
 	// camera setting control
 	if (KEY_PRESSED(KEY::_1))
 	{
-		if (ProjType == PROJ_TYPE::ORTHGRAPHIC)
+		if (ProjType == PROJ_TYPE::ORTHOGRAPHIC)
 			Camera()->SetScale(Camera()->GetScale() + DT * 0.1f);
 		else
 			Camera()->SetFOV(Camera()->GetFOV() + DT * 2.f);
@@ -113,7 +113,7 @@ void CCameraMoveScript::tick()
 	
 	if (KEY_PRESSED(KEY::_2))
 	{
-		if (ProjType == PROJ_TYPE::ORTHGRAPHIC)
+		if (ProjType == PROJ_TYPE::ORTHOGRAPHIC)
 			Camera()->SetScale(Camera()->GetScale() - DT * 0.1f);
 		else
 			Camera()->SetFOV(Camera()->GetFOV() - DT * 2.f);

@@ -9,7 +9,7 @@
 
 enum class PROJ_TYPE
 {
-    ORTHGRAPHIC,
+    ORTHOGRAPHIC,
     PERSEPECTIVE
 };
 

@@ -58,6 +58,7 @@ void CTransform::finaltick()
 	{
 		m_arrLocalDir[i] = XMVector3TransformNormal(m_arrLocalDir[i], m_matWorld); // translation 적용 않기 위해 0으로 확장
 		m_arrLocalDir[i].Normalize(); // scale 적용 않기 위해 정규화
+		m_arrWorldDir[i] = m_arrLocalDir[i]; // scale 적용 않기 위해 정규화
 	}
 
 
