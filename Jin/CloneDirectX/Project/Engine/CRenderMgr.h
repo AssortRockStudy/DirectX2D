@@ -31,6 +31,10 @@ public:
 
     void RegisterLight2D(CLight2D* _Light2D) { m_vecLight2D.push_back(_Light2D); }
 
+    void CopyRenderTargetToPostProcessTarget();
+
+    Ptr<CTexture> GetPostProcessTex() { return m_PostProcessTex; }
+
 public:
     void tick();
     void init();

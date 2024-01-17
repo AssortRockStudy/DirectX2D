@@ -10,6 +10,7 @@
 #include "CLayer.h"
 #include "CGameObject.h"
 #include "CRenderComponent.h"
+#include "CAssetMgr.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -108,6 +109,9 @@ void CCamera::render()
 	render(m_vecMasked);
 	render(m_vecTransparent);
 	render(m_vecPostProcess);
+
+	// 후처리!!!
+	render_postprocess();
 }
 
 void CCamera::SortObject()
@@ -159,4 +163,19 @@ void CCamera::render(vector<CGameObject*>& _vecObj)
 		_vecObj[i]->render();
 
 	_vecObj.clear();
+}
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); ++i)
+	{
+		// 최종 렌더링 이미지를 후처리 타겟에 복사
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+		// 복사받은 후처리 텍스쳐를 t13 레지스터에 바인딩
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+		// 후처리 오브젝트 렌더링
+		m_vecPostProcess[i]->render();
+	}
+	m_vecPostProcess.clear();
 }

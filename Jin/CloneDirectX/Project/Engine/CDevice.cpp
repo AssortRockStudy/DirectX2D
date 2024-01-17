@@ -92,7 +92,7 @@ int CDevice::init(HWND _hWnd, Vec2 _vResolution)
 
 void CDevice::ClearRenderTarget(float(&Color)[4])
 {
-    m_Context->ClearRenderTargetView(m_RTView.Get(), Color);
+    m_Context->ClearRenderTargetView(m_RTTex->GetRTV().Get(), Color);
     m_Context->ClearDepthStencilView(m_DSTex->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
@@ -143,16 +143,21 @@ int CDevice::CreateSwapChain()
 
 int CDevice::CreateTargetView()
 {
-    m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)m_RTTex.GetAddressOf());
-    m_Device->CreateRenderTargetView(m_RTTex.Get(), nullptr, m_RTView.GetAddressOf());
+    ComPtr<ID3D11Texture2D> tex2D;
+    m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)tex2D.GetAddressOf());
+
+    // RenderTargetTexture 를 AssetMgr 에 등록
+    m_RTTex = CAssetMgr::GetInst()->CreateTexture(L"RenderTargetTex", tex2D);
 
     // DepthStencilTexture 생성
-    m_DSTex = CAssetMgr::GetInst()->CreateTexture((UINT)m_vRenderResolution.x
+    m_DSTex = CAssetMgr::GetInst()->CreateTexture(L"DepthStencilTex"
+        , (UINT)m_vRenderResolution.x
         , (UINT)m_vRenderResolution.y
         , DXGI_FORMAT_D24_UNORM_S8_UINT
         , D3D11_BIND_DEPTH_STENCIL);
 
-    m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSTex->GetDSV().Get());
+    // OM(Output Merge State) 에 RenderTargetTexture 와 DepthStencilTexture 를 전달한다.
+    m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
     return S_OK;
 }
 

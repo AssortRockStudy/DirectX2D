@@ -64,32 +64,27 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pCamObj, 0);
 
-	// 광원 추가
+	// UI Cam
+	pCamObj = new CGameObject;
+	pCamObj->SetName(L"UICamera");
+	pCamObj->AddComponent(new CTransform);
+	pCamObj->AddComponent(new CCamera);
+
+	pCamObj->Transform()->SetRelativePos(Vec3(0.5f, 0.f, 0.f));
+	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
+
+	pCamObj->Camera()->SetCameraPriority(1);
+	pCamObj->Camera()->LayerCheck(L"UI", true);
+
+	// 전역 !! 광원 추가
 	CGameObject* pLight = new CGameObject;
+	pLight->SetName(L"Directional Light");
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
-
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLight->Light2D()->SetLightColor(Vec3(1.f, 0.3f, 0.3f));
-	pLight->Light2D()->SetRadius(300.f);
-
-	pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.8f, 0.8f));
 	m_CurLevel->AddObject(pLight, L"Light");
-
-	// 두번째 광원 추가
-	pLight = new CGameObject;
-	pLight->AddComponent(new CTransform);
-	pLight->AddComponent(new CMeshRender);
-	pLight->AddComponent(new CLight2D);
-
-	pLight->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLight->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.f));
-	pLight->Light2D()->SetRadius(300.f);
-
-	pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
-	m_CurLevel->AddObject(pLight, L"Light");
-
 
 	CGameObject* pObj = nullptr;
 
@@ -109,36 +104,7 @@ void CLevelMgr::init()
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
-
 	m_CurLevel->AddObject(pObj, L"Background", false);
-
-	// UI Cam
-	 pCamObj = new CGameObject;
-	pCamObj->SetName(L"UICamera");
-	pCamObj->AddComponent(new CTransform);
-	pCamObj->AddComponent(new CCamera);
-
-	pCamObj->Transform()->SetRelativePos(Vec3(0.5f, 0.f, 0.f));
-	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
-
-	pCamObj->Camera()->SetCameraPriority(1);
-	pCamObj->Camera()->LayerCheck(L"UI", true);
-
-	// PostProcess 오브젝트 추가
-	pObj = new CGameObject;
-	pObj->SetName(L"GrayFilter");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
-
-	m_CurLevel->AddObject(pObj, L"Default", false);
-
-
-	// 레벨 시작 ~!!!!!!!!!!!!!!!!!!!!
-	m_CurLevel->AddObject(pCamObj, 0);
 
 	// ------- Player Object 생성
 	pObj = nullptr;
@@ -164,7 +130,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\link.png"));
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
-	
+
 	// ------- Monster Object 생성
 	pObj = new CGameObject;
 	pObj->SetName(L"Monster");
@@ -199,6 +165,31 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
+
+	// PostProcess 오브젝트 추가
+	/*pObj = new CGameObject;
+	pObj->SetName(L"GrayFilter");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
+
+	m_CurLevel->AddObject(pObj, L"Default", false);*/
+
+	// Distortion 효과 추가
+	pObj = new CGameObject;
+	pObj->SetName(L"Distortion Object");
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMtrl"));
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"NoiseTex", L"texture\\noise\\noise_03.jpg"));
+
+	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	m_CurLevel->begin();
 	//GamePlayStatic::DrawDebugRect(Vec3(0.f, 0.f, 0.f), Vec3(200.f, 200.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), true, 20);
