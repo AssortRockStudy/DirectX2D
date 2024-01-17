@@ -11,6 +11,7 @@
 
 // Time Manager
 #define DT	CTimeMgr::GetInst()->GetDeltaTime()
+#define DTd	CTimeMgr::GetInst()->GetDeltaTime_d()
 
 // Key Manager
 #define KEY_CHECK(Key, State) CKeyMgr::GetInst()->GetKeyState(Key) == State

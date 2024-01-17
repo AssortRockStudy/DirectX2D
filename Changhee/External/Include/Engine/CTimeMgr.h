@@ -8,14 +8,15 @@ private:
 	LARGE_INTEGER	m_Frequency;
 	LARGE_INTEGER	m_PrevCount;
 	LARGE_INTEGER	m_CurCount;
-	float			m_fDeltaTime;
+	double			m_DeltaTime;
 
 
 	UINT			m_iCall;
-	float			m_fTime;
+	double			m_Time;
 
 public:
-	float GetDeltaTime() { return m_fDeltaTime; }
+	float GetDeltaTime() { return (float)m_DeltaTime; }
+	double GetDeltaTime_d() { return m_DeltaTime; }
 
 public:
 	void init();
