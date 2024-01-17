@@ -61,6 +61,7 @@ void CLevelMgr::init()
 
 	pCamObj->Camera()->SetCameraPriority(1);
 	pCamObj->Camera()->LayerCheck(L"UI", true);
+	pCamObj->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
 
 	m_CurLevel->AddObject(pCamObj, L"Default", false);
 
