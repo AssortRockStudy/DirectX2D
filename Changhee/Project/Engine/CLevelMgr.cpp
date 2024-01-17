@@ -38,6 +38,7 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(2)->SetName(L"Tile");
 	m_CurLevel->GetLayer(3)->SetName(L"Player");
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
+	m_CurLevel->GetLayer(5)->SetName(L"Light");
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
 	// 충돌 설정
@@ -75,6 +76,19 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pCamObj, 0);
 
+	// 광원 추가
+	CGameObject* pLight = new CGameObject;
+	pLight->AddComponent(new CTransform);
+	pLight->AddComponent(new CMeshRender);
+	pLight->AddComponent(new CLight2D);
+
+	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
+	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.3f, 0.4f));
+
+	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	m_CurLevel->AddObject(pLight, L"Light");
+
 	// Player Object 생성
 	CGameObject* pObj = nullptr;
 
@@ -84,6 +98,7 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
 	pObj->AddComponent(new CCollider2D);
+	pObj->AddComponent(new CAnimator2D);
 	pObj->AddComponent(new CPlayerScript);
 
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
@@ -100,11 +115,6 @@ void CLevelMgr::init()
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Character.png");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-	pObj->AddComponent(new CAnimator2D);
-	Ptr<CTexture> pAltasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
-	pObj->Animator2D()->Create(L"Explosion", pAltasTex, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(200.f, 200.f), 3, 1);
-
-	pObj->Animator2D()->Play(L"Explosion");
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
@@ -142,6 +152,8 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 
 	m_CurLevel->AddObject(pObj, L"UI", false);
+
+	m_CurLevel->begin();
 }
 
 void CLevelMgr::tick()

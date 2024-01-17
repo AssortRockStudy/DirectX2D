@@ -30,7 +30,19 @@ private:
 public:
     void finaltick();
     void UpdateData();
+    bool IsFinish() { return m_bFinish; }
+    void Reset()
+    {
+        m_bFinish = false;
+        m_iCurFrmIdx = 0;
+        m_fAccTime = 0.f;
+    }
+    
+
+    
     static void Clear();
+
+
 
 public:
     void Create(CAnimator2D* _Animator, Ptr<CTexture> _Atlas, Vec2 _vLeftTop

@@ -3,13 +3,11 @@
 
 #include "CStructuredBuffer.h"
 
-#include "CTimeMgr.h"
-
 #include "CDevice.h"
-#include "CCamera.h"
-#include "CMeshRender.h"
+#include "CTimeMgr.h"
 #include "CAssetMgr.h"
-#include "CTransform.h"
+
+#include "components.h"
 
 CRenderMgr::CRenderMgr()
 	: m_Light2DBuffer(nullptr)
@@ -31,12 +29,16 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::tick()
 {
-	Vec4 vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
+	Vec4 vClearColor = Vec4(0.f, 0.f, 0.f, 1.f);
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
+
+	UpdateData();
 
 	render();
 
 	render_debug();
+
+	Clear();
 
 	CDevice::GetInst()->Present();
 }
@@ -117,4 +119,25 @@ void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)
 	assert(nullptr == m_vecCam[_Idx]);
 
 	m_vecCam[_Idx] = _Cam;
+}
+
+void CRenderMgr::UpdateData()
+{
+	static vector<tLightInfo> vecLight2DInfo;
+
+	for (size_t i = 0; i < m_vecLight2D.size(); ++i)
+	{
+		const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
+		vecLight2DInfo.push_back(info);
+	}
+
+	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	m_Light2DBuffer->UpdateDate(11);
+
+	vecLight2DInfo.clear();
+}
+
+void CRenderMgr::Clear()
+{
+	m_vecLight2D.clear();
 }

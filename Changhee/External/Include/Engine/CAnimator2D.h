@@ -26,7 +26,7 @@ public:
 
 
 
-    void Play(const wstring& _srtKey);
+    void Play(const wstring& _srtKey, bool bRepeat = true);
 
 public:
     CAnimator2D();

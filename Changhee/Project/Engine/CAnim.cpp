@@ -27,7 +27,9 @@ void CAnim::finaltick()
 		++m_iCurFrmIdx;
 		if (m_vecFrm.size() <= m_iCurFrmIdx)
 		{
-			m_iCurFrmIdx = 0;
+			m_iCurFrmIdx = m_vecFrm.size() - 1;
+			m_bFinish = true;
+
 		}
 		m_fAccTime = 0.f;
 	}
