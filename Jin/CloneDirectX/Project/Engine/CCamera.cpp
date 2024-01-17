@@ -9,6 +9,7 @@
 #include "CLevel.h"
 #include "CLayer.h"
 #include "CGameObject.h"
+#include "CRenderComponent.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -103,17 +104,59 @@ void CCamera::render()
 	g_Transform.matView = m_matView;
 	g_Transform.matProj = m_matProj;
 
-	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+	render(m_vecOpaque);
+	render(m_vecMasked);
+	render(m_vecTransparent);
+	render(m_vecPostProcess);
+}
 
+void CCamera::SortObject()
+{
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 	for (int i = 0; i < LAYER_MAX; ++i)
 	{
+		// 카메라가 찍도록 설정된 레이어가 아니면 무시하기
 		if (false == (m_LayerCheck & (1 << i)))
 			continue;
+
 		CLayer* pLayer = pCurLevel->GetLayer(i);
 		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
-		for (size_t i = 0; i < vecObjects.size(); ++i)
+
+		for (size_t j = 0; j < vecObjects.size(); ++j)
 		{
-			vecObjects[i]->render();
+			// Mesh, Material, Shader 확인
+			if (!(vecObjects[j]->GetRenderComopnent()
+				&& vecObjects[j]->GetRenderComopnent()->GetMesh().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader().Get()))
+				continue;
+
+			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader()->GetDomain(); // 도메인 가져오기 !!
+			switch (domain)
+			{ // 그리고 분류
+				case SHADER_DOMAIN::DOMAIN_OPAQUE:
+					m_vecOpaque.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_MASKED:
+					m_vecMasked.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+					m_vecTransparent.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+					m_vecPostProcess.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_DEBUG:
+					break;
+			}
 		}
 	}
+}
+
+void CCamera::render(vector<CGameObject*>& _vecObj)
+{
+	for (size_t i = 0; i < _vecObj.size(); ++i)
+		_vecObj[i]->render();
+
+	_vecObj.clear();
 }

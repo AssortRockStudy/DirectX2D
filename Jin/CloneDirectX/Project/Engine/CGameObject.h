@@ -45,6 +45,7 @@ public:
     GET_COMPONENT(Light2D, LIGHT2D);
 
     const vector<CScript*>& GetScripts() { return m_vecScript; }
+    CRenderComponent* GetRenderComopnent() { return m_RenderCom; }
 
     template<typename T>
     T* GetScript()
