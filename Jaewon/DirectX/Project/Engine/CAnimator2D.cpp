@@ -14,7 +14,11 @@ CAnimator2D::~CAnimator2D()
 
 void CAnimator2D::finaltick()
 {
-	m_CurAnim->finaltick();
+	if (nullptr == m_CurAnim)
+		return;
+
+	if (m_CurAnim->IsFinish() && m_bRepeat)
+		m_CurAnim->Reset();
 }
 
 void CAnimator2D::Create(const wstring& _strKey, Ptr<CTexture> _AltasTex, Vec2 _LeftTop, Vec2 _vSliceSize, Vec2 _OffsetSize, Vec2 _Background, int _FrmCount, float _FPS)
@@ -36,6 +40,8 @@ CAnim* CAnimator2D::FindAnim(const wstring& _strKey)
 
 void CAnimator2D::UpdateData()
 {
+	if (nullptr == m_CurAnim)
+		return;
 	m_CurAnim->UpdateData();
 }
 
@@ -44,11 +50,14 @@ void CAnimator2D::Clear()
 	CAnim::Clear();
 }
 
-void CAnimator2D::Play(const wstring& _strAnimName)
+void CAnimator2D::Play(const wstring& _strAnimName, bool _bRepeat)
 {
 	CAnim* pAnim = FindAnim(_strAnimName);
 	if (nullptr == pAnim)
 		return;
 
+	m_bRepeat = _bRepeat;
+
 	m_CurAnim = pAnim;
+	m_CurAnim->Reset();
 }

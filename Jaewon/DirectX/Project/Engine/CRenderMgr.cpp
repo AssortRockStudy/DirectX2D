@@ -1,13 +1,11 @@
 #include "pch.h"
 #include "CRenderMgr.h"
 #include "CDevice.h"
-#include "CCamera.h"
-#include "CMeshRender.h"
 #include "CAssetMgr.h"
-#include "CTransform.h"
 #include "CGameObject.h"
 #include "CTimeMgr.h"
 #include "CStructedBuffer.h"
+#include "components.h"
 
 CRenderMgr::CRenderMgr()
 	: m_pDebugObj(nullptr)
@@ -27,23 +25,8 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::init()
 {
-	Vec4 arr[3] ={
-		Vec4(1.f, 0.f, 0.f, 1.f),
-		Vec4(0.f, 1.f, 0.f, 1.f),
-		Vec4(0.f, 0.f, 1.f, 1.f)
-	};
-
 	m_Light2DBuffer = new CStructuredBuffer;
 	m_Light2DBuffer->Create(sizeof(Vec4), 2, SB_TYPE::READ_ONLY, true);
-
-	if (m_Light2DBuffer->GetElementCount() < 3)
-		m_Light2DBuffer->Create(sizeof(Vec4), 10, SB_TYPE::READ_ONLY, true);
-
-	m_Light2DBuffer->SetData(arr, 3);
-	m_Light2DBuffer->UpdateData(14);
-
-	Vec4 arrTest[3] = {};
-	m_Light2DBuffer->GetData(arrTest, 3);
 
 	m_pDebugObj = new CGameObject;
 	m_pDebugObj->AddComponent(new CTransform);
@@ -52,12 +35,13 @@ void CRenderMgr::init()
 
 void CRenderMgr::tick()
 {
-	Vec4 vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
+	Vec4 vClearColor = Vec4(0.f, 0.f, 0.f, 1.f);
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
 
+	UpdateData();
 	render();
-
 	render_debug();
+	Clear();
 
 	CDevice::GetInst()->Present();
 }
@@ -129,4 +113,22 @@ void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)
 	assert(nullptr == m_vecCam[_Idx]);
 
 	m_vecCam[_Idx] = _Cam;
+}
+
+void CRenderMgr::UpdateData()
+{
+	static vector<tLightInfo> vecLight2DInfo;
+	for (size_t i = 0; i < m_vecLight2D.size(); ++i){
+		const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
+		vecLight2DInfo.push_back(info);
+	}
+	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	m_Light2DBuffer->UpdateData(11);
+
+	vecLight2DInfo.clear();
+}
+
+void CRenderMgr::Clear()
+{
+	m_vecLight2D.clear();
 }

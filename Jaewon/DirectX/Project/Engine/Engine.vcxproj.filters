@@ -134,6 +134,7 @@
       <Filter>08.Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="CStructedBuffer.h" />
+    <ClInclude Include="CLight2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -251,6 +252,7 @@
       <Filter>08.Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="CStructedBuffer.cpp" />
+    <ClCompile Include="CLight2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -334,6 +336,9 @@
     <Filter Include="03.Device\StructedBuffer">
       <UniqueIdentifier>{614d563b-0f8f-4366-be27-f10d9a2488c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08.Component\06.Light2D">
+      <UniqueIdentifier>{580f879c-d39e-4ef4-9769-de98a038fdc1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -348,6 +353,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="debug.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

@@ -29,6 +29,12 @@ public:
     void finaltick();
     void UpdateData();
     static void Clear();
+    bool IsFinish() { return m_bFinish; }
+    void Reset(){
+        m_bFinish = false;
+        m_CurFrmIdx = 0;
+        m_AccTime = 0.f;
+    }
 
 public:
     CAnim();
