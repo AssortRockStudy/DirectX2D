@@ -41,7 +41,7 @@ void UI::render()
 	}
 	else
 	{
-		ImGui::BeginChild(string(m_strName + m_strID).c_str());
+		ImGui::BeginChild(string(m_strName + m_strID).c_str(), m_vSize);
 
 		render_update();
 
