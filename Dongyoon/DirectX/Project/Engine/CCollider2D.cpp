@@ -39,6 +39,8 @@ void CCollider2D::finaltick()
 	{
 		m_matColWorld *= matObjWorld;
 	}
+	
+	return;
 
 	// 충돌중이면 Red, 충돌하지 않으면 Green
 	if (0 == m_CollisionCount)

@@ -27,6 +27,8 @@ CEngine::~CEngine()
 
 }
 
+
+
 int CEngine::Init(HWND hwnd, Vec2 _vResolution)
 {
 	//출력 윈도우
@@ -74,4 +76,14 @@ void CEngine::progress()
 
 	//Task
 	CTaskMgr::GetInst()->tick();
+
+	DebugFunctionCheck();
+}
+
+void CEngine::DebugFunctionCheck()
+{
+	if (KEY_TAP(KEY::O))
+	{
+		CRenderMgr::GetInst()->IsDebugPosition() ? CRenderMgr::GetInst()->SetDebugPosition(false) : CRenderMgr::GetInst()->SetDebugPosition(true);
+	}
 }

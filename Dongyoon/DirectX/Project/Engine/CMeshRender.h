@@ -9,6 +9,7 @@ class CMeshRender :
 
 public:
     virtual void UpdateData() override;
+    virtual void finaltick();
     virtual void render() override;
 
 public:

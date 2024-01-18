@@ -13,6 +13,8 @@ private:
 public:
 	HWND GetMainWind() { return m_hMainWnd; }
 
+private:
+	void DebugFunctionCheck();
 
 public:
 	int Init(HWND hwnd, Vec2 m_vResolution);
