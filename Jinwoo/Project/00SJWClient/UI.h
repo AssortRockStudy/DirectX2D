@@ -1,6 +1,7 @@
 #pragma once
 
 #include "imgui.h"
+#include "CImGuiMgr.h"
 
 class UI
 {
@@ -10,6 +11,7 @@ private:
 	ImVec2			m_vSize;
 
 	bool			m_bActive;
+	bool			m_bModal;
 
 	UI*				m_Parent;
 	vector<UI*>		m_vecChildUI;
@@ -22,9 +24,10 @@ public:
 	void SetSize(ImVec2 _Size) { m_vSize = _Size; }
 	ImVec2 GetSize() { return m_vSize; }
 
-	void Activate() { m_bActive = true; }
-	void Deactivate() { m_bActive = false; }
+	virtual void Activate() { m_bActive = true; }
+	virtual void Deactivate() { m_bActive = false; }
 	bool IsActivate() { return m_bActive; }
+	void SetModal(bool _Modal) { m_bModal = _Modal; }
 
 	void AddChildUI(UI* _ChildUI)
 	{

@@ -17,26 +17,29 @@
     <Filter Include="Default\ImGui">
       <UniqueIdentifier>{cc7a8eca-bba1-4b84-8b06-24e5177d0062}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector">
-      <UniqueIdentifier>{dcce9db3-1491-4383-b058-34597d80871e}</UniqueIdentifier>
+    <Filter Include="UI\4.ListUI">
+      <UniqueIdentifier>{bd094965-7cfe-43d5-8ecd-b7047c79764c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Content">
+    <Filter Include="UI\2.Content">
       <UniqueIdentifier>{680ca6cd-4153-44a5-9f4d-6447a443357a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Outliner">
-      <UniqueIdentifier>{00f538da-4f17-44af-ab12-5213bfdd7e68}</UniqueIdentifier>
+    <Filter Include="UI\3.Inspector">
+      <UniqueIdentifier>{dcce9db3-1491-4383-b058-34597d80871e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\ComponentUI">
+    <Filter Include="UI\3.Inspector\ComponentUI">
       <UniqueIdentifier>{da335739-56be-439e-a067-be4b64ddaa7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\AssetUI">
-      <UniqueIdentifier>{7d0ba918-525e-46d1-8347-742ea0c20ba0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Inspector\ComponentUI\Transform">
+    <Filter Include="UI\3.Inspector\ComponentUI\Transform">
       <UniqueIdentifier>{90242c65-1ee0-452f-b8f3-adbd6a21f094}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\ComponentUI\MeshRender">
+    <Filter Include="UI\3.Inspector\ComponentUI\MeshRender">
       <UniqueIdentifier>{5902bd00-64a7-4929-b9cc-1dd65d779cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI">
+      <UniqueIdentifier>{7d0ba918-525e-46d1-8347-742ea0c20ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\1.Outliner">
+      <UniqueIdentifier>{00f538da-4f17-44af-ab12-5213bfdd7e68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,22 +89,25 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Inspector.h">
-      <Filter>UI\Inspector</Filter>
+      <Filter>UI\3.Inspector</Filter>
     </ClInclude>
     <ClInclude Include="Content.h">
-      <Filter>UI\Content</Filter>
+      <Filter>UI\2.Content</Filter>
     </ClInclude>
     <ClInclude Include="Outliner.h">
-      <Filter>UI\Outliner</Filter>
+      <Filter>UI\1.Outliner</Filter>
     </ClInclude>
     <ClInclude Include="TransformUI.h">
-      <Filter>UI\Inspector\ComponentUI\Transform</Filter>
+      <Filter>UI\3.Inspector\ComponentUI\Transform</Filter>
     </ClInclude>
     <ClInclude Include="ComponentUI.h">
-      <Filter>UI\Inspector\ComponentUI</Filter>
+      <Filter>UI\3.Inspector\ComponentUI</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderUI.h">
-      <Filter>UI\Inspector\ComponentUI\MeshRender</Filter>
+      <Filter>UI\3.Inspector\ComponentUI\MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="ListUI.h">
+      <Filter>UI\4.ListUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,22 +156,25 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Inspector.cpp">
-      <Filter>UI\Inspector</Filter>
+      <Filter>UI\3.Inspector</Filter>
     </ClCompile>
     <ClCompile Include="Content.cpp">
-      <Filter>UI\Content</Filter>
+      <Filter>UI\2.Content</Filter>
     </ClCompile>
     <ClCompile Include="Outliner.cpp">
-      <Filter>UI\Outliner</Filter>
+      <Filter>UI\1.Outliner</Filter>
     </ClCompile>
     <ClCompile Include="TransformUI.cpp">
-      <Filter>UI\Inspector\ComponentUI\Transform</Filter>
+      <Filter>UI\3.Inspector\ComponentUI\Transform</Filter>
     </ClCompile>
     <ClCompile Include="ComponentUI.cpp">
-      <Filter>UI\Inspector\ComponentUI</Filter>
+      <Filter>UI\3.Inspector\ComponentUI</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderUI.cpp">
-      <Filter>UI\Inspector\ComponentUI\MeshRender</Filter>
+      <Filter>UI\3.Inspector\ComponentUI\MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="ListUI.cpp">
+      <Filter>UI\4.ListUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

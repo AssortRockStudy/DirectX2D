@@ -215,7 +215,7 @@ void CLevelMgr::init()
 	//pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
 
 	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"OutlineMtrl"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"VCRDistortionMtrl"));
 
 	//pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"Noise", L"texture\\noise\\noise_03.jpg"));
 

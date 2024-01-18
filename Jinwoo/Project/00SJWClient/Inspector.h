@@ -19,6 +19,8 @@ public:
     void SetTaretObject(CGameObject* _Object);
     void SetTargetAsset(Ptr<CAsset> _Asset);
 
+    CGameObject* GetTargetObject() { return m_TargetObject; }
+
 public:
     virtual void tick() override;
     virtual void render_update() override;

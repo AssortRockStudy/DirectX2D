@@ -6,7 +6,7 @@
 TransformUI::TransformUI()
 	: ComponentUI("Transform", "##Transform", COMPONENT_TYPE::TRANSFORM)
 {
-	SetSize(ImVec2(0.f, 120.f));
+	SetSize(ImVec2(0.f, 115.f));
 	SetComponentTitle("Transform");
 }
 
@@ -28,10 +28,11 @@ void TransformUI::render_update()
 	Vec3 vRot = GetTargetObject()->Transform()->GetRelativeRotation();
 	vRot.ToDegree();
 
+
 	ImGui::Text("Position");
 	ImGui::SameLine(0, 20);
 	ImGui::DragFloat3("##Relative Position", vPos);
-	
+
 	ImGui::Text("Scale");
 	ImGui::SameLine(0, 41);
 	ImGui::DragFloat3("##Relative Scale", vScale);

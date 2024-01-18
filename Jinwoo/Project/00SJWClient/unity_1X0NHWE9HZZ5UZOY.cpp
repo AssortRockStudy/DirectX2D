@@ -33,6 +33,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Inspector.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\ListUI.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\main.cpp"
 
 
