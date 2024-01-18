@@ -89,12 +89,11 @@ void CLevelMgr::init()
 	pObj->AddComponent(new CPlayerScript);
 
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(200.0f, 200.0f, 1.0f));
+	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
 
 	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(100.f, 0.f));
-
+	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
@@ -102,7 +101,17 @@ void CLevelMgr::init()
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
-	
+
+
+
+	pObj->AddComponent(new CAnimator2D);
+	Ptr<CTexture> pAltasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
+	pObj->Animator2D()->Create(L"Explosion", pAltasTex, Vec2(0.f, 520.f)
+		, Vec2(120.f, 130.f), Vec2(0.f, 0.f), 10, 24.f);
+
+
+	pObj->Animator2D()->Play(L"Explosion");
+
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
 	//Monster Obj »ý¼º
@@ -117,8 +126,8 @@ void CLevelMgr::init()
 	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
 
 	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(100.f, 0.f));
+	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
 
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));

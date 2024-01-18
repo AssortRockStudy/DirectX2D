@@ -6,6 +6,7 @@
 #include "CGraphicsShader.h"
 
 #include "CGameObject.h"
+#include "CAnimator2D.h"
 #include "CTransform.h"
 #include "CMaterial.h"
 
@@ -35,6 +36,15 @@ void CMeshRender::render()
 	if (GetMesh() == nullptr || GetMaterial() == nullptr)
 	{
 		return;
+	}
+
+	if (Animator2D())
+	{
+		Animator2D()->UpdateData();
+	}
+	else
+	{
+		Animator2D()->Clear();
 	}
 
 	UpdateData();

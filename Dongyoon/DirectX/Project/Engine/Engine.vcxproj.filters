@@ -136,6 +136,9 @@
     <Filter Include="04. Manager\ColMgr">
       <UniqueIdentifier>{417b1b09-be66-4f6b-8e9b-3ee21424b1dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. Component\03. Animator2D\Anim">
+      <UniqueIdentifier>{64509c2a-bf51-48fd-a617-9c277c32e662}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -264,6 +267,10 @@
     <ClInclude Include="CCollisionMgr.h">
       <Filter>04. Manager\ColMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
+      <Filter>08. Component\03. Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnim.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -377,6 +384,10 @@
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>04. Manager\ColMgr</Filter>
     </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
+      <Filter>08. Component\03. Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

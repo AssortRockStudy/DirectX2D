@@ -12,7 +12,3 @@ CScript::~CScript()
 {
 }
 
-void CScript::Destroy()
-{
-	GamePlayStatic::DestroyGameObject(GetOwner());
-}

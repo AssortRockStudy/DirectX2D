@@ -41,3 +41,14 @@ void Delete_Vec(vector<T*>& _vec)
 
 	_vec.clear();
 }
+
+template<typename T1, typename T2>
+void Delete_Map(map<T1, T2>& _map)
+{
+	for (const auto& pair : _map)
+	{
+		delete pair.second;
+	}
+
+	_map.clear();
+}

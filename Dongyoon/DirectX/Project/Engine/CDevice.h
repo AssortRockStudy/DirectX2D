@@ -1,34 +1,5 @@
 #pragma once
 
-template<typename T>
-class MyPtr
-{
-private:
-	T* m_Target;
-
-public:
-	~MyPtr()
-	{
-		m_Target->Release();
-	}
-};
-
-class SmartPointer
-{
-	int* pInt;
-
-public:
-	int* get()
-	{
-		return pInt;
-	}
-
-	int** GetAdressOf()
-	{
-		return &pInt;
-	}
-};
-
 class CConstBuffer;
 
 //Directx11 기준 GPU 제어 

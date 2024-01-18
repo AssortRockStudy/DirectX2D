@@ -32,33 +32,34 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    //uint width = 0;
-    //uint height = 0;
-    //g_tex_1.GetDimensions(width, height);
-    
     float4 vColor = float4(1.f, 0.f, 1.f, 1.f);
     
-    if(g_btex_0)
+    if (g_UseAnim2D)
     {
-        vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        //g_vLeftTop;
+        //g_vSlizeSize;
         
-        //saturate 0 ~ 1을 넘지 않게 보정
-        float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
-        
-        if(fAlpha < 0.1f)
+        float2 vUV = g_vLeftTop + (g_vSliceSize * _in.vUV);
+        vColor = g_anim2d_tex.Sample(g_sam_1, vUV);
+    }
+    else
+    {
+        if (g_btex_0)
         {
-            //픽셀 쉐이더 중간 폐기처리
-            discard; // clip(-1);
+            vColor = g_tex_0.Sample(g_sam_1, _in.vUV);
+        
+            //saturate 0 ~ 1 을 넘지 않게 보정
+            float fAlpha = 1.f - saturate(dot(vColor.rb, vColor.rb) / 2.f);
+        
+            if (fAlpha < 0.1f)
+            {
+            // 픽셀 쉐이더를 중간에 폐기처리
+                discard; //clip(-1);            
+            }
         }
     }
     
-    if(g_int_0)
-    {
-        vColor.r *= 2.f;
-    }
-    
     return vColor;
-
 }
 
 

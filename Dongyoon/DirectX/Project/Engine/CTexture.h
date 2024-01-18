@@ -23,6 +23,10 @@ public:
 
     static void Clear(int _RegisterNum);
 
+
+    UINT GetWidth() { return m_Desc.Width; }
+    UINT GetHeight() { return m_Desc.Height; }
+
 public:
     CTexture();
     ~CTexture();
