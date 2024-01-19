@@ -11,6 +11,8 @@
 #include "CGameObject.h"
 #include "CRenderComponent.h"
 
+#include "CAssetMgr.h"
+
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -119,20 +121,20 @@ void CCamera::SortObject()
 		for (size_t j = 0; j < vecObjects.size(); ++j)
 		{
 			//매쉬 재질 쉐이더 확인
-			if (!(vecObjects[j]->GetRenderComponent()
-				&& vecObjects[j]->GetRenderComponent()->GetMesh().Get()
-				&& vecObjects[j]->GetRenderComponent()->GetMaterial().Get()
-				&& vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader().Get()))
+			if (!(vecObjects[j]->GetRenderComopnent()
+				&& vecObjects[j]->GetRenderComopnent()->GetMesh().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader().Get()))
 			{
 				continue;
 			}
 
 
-			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader()->GetDomain();
+			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader()->GetDomain();
 
 			switch (domain)
 			{
-			case SHADER_DOMAIN::DOMAIN_OPAQIE:
+			case SHADER_DOMAIN::DOMAIN_OPAQUE:
 				m_vecOpaque.push_back(vecObjects[j]);
 				break;
 			case SHADER_DOMAIN::DOMAIN_MASKED:
@@ -167,6 +169,9 @@ void CCamera::render()
 	render(m_vecTransparent);
 	render(m_vecPostProcess);
 
+	//후처리 작업
+	render_postprocess();
+
 }
 
 void CCamera::render(vector<CGameObject*>& _vecObj)
@@ -176,5 +181,21 @@ void CCamera::render(vector<CGameObject*>& _vecObj)
 		_vecObj[i]->render();
 	}
 	_vecObj.clear();
+}
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); ++i)
+	{
+		//최종 렌더링 이미지를 후처리 타겟에 복사
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+
+		//복사받은 후처리 텍스쳐를 t13 레지스터에 바인딩
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+
+		// 후처리 오브젝트 렌더링
+		m_vecPostProcess[i]->render();
+	}
 }
 

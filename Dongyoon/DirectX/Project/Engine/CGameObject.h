@@ -45,7 +45,7 @@ public:
 
     const vector<CScript*>& GetScripts() { return m_vecScript; }
 
-    CRenderComponent* GetRenderComponent() { return m_RenderCom; }
+    CRenderComponent* GetRenderComopnent() { return m_RenderCom; }
     
     template<typename T>
     T* GetScript()
