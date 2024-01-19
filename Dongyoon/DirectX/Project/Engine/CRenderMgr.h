@@ -2,6 +2,8 @@
 
 #include "CSingleton.h"
 
+#include "CTexture.h"
+
 class CCamera;
 class CGameObject;
 class CStructuredBuffer;
@@ -13,6 +15,8 @@ class CRenderMgr :
     SINGLE(CRenderMgr);
 private:
     vector<CCamera*>            m_vecCam;
+
+    Ptr<CTexture>               m_PostProcessTex;
 
     CStructuredBuffer*          m_Light2DBuffer;
     vector<CLight2D*>           m_vecLight2D;

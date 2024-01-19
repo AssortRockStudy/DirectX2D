@@ -29,7 +29,7 @@ CEngine::~CEngine()
 
 }
 
-int D3D11memorycheck();
+
 
 int CEngine::Init(HWND hwnd, Vec2 _vResolution)
 {
