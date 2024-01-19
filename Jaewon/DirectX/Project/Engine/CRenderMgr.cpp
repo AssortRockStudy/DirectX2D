@@ -1,24 +1,27 @@
 #include "pch.h"
 #include "CRenderMgr.h"
 #include "CDevice.h"
-#include "CAssetMgr.h"
+#include "CConstBuffer.h"
+#include "CStructedBuffer.h"
 #include "CGameObject.h"
 #include "CTimeMgr.h"
-#include "CStructedBuffer.h"
+#include "CDevice.h"
+#include "CAssetMgr.h"
 #include "components.h"
 
+
 CRenderMgr::CRenderMgr()
-	: m_pDebugObj(nullptr)
-	, m_Light2DBuffer(nullptr)
+	: m_Light2DBuffer(nullptr)
+	, m_pDebugObj(nullptr)
 	, m_DebugPosition(true)
 {
-
 }
 
 CRenderMgr::~CRenderMgr()
 {
 	if (nullptr != m_pDebugObj)
 		delete m_pDebugObj;
+
 	if (nullptr != m_Light2DBuffer)
 		delete m_Light2DBuffer;
 }
@@ -26,7 +29,8 @@ CRenderMgr::~CRenderMgr()
 void CRenderMgr::init()
 {
 	m_Light2DBuffer = new CStructuredBuffer;
-	m_Light2DBuffer->Create(sizeof(Vec4), 2, SB_TYPE::READ_ONLY, true);
+	m_Light2DBuffer->Create(sizeof(tLightInfo), 10, SB_TYPE::READ_ONLY, true);
+
 
 	m_pDebugObj = new CGameObject;
 	m_pDebugObj->AddComponent(new CTransform);
@@ -39,8 +43,10 @@ void CRenderMgr::tick()
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
 
 	UpdateData();
+
 	render();
 	render_debug();
+
 	Clear();
 
 	CDevice::GetInst()->Present();
@@ -60,7 +66,7 @@ void CRenderMgr::render_debug()
 	g_Transform.matProj = m_vecCam[0]->GetProjMat();
 
 	list<tDebugShapeInfo>::iterator iter = m_DbgShapeInfo.begin();
-	for (; iter != m_DbgShapeInfo.end();)
+	for (; iter != m_DbgShapeInfo.end(); )
 	{
 		switch ((*iter).eShape)
 		{
@@ -73,6 +79,7 @@ void CRenderMgr::render_debug()
 		case DEBUG_SHAPE::CROSS:
 			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CrossMesh"));
 			break;
+
 		case DEBUG_SHAPE::CUBE:
 			m_pDebugObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"CubeMesh"));
 			break;
@@ -85,21 +92,64 @@ void CRenderMgr::render_debug()
 
 		m_pDebugObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DebugShapeMtrl"));
 		m_pDebugObj->MeshRender()->GetMaterial()->SetScalarParam(VEC4_0, (*iter).vColor);
+
 		D3D11_PRIMITIVE_TOPOLOGY PrevTopology = m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->GetTopology();
 		if (DEBUG_SHAPE::CROSS == (*iter).eShape)
+		{
 			m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_LINELIST);
+		}
+
 		m_pDebugObj->Transform()->SetWorldMat((*iter).matWorld);
 		m_pDebugObj->Transform()->UpdateData();
+
 		m_pDebugObj->render();
 
 		m_pDebugObj->MeshRender()->GetMaterial()->GetShader()->SetTopology(PrevTopology);
 
 		(*iter).fLifeTime += DT;
 		if ((*iter).fDuration <= (*iter).fLifeTime)
+		{
 			iter = m_DbgShapeInfo.erase(iter);
+		}
 		else
+		{
 			++iter;
+		}
 	}
+}
+
+void CRenderMgr::UpdateData()
+{
+	g_global.g_Light2DCount = (int)m_vecLight2D.size();
+	//g_global.g_Light3DCount = (int)m_vecLight3D.size();
+
+	// 전역 데이터 업데이트
+	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL_DATA);
+	pCB->SetData(&g_global);
+	pCB->UpdateData();
+
+
+	// 2D 광원정보 업데이트
+	static vector<tLightInfo> vecLight2DInfo;
+
+	for (size_t i = 0; i < m_vecLight2D.size(); ++i)
+	{
+		const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
+		vecLight2DInfo.push_back(info);
+	}
+
+	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	m_Light2DBuffer->UpdateData(11);
+
+	vecLight2DInfo.clear();
+
+
+	// 3D 광원정보 업데이트
+}
+
+void CRenderMgr::Clear()
+{
+	m_vecLight2D.clear();
 }
 
 void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)
@@ -113,22 +163,4 @@ void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)
 	assert(nullptr == m_vecCam[_Idx]);
 
 	m_vecCam[_Idx] = _Cam;
-}
-
-void CRenderMgr::UpdateData()
-{
-	static vector<tLightInfo> vecLight2DInfo;
-	for (size_t i = 0; i < m_vecLight2D.size(); ++i){
-		const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
-		vecLight2DInfo.push_back(info);
-	}
-	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
-	m_Light2DBuffer->UpdateData(11);
-
-	vecLight2DInfo.clear();
-}
-
-void CRenderMgr::Clear()
-{
-	m_vecLight2D.clear();
 }

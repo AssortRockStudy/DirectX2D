@@ -6,6 +6,7 @@ CStructuredBuffer::CStructuredBuffer()
 	: m_ElementSize(0)
 	, m_ElementCount(0)
 	, m_Type(SB_TYPE::READ_ONLY)
+	, m_bSysMemMove(false)
 {
 }
 
@@ -23,6 +24,7 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
 	m_SB_Read = nullptr;
 	m_SB_Write = nullptr;
 
+
 	m_ElementSize = _ElementSize;
 	m_ElementCount = _ElementCount;
 	m_Type = _Type;
@@ -33,30 +35,34 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
 	tDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	tDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 	tDesc.StructureByteStride = m_ElementSize;
+
 	tDesc.CPUAccessFlags = 0;
 	tDesc.Usage = D3D11_USAGE_DEFAULT;
 
 	HRESULT hr = E_FAIL;
 	if (nullptr == _pSysMem)
+	{
 		hr = DEVICE->CreateBuffer(&tDesc, nullptr, m_SB.GetAddressOf());
-	else{
+	}
+	else
+	{
 		D3D11_SUBRESOURCE_DATA tSub = {};
 		tSub.pSysMem = _pSysMem;
 		hr = DEVICE->CreateBuffer(&tDesc, &tSub, m_SB.GetAddressOf());
 	}
 
-	if (FAILED(hr)) 
-		return E_FAIL;
+	if (FAILED(hr)) return E_FAIL;
 
 	// Shader Resource View 생성
 	D3D11_SHADER_RESOURCE_VIEW_DESC SRVDesc = {};
 	SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
 	SRVDesc.Buffer.NumElements = m_ElementCount;
-	hr = DEVICE->CreateShaderResourceView(m_SB.Get(), &SRVDesc, m_SRV.GetAddressOf());
-	if (FAILED(hr)) 
-		return E_FAIL;
 
-	if (m_bSysMemMove){
+	hr = DEVICE->CreateShaderResourceView(m_SB.Get(), &SRVDesc, m_SRV.GetAddressOf());
+	if (FAILED(hr)) return E_FAIL;
+
+	if (m_bSysMemMove)
+	{
 		// 쓰기용 버퍼
 		tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		tDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -70,6 +76,7 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
 
 	return S_OK;
 }
+
 
 void CStructuredBuffer::UpdateData(UINT _RegisterNum)
 {
@@ -89,7 +96,9 @@ void CStructuredBuffer::SetData(void* _SysMem, UINT _ElementCount)
 
 	// 입력 데이터가 구조화버퍼보다 더 큰 경우
 	if (m_ElementCount < _ElementCount)
+	{
 		Create(m_ElementSize, _ElementCount, m_Type, m_bSysMemMove, nullptr);
+	}
 
 	D3D11_MAPPED_SUBRESOURCE tSub = {};
 	CONTEXT->Map(m_SB_Write.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);

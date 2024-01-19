@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CConstBuffer.h"
+
 #include "CDevice.h"
 
 CConstBuffer::CConstBuffer(CB_TYPE _Type)
@@ -21,8 +22,12 @@ int CConstBuffer::Create(UINT _ElementSize, UINT _ElementCount)
 	m_Desc.ByteWidth = m_ElementSize * m_ElementCount;
 	m_Desc.StructureByteStride = m_ElementSize;
 	m_Desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+
+	// 버퍼에 데이터 쓰기 가능
 	m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	m_Desc.Usage = D3D11_USAGE_DYNAMIC;
+
+	// 상수 버퍼 생성
 	if (FAILED(DEVICE->CreateBuffer(&m_Desc, nullptr, m_CB.GetAddressOf())))
 	{
 		MessageBox(nullptr, L"상수 버퍼 생성 실패", L"TestInit 오류", MB_OK);

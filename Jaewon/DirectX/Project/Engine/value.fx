@@ -3,14 +3,20 @@
 
 #include "struct.fx"
 
+#define PI 3.1415926535f
+
+// 4096 크기제한
 cbuffer TRANSFORM : register(b0)
 {
     row_major Matrix g_matWorld;
     row_major Matrix g_matWorldInv;
+
     row_major Matrix g_matView;
     row_major Matrix g_matViewInv;
+
     row_major Matrix g_matProj;
     row_major Matrix g_matProjInv;
+
     row_major Matrix g_matWV;
     row_major Matrix g_matWVP;
 }
@@ -64,6 +70,17 @@ cbuffer ANIM_DATA2D : register(b2)
     float3 padding;
 }
 
+cbuffer GLOBAL_DATA : register(b3)
+{
+    float2 g_RenderResolution; // 렌더링 해상도
+    float g_dt; // Delta Time
+    float g_time; // 누적 시간
+    int g_Light2DCount; // 2D 광원 개수
+    int g_Light3DCount; // 3D 광원 개수
+    float2 globalpadding;
+}
+
+
 Texture2D g_tex_0 : register(t0);
 Texture2D g_tex_1 : register(t1);
 Texture2D g_tex_2 : register(t2);
@@ -82,7 +99,9 @@ Texture2D g_anim2d_tex : register(t10);
 StructuredBuffer<tLightInfo> g_Light2D : register(t11);
 StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
+
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);
+
 
 #endif
