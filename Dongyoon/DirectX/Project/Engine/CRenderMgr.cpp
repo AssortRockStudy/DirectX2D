@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CRenderMgr.h"
 
+#include "CStructuredBuffer.h"
+
 #include "CTimeMgr.h"
 
 #include "CDevice.h"
@@ -10,7 +12,9 @@
 #include "CTransform.h"
 
 CRenderMgr::CRenderMgr()
-	: m_pDebugObj(nullptr)
+	: m_Light2DBuffer(nullptr)
+	, m_pDebugObj(nullptr)
+	, m_DebugPosition(true)
 {
 
 }
@@ -19,6 +23,9 @@ CRenderMgr::~CRenderMgr()
 {
 	if (m_pDebugObj != nullptr)
 		delete m_pDebugObj;
+
+	if (nullptr != m_Light2DBuffer)
+		delete m_Light2DBuffer;
 }
 
 void CRenderMgr::tick()

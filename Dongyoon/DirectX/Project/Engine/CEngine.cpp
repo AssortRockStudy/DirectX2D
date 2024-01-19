@@ -14,6 +14,8 @@
 #include "CCollisionMgr.h"
 
 
+
+
 CEngine::CEngine()
 	: m_hMainWnd(nullptr)
 	, m_vResolution()
@@ -27,7 +29,7 @@ CEngine::~CEngine()
 
 }
 
-
+int D3D11memorycheck();
 
 int CEngine::Init(HWND hwnd, Vec2 _vResolution)
 {
@@ -78,6 +80,7 @@ void CEngine::progress()
 	CTaskMgr::GetInst()->tick();
 
 	DebugFunctionCheck();
+
 }
 
 void CEngine::DebugFunctionCheck()
@@ -87,3 +90,5 @@ void CEngine::DebugFunctionCheck()
 		CRenderMgr::GetInst()->IsDebugPosition() ? CRenderMgr::GetInst()->SetDebugPosition(false) : CRenderMgr::GetInst()->SetDebugPosition(true);
 	}
 }
+
+

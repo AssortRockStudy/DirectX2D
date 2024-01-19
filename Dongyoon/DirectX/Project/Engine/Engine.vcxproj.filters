@@ -64,9 +64,6 @@
     <Filter Include="08. Component\02. Collider2D">
       <UniqueIdentifier>{bd63f02a-899b-4482-ab44-75db3951d0ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Component\03. Animator2D">
-      <UniqueIdentifier>{8fbe1c15-df2a-4db6-8144-7fc2f474ffc1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. Component\06. Light2D">
       <UniqueIdentifier>{74361a49-4f55-4337-8219-a2e189b3607f}</UniqueIdentifier>
     </Filter>
@@ -97,26 +94,8 @@
     <Filter Include="04. Manager\AssetMgr">
       <UniqueIdentifier>{dbc65137-f1f2-4368-b9ed-ef28e546a1c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Manager\AssetMgr\Mesh">
-      <UniqueIdentifier>{b0a37aa2-1f4f-4e57-a420-cc826948b671}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\AssetMgr\MeshData">
-      <UniqueIdentifier>{5e344a46-8059-4a58-9bc4-47fb63c4e3c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\AssetMgr\Material">
-      <UniqueIdentifier>{945db2ba-813f-4475-a4bc-5d210fa375b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\AssetMgr\Sound">
-      <UniqueIdentifier>{f98e4b42-2407-466e-8cd5-6ba568741a82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\AssetMgr\Shader">
-      <UniqueIdentifier>{fd05a542-310b-44fc-bf59-e349dc84f267}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Manager\LevelMgr">
       <UniqueIdentifier>{c18723aa-5077-495a-8599-ee35b238f4db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\RenderMgr">
-      <UniqueIdentifier>{df2bba78-1ab9-4834-a91f-fdbf7fbbc67f}</UniqueIdentifier>
     </Filter>
     <Filter Include="06. Asset\Texture">
       <UniqueIdentifier>{ef8c16af-c8fc-4764-a9cc-aa91be9b4d69}</UniqueIdentifier>
@@ -136,7 +115,13 @@
     <Filter Include="04. Manager\ColMgr">
       <UniqueIdentifier>{417b1b09-be66-4f6b-8e9b-3ee21424b1dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Component\03. Animator2D\Anim">
+    <Filter Include="03. Device\StructedBuffer">
+      <UniqueIdentifier>{1c32dc20-4120-480c-b212-b6b13a177b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D">
+      <UniqueIdentifier>{8fbe1c15-df2a-4db6-8144-7fc2f474ffc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D\Anim">
       <UniqueIdentifier>{64509c2a-bf51-48fd-a617-9c277c32e662}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -210,9 +195,6 @@
     <ClInclude Include="CRenderComponent.h">
       <Filter>08. Component\RenderComponent</Filter>
     </ClInclude>
-    <ClInclude Include="CConstBuffer.h">
-      <Filter>03. Device</Filter>
-    </ClInclude>
     <ClInclude Include="CMeshRender.h">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
     </ClInclude>
@@ -268,9 +250,17 @@
       <Filter>04. Manager\ColMgr</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator2D.h">
-      <Filter>08. Component\03. Animator2D</Filter>
+      <Filter>08. Component\04. Animator2D</Filter>
     </ClInclude>
-    <ClInclude Include="CAnim.h" />
+    <ClInclude Include="CAnim.h">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h">
+      <Filter>03. Device\StructedBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -323,9 +313,6 @@
     </ClCompile>
     <ClCompile Include="CRenderComponent.cpp">
       <Filter>08. Component\RenderComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="CConstBuffer.cpp">
-      <Filter>03. Device</Filter>
     </ClCompile>
     <ClCompile Include="CMeshRender.cpp">
       <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
@@ -385,9 +372,17 @@
       <Filter>04. Manager\ColMgr</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator2D.cpp">
-      <Filter>08. Component\03. Animator2D</Filter>
+      <Filter>08. Component\04. Animator2D</Filter>
     </ClCompile>
-    <ClCompile Include="CAnim.cpp" />
+    <ClCompile Include="CAnim.cpp">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp">
+      <Filter>03. Device\StructedBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

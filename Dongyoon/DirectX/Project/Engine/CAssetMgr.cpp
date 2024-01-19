@@ -124,7 +124,6 @@ void CAssetMgr::CreateDefaultMesh()
 	vecVtx.clear();
 	vecIdx.clear();
 
-
 	//==================================
 	//CrossMesh¸¸µé±â
 	//==================================
@@ -151,6 +150,7 @@ void CAssetMgr::CreateDefaultMesh()
 	AddAsset(L"CrossMesh", pMesh);
 	vecVtx.clear();
 	vecIdx.clear();
+
 }
 
 void CAssetMgr::CreateDefaultGraphicsShader()

@@ -29,6 +29,7 @@ using std::make_pair;
 
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
+#pragma comment(lib, "dxguid")
 
 using namespace DirectX;
 
@@ -56,3 +57,5 @@ typedef Vector4 Vec4;
 #include "define.h"
 #include "struct.h"
 #include "func.h"
+
+
