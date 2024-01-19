@@ -50,6 +50,9 @@ int CDevice::Init(HWND _hwnd, Vec2 _vResolution)
 		return E_FAIL;
 	}
 
+	// Àü¿ª µ¥ÀÌÅÍ¿¡ ·»´õ¸µ ÇØ»óµµ ±â·Ï
+	g_global.g_RenderResolution = m_vRenderResolution;
+
 	//·»´õ Å¸°Ù, ·»´õÅ¸°Ù ºä, µª½º ½ºÅÙ½Ç Å¸°Ù, µª½º ½ºÅÙ½Ç ºä »ý¼º
 	if (FAILED(CreateTargetView()))
 	{
@@ -400,6 +403,8 @@ int CDevice::CreateConstBuffer()
 	m_arrCB[(UINT)CB_TYPE::ANIM2D_DATA] = new CConstBuffer(CB_TYPE::ANIM2D_DATA);
 	m_arrCB[(UINT)CB_TYPE::ANIM2D_DATA]->Create(sizeof(tAnimData2D), 1);
 
+	m_arrCB[(UINT)CB_TYPE::GLOBAL_DATA] = new CConstBuffer(CB_TYPE::GLOBAL_DATA);
+	m_arrCB[(UINT)CB_TYPE::GLOBAL_DATA]->Create(sizeof(tGlobalData), 1);
 
 
 	return S_OK;
