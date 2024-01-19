@@ -17,11 +17,22 @@ CAnimator2D::~CAnimator2D()
 
 void CAnimator2D::finaltick()
 {
+	if (m_CurAnim == nullptr)
+		return;
+
+	if (m_CurAnim->IsFinish() && m_bRepeat)
+	{
+		m_CurAnim->Reset();
+	}
+
 	m_CurAnim->finaltick();
 }
 
 void CAnimator2D::UpdateData()
 {
+	if (m_CurAnim == nullptr)
+		return;
+
 	m_CurAnim->UpdateData();
 }
 
@@ -52,11 +63,14 @@ CAnim* CAnimator2D::FindAnim(const wstring& _strKey)
 }
 
 
-void CAnimator2D::Play(const wstring& _strAnimName)
+void CAnimator2D::Play(const wstring& _strAnimName, bool _bRepeat)
 {
 	CAnim* pAnim = FindAnim(_strAnimName);
 	if (nullptr == pAnim)
 		return;
+	
+	m_bRepeat = _bRepeat;
 
 	m_CurAnim = pAnim;
+	m_CurAnim->Reset();
 }
