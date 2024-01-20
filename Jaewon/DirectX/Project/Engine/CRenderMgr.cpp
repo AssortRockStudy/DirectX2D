@@ -35,6 +35,9 @@ void CRenderMgr::init()
 	m_pDebugObj = new CGameObject;
 	m_pDebugObj->AddComponent(new CTransform);
 	m_pDebugObj->AddComponent(new CMeshRender);
+
+	Vec2 vRenderResolution = CDevice::GetInst()->GetRenderResolution();
+	m_PostProcessTex = CAssetMgr::GetInst()->CreateTexture(L"PostProcessTex", (UINT)vRenderResolution.x, (UINT)vRenderResolution.y, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
 }
 
 void CRenderMgr::tick()
@@ -56,6 +59,7 @@ void CRenderMgr::render()
 {
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
+		m_vecCam[i]->SortObject();
 		m_vecCam[i]->render();
 	}
 }
@@ -138,7 +142,9 @@ void CRenderMgr::UpdateData()
 		vecLight2DInfo.push_back(info);
 	}
 
-	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	if (!vecLight2DInfo.empty())
+		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
+	
 	m_Light2DBuffer->UpdateData(11);
 
 	vecLight2DInfo.clear();
@@ -163,4 +169,10 @@ void CRenderMgr::RegisterCamera(CCamera* _Cam, int _Idx)
 	assert(nullptr == m_vecCam[_Idx]);
 
 	m_vecCam[_Idx] = _Cam;
+}
+
+void CRenderMgr::CopyRenderTargetToPostProcessTarget()
+{
+	Ptr<CTexture> pRTTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	CONTEXT->CopyResource(m_PostProcessTex->GetTex2D().Get(), pRTTex->GetTex2D().Get());
 }

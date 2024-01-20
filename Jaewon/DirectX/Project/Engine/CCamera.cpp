@@ -7,6 +7,8 @@
 #include "CLevel.h"
 #include "CLayer.h"
 #include "CGameObject.h"
+#include "CRenderComponent.h"
+#include "CAssetMgr.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -79,6 +81,48 @@ void CCamera::LayerCheck(const wstring& _strLayerName, bool _bCheck)
 	LayerCheck(idx, _bCheck);
 }
 
+
+void CCamera::SortObject()
+{
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+
+	for (int i = 0; i < LAYER_MAX; ++i){
+
+		if (false == (m_LayerCheck & (1 << i)))
+			continue;
+
+		CLayer* pLayer = pCurLevel->GetLayer(i);
+		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
+		for (size_t j = 0; j < vecObjects.size(); ++j){
+			if (!(vecObjects[j]->GetRenderComopnent()
+				&& vecObjects[j]->GetRenderComopnent()->GetMesh().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial().Get()
+				&& vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader().Get()))
+				continue;
+
+			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader()->GetDomain();
+
+			switch (domain)
+			{
+			case SHADER_DOMAIN::DOMAIN_OPAQUE:
+				m_vecOpaque.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_MASKED:
+				m_vecMaked.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+				m_vecTransparent.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+				m_vecPostProcess.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_DEBUG:
+				break;
+			}
+		}
+	}
+}
+
 void CCamera::render()
 {
 	g_Transform.matView = m_matView;
@@ -86,12 +130,29 @@ void CCamera::render()
 
 	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 
-	for (int i = 0; i < LAYER_MAX; ++i){
-		if (false == (m_LayerCheck & (1 << i)))
-			continue;
-		CLayer* pLayer = pCurLevel->GetLayer(i);
-		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
-		for (int i = 0; i < vecObjects.size(); ++i)
-			vecObjects[i]->render();
+	render(m_vecOpaque);
+	render(m_vecMaked);
+	render(m_vecTransparent);
+	render_postprocess();
+}
+
+void CCamera::render(vector<CGameObject*>& _vecObj)
+{
+	for (size_t i = 0; i < _vecObj.size(); ++i)
+	{
+		_vecObj[i]->render();
 	}
+	_vecObj.clear();
+}
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); ++i){
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+		m_vecPostProcess[i]->render();
+	}
+
+	m_vecPostProcess.clear();
 }
