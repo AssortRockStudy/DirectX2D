@@ -87,11 +87,15 @@ void CLevelMgr::init()
 	CGameObject* pLight = new CGameObject;
 	pLight->SetName(L"Light2D");
 	pLight->AddComponent(new CTransform);
-	//pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
 
 	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	//pLight->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
 	pLight->Light2D()->SetAmbient(Vec3(0.8f, 0.8f, 0.8f));
+	//pLight->Light2D()->SetRadius(500.f);
+	//pLight->Light2D()->SetAngle(XM_PI / 6.f);
+	//pLight->Light2D()->SetDir(Vec3(1.f, 0.f, 0.f));
+
 	m_CurLevel->AddObject(pLight, L"Light");
 
 	// Player 생성
@@ -139,6 +143,27 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
+
+	// Monster Object 생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Monster");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CMeshRender);
+	pObj->AddComponent(new CCollider2D);
+
+	pObj->Transform()->SetRelativePos(Vec3(500.f, 0.f, 500.f));
+	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+
+	pObj->Collider2D()->SetAbsolute(true);
+	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
+	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
+
+	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+
+	m_CurLevel->AddObject(pObj, L"Monster", false);
 
 	//// 타일 생성
 	//pObj = new CGameObject;

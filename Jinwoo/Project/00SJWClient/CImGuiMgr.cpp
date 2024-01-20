@@ -85,7 +85,7 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11
     create_UI();
 
     CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
-    CGameObject* pObject = pCurLevel->FindObjectByName(L"Player");
+    CGameObject* pObject = pCurLevel->FindObjectByName(L"Light2D");
     ((Inspector*)FindUI("##Inspector"))->SetTaretObject(pObject);
 }
 

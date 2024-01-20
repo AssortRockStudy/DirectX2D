@@ -9,6 +9,10 @@ public:
     virtual void render_update() override;
 
 public:
+    Vec3 AngleToVector(float _angle);
+
+
+public:
     Light2DUI();
     ~Light2DUI();
 };
