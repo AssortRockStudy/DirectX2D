@@ -40,7 +40,7 @@ void CCollider2D::finaltick()
 		m_matColWorld *= matObjWorld;
 	}
 
-	return;
+	//return;
 
 	// 충돌중이면 빨간색, 충돌하고 있지 않으면 초록색
 	if (0 == m_CollisionCount)
@@ -51,9 +51,7 @@ void CCollider2D::finaltick()
 		}
 		else
 		{
-			Vec3 vPos = GetOwner()->Transform()->GetWorldPos();
-			Vec2 vRadius = GetOwner()->Collider2D()->GetOffsetScale();
-			GamePlayStatic::DrawDebugCircle(vPos, vRadius.x, Vec3(0.f, 1.f, 0.f), false);
+			GamePlayStatic::DrawDebugCircle(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);
 		}
 	}
 	else

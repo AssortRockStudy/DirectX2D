@@ -30,16 +30,25 @@ void TransformUI::render_update()
 
 
 	ImGui::Text("Position");
-	ImGui::SameLine(0, 20);
-	ImGui::DragFloat3("##Relative Position", vPos);
+	ImGui::SameLine(0, 20);	ImGui::PushItemWidth(80);
+	ImGui::Text("x"); ImGui::SameLine(); ImGui::DragFloat("##Posx", &vPos.x); ImGui::SameLine();
+	ImGui::Text("y"); ImGui::SameLine(); ImGui::DragFloat("##Posy", &vPos.y); ImGui::SameLine();
+	ImGui::Text("z"); ImGui::SameLine(); ImGui::DragFloat("##Posz", &vPos.z);
+	//ImGui::DragFloat3("##Relative Position", vPos);
 
 	ImGui::Text("Scale");
-	ImGui::SameLine(0, 41);
-	ImGui::DragFloat3("##Relative Scale", vScale);
+	ImGui::SameLine(0, 41);	ImGui::PushItemWidth(80);
+	ImGui::Text("x"); ImGui::SameLine(); ImGui::DragFloat("##Scalex", &vScale.x); ImGui::SameLine();
+	ImGui::Text("y"); ImGui::SameLine(); ImGui::DragFloat("##Scaley", &vScale.y); ImGui::SameLine();
+	ImGui::Text("z"); ImGui::SameLine(); ImGui::DragFloat("##Scalez", &vScale.z);
+	//ImGui::DragFloat3("##Relative Scale", vScale);
 
 	ImGui::Text("Rotation");
-	ImGui::SameLine(0, 20);
-	ImGui::DragFloat3("##Relative Rotation", vRot);
+	ImGui::SameLine(0, 20);	ImGui::PushItemWidth(80);
+	ImGui::Text("x"); ImGui::SameLine(); ImGui::DragFloat("##Rotx", &vRot.x); ImGui::SameLine();
+	ImGui::Text("y"); ImGui::SameLine(); ImGui::DragFloat("##Roty", &vRot.y); ImGui::SameLine();
+	ImGui::Text("z"); ImGui::SameLine(); ImGui::DragFloat("##Rotz", &vRot.z);
+	//ImGui::DragFloat3("##Relative Rotation", vRot);
 
 	vRot.ToRadian();
 

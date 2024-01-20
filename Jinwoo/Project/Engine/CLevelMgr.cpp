@@ -43,6 +43,8 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(3)->SetName(L"Player");
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
+	m_CurLevel->GetLayer(6)->SetName(L"Tile");
+
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
 	// 충돌 설정
@@ -83,9 +85,9 @@ void CLevelMgr::init()
 
 	// 광원 추가
 	CGameObject* pLight = new CGameObject;
-	pLight->SetName(L"Directional Light");
+	pLight->SetName(L"Light2D");
 	pLight->AddComponent(new CTransform);
-	pLight->AddComponent(new CMeshRender);
+	//pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
 
 	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
@@ -138,71 +140,17 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
-	//// Monster 생성
+	//// 타일 생성
 	//pObj = new CGameObject;
-	//pObj->SetName(L"Monster");
+	//pObj->SetName(L"TileMap");
 
 	//pObj->AddComponent(new CTransform);
-	//pObj->AddComponent(new CMeshRender);
-	//pObj->AddComponent(new CCollider2D);
+	//pObj->AddComponent(new CTileMap);
 
-	//pObj->Transform()->SetRelativePos(Vec3(300.f, 0.f, 300.f));
-	//pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+	//pTex = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
+	//pObj->TileMap()->SetTileAtlas(pTex, Vec2(64.f, 64.f));
 
-	//pObj->Collider2D()->SetAbsolute(true);
-	//pObj->Collider2D()->SetOffsetScale(Vec2(50.f, 50.f));
-	//pObj->Collider2D()->SetOffsetPos(Vec2(0.f, -20.f));
-
-	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	//pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
-
-	//m_CurLevel->AddObject(pObj, L"Monster", false);
-
-	//// tv 생성
-	//pObj = new CGameObject;
-	//pObj->SetName(L"TV");
-
-	//pObj->AddComponent(new CTransform);
-	//pObj->AddComponent(new CMeshRender);
-
-	//pObj->Transform()->SetRelativePos(Vec3(100.f, 0.f, 300.f));
-	//pObj->Transform()->SetRelativeScale(Vec3(900.f, 480.f, 1.f));
-
-	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	//
-	//pTex = CAssetMgr::GetInst()->Load<CTexture>(L"TVTex", L"texture\\tv.png");
-	//pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
-
-	//m_CurLevel->AddObject(pObj, L"Monster", false);
-
-	//// UI GameObject 생성
-	//pObj = new CGameObject;
-	//pObj->SetName(L"UI");
-
-	//pObj->AddComponent(new CTransform);
-	//pObj->AddComponent(new CMeshRender);
-
-	//pObj->Transform()->SetRelativePos(Vec3(-590, 310.f, 500.f));
-	//pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
-
-	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-
-	//m_CurLevel->AddObject(pObj, L"UI", false);
-
-	//// PostProcess 생성
-	//pObj = new CGameObject;
-	//pObj->SetName(L"GrayFilter");
-
-	//pObj->AddComponent(new CTransform);
-	//pObj->AddComponent(new CMeshRender);
-
-	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
-
-	//m_CurLevel->AddObject(pObj, L"Default", false);
+	//m_CurLevel->AddObject(pObj, L"Tile", false);
 
 	//// PostProcess 생성
 	//pObj = new CGameObject;

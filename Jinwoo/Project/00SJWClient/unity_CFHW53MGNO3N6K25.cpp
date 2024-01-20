@@ -3,6 +3,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\CImGuiMgr.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Collider2DUI.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\ComponentUI.cpp"
 
 
@@ -31,6 +34,9 @@
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Inspector.cpp"
+
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Light2DUI.cpp"
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\ListUI.cpp"

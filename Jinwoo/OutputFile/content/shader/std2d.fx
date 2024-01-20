@@ -4,9 +4,6 @@
 #include "value.fx"
 #include "func.fx"
 
-// 구조화 버퍼 선언 예시
-StructuredBuffer<float4> g_Data : register(t14);
-
 struct VS_IN
 {
     float4 vColor : COLOR;

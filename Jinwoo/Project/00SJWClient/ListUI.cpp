@@ -41,9 +41,16 @@ void ListUI::render_update()
             {
                 m_strDBClicked = m_vecStr[i];
 
+                // 등록된 콜백 함수가 있으면 호출
                 if (nullptr != m_CallBackFunc)
                 {
                     m_CallBackFunc((DWORD_PTR)m_strDBClicked.c_str());
+                }
+
+                // 등록된 델리게이트 함수가 있으면 호출
+                if (m_pUI && m_Func)
+                {
+                    (m_pUI->*m_Func)((DWORD_PTR)m_strDBClicked.c_str());
                 }
 
                 Deactivate();

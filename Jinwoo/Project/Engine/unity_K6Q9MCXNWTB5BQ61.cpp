@@ -62,3 +62,6 @@
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevel.cpp"
 
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevelMgr.cpp"
+

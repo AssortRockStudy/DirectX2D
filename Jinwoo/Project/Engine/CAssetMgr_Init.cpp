@@ -180,6 +180,20 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 
 	//======================
+	// 타일맵 셰이더 생성
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\tilemap.fx", "VS_TileMap");
+	pShader->CreatePixelShader(L"shader\\tilemap.fx", "PS_TileMap");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDSType(DS_TYPE::LESS);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
+
+	AddAsset(L"TileMapShader", pShader);
+
+	//======================
 	// GrayFilter Shader 생성
 	// Mesh		:	RectMesh
 	// RS_TYPE	:	CULL_BACK
@@ -279,6 +293,15 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
 	AddAsset<CMaterial>(L"BackgroundMtrl", pMtrl);
 
+	// 타일맵머테리얼 생성
+	pMtrl = new CMaterial;
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"TileMapShader"));
+	AddAsset<CMaterial>(L"TileMapMtrl", pMtrl);
+
+	
+	// ============================================================
+
+
 	// GrayFilterMtrl
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"GrayFilterShader"));
@@ -298,6 +321,10 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMtrl = new CMaterial;
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"OutlineShader"));
 	AddAsset<CMaterial>(L"OutlineMtrl", pMtrl);
+
+
+	// ============================================================
+
 
 	// 디버그쉐이프 머테리얼 생성
 	pMtrl = new CMaterial;

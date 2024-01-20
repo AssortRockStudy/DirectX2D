@@ -35,7 +35,7 @@ void CCameraMoveScript::tick()
 		MovePerspective();
 	}
 
-	if (KEY_PRESSED(NUM1))
+	if (KEY_PRESSED(_1))
 	{
 		if (Camera()->GetProjType() == PROJ_TYPE::ORTHOGRAPHIC)
 		{
@@ -48,7 +48,7 @@ void CCameraMoveScript::tick()
 		}
 	}
 
-	if (KEY_PRESSED(NUM2))
+	if (KEY_PRESSED(_2))
 	{
 		if (Camera()->GetProjType() == PROJ_TYPE::ORTHOGRAPHIC)
 		{

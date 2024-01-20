@@ -2,6 +2,7 @@
 
 #include "CTransform.h"
 #include "CMeshRender.h"
+#include "CTileMap.h"
 
 #include "CCamera.h"
 

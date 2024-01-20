@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevelMgr.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLight2D.cpp"
 
 
@@ -46,6 +43,9 @@
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CTexture.cpp"
+
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CTileMap.cpp"
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CTimeMgr.cpp"
