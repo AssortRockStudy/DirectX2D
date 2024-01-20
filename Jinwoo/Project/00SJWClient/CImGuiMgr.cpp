@@ -15,7 +15,7 @@
 #include "ListUI.h"
 
 CImGuiMgr::CImGuiMgr()
-    : m_bDemoUI(true)
+    : m_bDemoUI(false)
 {
 
 }
@@ -85,7 +85,7 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11
     create_UI();
 
     CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
-    CGameObject* pObject = pCurLevel->FindObjectByName(L"Light2D");
+    CGameObject* pObject = pCurLevel->FindObjectByName(L"MainCamera");
     ((Inspector*)FindUI("##Inspector"))->SetTaretObject(pObject);
 }
 

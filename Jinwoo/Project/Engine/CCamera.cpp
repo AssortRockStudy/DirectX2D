@@ -57,11 +57,22 @@ void CCamera::finaltick()
 	if (m_ProjType == PROJ_TYPE::ORTHOGRAPHIC)
 	{
 		Vec2 vResol = CDevice::GetInst()->GetRenderResolution();
+
+		if (m_Scale <= 0.f || m_Far <= 1.f)
+		{
+			return;
+		}
+
 		m_matProj = XMMatrixOrthographicLH(vResol.x * m_Scale, (vResol.x / m_AspectRatio) * m_Scale, 1.f, m_Far);
 	}
 	// 원근 투영일 때
 	else
 	{
+		if (m_FOV <= 0.f || m_Far <= 1.f)
+		{
+			return;
+		}
+
 		m_matProj = XMMatrixPerspectiveFovLH(m_FOV, m_AspectRatio, 1.f, m_Far);
 	}
 }
@@ -192,3 +203,11 @@ void CCamera::render_postprocess()
 	m_vecPostProcess.clear();
 }
 
+
+void CCamera::AllLayerOff()
+{
+	for (size_t i = 0; i < LAYER_MAX; ++i)
+	{
+		LayerCheck(i, false);
+	}
+}

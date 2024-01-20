@@ -43,7 +43,6 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(3)->SetName(L"Player");
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
-	m_CurLevel->GetLayer(6)->SetName(L"Tile");
 
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
@@ -144,26 +143,26 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
-	// Monster Object 생성
-	pObj = new CGameObject;
-	pObj->SetName(L"Monster");
+	//// Monster Object 생성
+	//pObj = new CGameObject;
+	//pObj->SetName(L"Monster");
 
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-	pObj->AddComponent(new CCollider2D);
+	//pObj->AddComponent(new CTransform);
+	//pObj->AddComponent(new CMeshRender);
+	//pObj->AddComponent(new CCollider2D);
 
-	pObj->Transform()->SetRelativePos(Vec3(500.f, 0.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+	//pObj->Transform()->SetRelativePos(Vec3(500.f, 0.f, 500.f));
+	//pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
 
-	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
+	//pObj->Collider2D()->SetAbsolute(true);
+	//pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
+	//pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
 
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+	//pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
+	//pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
-	m_CurLevel->AddObject(pObj, L"Monster", false);
+	//m_CurLevel->AddObject(pObj, L"Monster", false);
 
 	//// 타일 생성
 	//pObj = new CGameObject;

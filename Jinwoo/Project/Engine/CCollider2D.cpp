@@ -9,6 +9,7 @@ CCollider2D::CCollider2D()
 	, m_CollisionCount(0)
 	, m_bAbsolute(false)
 	, m_Type(COLLIDER2D_TYPE::RECT)
+	, m_IsDebug(false)
 {
 }
 
@@ -42,29 +43,32 @@ void CCollider2D::finaltick()
 
 	//return;
 
-	// 충돌중이면 빨간색, 충돌하고 있지 않으면 초록색
-	if (0 == m_CollisionCount)
+	if (m_IsDebug)
 	{
-		if (m_Type == COLLIDER2D_TYPE::RECT)
+		// 충돌중이면 빨간색, 충돌하고 있지 않으면 초록색
+		if (0 == m_CollisionCount)
 		{
-			GamePlayStatic::DrawDebugRect(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);
+			if (m_Type == COLLIDER2D_TYPE::RECT)
+			{
+				GamePlayStatic::DrawDebugRect(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);
+			}
+			else
+			{
+				GamePlayStatic::DrawDebugCircle(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);
+			}
 		}
 		else
 		{
-			GamePlayStatic::DrawDebugCircle(m_matColWorld, Vec3(0.f, 1.f, 0.f), false);
-		}
-	}
-	else
-	{
-		if (m_Type == COLLIDER2D_TYPE::RECT)
-		{
-			GamePlayStatic::DrawDebugRect(m_matColWorld, Vec3(1.f, 0.f, 0.f), false);
-		}
-		else
-		{
-			Vec3 vPos = GetOwner()->Transform()->GetWorldPos();
-			Vec2 vRadius = GetOwner()->Collider2D()->GetOffsetScale();
-			GamePlayStatic::DrawDebugCircle(vPos, vRadius.x, Vec3(1.f, 0.f, 0.f), false);
+			if (m_Type == COLLIDER2D_TYPE::RECT)
+			{
+				GamePlayStatic::DrawDebugRect(m_matColWorld, Vec3(1.f, 0.f, 0.f), false);
+			}
+			else
+			{
+				Vec3 vPos = GetOwner()->Transform()->GetWorldPos();
+				Vec2 vRadius = GetOwner()->Collider2D()->GetOffsetScale();
+				GamePlayStatic::DrawDebugCircle(vPos, vRadius.x, Vec3(1.f, 0.f, 0.f), false);
+			}
 		}
 	}
 }

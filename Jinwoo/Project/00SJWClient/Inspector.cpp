@@ -7,6 +7,7 @@
 #include "MeshRenderUI.h"
 #include "Collider2DUI.h"
 #include "Light2DUI.h"
+#include "CameraUI.h"
 
 Inspector::Inspector()
 	: UI("Inspector", "##Inspector")
@@ -24,6 +25,9 @@ Inspector::Inspector()
 
 	m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D] = new Light2DUI;
 	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D]);
+
+	m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA] = new CameraUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA]);
 }
 
 Inspector::~Inspector()

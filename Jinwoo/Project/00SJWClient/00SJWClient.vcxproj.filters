@@ -47,6 +47,9 @@
     <Filter Include="UI\3.Inspector\ComponentUI\Light2D">
       <UniqueIdentifier>{464a136b-bb20-4ddc-96b8-408fb49deb55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\3.Inspector\ComponentUI\Camera">
+      <UniqueIdentifier>{1faceb6c-e2f0-48c7-a433-283d5ccff158}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -121,6 +124,9 @@
     <ClInclude Include="Light2DUI.h">
       <Filter>UI\3.Inspector\ComponentUI\Light2D</Filter>
     </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>UI\3.Inspector\ComponentUI\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="Light2DUI.cpp">
       <Filter>UI\3.Inspector\ComponentUI\Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>UI\3.Inspector\ComponentUI\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
