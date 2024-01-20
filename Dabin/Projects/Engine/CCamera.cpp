@@ -6,6 +6,7 @@
 #include "CLevelMgr.h"
 #include "CLayer.h"
 #include "CRenderMgr.h"
+#include "CRenderComponent.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -23,6 +24,27 @@ CCamera::CCamera()
 
 CCamera::~CCamera()
 {
+}
+
+void CCamera::render(vector<CGameObject*>& _vec)
+{
+	for (size_t i = 0; i < _vec.size(); ++i)
+		_vec[i]->render();
+	_vec.clear();	// 매 틱마다 domain 분류해 넣고 clear 반복
+}
+
+void CCamera::render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); ++i)
+	{
+		// 최종 render image 복사 후 register binding
+		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
+		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdatePipeline(13);
+		
+		m_vecPostProcess[i]->render();
+	}
+	m_vecPostProcess.clear(); // 매 틱마다 새로 등록, clear
 }
 
 void CCamera::finaltick()
@@ -64,18 +86,55 @@ void CCamera::render()
 	g_Transform.matView = m_matView;
 	g_Transform.matProj = m_matProj;
 
+	// domain 순서대로 렌더링
+	render(m_vecOpaque);
+	render(m_vecMasked);
+	render(m_vecTransparent);
+
+	render_postprocess();
+}
+
+void CCamera::SortObject()
+{
+	// 카메라가 볼 수 있는 layer의 objets를 모아, domain별로 sorting함
 	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 
 	for (int i = 0; i < LAYER_MAX; ++i)
 	{
-		// 카메라가 볼 수 있는 layer만 렌더
+		// 1. layer check
 		if (false == (m_LayerCheck & (1 << i)))
 			continue;
 
+		// 2. sort by domain
 		CLayer* pLayer = pCurLevel->GetLayer(i);
 		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
-		for (size_t i = 0; i < vecObjects.size(); ++i)
-			vecObjects[i]->render();
+		for (size_t j = 0; j < vecObjects.size(); ++j)
+		{
+			if (!(vecObjects[j]->GetRenderComponent()
+				&& vecObjects[j]->GetRenderComponent()->GetMesh().Get()
+				&& vecObjects[j]->GetRenderComponent()->GetMaterial().Get()
+				&& vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader().Get()))
+				continue;
+
+			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader()->GetDomain();
+			switch (domain)
+			{
+			case SHADER_DOMAIN::DOMAIN_OPAQUE:
+				m_vecOpaque.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_MASKED:
+				m_vecMasked.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+				m_vecTransparent.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+				m_vecPostProcess.push_back(vecObjects[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_DEBUG:
+				break;
+			}
+		}
 	}
 }
 

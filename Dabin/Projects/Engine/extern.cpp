@@ -6,3 +6,4 @@
 // =======================================
 
 tTransform g_Transform = {};
+tGlobalData g_Global = {};

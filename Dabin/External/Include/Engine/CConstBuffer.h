@@ -1,8 +1,9 @@
 #pragma once
 #include "CEntity.h"
 // =======================================
-// CConstBuffer: Obj의 Transform과 관련된 상수 전달 버퍼
+// CConstBuffer: Obj의 상수 전달 버퍼
 // =======================================
+// - ex) Transform 관련된 상수 정보 전달 
 // - object의 이동 위해서 vertex를 직접 update하지 않고, 이동정보(offset), 즉 transform 보냄
 // - vertex shader에서 vector를 해당 값만큼 이동
 

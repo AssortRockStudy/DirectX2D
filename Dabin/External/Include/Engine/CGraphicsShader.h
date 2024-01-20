@@ -24,11 +24,14 @@ private:
     ComPtr<ID3D11InputLayout>   m_Layout;	// Input Layout: vertex의 구조 알림
     D3D11_PRIMITIVE_TOPOLOGY    m_Topology;
 
-    RS_TYPE m_RasterizerType;   // Restarizer State
+    RS_TYPE         m_RasterizerType;   // Restarizer State
     
     // OM
-    DS_TYPE m_DSType;   // DepthStencil State
-    BS_TYPE m_BlendType;   // Blend State
+    DS_TYPE         m_DSType;   // DepthStencil State
+    BS_TYPE         m_BlendType;   // Blend State
+
+    // Shader Domain
+    SHADER_DOMAIN   m_Domain;
 
 public:
     virtual void UpdatePipeline();
@@ -44,6 +47,9 @@ public:
     void SetRSType(RS_TYPE _Type) { m_RasterizerType = _Type; }
     void SetDSType(DS_TYPE _Type) { m_DSType = _Type; }
     void SetBSType(BS_TYPE _Type) { m_BlendType = _Type; }
+    void SetDomain(SHADER_DOMAIN _domain) { m_Domain = _domain; }
+    D3D11_PRIMITIVE_TOPOLOGY GetTopology() { return m_Topology; }
+    SHADER_DOMAIN GetDomain() { return m_Domain; }
 
 public:
     CGraphicsShader();

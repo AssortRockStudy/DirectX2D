@@ -70,7 +70,8 @@ enum class COMPONENT_TYPE
 enum class CB_TYPE
 {
 	TRANSFORM,
-	MATREIAL_CONST,
+	MATERIAL_CONST,
+	ANIM2D_DATA,
 	GLOBAL_DATA,
 	ANIMTATION,
 
@@ -178,4 +179,23 @@ enum class DEBUG_SHAPE
 
 	CUBE,
 	SPHERE,
+
+	CROSS,
+};
+
+enum class LIGHT_TYPE
+{
+	DIRECTIONAL,
+	POINT,
+	SPOT,
+};
+
+enum class SHADER_DOMAIN
+{
+	DOMAIN_OPAQUE,		// 무조건 불투명
+	DOMAIN_MASKED,		// 투명 잘라내기
+	DOMAIN_TRANSPARENT,	// 반투명
+	DOMAIN_POSTPROCESS,	// 후처리
+
+	DOMAIN_DEBUG
 };

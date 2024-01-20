@@ -1,10 +1,8 @@
 #pragma once
 #include "singleton.h"
-
 // =======================================
 // CLevelMgr: Level 积己, 包府
 // =======================================
-
 class CLevel;
 
 class CLevelMgr :

@@ -31,6 +31,12 @@ void CGameObject::begin()
 		if (m_arrCom[i])
 			m_arrCom[i]->begin();
 	}
+
+	for (size_t i = 0; i < m_vecScript.size(); ++i)
+		m_vecScript[i]->begin();
+
+	for (size_t i = 0; i < m_vecChild.size(); ++i)
+		m_vecChild[i]->begin();
 }
 
 void CGameObject::tick()
@@ -108,6 +114,11 @@ void CGameObject::DisconnectWithLayer()
 	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 	CLayer* pCurLayer = pCurLevel->GetLayer(m_iLayerIdx);
 	pCurLayer->DetachGameObject(this);
+}
+
+void CGameObject::Destroy()
+{
+	GamePlayStatic::DestroyGameObject(this);
 }
 
 void CGameObject::AddComponent(CComponent* _Component)

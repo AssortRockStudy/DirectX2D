@@ -158,10 +158,14 @@ call EngineCopy.bat</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAnim.h" />
+    <ClInclude Include="CAnimator2D.h" />
     <ClInclude Include="CAsset.h" />
     <ClInclude Include="CAssetMgr.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCameraMoveScript.h" />
+    <ClInclude Include="CCollider2D.h" />
+    <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CDevice.h" />
@@ -174,6 +178,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="CLayer.h" />
     <ClInclude Include="CLevel.h" />
     <ClInclude Include="CLevelMgr.h" />
+    <ClInclude Include="CLight2D.h" />
     <ClInclude Include="CMaterial.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CMeshRender.h" />
@@ -185,17 +190,25 @@ call EngineCopy.bat</Command>
     <ClInclude Include="CRenderMgr.h" />
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CShader.h" />
+    <ClInclude Include="CStructuredBuffer.h" />
     <ClInclude Include="CTaskMgr.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
+    <ClCompile Include="CAnim.cpp" />
+    <ClCompile Include="CAnimator2D.cpp" />
+    <ClCompile Include="CAssetMgr_init.cpp" />
     <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="CCollider2D.cpp" />
+    <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CGC.cpp" />
+    <ClCompile Include="CLight2D.cpp" />
     <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="CRenderMgr.cpp" />
     <ClCompile Include="CRenderMgr_init.cpp" />
+    <ClCompile Include="CStructuredBuffer.cpp" />
     <ClCompile Include="CTaskMgr.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="extern.cpp">
@@ -246,6 +259,11 @@ call EngineCopy.bat</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <FxCompile Include="postprocess.fx">
+      <FileType>Document</FileType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
     <ClCompile Include="RenderingTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -258,11 +276,23 @@ call EngineCopy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="func.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="std2d.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="UI.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="value.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

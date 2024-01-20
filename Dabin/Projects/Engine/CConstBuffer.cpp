@@ -47,7 +47,7 @@ void CConstBuffer::SetData(void* _Src, UINT _ElementCount)
 	D3D11_MAPPED_SUBRESOURCE tSub = {};
 
 	CONTEXT->Map(m_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
-	memcpy(tSub.pData, _Src, m_ElementSize *= _ElementCount);
+	memcpy(tSub.pData, _Src, m_ElementSize * _ElementCount);
 	CONTEXT->Unmap(m_CB.Get(), 0);
 }
 

@@ -45,6 +45,93 @@ int CTexture::Load(const wstring& _strFilePath)
 	return S_OK;
 }
 
+int CTexture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _USAGE)
+{
+	m_Desc.Format = _Format;
+	m_Desc.Width = _Width;
+	m_Desc.Height = _Height;
+	m_Desc.BindFlags = _BindFlag;
+	m_Desc.Usage = _USAGE;
+	if (_USAGE == D3D11_USAGE_DYNAMIC)
+		m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	m_Desc.SampleDesc.Count = 1;
+	m_Desc.SampleDesc.Quality = 0;
+	m_Desc.MipLevels = 1;
+	m_Desc.MiscFlags = 0;
+	m_Desc.ArraySize = 1;
+
+	if (FAILED(DEVICE->CreateTexture2D(&m_Desc, nullptr, m_Tex2D.GetAddressOf())))
+		return E_FAIL;
+
+	// bind flag가 enum이 아닌 UINT인 이유: bit조합으로 사용
+	if (m_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+	{
+		if (FAILED(DEVICE->CreateDepthStencilView(m_Tex2D.Get(), nullptr, m_DSV.GetAddressOf())))
+			return E_FAIL;
+	}
+	else
+	{
+		if (m_Desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+		{
+			if (FAILED(DEVICE->CreateRenderTargetView(m_Tex2D.Get(), nullptr, m_RTV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+		{
+			if (FAILED(DEVICE->CreateShaderResourceView(m_Tex2D.Get(), nullptr, m_SRV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS)
+		{
+			if (FAILED(DEVICE->CreateUnorderedAccessView(m_Tex2D.Get(), nullptr, m_UAV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+	}
+
+	return S_OK;
+}
+
+int CTexture::Create(ComPtr<ID3D11Texture2D> _tex2D)
+{
+	assert(_tex2D.Get());
+
+	m_Tex2D = _tex2D;
+	m_Tex2D->GetDesc(&m_Desc);
+
+	// bind flag가 enum이 아닌 UINT인 이유: bit조합으로 사용
+	if (m_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+	{
+		if (FAILED(DEVICE->CreateDepthStencilView(m_Tex2D.Get(), nullptr, m_DSV.GetAddressOf())))
+			return E_FAIL;
+	}
+	else
+	{
+		if (m_Desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+		{
+			if (FAILED(DEVICE->CreateRenderTargetView(m_Tex2D.Get(), nullptr, m_RTV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+		{
+			if (FAILED(DEVICE->CreateShaderResourceView(m_Tex2D.Get(), nullptr, m_SRV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS)
+		{
+			if (FAILED(DEVICE->CreateUnorderedAccessView(m_Tex2D.Get(), nullptr, m_UAV.GetAddressOf())))
+				return E_FAIL;
+		}
+
+	}
+
+	return S_OK;
+}
+
 // Rendering Pipeline으로 넘김
 void CTexture::UpdatePipeline(int _registerNum)
 {

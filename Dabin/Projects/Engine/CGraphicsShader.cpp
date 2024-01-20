@@ -9,6 +9,7 @@ CGraphicsShader::CGraphicsShader()
 	, m_RasterizerType(RS_TYPE::CULL_BACK)
 	, m_BlendType(BS_TYPE::DEFAULT)
 	, m_DSType(DS_TYPE::LESS)
+	, m_Domain(SHADER_DOMAIN::DOMAIN_MASKED)
 {
 
 }

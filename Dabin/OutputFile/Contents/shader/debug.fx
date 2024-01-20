@@ -27,19 +27,20 @@ VS_OUT VS_DebugShape(VS_IN _in)
 static float g_Thickness = 0.1f;
 float4 PS_DebugShape(VS_OUT _in) : SV_Target
 {
-    // outline 만듦 (방법1)
-    // - 방법1: PS에서UV로 설정
-    // - 방법2: rasterizer를 wireframe render로 설정
-    // - 방법3: topology를 line strip으로 설정
     float4 vOutColor = (float4) 0.f;
     
-    if (g_Thickness <= _in.vUV.x && _in.vUV.x <= (1.f - g_Thickness)
-        && g_Thickness <= _in.vUV.y && _in.vUV.y <= (1.f - g_Thickness))
-    {
-        discard;
-    }
-
-    vOutColor = float4(1.f, 1.f, 0.f, 1.f);
+    // outline
+    // - 방법1: PS에서UV로 설정
+    //if (g_Thickness <= _in.vUV.x && _in.vUV.x <= (1.f - g_Thickness)
+    //    && g_Thickness <= _in.vUV.y && _in.vUV.y <= (1.f - g_Thickness))
+    //{
+    //    discard;
+    //}
+    // - 방법2: rasterizer를 wireframe render로 설정
+    // - 방법3: topology를 line strip으로 설정
+    
+    vOutColor = g_vec4_0;
+    vOutColor.a = 1.f;
     return vOutColor;
 }
 

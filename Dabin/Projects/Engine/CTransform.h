@@ -32,8 +32,11 @@ public:
     Vec3 GetRelativeScale() { return m_vRelativeScale; }
     Vec3 GetRelativeRotation() { return m_vRelativeRotation; }
     Vec3 GetLocalDir(DIR_TYPE _Type) { return m_arrLocalDir[(UINT)_Type]; }
-    Vec3 GetWorldDir(DIR_TYPE _Type) { return m_arrWorldDir[(UINT)_Type]; }
     const Matrix& GetWorldMat() { return m_matWorld; }
+    Vec3 GetWorldPos() { return m_matWorld.Translation(); }
+    Vec3 GetWorldScale();
+    //Vec3 GetWorldRotate(); // Rotation은 world 계산 어려움... 나중에!
+    Vec3 GetWorldDir(DIR_TYPE _Type) { return m_arrWorldDir[(UINT)_Type]; }
 
 public:
     CTransform();

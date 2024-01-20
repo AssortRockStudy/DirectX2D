@@ -10,7 +10,6 @@
 // AssetMgr: Asset(resource) 생성, 관리
 // =======================================
 // - Asset load: Asset mgr를 통해서만 가능
-
 class CAsset;
 
 class CAssetMgr :
@@ -28,6 +27,8 @@ private:
 
 public:
     void init();
+    Ptr<CTexture> CreateTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
+    Ptr<CTexture> CreateTexture(const wstring& _strKey, ComPtr<ID3D11Texture2D> _tex2D);
 
     template<typename T>
     Ptr<T> Load(const wstring& _strKey, const wstring& _strRelativePath); // asset load: asset mgr로 관리

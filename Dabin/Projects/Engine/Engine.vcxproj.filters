@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Default">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="01. Header">
       <UniqueIdentifier>{928a7551-a1f5-4f04-a256-bbec5b09f517}</UniqueIdentifier>
     </Filter>
@@ -109,6 +105,31 @@
     </Filter>
     <Filter Include="04. Manager\RenderMgr">
       <UniqueIdentifier>{f27e517c-96cd-487e-b8f0-11aba96b4c55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D">
+      <UniqueIdentifier>{46db433b-6b40-41df-b469-9566577e8f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CollisionMgr">
+      <UniqueIdentifier>{eef1aedc-2626-4499-b4fd-bc636a8d2677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\04. Animator2D\Anim">
+      <UniqueIdentifier>{07fe3dd9-e687-4e5c-925c-bf5591fddfce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\StructuredBuffer">
+      <UniqueIdentifier>{ee36e89b-264c-4b03-adfa-33dfa3b9a282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Component\06. Light2D">
+      <UniqueIdentifier>{a98c7733-349a-434b-a414-186c59b4df84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ShaderCode\Render">
+      <UniqueIdentifier>{3bfd8957-07f8-4339-b1d0-56436c0fec12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Util">
+      <UniqueIdentifier>{db2e13ee-af40-459a-91e7-e1c549b14517}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +254,24 @@
     <ClInclude Include="CRenderMgr.h">
       <Filter>04. Manager\RenderMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CCollider2D.h">
+      <Filter>08. Component\02. Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator2D.h">
+      <Filter>08. Component\04. Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>04. Manager\CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnim.h">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CLight2D.h">
+      <Filter>08. Component\06. Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -341,16 +380,49 @@
     <ClCompile Include="CRenderMgr_init.cpp">
       <Filter>04. Manager\RenderMgr</Filter>
     </ClCompile>
+    <ClCompile Include="CCollider2D.cpp">
+      <Filter>08. Component\02. Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator2D.cpp">
+      <Filter>08. Component\04. Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>04. Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnim.cpp">
+      <Filter>08. Component\04. Animator2D\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CLight2D.cpp">
+      <Filter>08. Component\06. Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr_init.cpp">
+      <Filter>04. Manager\AssetMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="UI.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
     <FxCompile Include="std2d.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="debug.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>ShaderCode\Util</Filter>
     </FxCompile>
     <FxCompile Include="value.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>ShaderCode\Util</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

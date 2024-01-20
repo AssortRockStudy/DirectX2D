@@ -39,7 +39,7 @@ void CMaterial::UpdatePipeline()
 	}
 
 	// binding Material Const Param
-	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATREIAL_CONST);	// static
+	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);	// static
 	pCB->SetData(&m_Const);
 	pCB->UpdatePipeline();
 }

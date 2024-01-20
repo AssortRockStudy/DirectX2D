@@ -1,9 +1,9 @@
 #pragma once
+#include "CTexture.h"
 
 // =======================================
 // CDevice: DRX11 Graphic Device
 // =======================================
-
 class CConstBuffer;
 
 class CDevice :
@@ -17,10 +17,12 @@ private:
     ComPtr<IDXGISwapChain>          m_SwapChain;    // 출력 버퍼 지정
 
     // OM (Ouput Merge State)
-    ComPtr<ID3D11Texture2D>         m_RTTex;        // Render Target
-    ComPtr<ID3D11RenderTargetView>  m_RTView;
-    ComPtr<ID3D11Texture2D>         m_DSTex;        // Depth Stencil
-    ComPtr<ID3D11DepthStencilView>  m_DSView;
+    Ptr<CTexture>                   m_RTTex;
+    Ptr<CTexture>                   m_DSTex;
+    //ComPtr<ID3D11Texture2D>         m_RTTex;        // Render Target
+    //ComPtr<ID3D11RenderTargetView>  m_RTView;
+    //ComPtr<ID3D11Texture2D>         m_DSTex;        // Depth Stencil
+    //ComPtr<ID3D11DepthStencilView>  m_DSView;
     HWND                            m_hRenderWnd;
     Vec2                            m_vRenderResolution;
 

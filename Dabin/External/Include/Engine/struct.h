@@ -19,10 +19,25 @@ struct tDebugShapeInfo
 	Matrix		matWorld;
 
 	Vec3		vColor;
+	float		fLifeTime;
 	float		fDuration;
 	bool		bDepthTest;
 };
 
+struct tLightInfo
+{
+	int		LightType;	// 광원 타입
+	Vec4	vColor;		// 빛의 색상		(광원의 순수 색상)
+	Vec4	vSpecular;	// 반사광			(광원이 물체 표면에 반사되는 색상)
+	Vec4	vAmbient;	// 환경광(주변광)	(광원에 의해 보장되는 최소한의 빛)
+
+	Vec3	vWorldPos;
+	Vec3	vWorldDir;
+	float	fRadius;
+	float	fAngle;
+
+	Vec3	vPadding;
+};
 
 //---------------------------------
 // Constant Buffer 대응 구조체
@@ -59,3 +74,24 @@ struct tMtrlConst
 
 	int iPadding[2];
 };
+
+struct tAnimData2D
+{
+	Vec2 vLeftTop;
+	Vec2 vCutSize;
+	Vec2 vBackgroundSize;
+	Vec2 vOffset;
+	int UseAnim2D;
+	Vec3 vPadding;
+};
+
+struct tGlobalData		// 자주 사용하는 정보들 전달
+{
+	Vec2	g_RenderResolution;
+	float	g_dt;
+	float	g_time;
+	int		g_Light2DCount;
+	int		g_Light3DCount;
+	Vec2	g_vPadding;
+};
+extern tGlobalData g_Global;

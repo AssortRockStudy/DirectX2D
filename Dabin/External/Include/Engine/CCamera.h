@@ -34,12 +34,24 @@ private:
     Matrix m_matView;
     Matrix m_matProj;
 
+    // Layer Check
     UINT m_LayerCheck;      // camera가 볼 수 있는 layer 설정 (bit flag)
+
+    // Object Sort (rendering order)
+    vector<CGameObject*>    m_vecOpaque;
+    vector<CGameObject*>    m_vecMasked;
+    vector<CGameObject*>    m_vecTransparent;
+    vector<CGameObject*>    m_vecPostProcess;
+
+private:
+    void render(vector<CGameObject*>& _vec);
+    void render_postprocess();
 
 public:
     virtual void finaltick() override;
     void render();
 
+    void SortObject();
 
 public:
     void SetProjType(PROJ_TYPE _Type) { m_ProjType = _Type; }
