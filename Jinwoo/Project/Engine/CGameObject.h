@@ -49,6 +49,9 @@ public:
     CGameObject* GetParent() { return m_Parent; }
     const vector<CGameObject*>& GetChild() { return m_vecChild; }
 
+    void SetLayerIdx(int _Idx) { m_iLayerIdx = _Idx; }
+    int GetLayerIdx() { return m_iLayerIdx; }
+
     const vector<CScript*>& GetScripts() { return m_vecScript; }
 
     template<typename T>

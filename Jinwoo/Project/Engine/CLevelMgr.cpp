@@ -49,7 +49,7 @@ void CLevelMgr::init()
 	// 충돌 설정
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
 	CCollisionMgr::GetInst()->LayerCheck(L"Monster", L"Monster");
-
+	
 	// Main Camera 생성
 	CGameObject* pCamObj = new CGameObject;
 	pCamObj->SetName(L"MainCamera");

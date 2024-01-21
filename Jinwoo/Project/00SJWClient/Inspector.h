@@ -27,6 +27,7 @@ public:
 
 public:
     Inspector();
+    Inspector(string _strName, string _strID);
     ~Inspector();
 };
 

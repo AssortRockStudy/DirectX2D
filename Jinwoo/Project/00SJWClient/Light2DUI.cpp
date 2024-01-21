@@ -6,7 +6,7 @@
 Light2DUI::Light2DUI()
 	: ComponentUI("Light2D", "##Light2D", COMPONENT_TYPE::LIGHT2D)
 {
-	SetSize(ImVec2(0.f, 430.f));
+	SetSize(ImVec2(0.f, 405.f));
 	SetComponentTitle("Light2D");
 }
 
@@ -16,6 +16,9 @@ Light2DUI::~Light2DUI()
  
 void Light2DUI::render_update()
 {
+	if (nullptr == GetTargetObject())
+		return;
+
 	ComponentUI::render_update();
 
 	tLightInfo info = GetTargetObject()->Light2D()->GetLightInfo();
@@ -101,6 +104,8 @@ Vec3 Light2DUI::AngleToVector(float _angle)
 
 	return Vec3(x, y, 0.f);
 }
+
+
 
 //Vec4	vColor;		// 광원의 순수 색상
 //Vec4	vSpecular;	// 반사광 - 광원이 물체 표면에 반사된 색상

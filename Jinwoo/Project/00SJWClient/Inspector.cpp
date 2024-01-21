@@ -30,6 +30,27 @@ Inspector::Inspector()
 	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA]);
 }
 
+Inspector::Inspector(string _strName, string _strID)
+	: UI(_strName, _strID)
+	, m_TargetObject(nullptr)
+	, m_arrComUI{}
+{
+	m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM]);
+
+	m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new MeshRenderUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER]);
+
+	m_arrComUI[(UINT)COMPONENT_TYPE::COLLIDER2D] = new Collider2DUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::COLLIDER2D]);
+
+	m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D] = new Light2DUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D]);
+
+	m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA] = new CameraUI;
+	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA]);
+}
+
 Inspector::~Inspector()
 {
 }

@@ -6,9 +6,10 @@
 #include <Engine\CLevel.h>
 #include <Engine\CLayer.h>
 
+
 CameraUI::CameraUI()
 	: ComponentUI("Camera", "##Camera", COMPONENT_TYPE::CAMERA)
-	, m_LayerIdx(1)
+	, m_LayerIdx(CAMERALAYER::EVERYTHING)
 {
 	SetSize(ImVec2(0.f, 300.f));
 	SetComponentTitle("Camera");
@@ -20,6 +21,9 @@ CameraUI::~CameraUI()
 
 void CameraUI::render_update()
 {
+	if (nullptr == GetTargetObject())
+		return;
+
 	ComponentUI::render_update();
 
 	static int ProjType = int(GetTargetObject()->Camera()->GetProjType());
@@ -78,13 +82,37 @@ void CameraUI::render_update()
 	ImGui::SameLine(0, 72); ImGui::PushItemWidth(150);
 	ImGui::DragFloat("##CameraFar", &fFar);
 
-	m_LayerIdx = GetLayerIdx();
+	// ===================================================================
+
+	CAMERALAYER selectedlayer = m_LayerIdx;
 
 	ImGui::Text("Layer");
 	ImGui::SameLine(0, 58); ImGui::PushItemWidth(150);
-	ImGui::Combo("##CameraLayer", &m_LayerIdx, "None\0Everything\0Player\0Background\0\0");
+	if(ImGui::BeginCombo("##CameraLayer", LayerToString(selectedlayer).c_str()))
+	{
+		for (int i = (int)(CAMERALAYER::NONE); i < (int)CAMERALAYER::END; ++i)
+		{
+			CAMERALAYER cLayer = (CAMERALAYER)i;
 
-	switch (m_LayerIdx)
+			bool isSelected = (cLayer == selectedlayer);
+
+			if (ImGui::Selectable(LayerToString(cLayer).c_str(), isSelected))
+			{
+				selectedlayer = cLayer;
+			}
+
+			if (isSelected)
+			{
+				ImGui::SetItemDefaultFocus();
+			}
+		}
+
+		ImGui::EndCombo();
+	}
+
+	SetLayerIdx(selectedlayer);
+
+	switch ((int)selectedlayer)
 	{
 	case 0:
 		GetTargetObject()->Camera()->AllLayerOff();
@@ -92,23 +120,31 @@ void CameraUI::render_update()
 	case 1:
 		GetTargetObject()->Camera()->LayerCheckAll();
 		break;
-	case 2:
+	default:
 		GetTargetObject()->Camera()->AllLayerOff();
-		GetTargetObject()->Camera()->LayerCheck(L"Player", true);
-		break;
-	case 3:
-		GetTargetObject()->Camera()->AllLayerOff();
-		GetTargetObject()->Camera()->LayerCheck(L"Background", true);
+		GetTargetObject()->Camera()->LayerCheck((int)selectedlayer - 2, true);
 		break;
 	}
-
-	SetLayerIdx(m_LayerIdx);
 
 	GetTargetObject()->Camera()->SetProjType((PROJ_TYPE)ProjType);
 	GetTargetObject()->Camera()->SetFOV(fov);
 	GetTargetObject()->Camera()->SetScale(scale);
 	GetTargetObject()->Camera()->SetFar(fFar);
 }
+
+string CameraUI::LayerToString(CAMERALAYER _layer)
+{
+	switch (_layer)
+	{
+	case CAMERALAYER::NONE:
+		return "None";
+	case CAMERALAYER::EVERYTHING:
+		return "Everything";
+	default:
+		return "Layer" + std::to_string((int)_layer - (int)CAMERALAYER::LAYER0);
+	}
+}
+
 
 //PROJ_TYPE   m_ProjType;     // 투영 방식
 //// 원근 투영(Perspective)

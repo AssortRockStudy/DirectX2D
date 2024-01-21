@@ -11,7 +11,6 @@ public:
 public:
     Vec3 AngleToVector(float _angle);
 
-
 public:
     Light2DUI();
     ~Light2DUI();

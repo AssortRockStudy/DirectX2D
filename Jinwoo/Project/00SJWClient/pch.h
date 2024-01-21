@@ -4,6 +4,6 @@
 
 #include <Engine/global.h>
 
-#include <string.h>
+#include <string>
 using std::string;
 using std::wstring;
