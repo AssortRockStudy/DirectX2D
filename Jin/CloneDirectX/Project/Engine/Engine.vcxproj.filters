@@ -257,8 +257,12 @@
       <Filter>08. Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="CStructuredBuffer.h" />
-    <ClInclude Include="CLight2D.h" />
-    <ClInclude Include="CBackgroundScript.h" />
+    <ClInclude Include="CBackgroundScript.h">
+      <Filter>Module\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CLight2D.h">
+      <Filter>08. Component\06. Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -379,10 +383,14 @@
       <Filter>08. Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="CStructuredBuffer.cpp" />
-    <ClCompile Include="CLight2D.cpp" />
-    <ClCompile Include="CBackgroundScript.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp">
       <Filter>04. Manager\AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackgroundScript.cpp">
+      <Filter>Module\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CLight2D.cpp">
+      <Filter>08. Component\06. Light2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -398,8 +406,12 @@
     <FxCompile Include="struct.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
-    <FxCompile Include="func.fx" />
-    <FxCompile Include="postprocess.fx" />
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
