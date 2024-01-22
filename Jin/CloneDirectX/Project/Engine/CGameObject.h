@@ -59,6 +59,8 @@ public:
     }
 
     CGameObject* GetParent() { return m_Parent; }
+    const vector<CGameObject*>& GetChild() { return m_vecChild; }
+
     void DisconnectWithParent();
     void AddChild(CGameObject* _Child);
 

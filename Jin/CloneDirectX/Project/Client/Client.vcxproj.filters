@@ -34,6 +34,9 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="CImGuiMgr.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Outliner.h" />
+    <ClInclude Include="Inspector.h" />
+    <ClInclude Include="Content.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -62,6 +65,9 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="CImGuiMgr.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Outliner.cpp" />
+    <ClCompile Include="Inspector.cpp" />
+    <ClCompile Include="Content.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.inl" />
