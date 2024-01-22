@@ -37,6 +37,7 @@
     <ClInclude Include="Outliner.h" />
     <ClInclude Include="Inspector.h" />
     <ClInclude Include="Content.h" />
+    <ClInclude Include="TransformUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -68,6 +69,7 @@
     <ClCompile Include="Outliner.cpp" />
     <ClCompile Include="Inspector.cpp" />
     <ClCompile Include="Content.cpp" />
+    <ClCompile Include="TransformUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.inl" />

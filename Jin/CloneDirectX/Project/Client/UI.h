@@ -10,6 +10,9 @@ private:
 
 	bool	m_bActive;
 
+	UI*		m_Parent;
+	vector<UI*>	m_vecChildUI;
+
 public:
 	void SetName(const string& _name) { m_strName = _name; }
 	const string& GetName() { return m_strName; }
@@ -18,6 +21,14 @@ public:
 	void Activate() { m_bActive = true; }
 	void Deactivate() { m_bActive = false; }
 	bool IsActivate() { return m_bActive; }
+
+	void AddChildUI(UI* _ChildUI)
+	{
+		m_vecChildUI.push_back(_ChildUI);
+		_ChildUI->m_Parent = this;
+	}
+
+	UI* GetParentUI() { return m_Parent; }
 
 public:
 	virtual void tick();
