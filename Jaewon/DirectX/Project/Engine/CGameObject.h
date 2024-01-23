@@ -37,9 +37,8 @@ public:
     GET_COMPONENT(Animator2D, ANIMATOR2D);
     GET_COMPONENT(Light2D, LIGHT2D);
     CRenderComponent* GetRenderComopnent() { return m_RenderCom; }
-
-
     CGameObject* GetParent() { return m_Parent; }
+    const vector<CGameObject*>& GetChild() { return m_vecChild; }
     void DisconnectWithParent();
     void DisconnectWithLayer();
     void AddChild(CGameObject* _Child);

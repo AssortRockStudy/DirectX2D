@@ -64,6 +64,18 @@
     <ClInclude Include="UI.h">
       <Filter>Default\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Outliner.h">
+      <Filter>Default\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>Default\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>Default\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformUI.h">
+      <Filter>Default\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -110,6 +122,18 @@
       <Filter>Default\ImGuiMgr</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
+      <Filter>Default\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Outliner.cpp">
+      <Filter>Default\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>Default\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>Default\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformUI.cpp">
       <Filter>Default\UI</Filter>
     </ClCompile>
   </ItemGroup>
