@@ -1,22 +1,27 @@
-﻿#include "framework.h"
+﻿#include "pch.h"
+#include "framework.h"
 #include "Client.h"
-
-
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
+#include <Engine\CDevice.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "Engine\\Engine_d.lib")
 #else
 #pragma comment(lib, "Engine\\Engine.lib")
 #endif
-
-
+#include "CImGuiMgr.h"
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
 
 #define MAX_LOADSTRING 100
 
 HINSTANCE   hInst;
 HWND        hWnd;
+
+static UINT g_ResizeWidth = 0;
+static UINT g_ResizeHeight = 0;
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -45,6 +50,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 0;
     }
 
+    // ImGui 초기화
+    CImGuiMgr::GetInst()->init(hWnd, DEVICE, CONTEXT);
+
     while (true)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -62,6 +70,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             CEngine::GetInst()->progress();
+
+            // ImGui Update
+            CImGuiMgr::GetInst()->progress();
+
+            // Engine 및 ImGui 렌더링 최종 결과를 출력한다.
+            CDevice::GetInst()->Present();
         }
     }
 
@@ -124,18 +138,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  용도: 주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+
     switch (message)
     {
     case WM_COMMAND:
@@ -149,6 +158,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         case IDM_EXIT:
             DestroyWindow(hWnd);
+            break;
+        case WM_DPICHANGED:
+            if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_DpiEnableScaleViewports)
+            {
+                //const int dpi = HIWORD(wParam);
+                //printf("WM_DPICHANGED to %d (%.0f%%)\n", dpi, (float)dpi / 96.0f * 100.0f);
+                const RECT* suggested_rect = (RECT*)lParam;
+                ::SetWindowPos(hWnd, nullptr, suggested_rect->left, suggested_rect->top, suggested_rect->right - suggested_rect->left, suggested_rect->bottom - suggested_rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+            }
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);
