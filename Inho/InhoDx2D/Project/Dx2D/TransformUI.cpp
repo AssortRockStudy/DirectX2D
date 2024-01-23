@@ -6,7 +6,7 @@
 TransformUI::TransformUI()
 	:ComponentUI("Transform", "##Transform", COMPONENT_TYPE::TRANSFORM)
 {
-	SetSize(ImVec2(0.f, 100.f));
+	SetSize(ImVec2(0.f, 120.f));
 	SetComponentTitle("Transform");
 }
 
@@ -25,12 +25,17 @@ void TransformUI::render_update()
 	Vec3 vRot = GetTargetObject()->Transform()->GetRelativeRotation();
 	vRot.ToDegree();
 
-	ImGui::InputFloat3("Relative Position", vPos);
-	ImGui::InputFloat3("Relative Scale", vScale);
-	ImGui::InputFloat3("Relative Rotation", vRot);
+	ImGui::Text("Position"); ImGui::SameLine();  ImGui::DragFloat3("##Relative Position", vPos);
+	ImGui::Text("Scale   "); ImGui::SameLine(); ImGui::DragFloat3("##Relative Scale", vScale);
+	ImGui::Text("Rotation"); ImGui::SameLine(); ImGui::DragFloat3("##Relative Rotation", vRot);
 
 	vRot.ToRadian();
 	GetTargetObject()->Transform()->SetRelativePos(vPos);
 	GetTargetObject()->Transform()->SetRelativeScale(vScale);
 	GetTargetObject()->Transform()->SetRelativeRotation(vRot);
+
+	// Absolute °ª 
+	bool bAbsolute = GetTargetObject()->Transform()->IsAbsolute();
+	ImGui::Text("Scale Absolute"); ImGui::SameLine(); ImGui::Checkbox("##TransformAbsolute", &bAbsolute);
+	GetTargetObject()->Transform()->SetAbsolute(bAbsolute);
 }

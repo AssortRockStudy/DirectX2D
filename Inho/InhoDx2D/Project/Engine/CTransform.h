@@ -32,7 +32,7 @@ public:
     Vec3 GetWorldScale();
 
     void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute; }
-
+    bool IsAbsolute() { return m_bAbsolute; }
     const Matrix& GetWorldMat() { return m_matWorld; }
 
     Vec3 GetLocalDir(DIR_TYPE _type) { return m_arrLocalDir[(UINT)_type]; }
