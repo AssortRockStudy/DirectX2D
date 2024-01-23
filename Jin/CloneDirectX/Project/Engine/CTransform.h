@@ -31,6 +31,7 @@ public:
     Vec3 GetRelativeRotation() { return m_vRealtiveRotation; }
 
     void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute;  }
+    bool IsAbsolute() { return m_bAbsolute; }
 
     const Matrix& GetWorldMat() { return m_matWorld; }
 

@@ -64,7 +64,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.h" />
     <ClInclude Include="imgui_impl_dx11.h">
       <Filter>Default\ImGui</Filter>
     </ClInclude>
@@ -129,9 +128,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Default</Filter>
-    </ClCompile>
     <ClCompile Include="imgui_demo.cpp">
       <Filter>Default\ImGui</Filter>
     </ClCompile>
@@ -178,8 +174,6 @@
       <Filter>UI\3. Inspector\ComponentUI\Transform</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderUI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.inl" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
 </Project>
