@@ -7,7 +7,7 @@ class UI
 private:
 	string m_strName;
 	string m_strID;
-
+	ImVec2 m_vSize;
 	bool m_bActive;
 
 	UI* m_Parent;
@@ -18,6 +18,9 @@ public:
 	const string& GetName() { return m_strName; }
 	const string& GetID() { return m_strID; }
 
+	void SetSize(ImVec2 _Size) { m_vSize = _Size; }
+	ImVec2 GetSize() { return m_vSize; }
+
 	void AddChildUI(UI* _ChildUI) {
 		m_vecChildUI.push_back(_ChildUI);
 		_ChildUI->m_Parent = this;
@@ -25,7 +28,7 @@ public:
 	UI* GetParentUI() { return m_Parent; }
 
 	void Activate() { m_bActive = true; }
-	void DeActivate() { m_bActive = false; }
+	void Deactivate() { m_bActive = false; }
 	bool IsActivate() { return m_bActive; }
 
 public:
@@ -35,6 +38,6 @@ public:
 
 public:
 	UI(const string& _strName, const string& _strID);
-	~UI();
+	virtual ~UI();
 };
 
