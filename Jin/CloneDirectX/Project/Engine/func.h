@@ -15,7 +15,8 @@ namespace GamePlayStatic
 	void DrawDebugCross(Vec3 _vWorldPos, float _fScale, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
 }
 
-
+string ToString(const wstring& _str);
+wstring ToWString(const string& _str);
 
 
 template<typename T, UINT SIZE>

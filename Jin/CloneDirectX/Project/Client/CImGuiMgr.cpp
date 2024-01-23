@@ -15,6 +15,7 @@
 
 
 CImGuiMgr::CImGuiMgr()
+    : m_bDemoUI(true) // 单葛UI onoff
 {
 }
 
@@ -115,6 +116,9 @@ void CImGuiMgr::tick()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    if (m_bDemoUI)
+        ImGui::ShowDemoWindow(&m_bDemoUI);
+
     for (const auto& pair : m_mapUI)
     {
         pair.second->tick();
@@ -144,15 +148,15 @@ void CImGuiMgr::create_ui()
 {
     UI* pUI = nullptr;
 
-    // Inspector
+    // Inspector 积己 饶 Add
     pUI = new Inspector;
     AddUI(pUI->GetID(), pUI);
 
-    // Content
+    // Content 积己 饶 Add
     pUI = new Content;
     AddUI(pUI->GetID(), pUI);
 
-    // Outliner
+    // Outliner 积己 饶 Add
     pUI = new Outliner;
     AddUI(pUI->GetID(), pUI);
 }

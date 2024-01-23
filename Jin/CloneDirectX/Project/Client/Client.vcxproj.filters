@@ -8,6 +8,48 @@
     <Filter Include="Default">
       <UniqueIdentifier>{2adfb940-7898-4309-a5f2-e6203a7a1063}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Default\ImGui">
+      <UniqueIdentifier>{984900ec-53ed-4066-a8e9-c4c4ce9b8429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGuiMgr">
+      <UniqueIdentifier>{d9dda8aa-8309-4925-b59b-1f8b9eac9190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{e7d558af-f095-406d-af56-980096b50f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\1. Outliner">
+      <UniqueIdentifier>{7182bb8e-b8bc-48a3-9ff3-75c6d80dd557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\2. Content">
+      <UniqueIdentifier>{b6d944b0-2c06-48bd-b982-1410d241c274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector">
+      <UniqueIdentifier>{43e9fe66-bc4c-4ffb-9e82-44c550e2af79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\4. ListUI">
+      <UniqueIdentifier>{13e83f60-05d3-4558-875f-3a57a934d3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI">
+      <UniqueIdentifier>{736c85c2-55fd-4f44-a5ef-b7c3f86ff89d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI">
+      <UniqueIdentifier>{80fdc296-234d-44d0-b023-97a54a256573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI\Animator2D">
+      <UniqueIdentifier>{fc5c0d70-20fd-4f6f-a051-3b7aa354d628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI\Collider2D">
+      <UniqueIdentifier>{8736eede-fa77-4bf8-a5e5-a7dcd609c92b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI\Light2D">
+      <UniqueIdentifier>{d48ffe1c-d117-4373-aa97-1fcb81a27cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI\MeshRender">
+      <UniqueIdentifier>{20cc6c47-2536-485a-af4e-14ba7496a869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI\Transform">
+      <UniqueIdentifier>{627c0e34-0318-4a5d-a323-78d8b7175c1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -23,21 +65,55 @@
       <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.h" />
-    <ClInclude Include="imgui.h" />
-    <ClInclude Include="imgui_impl_dx11.h" />
-    <ClInclude Include="imgui_impl_win32.h" />
-    <ClInclude Include="imgui_internal.h" />
-    <ClInclude Include="imstb_rectpack.h" />
-    <ClInclude Include="imstb_textedit.h" />
-    <ClInclude Include="imstb_truetype.h" />
-    <ClInclude Include="imconfig.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="CImGuiMgr.h" />
-    <ClInclude Include="UI.h" />
-    <ClInclude Include="Outliner.h" />
-    <ClInclude Include="Inspector.h" />
-    <ClInclude Include="Content.h" />
-    <ClInclude Include="TransformUI.h" />
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="CImGuiMgr.h">
+      <Filter>ImGuiMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Outliner.h">
+      <Filter>UI\1. Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>UI\2. Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>UI\3. Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentUI.h">
+      <Filter>UI\3. Inspector\ComponentUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformUI.h">
+      <Filter>UI\3. Inspector\ComponentUI\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -56,20 +132,52 @@
     <ClCompile Include="main.cpp">
       <Filter>Default</Filter>
     </ClCompile>
-    <ClCompile Include="imgui.cpp" />
-    <ClCompile Include="imgui_demo.cpp" />
-    <ClCompile Include="imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_dx11.cpp" />
-    <ClCompile Include="imgui_impl_win32.cpp" />
-    <ClCompile Include="imgui_tables.cpp" />
-    <ClCompile Include="imgui_widgets.cpp" />
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="CImGuiMgr.cpp" />
-    <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Outliner.cpp" />
-    <ClCompile Include="Inspector.cpp" />
-    <ClCompile Include="Content.cpp" />
-    <ClCompile Include="TransformUI.cpp" />
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CImGuiMgr.cpp">
+      <Filter>ImGuiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Outliner.cpp">
+      <Filter>UI\1. Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>UI\2. Content</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>UI\3. Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Default\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentUI.cpp">
+      <Filter>UI\3. Inspector\ComponentUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformUI.cpp">
+      <Filter>UI\3. Inspector\ComponentUI\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\AR\DirectX\External\Include\DirectXTex\DirectXTex.inl" />

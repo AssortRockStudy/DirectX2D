@@ -38,7 +38,7 @@ void UI::render()
 
 	else // 부모가 있는 계층일 때
 	{
-		ImGui::BeginChild(string(m_strName + m_strID).c_str());
+		ImGui::BeginChild(string(m_strName + m_strID).c_str(),m_vSize);
 		render_update();
 		for (size_t i = 0; i < m_vecChildUI.size(); ++i)
 		{

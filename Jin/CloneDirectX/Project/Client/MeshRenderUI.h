@@ -1,13 +1,13 @@
 #pragma once
 #include "ComponentUI.h"
-class TransformUI :
+class MeshRenderUI :
     public ComponentUI
 {
 public:
     virtual void render_update() override;
 
 public:
-    TransformUI();
-    ~TransformUI();
+    MeshRenderUI();
+    ~MeshRenderUI();
 };
 

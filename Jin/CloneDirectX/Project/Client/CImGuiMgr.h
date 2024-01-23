@@ -10,6 +10,7 @@ class CImGuiMgr :
 
 private:
     map<string, UI*> m_mapUI;
+    bool             m_bDemoUI;
 
 public:
     void init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr <ID3D11DeviceContext> _Context);
