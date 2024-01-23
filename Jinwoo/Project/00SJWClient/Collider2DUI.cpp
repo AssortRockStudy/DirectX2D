@@ -6,7 +6,7 @@
 Collider2DUI::Collider2DUI()
 	: ComponentUI("Collider2D", "##Collider2D", COMPONENT_TYPE::COLLIDER2D)
 {
-	SetSize(ImVec2(0.f, 150.f));
+	SetSize(ImVec2(0.f, 135.f));
 	SetComponentTitle("Collider2D");
 }
 

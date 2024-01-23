@@ -19,16 +19,13 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::begin()
 {
-	Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
-	Animator2D()->Create(L"IDLE_UP", pAtlasTex, Vec2(0.f, 260.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 1, 5.f);
-	Animator2D()->Create(L"IDLE_DOWN", pAtlasTex, Vec2(0.f, 0.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 5.f);
-	Animator2D()->Create(L"IDLE_LEFT", pAtlasTex, Vec2(0.f, 130.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 5.f);
-	Animator2D()->Create(L"IDLE_RIGHT", pAtlasTex, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 3, 5.f);
-
-	Animator2D()->Create(L"MOVE_UP", pAtlasTex, Vec2(0.f, 780.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 10, 20.f);
-	Animator2D()->Create(L"MOVE_DOWN", pAtlasTex, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 10, 20.f);
-	Animator2D()->Create(L"MOVE_LEFT", pAtlasTex, Vec2(0.f, 650.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 10, 20.f);
-	Animator2D()->Create(L"MOVE_RIGHT", pAtlasTex, Vec2(0.f, 910.f), Vec2(120.f, 130.f), Vec2(0.f, 0.f), Vec2(150.f, 150.f), 10, 20.f);
+	//Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
+	//Animator2D()->Create(L"test", pAtlasTex, Vec2(0.f, 0.f), Vec2(120, 130), Vec2(0.f, -60.f), Vec2(200.f, 200.f), 3, 1);
+	//Animator2D()->SaveAnimations(L"animdata");
+	
+	//Animator2D()->LoadAnimation(L"animdata\\IdleDown.txt");
+	//Animator2D()->LoadAnimation(L"animdata\\i.txt");
+	//Animator2D()->Play(L"i");
 }
 
 void CPlayerScript::tick()
@@ -42,7 +39,7 @@ void CPlayerScript::tick()
 	}
 	if (KEY_TAP(UP))
 	{
-		Animator2D()->Play(L"MOVE_UP");
+		Animator2D()->Play(L"Idle_Down");
 	}
 	if (KEY_RELEASED(UP))
 	{

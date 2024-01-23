@@ -3,14 +3,6 @@
 
 #include "CTexture.h"
 
-struct tAnimFrm
-{
-    Vec2 vLeftTop;
-    Vec2 vSlice;
-    Vec2 vOffset;
-    Vec2 vBackground;
-    float Durateion;
-};
 
 class CAnimator2D;
 
@@ -42,8 +34,15 @@ public:
     void Create(CAnimator2D* _Animator, Ptr<CTexture> _Atlas, Vec2 _vLeftTop, Vec2 _vSliceSize,
                 Vec2 _vOffset, Vec2 _vBackground, int _FrmCount, float _FPS);
 
+    void CreateFrm(CAnimator2D* _Animator, Ptr<CTexture> _Atlas, vector<tAnimFrm> _vecAnimFrm);
+
+    bool Save(const wstring& _FilePath, const wstring& _strKey);
+    bool Load(const wstring& _FilePath);
+
 public:
     CAnim();
     ~CAnim();
+
+    friend class CAnimator2D;
 };
 

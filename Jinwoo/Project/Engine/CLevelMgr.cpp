@@ -119,7 +119,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
 	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
-	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\playerportraitbig_01_isaac.png");
+	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\link.png");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
@@ -173,6 +173,14 @@ void CLevelMgr::init()
 
 	//pTex = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
 	//pObj->TileMap()->SetTileAtlas(pTex, Vec2(64.f, 64.f));
+	//pObj->TileMap()->SetFace(8, 6);
+	//for (int i = 0; i < 6; ++i)
+	//{
+	//	for (int j = 0; j < 8; ++j)
+	//	{
+	//		pObj->TileMap()->SetTileIndex(i, j, i * 6 + j);
+	//	}
+	//}
 
 	//m_CurLevel->AddObject(pObj, L"Tile", false);
 

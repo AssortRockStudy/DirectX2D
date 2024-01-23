@@ -153,11 +153,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h" />
+    <ClInclude Include="Animator2DUI.h" />
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="CImGuiMgr.h" />
     <ClInclude Include="Collider2DUI.h" />
     <ClInclude Include="ComponentUI.h" />
     <ClInclude Include="Content.h" />
+    <ClInclude Include="EditAnimator.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
@@ -174,16 +176,19 @@
     <ClInclude Include="Outliner.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TransformUI.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animator2DUI.cpp" />
     <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="CImGuiMgr.cpp" />
     <ClCompile Include="Collider2DUI.cpp" />
     <ClCompile Include="ComponentUI.cpp" />
     <ClCompile Include="Content.cpp" />
+    <ClCompile Include="EditAnimator.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />

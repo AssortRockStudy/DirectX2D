@@ -131,6 +131,7 @@ namespace DirectX
             // Conversion
             operator ImVec2() const;
 
+
             // Comparison operators
             bool operator == (const Vector2& V) const;
             bool operator != (const Vector2& V) const;

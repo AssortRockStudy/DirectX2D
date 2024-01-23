@@ -95,3 +95,13 @@ struct tGlobalData
 };
 
 extern tGlobalData g_global;
+
+
+struct tAnimFrm
+{
+	Vec2 vLeftTop;
+	Vec2 vSlice;
+	Vec2 vOffset;
+	Vec2 vBackground;
+	float Duration;
+};

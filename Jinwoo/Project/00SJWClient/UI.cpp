@@ -2,6 +2,7 @@
 #include "UI.h"
 
 
+
 UI::UI(const string& _strName, const string& _strID)
 	: m_strName(_strName)
 	, m_strID(_strID)
@@ -111,4 +112,7 @@ void UI::render()
 
 		ImGui::EndChild();
 	}
+
+
+
 }

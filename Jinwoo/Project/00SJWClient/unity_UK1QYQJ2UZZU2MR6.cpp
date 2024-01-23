@@ -1,5 +1,8 @@
 #include "pch.h"
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Animator2DUI.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\CameraUI.cpp"
 
 
@@ -13,6 +16,9 @@
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Content.cpp"
+
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\EditAnimator.cpp"
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\imgui.cpp"

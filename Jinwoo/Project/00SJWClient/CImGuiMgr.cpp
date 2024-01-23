@@ -13,6 +13,8 @@
 #include "Content.h"
 #include "Outliner.h"
 #include "ListUI.h"
+#include "EditAnimator.h"
+
 
 CImGuiMgr::CImGuiMgr()
     : m_bDemoUI(false)
@@ -165,6 +167,10 @@ void CImGuiMgr::create_UI()
 
     // List
     pUI = new ListUI;
+    AddUI(pUI->GetID(), pUI);
+
+    // Edit Animation
+    pUI = new EditAnimator;
     AddUI(pUI->GetID(), pUI);
 }
 

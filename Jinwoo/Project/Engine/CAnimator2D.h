@@ -22,9 +22,17 @@ public:
 public:
     void Create(const wstring& _strKey, Ptr<CTexture> _AtlasTex, Vec2 _LeftTop, Vec2 _vSliceSize,
                  Vec2 _OffsetSize, Vec2 _Background, int _FrmCount, float _FPS);
-    CAnim* FindAnim(const wstring& _strAnimName);
 
+    void CreateFrm(const wstring& _strKey, Ptr<CTexture> _AtlasTex, vector<tAnimFrm> _vecAnimFrm);
+
+    CAnim* FindAnim(const wstring& _strAnimName);
     void Play(const wstring& _strAnimName, bool _bRepeat = true);
+
+    void SaveAnimations(const wstring& _strRelativePath);
+    void LoadAnimation(const wstring& _strRelativePath);
+
+    map<wstring, CAnim*> GetAnimList();
+    CAnim* GetCurAnim() { return m_CurAnim; }
 
 public:
     CAnimator2D();

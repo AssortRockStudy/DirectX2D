@@ -50,6 +50,12 @@
     <Filter Include="UI\3.Inspector\ComponentUI\Camera">
       <UniqueIdentifier>{1faceb6c-e2f0-48c7-a433-283d5ccff158}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\3.Inspector\ComponentUI\Animator2D">
+      <UniqueIdentifier>{cd1baf40-be2c-4ea4-9f9d-78f647f382c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\5.EditAnimatorUI">
+      <UniqueIdentifier>{e26b321a-f9f2-4926-9658-99018acde9fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -127,6 +133,15 @@
     <ClInclude Include="CameraUI.h">
       <Filter>UI\3.Inspector\ComponentUI\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Animator2DUI.h">
+      <Filter>UI\3.Inspector\ComponentUI\Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="EditAnimator.h">
+      <Filter>UI\5.EditAnimatorUI</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Default\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -202,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="CameraUI.cpp">
       <Filter>UI\3.Inspector\ComponentUI\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2DUI.cpp">
+      <Filter>UI\3.Inspector\ComponentUI\Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="EditAnimator.cpp">
+      <Filter>UI\5.EditAnimatorUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

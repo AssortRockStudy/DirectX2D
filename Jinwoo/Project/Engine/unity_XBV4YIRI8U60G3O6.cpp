@@ -15,6 +15,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMissileScript.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleSystem.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPathMgr.cpp"
 
 
