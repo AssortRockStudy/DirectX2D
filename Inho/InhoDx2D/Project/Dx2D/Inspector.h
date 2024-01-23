@@ -23,6 +23,8 @@ public:
     void SetTargetObject(CGameObject* _Object);
     void SetTargetAsset(Ptr<CAsset> _Asset);
 
+    CGameObject* GetTargetObject() { return m_TargetObject; }
+
 public:
     Inspector();
     ~Inspector();

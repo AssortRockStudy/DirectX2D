@@ -37,6 +37,9 @@ public:
 
     Ptr<CTexture> CreatTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
     Ptr<CTexture> CreatTexture(const wstring& _strKey, ComPtr<ID3D11Texture2D> _tex2D);
+
+public:
+    void GetAssetName(ASSET_TYPE _Type, vector<string>& _Out);
 };
 
 template<typename T>

@@ -39,3 +39,11 @@ Ptr<CTexture> CAssetMgr::CreatTexture(const wstring& _strKey, ComPtr<ID3D11Textu
 
 	return pTex;
 }
+
+void CAssetMgr::GetAssetName(ASSET_TYPE _Type, vector<string>& _Out)
+{
+	for (const auto& pair : m_mapAsset[(UINT)_Type])
+	{
+		_Out.push_back(ToString(pair.first));
+	}
+}

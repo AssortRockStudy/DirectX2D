@@ -115,6 +115,7 @@
     <ClInclude Include="MeshRenderUI.h">
       <Filter>UI\3. Inspector\ComponentUI\MeshRender</Filter>
     </ClInclude>
+    <ClInclude Include="ListUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dx2D.rc">
@@ -181,5 +182,6 @@
     <ClCompile Include="MeshRenderUI.cpp">
       <Filter>UI\3. Inspector\ComponentUI\MeshRender</Filter>
     </ClCompile>
+    <ClCompile Include="ListUI.cpp" />
   </ItemGroup>
 </Project>

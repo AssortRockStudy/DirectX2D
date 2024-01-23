@@ -12,6 +12,7 @@
 #include "Inspector.h"
 #include "Content.h"
 #include "Outliner.h"
+#include "ListUI.h"
 
 CImGuiMgr::CImGuiMgr()
     :m_bDemoUI(true)
