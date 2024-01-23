@@ -39,6 +39,8 @@ public:
     CComponent* GetComponent(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
 
     CGameObject* GetParent() { return m_Parent; }
+    const vector<CGameObject*>& GetChild() { return m_vecChild; }
+
     const vector<CScript*>& GetScripts() { return m_vecScript; }
     CRenderComponent* GetRenderComopnent() { return m_RenderCom; }
 
