@@ -42,12 +42,15 @@ void CRenderMgr::tick()
 	render_debug();
 
 	Clear();
-
-	CDevice::GetInst()->Present();
 }
 
 void CRenderMgr::render()
 {
+	// ∑ª¥ı≈∏∞Ÿ π◊ ±Ì¿Ã ≈∏∞Ÿ º≥¡§
+	Ptr<CTexture> pRTTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	Ptr<CTexture> pDSTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
+	CONTEXT->OMSetRenderTargets(1, pRTTex->GetRTV().GetAddressOf(), pDSTex->GetDSV().Get());
+
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
 		m_vecCam[i]->SortObject();
