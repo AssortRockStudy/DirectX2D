@@ -10,6 +10,7 @@ CGraphicsShader::CGraphicsShader()
 	, m_RSType(RS_TYPE::CULL_NONE)
 	, m_DSType(DS_TYPE::LESS)
 	, m_BSType(BS_TYPE::ALPHA_BLEND)
+	, m_Domain(SHADER_DOMAIN::DOMAIN_MASKED)
 {
 }
 

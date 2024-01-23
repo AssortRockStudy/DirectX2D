@@ -1,6 +1,8 @@
 #pragma once
 #include "singleton.h"
 
+#include "CTexture.h"
+
 class CGameObject;
 class CCamera;
 class CLight2D;
@@ -15,8 +17,9 @@ private:
     vector<CCamera*>        m_vecCam;
     vector<CLight2D*>       m_vecLight2D;
 
-    CStructuredBuffer*      m_Light2DBuffer;
+    Ptr<CTexture>           m_PostProcessTex;
 
+    CStructuredBuffer*      m_Light2DBuffer;
     list<tDebugShapeInfo>   m_DbgShapeInfo;
     CGameObject*            m_DebugObj;
     bool                    m_bDebugPosition;
@@ -32,6 +35,9 @@ public:
     bool IsDebugPosition() { return m_bDebugPosition; }
 
     void RegisterLight2D(CLight2D* _Light2D) { m_vecLight2D.push_back(_Light2D); }
+
+    void CopyRenderTargetToPostProcessTarget();
+    Ptr<CTexture> GetPostProcessTex() { return m_PostProcessTex; }
 
 public:
     void init();

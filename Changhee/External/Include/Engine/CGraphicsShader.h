@@ -31,7 +31,8 @@ private:
     // BlendState
     BS_TYPE                         m_BSType;
 
-    // OutputMerge
+    // Shader Domain
+    SHADER_DOMAIN                   m_Domain;
 
 public:
     int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
@@ -46,6 +47,9 @@ public:
     void SetRSType(RS_TYPE _Type) { m_RSType = _Type; }
     void SetDSType(DS_TYPE _Type) { m_DSType = _Type; }
     void SetBSType(BS_TYPE _Type) { m_BSType = _Type; }
+    void SetDomain(SHADER_DOMAIN _Domain) { m_Domain = _Domain; }
+
+    SHADER_DOMAIN GetDomain() { return m_Domain; }
 
 public:
     virtual void UpdateData() override;

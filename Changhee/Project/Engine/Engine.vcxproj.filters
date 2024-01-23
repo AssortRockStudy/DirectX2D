@@ -397,6 +397,9 @@
       <Filter>08. Component\06. Light2D</Filter>
     </ClCompile>
     <ClCompile Include="CBackgroundScript.cpp" />
+    <ClCompile Include="CAssetmgr_init.cpp">
+      <Filter>04. Manager\AssetManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -417,6 +420,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="func.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

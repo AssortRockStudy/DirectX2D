@@ -32,7 +32,7 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::tick()
 {
-	Vec4 vClearColor = Vec4(0.f, 0.f, 0.f, 1.f);
+	Vec4 vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
 
 	UpdateData();
@@ -50,6 +50,7 @@ void CRenderMgr::render()
 {
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
+		m_vecCam[i]->SortObject();
 		m_vecCam[i]->render();
 	}
 }
@@ -145,7 +146,12 @@ void CRenderMgr::UpdateData()
 		vecLight2DInfo.push_back(info);
 	}
 
-	m_Light2DBuffer->SetData(vecLight2DInfo.data(), vecLight2DInfo.size());
+	// 광원이 없는 경우
+	if (!vecLight2DInfo.empty())
+	{
+		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
+	}
+
 	m_Light2DBuffer->UpdateDate(11);
 
 	vecLight2DInfo.clear();
