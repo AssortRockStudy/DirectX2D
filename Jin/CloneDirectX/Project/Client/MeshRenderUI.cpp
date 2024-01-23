@@ -8,8 +8,6 @@
 #include "ListUI.h"
 #include "Inspector.h"
 
-void MeshSelect(DWORD_PTR _ptr);
-void MaterialSelect(DWORD_PTR _ptr);
 
 MeshRenderUI::MeshRenderUI()
 	: ComponentUI("MeshRender", "##MeshRender", COMPONENT_TYPE::MESHRENDER)
@@ -52,7 +50,8 @@ void MeshRenderUI::render_update()
 		CAssetMgr::GetInst()->GetAssetName(ASSET_TYPE::MESH, vecMeshName);
 
 		pListUI->AddString(vecMeshName);
-		pListUI->SetDbClickCallBack(MeshSelect);
+		//pListUI->SetDbClickCallBack(MeshSelect);
+		pListUI->SetDbClickDelegate(this, (Delegate_1)&MeshRenderUI::MeshSelect);
 		pListUI->Activate();
 	}
 	ImGui::Text("Material");
@@ -68,33 +67,36 @@ void MeshRenderUI::render_update()
 		CAssetMgr::GetInst()->GetAssetName(ASSET_TYPE::MATERIAL, vecMtrlName);
 
 		pListUI->AddString(vecMtrlName);
-		pListUI->SetDbClickCallBack(MaterialSelect);
+		//pListUI->SetDbClickCallBack(MaterialSelect);
+		pListUI->SetDbClickDelegate(this, (Delegate_1)&MeshRenderUI::MaterialSelect);
 		pListUI->Activate();
 	}
 }
 
-void MeshSelect(DWORD_PTR _ptr)
+void MeshRenderUI::MeshSelect(DWORD_PTR _ptr)
 {
 	string strMesh = (char*)_ptr;
 	wstring strMeshName = ToWString(strMesh);
 
 	Ptr<CMesh> pMesh = CAssetMgr::GetInst()->FindAsset<CMesh>(strMeshName);
 
-	Inspector* pInspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
-	CGameObject* pTargetObject = pInspector->GetTargetObject();
+	//Inspector* pInspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+	//CGameObject* pTargetObject = pInspector->GetTargetObject();
 
-	pTargetObject->MeshRender()->SetMesh(pMesh);
+	//pTargetObject->MeshRender()->SetMesh(pMesh);
+	GetTargetObject()->MeshRender()->SetMesh(pMesh);
 }
 
-void MaterialSelect(DWORD_PTR _ptr)
+void MeshRenderUI::MaterialSelect(DWORD_PTR _ptr)
 {
 	string strMtrl = (char*)_ptr;
 	wstring strMtrlName = ToWString(strMtrl);
 
 	Ptr<CMaterial> pMtrl = CAssetMgr::GetInst()->FindAsset<CMaterial>(strMtrlName);
 
-	Inspector* pInspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+	/*Inspector* pInspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
 	CGameObject* pTargetObject = pInspector->GetTargetObject();
 
-	pTargetObject->MeshRender()->SetMaterial(pMtrl);
+	pTargetObject->MeshRender()->SetMaterial(pMtrl);*/
+	GetTargetObject()->MeshRender()->SetMaterial(pMtrl);
 }

@@ -36,8 +36,14 @@ void ListUI::render_update()
 			{
 				m_strDBClicked = m_vecStr[i];
 
+				// 등록됨 CallBack 이 있으면 호출 !!
 				if (nullptr != m_CallBackFunc)
 					m_CallBackFunc((DWORD_PTR)m_strDBClicked.c_str());
+
+				// 등록된 Delegate 가 있으면 호출 !!
+				if (m_pUI && m_Func)
+					(m_pUI->*m_Func)((DWORD_PTR)m_strDBClicked.c_str());
+
 				Deactivate();
 			}
 		}

@@ -4,9 +4,6 @@
 #include "value.fx"
 #include "func.fx"
 
-StructuredBuffer<float4> g_Data : register(t14);
-
-
 struct VS_IN
 {
     // Sementic

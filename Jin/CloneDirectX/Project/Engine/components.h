@@ -13,7 +13,8 @@
 //
 #include "CLight2D.h"
 //#include "CLight3D.h"
-//
+
+#include "CTileMap.h"
 //#include "Skybox.h"
 //#include "Decal.h"
 //#include "Landscape.h"

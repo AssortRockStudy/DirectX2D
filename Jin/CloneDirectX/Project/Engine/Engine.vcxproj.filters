@@ -263,6 +263,7 @@
     <ClInclude Include="CLight2D.h">
       <Filter>08. Component\06. Light2D</Filter>
     </ClInclude>
+    <ClInclude Include="CTileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -392,6 +393,9 @@
     <ClCompile Include="CLight2D.cpp">
       <Filter>08. Component\06. Light2D</Filter>
     </ClCompile>
+    <ClCompile Include="CTileMap.cpp">
+      <Filter>08. Component\RenderComponent\02. TileMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
@@ -410,6 +414,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="postprocess.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>
