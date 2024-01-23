@@ -12,6 +12,7 @@
 #include "Inspector.h"
 #include "Content.h"
 #include "Outliner.h"
+#include "ListUI.h"
 
 
 CImGuiMgr::CImGuiMgr()
@@ -158,5 +159,9 @@ void CImGuiMgr::create_ui()
 
     // Outliner »ý¼º ÈÄ Add
     pUI = new Outliner;
+    AddUI(pUI->GetID(), pUI);
+
+    // List
+    pUI = new ListUI;
     AddUI(pUI->GetID(), pUI);
 }

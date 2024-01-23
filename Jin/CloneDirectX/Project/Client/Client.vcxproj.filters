@@ -113,6 +113,7 @@
       <Filter>UI\3. Inspector\ComponentUI\Transform</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderUI.h" />
+    <ClInclude Include="ListUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -175,5 +176,6 @@
     </ClCompile>
     <ClCompile Include="MeshRenderUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ListUI.cpp" />
   </ItemGroup>
 </Project>

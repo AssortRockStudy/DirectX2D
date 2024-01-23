@@ -3,13 +3,17 @@
 #include <Engine\singleton.h>
 #include "UI.h"
 
+typedef void (*CALL_BACK_0)(void);
+typedef void (*CALL_BACK_1)(DWORD_PTR);
+typedef void (*CALL_BACK_2)(DWORD_PTR, DWORD_PTR);
+
 class CImGuiMgr :
     public CSingleton<CImGuiMgr>
 {
     SINGLETON(CImGuiMgr);
 
 private:
-    map<string, UI*> m_mapUI;
+    map<string, class UI*> m_mapUI;
     bool             m_bDemoUI;
 
 public:
@@ -17,8 +21,8 @@ public:
     void progress();
 
 public:
-    UI* FindUI(const string& _strUIName);
-    void AddUI(const string& _strKey, UI* _UI);
+    class UI* FindUI(const string& _strUIName);
+    void AddUI(const string& _strKey, class UI* _UI);
 
 private:
     void tick();

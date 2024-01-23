@@ -3,6 +3,10 @@
 class MeshRenderUI :
     public ComponentUI
 {
+
+public:
+    void MeshDBClicked();
+
 public:
     virtual void render_update() override;
 

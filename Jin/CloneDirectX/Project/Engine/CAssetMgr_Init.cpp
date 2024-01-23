@@ -5,6 +5,14 @@
 #include "CGraphicsShader.h"
 #include "CMaterial.h"
 
+void CAssetMgr::GetAssetName(ASSET_TYPE _Type, vector<string>& _Out)
+{
+	for (const auto& pair : m_mapAsset[(UINT)_Type])
+	{
+		_Out.push_back(ToString(pair.first));
+	}
+}
+
 void CAssetMgr::init()
 {
 	CreateDefaultMesh();
