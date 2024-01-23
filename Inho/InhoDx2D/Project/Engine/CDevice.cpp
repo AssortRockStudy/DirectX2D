@@ -160,8 +160,6 @@ int CDevice::CreateTargetView()
                                                                                                     , DXGI_FORMAT_D24_UNORM_S8_UINT
                                                                                                     , D3D11_BIND_DEPTH_STENCIL);
 
-    m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
-
     return S_OK;
 }
 

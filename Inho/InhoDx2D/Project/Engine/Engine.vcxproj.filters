@@ -127,6 +127,18 @@
     <Filter Include="08. Component\04. Animator2D\Anim">
       <UniqueIdentifier>{681b9a7a-85a7-4b34-9b48-acb6c191a0f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Device\StructuredBuffer">
+      <UniqueIdentifier>{da92c82e-2f72-4d85-b841-66de617374c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadeCode\Util">
+      <UniqueIdentifier>{ac284309-9750-4fcb-9d68-1c01b30b6da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadeCode\Render">
+      <UniqueIdentifier>{cafae243-8718-4f04-bd93-59334fc03de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadeCode\Compute">
+      <UniqueIdentifier>{1ae6500b-0020-467e-bb64-b3b08381058f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -261,9 +273,15 @@
     <ClInclude Include="CAnimator2D.h">
       <Filter>08. Component\04. Animator2D</Filter>
     </ClInclude>
-    <ClInclude Include="CStructuredBuffer.h" />
-    <ClInclude Include="CLight2D.h" />
-    <ClInclude Include="CBackgroundScript.h" />
+    <ClInclude Include="CBackgroundScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CLight2D.h">
+      <Filter>08. Component\06. Light2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -383,26 +401,38 @@
     <ClCompile Include="CAnimator2D.cpp">
       <Filter>08. Component\04. Animator2D</Filter>
     </ClCompile>
-    <ClCompile Include="CStructuredBuffer.cpp" />
-    <ClCompile Include="CLight2D.cpp" />
-    <ClCompile Include="CBackgroundScript.cpp" />
     <ClCompile Include="CAssetMgr_init.cpp">
       <Filter>04. Manager\AssetMgr</Filter>
     </ClCompile>
+    <ClCompile Include="CBackgroundScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CLight2D.cpp">
+      <Filter>08. Component\06. Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="std2d.fx">
-      <Filter>ShadeCode</Filter>
+    <FxCompile Include="func.fx">
+      <Filter>ShadeCode\Util</Filter>
     </FxCompile>
-    <FxCompile Include="debug.fx">
-      <Filter>ShadeCode</Filter>
+    <FxCompile Include="struct.fx">
+      <Filter>ShadeCode\Util</Filter>
     </FxCompile>
     <FxCompile Include="value.fx">
-      <Filter>ShadeCode</Filter>
+      <Filter>ShadeCode\Util</Filter>
     </FxCompile>
-    <FxCompile Include="struct.fx" />
-    <FxCompile Include="func.fx" />
-    <FxCompile Include="postprocess.fx" />
+    <FxCompile Include="debug.fx">
+      <Filter>ShadeCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShadeCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>ShadeCode\Render</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

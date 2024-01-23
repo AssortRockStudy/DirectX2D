@@ -1,5 +1,6 @@
 ﻿// Dx2D.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
+#include "pch.h"
 
 #include <crtdbg.h>
 
@@ -8,6 +9,7 @@
 
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
+#include <Engine\CDevice.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "Engine\\Engine_d.lib")
@@ -15,15 +17,18 @@
 #pragma comment(lib, "Engine\\Engine.lib")
 #endif
 
-#define MAX_LOADSTRING 100
+#include "CImGuiMgr.h"
+
+#include "imgui.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
+static UINT g_ResizeWidth = 0, g_ResizeHeight = 0;
 
 // 전역 변수:
 HINSTANCE hInst;                             
 HWND hWnd;
 
 
-WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
-WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -39,14 +44,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     //_CrtSetBreakAlloc(595);
 
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
-
-    // TODO: 여기에 코드를 입력합니다.
-
-    // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_DX2D, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // 애플리케이션 초기화를 수행합니다:
@@ -64,6 +61,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 0;
     }
 
+    // ImGui 초기화
+    CImGuiMgr::GetInst()->init(hWnd, DEVICE, CONTEXT);
     
     while (true) {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
@@ -76,6 +75,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else {
             CEngine::GetInst()->progress();
+
+            CImGuiMgr::GetInst()->progress();
+
+            // Engine 및 ImGui 렌더링 최종 결과를 출력한다.
+            CDevice::GetInst()->Present();
         }
     }
 
@@ -104,7 +108,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = nullptr;
-    wcex.lpszClassName  = szWindowClass;
+    wcex.lpszClassName  = L"MyClass";
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -124,7 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(L"MyClass", L"MyWindow", WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
@@ -138,6 +142,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -150,6 +158,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+
     switch (message)
     {
     case WM_COMMAND:
@@ -180,6 +191,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
+
+    case WM_DPICHANGED:
+        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_DpiEnableScaleViewports)
+        {
+            //const int dpi = HIWORD(wParam);
+            //printf("WM_DPICHANGED to %d (%.0f%%)\n", dpi, (float)dpi / 96.0f * 100.0f);
+            const RECT* suggested_rect = (RECT*)lParam;
+            ::SetWindowPos(hWnd, nullptr, suggested_rect->left, suggested_rect->top, suggested_rect->right - suggested_rect->left, suggested_rect->bottom - suggested_rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+        }
+        break;
+
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
