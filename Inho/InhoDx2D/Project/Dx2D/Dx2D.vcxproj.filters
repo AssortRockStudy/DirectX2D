@@ -17,6 +17,18 @@
     <Filter Include="UI">
       <UniqueIdentifier>{cdcabe3b-ff82-4b03-98d3-41af215f835f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\1. Outliner">
+      <UniqueIdentifier>{407e0acf-fa1e-4349-88c0-60f46bf3792e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\2. Content">
+      <UniqueIdentifier>{943e4662-2f34-4af6-b61b-2242f7035971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector">
+      <UniqueIdentifier>{60adb6c6-06e3-41a9-bce9-729bb7bb34ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\4. ListUI">
+      <UniqueIdentifier>{4a471a11-b7a7-434f-a98a-d85d32b0e5eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dx2D.h">
@@ -63,6 +75,15 @@
     </ClInclude>
     <ClInclude Include="CImGuiMgr.h">
       <Filter>ImGuiMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Outliner.h">
+      <Filter>UI\1. Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>UI\3. Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>UI\2. Content</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +132,15 @@
     </ClCompile>
     <ClCompile Include="CImGuiMgr.cpp">
       <Filter>ImGuiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Outliner.cpp">
+      <Filter>UI\1. Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>UI\3. Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>UI\2. Content</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
