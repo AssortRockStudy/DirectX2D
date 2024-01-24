@@ -143,6 +143,9 @@ void CImGuiMgr::create_ui()
     pUI = new Outliner;
     AddUI(pUI->GetID(), pUI);
 
+    // List
+    pUI = new ListUI;
+    AddUI(pUI->GetID(), pUI);
 }
 
 UI* CImGuiMgr::FindUI(const string& _strUIName)
