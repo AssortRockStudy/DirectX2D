@@ -33,6 +33,8 @@ public:
     Vec3 GetWorldScale();
     // Vec3 GetWorldRot();
 
+    bool IsAbsolute() { return m_bAbsolute; }
+
     void SetAbsolute(bool _bAbsolute) { m_bAbsolute = _bAbsolute; }
 
     const Matrix& GetWorldMat() { return m_matWorld; }

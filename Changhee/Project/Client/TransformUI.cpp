@@ -4,9 +4,10 @@
 #include <Engine/CTransform.h>
 
 TransformUI::TransformUI()
-	: UI("Transform", "##Transform")
-	, m_TargetObject(nullptr)
+	: ComponentUI("Transform", "##Transform", COMPONENT_TYPE::TRANSFORM)
 {
+	SetSize(ImVec2(0.f, 120.f));
+	SetComponentTitle("Transform");
 }
 
 TransformUI::~TransformUI()
@@ -16,22 +17,28 @@ TransformUI::~TransformUI()
 
 void TransformUI::render_update()
 {
-	if (nullptr == m_TargetObject)
+	if (nullptr == GetTargetObject())
 		return;
 
-	Vec3 vPos = m_TargetObject->Transform()->GetRelativePos();
-	Vec3 vScale = m_TargetObject->Transform()->GetRelativeScale();
-	Vec3 vRot = m_TargetObject->Transform()->GetRelativeRotation();
+	ComponentUI::render_update();
+
+	Vec3 vPos = GetTargetObject()->Transform()->GetRelativePos();
+	Vec3 vScale = GetTargetObject()->Transform()->GetRelativeScale();
+	Vec3 vRot = GetTargetObject()->Transform()->GetRelativeRotation();
 	vRot.ToDegree();
 
-	ImGui::InputFloat3("Relative Position", vPos);
-	ImGui::InputFloat3("Relative Scale", vScale);
-	ImGui::InputFloat3("Relative Rotation", vRot);
+	ImGui::Text("Position"); ImGui::SameLine(); ImGui::DragFloat3("##Relative Position", vPos);
+	ImGui::Text("Scale   "); ImGui::SameLine(); ImGui::DragFloat3("##Relative Scale", vScale);
+	ImGui::Text("Rotation"); ImGui::SameLine(); ImGui::DragFloat3("##Relative Rotation", vRot);
 
 	vRot.ToRadian();
-	m_TargetObject->Transform()->SetRelativePos(vPos);
-	m_TargetObject->Transform()->SetRelativeScale(vScale);
-	m_TargetObject->Transform()->SetRelativeRotation(vRot);
+	GetTargetObject()->Transform()->SetRelativePos(vPos);
+	GetTargetObject()->Transform()->SetRelativeScale(vScale);
+	GetTargetObject()->Transform()->SetRelativeRotation(vRot);
 
+	// Absolute °ª 
+	bool bAbsolute = GetTargetObject()->Transform()->IsAbsolute();
+	ImGui::Text("Scale Absolute"); ImGui::SameLine(); ImGui::Checkbox("##TransformAbsolute", &bAbsolute);
+	GetTargetObject()->Transform()->SetAbsolute(bAbsolute);
 }
 
