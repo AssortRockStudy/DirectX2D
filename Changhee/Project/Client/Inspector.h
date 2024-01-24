@@ -16,13 +16,16 @@ private:
 
 	ComponentUI*		m_arrComUI[(UINT)COMPONENT_TYPE::END];
 
+
+public:
+	CGameObject* GetTargetObject() { return m_TargetObject; }
+
+	void SetTargetObject(CGameObject* _Object);
+	void SetTargetAsset(Ptr<CAsset> _Asset);
+
 public:
 	virtual void tick() override;
 	virtual void render_update() override;
-
-public:
-	void SetTargetObject(CGameObject* _Object);
-	void SetTargetAsset(Ptr<CAsset> _Asset);
 
 public:
 	Inspector();

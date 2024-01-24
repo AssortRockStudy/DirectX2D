@@ -14,29 +14,32 @@
     <Filter Include="UI">
       <UniqueIdentifier>{c6babc60-489b-4fb5-b8a0-7f773b5337ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Content">
-      <UniqueIdentifier>{7e0beaf0-9e57-41b0-89d5-81a99733724e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Inspector">
-      <UniqueIdentifier>{d09e29e6-be64-47da-ac8e-41351afd7e6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Outliner">
-      <UniqueIdentifier>{28d0a270-71fe-403e-885c-a9a08ea720ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Default\ImGui">
       <UniqueIdentifier>{e1931d6a-a740-4fba-8e9c-6858f90c06f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\ComponentUI">
+    <Filter Include="UI\1. Outliner">
+      <UniqueIdentifier>{28d0a270-71fe-403e-885c-a9a08ea720ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\2. Content">
+      <UniqueIdentifier>{7e0beaf0-9e57-41b0-89d5-81a99733724e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector">
+      <UniqueIdentifier>{d09e29e6-be64-47da-ac8e-41351afd7e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\ComponentUI">
       <UniqueIdentifier>{c5f1b1cb-c28b-4dca-b9ee-18d5441b9a62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\AssetUI">
-      <UniqueIdentifier>{575b9eec-602a-425f-8804-ead7c92b887f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Inspector\ComponentUI\TransformUI">
+    <Filter Include="UI\3. Inspector\ComponentUI\TransformUI">
       <UniqueIdentifier>{7324e425-17e0-48bf-9650-1607df0f5be1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Inspector\ComponentUI\MeshRenderUI">
+    <Filter Include="UI\3. Inspector\ComponentUI\MeshRenderUI">
       <UniqueIdentifier>{46f6b453-92d8-4e37-bd87-4eff905b14c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI">
+      <UniqueIdentifier>{575b9eec-602a-425f-8804-ead7c92b887f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\4. ListUI">
+      <UniqueIdentifier>{e2615fa9-8735-4c25-851c-49f8d0781b03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,22 +89,25 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Content.h">
-      <Filter>UI\Content</Filter>
+      <Filter>UI\2. Content</Filter>
     </ClInclude>
     <ClInclude Include="Outliner.h">
-      <Filter>UI\Outliner</Filter>
+      <Filter>UI\1. Outliner</Filter>
     </ClInclude>
     <ClInclude Include="Inspector.h">
-      <Filter>UI\Inspector</Filter>
+      <Filter>UI\3. Inspector</Filter>
     </ClInclude>
     <ClInclude Include="ComponentUI.h">
-      <Filter>UI\Inspector\ComponentUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI</Filter>
     </ClInclude>
     <ClInclude Include="TransformUI.h">
-      <Filter>UI\Inspector\ComponentUI\TransformUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI\TransformUI</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderUI.h">
-      <Filter>UI\Inspector\ComponentUI\MeshRenderUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI\MeshRenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ListUI.h">
+      <Filter>UI\4. ListUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,22 +158,25 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Content.cpp">
-      <Filter>UI\Content</Filter>
+      <Filter>UI\2. Content</Filter>
     </ClCompile>
     <ClCompile Include="Outliner.cpp">
-      <Filter>UI\Outliner</Filter>
+      <Filter>UI\1. Outliner</Filter>
     </ClCompile>
     <ClCompile Include="Inspector.cpp">
-      <Filter>UI\Inspector</Filter>
+      <Filter>UI\3. Inspector</Filter>
     </ClCompile>
     <ClCompile Include="ComponentUI.cpp">
-      <Filter>UI\Inspector\ComponentUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI</Filter>
     </ClCompile>
     <ClCompile Include="TransformUI.cpp">
-      <Filter>UI\Inspector\ComponentUI\TransformUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI\TransformUI</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderUI.cpp">
-      <Filter>UI\Inspector\ComponentUI\MeshRenderUI</Filter>
+      <Filter>UI\3. Inspector\ComponentUI\MeshRenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ListUI.cpp">
+      <Filter>UI\4. ListUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

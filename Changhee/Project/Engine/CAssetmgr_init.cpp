@@ -5,7 +5,6 @@
 #include "CGraphicsShader.h"
 #include "CMaterial.h"
 
-// test
 
 void CAssetMgr::init()
 {

@@ -16,6 +16,9 @@ private:
     map<wstring, Ptr<CAsset>>   m_mapAsset[(UINT)ASSET_TYPE::END];
 
 public:
+    void GetAssetName(ASSET_TYPE _Type, vector<string>& _Out);
+
+public:
     void init();
 
 private:

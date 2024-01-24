@@ -15,6 +15,14 @@ CAssetMgr::~CAssetMgr()
 
 }
 
+void CAssetMgr::GetAssetName(ASSET_TYPE _Type, vector<string>& _Out)
+{
+	for (const auto& pair : m_mapAsset[(UINT)_Type])
+	{
+		_Out.push_back(ToString(pair.first));
+	}
+
+}
 
 Ptr<CTexture> CAssetMgr::CreateTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage)
 {

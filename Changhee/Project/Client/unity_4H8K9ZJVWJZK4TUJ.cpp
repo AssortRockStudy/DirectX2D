@@ -33,6 +33,9 @@
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Inspector.cpp"
 
 
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ListUI.cpp"
+
+
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\main.cpp"
 
 
