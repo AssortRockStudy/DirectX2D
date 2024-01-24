@@ -69,11 +69,18 @@ void TransformUI::render_update()
 
 	// 오브젝트 이름
 	ImGui::Text("Name");
-	string objName = ToString(GetTargetObject()->GetName()).c_str();
+	char ObjName[200] = {};
+	string temp = ToString(GetTargetObject()->GetName()).c_str();
+
+	for (size_t i = 0; i < temp.length(); ++i)
+	{
+		ObjName[i] = temp[i];
+	}
+
 	ImGui::SameLine(0, 65);
 	ImGui::SetNextItemWidth(100);
-	ImGui::InputText("##ObjName", (char*)objName.c_str(), 100);
-	GetTargetObject()->SetName(ToWString(objName.c_str()));
+	ImGui::InputText("##ObjName", ObjName, 100);
+	GetTargetObject()->SetName(ToWString(ObjName));
 
 	// 오브젝트 레이어
 	m_LayerIdx = (OBJECTLAYER)GetTargetObject()->GetLayerIdx();

@@ -36,6 +36,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CScript.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CSetColorShader.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CShader.cpp"
 
 

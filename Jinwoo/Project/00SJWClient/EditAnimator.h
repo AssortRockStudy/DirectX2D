@@ -29,7 +29,6 @@ private:
     ComPtr<ID3D11ShaderResourceView>    m_textureID;
     ImTextureID                         m_imTexId;
 
-
     bool    m_IsPlaying;
     bool    m_Loop;
     float   m_AccTime;

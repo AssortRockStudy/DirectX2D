@@ -33,6 +33,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CComponent.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CComputeShader.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CConstBuffer.cpp"
 
 

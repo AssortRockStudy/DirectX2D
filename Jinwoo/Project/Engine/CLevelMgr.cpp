@@ -17,6 +17,8 @@
 #include "CGraphicsShader.h" 
 #include "CTexture.h"
 
+#include "CSetColorShader.h"
+
 CLevelMgr::CLevelMgr()
 	: m_CurLevel(nullptr)
 {
@@ -45,6 +47,20 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
 
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
+
+
+	// ComputeShader 테스트
+	Ptr<CTexture> pTestTex = CAssetMgr::GetInst()->CreateTexture(L"TestTex", 1024, 1024,
+																DXGI_FORMAT_R8G8B8A8_UNORM,
+																D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+
+	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"SetColorShader").Get();
+	pCS->SetColor(Vec3(0.f, 1.f, 0.f));
+	pCS->SetTargetTexture(pTestTex);
+	pCS->Execute();
+
+
+
 
 	// 충돌 설정
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
@@ -142,6 +158,14 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
+
+	// background  생성
+	pObj = new CGameObject;
+	pObj->SetName(L"Particle");
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CParticleSystem);
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	//// Monster Object 생성
 	//pObj = new CGameObject;

@@ -18,4 +18,4 @@
 //#include "Skybox.h"
 //#include "Decal.h"
 //#include "Landscape.h"
-//#include "ParticleSystem.h"
+#include "CParticleSystem.h"

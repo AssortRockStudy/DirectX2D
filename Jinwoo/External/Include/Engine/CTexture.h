@@ -17,6 +17,9 @@ private:
     ComPtr<ID3D11UnorderedAccessView>   m_UAV;      // GPGPU(General Purpose GPU) - ComputeShader, 읽기 쓰기 동시가능
                                                     // (Unordered Register(u) 에 바인딩 가능)
 
+    UINT    m_RecentNum_SRV;
+    UINT    m_RecentNum_UAV;
+
 private:
     virtual int Load(const wstring& _strFilePath) override;
     int Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
@@ -24,8 +27,12 @@ private:
 
 public:
     void UpdateData(int _RegisterNum);
+    int UpdateData_CS_SRV(int _RegisterNum);
+    int UpdateData_CS_UAV(int _RegisterNum);
 
     static void Clear(int _RegisterNum);
+    void Clear_CS_SRV();
+    void Clear_CS_UAV();
 
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
@@ -35,6 +42,8 @@ public:
     ComPtr<ID3D11DepthStencilView> GetDSV() { return m_DSV; }
     ComPtr<ID3D11ShaderResourceView> GetSRV() { return m_SRV; }
     ComPtr<ID3D11UnorderedAccessView> GetUAV() { return m_UAV; }
+
+    tPixel* GetPixels();
 
 public:
     CTexture();

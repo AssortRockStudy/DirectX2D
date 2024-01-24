@@ -24,7 +24,7 @@ EditAnimator::EditAnimator()
 	, m_pAtlasTex(nullptr)
 	, m_textureID(nullptr)
 	, m_imTexId(nullptr)
-	, m_ImageSize(0,0)
+	, m_ImageSize(0, 0)
 	, m_width(1.f)
 	, m_height(1.f)
 	, m_IsPlaying(false)
@@ -210,7 +210,7 @@ void EditAnimator::render_update()
 	}
 
 
-	ImGui::BeginChild("Selected Region", ImVec2(300 + scrollwidth, 300 + tapheight), true, ImGuiWindowFlags_NoScrollbar);
+	ImGui::BeginChild("Selected Region", ImVec2(vBackground.x +scrollwidth, vBackground.y + tapheight), true, ImGuiWindowFlags_NoScrollbar);
 	ImVec2 uv0 = ImVec2(selectedRegion.x / m_width, selectedRegion.y / m_height);
 	ImVec2 uv1 = ImVec2((selectedRegion.x + sliceSize.x) / m_width, (selectedRegion.y + sliceSize.y) / m_height);
 	ImVec2 regionSize = sliceSize;
@@ -244,11 +244,8 @@ void EditAnimator::render_update()
 
 	if (!m_vecAnimFrm.empty())
 	{
-		ImGui::Text("Frames in m_vecAnimFrm:");
-
 		for (const auto& frame : m_vecAnimFrm)
 		{
-			ImGui::SameLine();
 			ImGui::Text("LeftTop: %.0f, %.0f", frame.vLeftTop.x, frame.vLeftTop.y); ImGui::SameLine();
 			ImGui::Text("Slice: %.0f, %.0f", frame.vSlice.x, frame.vSlice.y); ImGui::SameLine();
 			ImGui::Text("Offset: %.0f, %.0f", frame.vOffset.x, frame.vOffset.y); ImGui::SameLine();
@@ -261,20 +258,12 @@ void EditAnimator::render_update()
 	
 	if (m_IsPlaying && !m_vecAnimFrm.empty())
 	{
-		//ImGui::Text("Current Frame:");
-		//ImGui::Text("LeftTop: %.0f, %.0f", m_vecAnimFrm[m_CurFrame].vLeftTop.x, m_vecAnimFrm[m_CurFrame].vLeftTop.y);
-		//ImGui::Text("Slice: %.0f, %.0f", m_vecAnimFrm[m_CurFrame].vSlice.x, m_vecAnimFrm[m_CurFrame].vSlice.y);
-		//ImGui::Text("Offset: %.0f, %.0f", m_vecAnimFrm[m_CurFrame].vOffset.x, m_vecAnimFrm[m_CurFrame].vOffset.y);
-		//ImGui::Text("Background: %.0f, %.0f", m_vecAnimFrm[m_CurFrame].vBackground.x, m_vecAnimFrm[m_CurFrame].vBackground.y);
-		//ImGui::Text("Duration: %.0f", m_vecAnimFrm[m_CurFrame].Duration);
-
 		selectedRegion = ImVec2(m_vecAnimFrm[m_CurFrame].vLeftTop.x, m_vecAnimFrm[m_CurFrame].vLeftTop.y);
 		sliceSize = ImVec2(m_vecAnimFrm[m_CurFrame].vSlice.x, m_vecAnimFrm[m_CurFrame].vSlice.y);
 		offset = ImVec2(m_vecAnimFrm[m_CurFrame].vOffset.x, m_vecAnimFrm[m_CurFrame].vOffset.y);
 		vBackground = ImVec2(m_vecAnimFrm[m_CurFrame].vBackground.x, m_vecAnimFrm[m_CurFrame].vBackground.y);
 		Duration = m_vecAnimFrm[m_CurFrame].Duration;
 	}
-
 }
 
 void EditAnimator::Deactivate()

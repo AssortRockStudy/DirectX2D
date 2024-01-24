@@ -28,6 +28,11 @@ void Animator2DUI::render_update()
 		pEdit->SetTaretObject(pTarget);
 		pEdit->Activate();
 	}
+	ImGui::SameLine();
+	if (ImGui::Button("Load Animation", ImVec2(130, 20)))
+	{
+		OpenFildDialog();
+	}
 
 	map<wstring, CAnim*> animList = GetTargetObject()->Animator2D()->GetAnimList();
 
@@ -69,7 +74,6 @@ void Animator2DUI::render_update()
 			ImGui::EndCombo();
 		}
 
-		// 현재 선택된 애니메이션을 실행하는 버튼
 		if (ImGui::Button("Play Animation"))
 		{
 			if (selectedIndex >= 0 && selectedIndex < animNames.size())
@@ -77,9 +81,53 @@ void Animator2DUI::render_update()
 				string selectedAnimName = animNames[selectedIndex];
 				wstring selectedAnimNameW = ToWString(selectedAnimName);
 
-				// 선택된 애니메이션 실행 코드 추가
 				GetTargetObject()->Animator2D()->Play(selectedAnimNameW);
 			}
 		}
 	}
+}
+
+void Animator2DUI::OpenFildDialog()
+{
+	OPENFILENAME ofn;
+	wchar_t szFile[MAX_PATH] = L"";
+
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFile = szFile;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(szFile) / sizeof(*szFile);
+	ofn.lpstrFilter = L"All Files\0*.*\0";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	if (GetOpenFileName(&ofn))
+	{
+		const wstring filePath = szFile;
+		LoadAnimationFromFile(filePath);
+	}
+}
+
+
+void Animator2DUI::LoadAnimationFromFile(const wstring& filePath)
+{
+	wstring fileName = GetFileFromPath(filePath);
+
+	GetTargetObject()->Animator2D()->LoadAnimation(fileName);
+}
+
+wstring Animator2DUI::GetFileFromPath(const wstring& filePath)
+{
+	size_t found = filePath.find(L"content\\");
+
+	if (found != wstring::npos)
+	{
+		return filePath.substr(found + 8);
+	}
+
+	return filePath;
 }

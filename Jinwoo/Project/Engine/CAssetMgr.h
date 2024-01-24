@@ -5,6 +5,7 @@
 #include "CAsset.h"
 
 #include "CMesh.h"
+#include "CComputeShader.h"
 #include "CGraphicsShader.h"
 #include "CTexture.h"
 #include "CMaterial.h"
@@ -20,6 +21,7 @@ private:
 private:
 	void CreateDefaultMesh();
 	void CreateDefaultGraphicsShader();
+	void CreateDefaultComputeShader();
 	void CreateDefaultMaterial();
 
 public:
@@ -62,6 +64,10 @@ ASSET_TYPE GetAssetType()
 	else if (&info == &typeid(CGraphicsShader))
 	{
 		Type = ASSET_TYPE::GRAPHICS_SHADER;
+	}
+	else if (&info == &typeid(CComputeShader))
+	{
+		Type = ASSET_TYPE::COMPUTE_SHADER;
 	}
 	else if (&info == &typeid(CMaterial))
 	{
