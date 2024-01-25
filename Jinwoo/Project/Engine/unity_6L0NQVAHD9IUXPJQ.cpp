@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLight2D.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMaterial.cpp"
 
 
@@ -16,6 +13,9 @@
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleSystem.cpp"
+
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleUpdate.cpp"
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPathMgr.cpp"

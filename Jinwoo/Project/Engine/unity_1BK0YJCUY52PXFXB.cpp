@@ -68,3 +68,6 @@
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevelMgr.cpp"
 
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLight2D.cpp"
+

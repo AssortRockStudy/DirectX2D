@@ -60,7 +60,7 @@ void CComputeShader::Execute()
 		return;
 	}
 
-	UpdateData();
+	UpdateGroupCount();
 
 	// 상수 데이터 바인딩
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
