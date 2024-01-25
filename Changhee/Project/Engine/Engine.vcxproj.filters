@@ -270,7 +270,12 @@
     <ClInclude Include="CLight2D.h">
       <Filter>08. Component\06. Light2D</Filter>
     </ClInclude>
-    <ClInclude Include="CBackgroundScript.h" />
+    <ClInclude Include="CTileMap.h">
+      <Filter>08. Component\RenderComponent\02. TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CBackgroundScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -396,9 +401,14 @@
     <ClCompile Include="CLight2D.cpp">
       <Filter>08. Component\06. Light2D</Filter>
     </ClCompile>
-    <ClCompile Include="CBackgroundScript.cpp" />
     <ClCompile Include="CAssetmgr_init.cpp">
       <Filter>04. Manager\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileMap.cpp">
+      <Filter>08. Component\RenderComponent\02. TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="CBackgroundScript.cpp">
+      <Filter>Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -423,6 +433,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="postprocess.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

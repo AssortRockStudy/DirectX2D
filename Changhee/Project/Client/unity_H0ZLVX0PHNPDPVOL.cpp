@@ -1,6 +1,12 @@
 #include "pch.h"
 
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Animator2DUI.cpp"
+
+
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\CImGuiMgr.cpp"
+
+
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Collider2DUI.cpp"
 
 
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ComponentUI.cpp"
@@ -31,6 +37,9 @@
 
 
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Inspector.cpp"
+
+
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Light2DUI.cpp"
 
 
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ListUI.cpp"

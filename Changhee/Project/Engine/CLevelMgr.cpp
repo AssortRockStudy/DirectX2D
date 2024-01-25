@@ -40,6 +40,7 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(3)->SetName(L"Player");
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
+	m_CurLevel->GetLayer(6)->SetName(L"Tile");
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
 
 	// 충돌 설정
@@ -108,6 +109,20 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
+
+	// TileMap Object
+	pObj = new CGameObject;
+	pObj->SetName(L"TileMap");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CTileMap);
+
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
+
+	Ptr<CTexture> pTileAtlas = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
+	pObj->TileMap()->SetTileAtlas(pTileAtlas, Vec2(64.f, 64.f));
+
+	m_CurLevel->AddObject(pObj, L"Tile", false);
 
 	// Player Object 생성
 	pObj = nullptr;
@@ -183,7 +198,7 @@ void CLevelMgr::init()
 	//m_CurLevel->AddObject(pObj, L"Default", false);
 
 	// Distortion 효과 추가
-	pObj = new CGameObject;
+	/*pObj = new CGameObject;
 	pObj->SetName(L"Distortion Object");
 
 	pObj->AddComponent(new CTransform);
@@ -196,7 +211,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMtrl"));
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"NoiseTex", L"texture\\noise\\noise_03.jpg"));
 
-	m_CurLevel->AddObject(pObj, L"Default", false);
+	m_CurLevel->AddObject(pObj, L"Default", false);*/
 
 
 	m_CurLevel->begin();

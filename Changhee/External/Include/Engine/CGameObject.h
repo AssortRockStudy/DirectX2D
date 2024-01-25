@@ -73,6 +73,7 @@ public:
     GET_COMPONENT(Collider2D, COLLIDER2D);
     GET_COMPONENT(Animator2D, ANIMATOR2D);
     GET_COMPONENT(Light2D, LIGHT2D);
+    GET_COMPONENT(TileMap, TILEMAP);
 
     friend class CLayer;
     friend class CTaskMgr;
