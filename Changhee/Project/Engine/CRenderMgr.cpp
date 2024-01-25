@@ -155,7 +155,7 @@ void CRenderMgr::UpdateData()
 		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
 	}
 
-	m_Light2DBuffer->UpdateDate(11);
+	m_Light2DBuffer->UpdateData(11);
 
 	vecLight2DInfo.clear();
 }

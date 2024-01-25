@@ -6,6 +6,8 @@
 
 #include "CTransform.h"
 
+#include "CStructuredBuffer.h"
+
 
 CTileMap::CTileMap()
 	: CRenderComponent(COMPONENT_TYPE::TILEMAP)
@@ -13,13 +15,32 @@ CTileMap::CTileMap()
 	, m_FaceY(2)
 	, m_vTileRenderSize(Vec2(128.f,128.f))
 	, m_TileIdx(47)
+	, m_TileInfoBuffer(nullptr)
 {
 	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"TileMapMtrl"));
+
+	m_TileInfoBuffer = new CStructuredBuffer;
+
+	SetFace(m_FaceX, m_FaceY);
 }
 
 CTileMap::~CTileMap()
 {
+	if (nullptr != m_TileInfoBuffer)
+		delete m_TileInfoBuffer;
+}
+
+void CTileMap::SetFace(UINT _FaceX, UINT _FaceY)
+{
+	m_FaceX = _FaceX;
+	m_FaceY = _FaceY;
+
+	vector<tTileInfo> vecTemp;
+	m_vecTileInfo.swap(vecTemp);
+	m_vecTileInfo.resize(_FaceX * _FaceY);
+
+	m_TileInfoBuffer->Create(sizeof(tTileInfo), _FaceX * _FaceY, SB_TYPE::READ_ONLY, true);
 }
 
 void CTileMap::SetTileAtlas(Ptr<CTexture> _Atlas, Vec2 _TilePixelSize)
@@ -29,6 +50,24 @@ void CTileMap::SetTileAtlas(Ptr<CTexture> _Atlas, Vec2 _TilePixelSize)
 
 	m_MaxCol = m_TileAtlas->GetWidth() / (UINT)m_vTilePixelSize.x;
 	m_MaxRow = m_TileAtlas->GetHeight() / (UINT)m_vTilePixelSize.y;
+
+	m_vSliceSizeUV = Vec2(m_vTilePixelSize.x / m_TileAtlas->GetWidth(), m_vTilePixelSize.y / m_TileAtlas->GetHeight());
+}
+
+void CTileMap::SetTileIndex(UINT _Row, UINT _Col, UINT _ImgIdx)
+{
+	if (nullptr == m_TileAtlas)
+		return;
+
+	UINT idx = _Row * m_FaceX + _Col;
+
+	// 렌더링할 타일 정보
+	UINT iRow = _ImgIdx / m_MaxCol;
+	UINT iCol = _ImgIdx % m_MaxCol;
+
+	m_vecTileInfo[idx].vLeftTopUV = Vec2((iCol * m_vTilePixelSize.x) / m_TileAtlas->GetWidth(), (iRow * m_vTilePixelSize.y) / m_TileAtlas->GetHeight());
+
+	m_vecTileInfo[idx].bRender = 1;
 }
 
 void CTileMap::finaltick()
@@ -39,21 +78,17 @@ void CTileMap::finaltick()
 
 void CTileMap::render()
 {
-	// 재질에 아틀라스 텍스쳐 전달
 	GetMaterial()->SetTexParam(TEX_0, m_TileAtlas);
 
-	// 렌더링할 타일 정보
-	UINT iRow = m_TileIdx / m_MaxCol;
-	UINT iCol = m_TileIdx % m_MaxCol;
+	GetMaterial()->SetScalarParam(INT_0, m_FaceX);
+	GetMaterial()->SetScalarParam(INT_1, m_FaceY);
 
-	Vec2 vLeftTopUV = Vec2((iCol * m_vTilePixelSize.x)/ m_TileAtlas->GetWidth()
-						, (iRow * m_vTilePixelSize.y) / m_TileAtlas->GetHeight());
+	GetMaterial()->SetScalarParam(VEC2_0, m_vSliceSizeUV);
 
-	Vec2 vSliceSizeUV = Vec2(m_vTilePixelSize.x / m_TileAtlas->GetWidth()
-						, m_vTilePixelSize.y / m_TileAtlas->GetHeight());
+	m_TileInfoBuffer->SetData(m_vecTileInfo.data(), m_vecTileInfo.size());
+	m_TileInfoBuffer->UpdateData(20);
 
-	GetMaterial()->SetScalarParam(VEC2_0, vLeftTopUV);
-	GetMaterial()->SetScalarParam(VEC2_1, vSliceSizeUV);
+	// 재질 업데이트
 
 	GetMaterial()->UpdateData();
 

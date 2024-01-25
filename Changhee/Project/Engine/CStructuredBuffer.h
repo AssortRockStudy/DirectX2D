@@ -26,7 +26,7 @@ private:
 
 public:
     int Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Type = SB_TYPE::READ_ONLY, bool _bSysMemMove = false, void* _pSysMem = nullptr);
-    void UpdateDate(UINT _RegisterNum);
+    void UpdateData(UINT _RegisterNum);
 
     void SetData(void* _SysMem, UINT _ElementCount = 0);
     void GetData(void* _Dest, UINT _ElementCount = 0);

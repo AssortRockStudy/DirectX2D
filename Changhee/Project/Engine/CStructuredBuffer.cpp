@@ -80,7 +80,7 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
     return S_OK;
 }
 
-void CStructuredBuffer::UpdateDate(UINT _RegisterNum)
+void CStructuredBuffer::UpdateData(UINT _RegisterNum)
 {
         CONTEXT->VSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
         CONTEXT->HSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());

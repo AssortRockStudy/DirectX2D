@@ -276,6 +276,9 @@
     <ClInclude Include="CBackgroundScript.h">
       <Filter>Script</Filter>
     </ClInclude>
+    <ClInclude Include="CParticleSystem.h">
+      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="CBackgroundScript.cpp">
       <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleSystem.cpp">
+      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
