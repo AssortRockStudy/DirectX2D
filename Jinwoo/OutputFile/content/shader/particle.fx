@@ -39,10 +39,10 @@ VS_OUT VS_Particle(VS_IN _in)
 
 float4 PS_Particle(VS_OUT _in) : SV_Target
 {
-    //if (!g_ParticleBuffer[(uint)_in.InstID].Active)
-    //{
-    //    discard;
-    //}
+    if (!g_ParticleBuffer[(uint) _in.InstID].Active)
+    {
+        discard;
+    }
     
     return float4(1.f, 0.f, 0.f, 1.f);
 }

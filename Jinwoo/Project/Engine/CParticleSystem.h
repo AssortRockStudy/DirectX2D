@@ -14,6 +14,12 @@ private:
 
     Ptr<CParticleUpdate>    m_CSParticleUpdate;
 
+    tParticleModule         m_Module;
+    CStructuredBuffer*      m_ParticleModuleBuffer;
+    CStructuredBuffer*      m_SpawnCountBuffer;
+    
+    float   m_Time;
+
 public:
     virtual void UpdateData() override;
     virtual void finaltick() override;
