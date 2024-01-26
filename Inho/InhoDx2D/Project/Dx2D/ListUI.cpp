@@ -40,6 +40,9 @@ void ListUI::render_update()
                 if (nullptr != m_CallBackFunc)
                     m_CallBackFunc((DWORD_PTR)m_strDBClicked.c_str());
 
+                if (m_pUI && m_Func)
+                    (m_pUI->*m_Func)((DWORD_PTR)m_strDBClicked.c_str());
+
                 Deactivate();
             }
 

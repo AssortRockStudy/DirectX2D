@@ -8,10 +8,6 @@
 #include "ListUI.h"
 #include "Inspector.h"
 
-
-void MeshSelect(DWORD_PTR _ptr);
-void MaterialSelect(DWORD_PTR _ptr);
-
 MeshRenderUI::MeshRenderUI()
 	: ComponentUI("MeshRender", "MeshRender", COMPONENT_TYPE::MESHRENDER)
 {
@@ -51,7 +47,7 @@ void MeshRenderUI::render_update()
 		CAssetMgr::GetInst()->GetAssetName(ASSET_TYPE::MESH, vecMeshName);
 
 		pListUI->AddString(vecMeshName);
-		pListUI->SetDbClickCallBack(MeshSelect);
+		pListUI->SetDbClickDelegate(this, (Delegate_1)&MeshRenderUI::MeshSelect);
 		pListUI->Activate();
 	}
 
@@ -68,37 +64,29 @@ void MeshRenderUI::render_update()
 		CAssetMgr::GetInst()->GetAssetName(ASSET_TYPE::MATERIAL, vecMtrlName);
 
 		pListUI->AddString(vecMtrlName);
-		pListUI->SetDbClickCallBack(MaterialSelect);
+		//pListUI->SetDbClickCallBack(MaterialSelect);
+		pListUI->SetDbClickDelegate(this, (Delegate_1)&MeshRenderUI::MaterialSelect);
 		pListUI->Activate();
 	}
 }
 
-void MeshRenderUI::MeshDBClicked()
-{
-}
-
-void MeshSelect(DWORD_PTR _ptr)
+void MeshRenderUI::MeshSelect(DWORD_PTR _ptr)
 {
 	string strMesh = (char*)_ptr;
 	wstring strMeshName = ToWString(strMesh);
 
 	Ptr<CMesh> pMesh = CAssetMgr::GetInst()->FindAsset<CMesh>(strMeshName);
 
-	Inspector* pInstector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
-	CGameObject* pTargetObject = pInstector->GetTargetObject();
-
-	pTargetObject->MeshRender()->SetMesh(pMesh);
+	GetTargetObject()->MeshRender()->SetMesh(pMesh);
 }
 
-void MaterialSelect(DWORD_PTR _ptr)
+void MeshRenderUI::MaterialSelect(DWORD_PTR _ptr)
 {
 	string strMtrl = (char*)_ptr;
 	wstring strMtrlName = ToWString(strMtrl);
 
 	Ptr<CMaterial> pMtrl = CAssetMgr::GetInst()->FindAsset<CMaterial>(strMtrlName);
 
-	Inspector* pInstector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
-	CGameObject* pTargetObject = pInstector->GetTargetObject();
+	GetTargetObject()->MeshRender()->SetMaterial(pMtrl);
 
-	pTargetObject->MeshRender()->SetMaterial(pMtrl);
 }

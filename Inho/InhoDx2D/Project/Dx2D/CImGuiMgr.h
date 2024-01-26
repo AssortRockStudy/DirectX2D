@@ -1,13 +1,15 @@
 #pragma once
 #include <Engine/singleton.h>
 
-#include "UI.h"
+class UI;
+
+typedef void (UI::* Delegate_0)(void);
+typedef void (UI::* Delegate_1)(DWORD_PTR);
+typedef void (UI::* Delegate_2)(DWORD_PTR, DWORD_PTR);
 
 typedef void (*CALL_BACK_0)(void);
 typedef void (*CALL_BACK_1)(DWORD_PTR);
 typedef void (*CALL_BACK_2)(DWORD_PTR, DWORD_PTR);
-
-class UI;
 
 class CImGuiMgr:
 	public CSingleton<CImGuiMgr>

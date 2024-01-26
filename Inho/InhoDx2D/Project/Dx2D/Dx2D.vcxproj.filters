@@ -115,7 +115,18 @@
     <ClInclude Include="MeshRenderUI.h">
       <Filter>UI\3. Inspector\ComponentUI\MeshRender</Filter>
     </ClInclude>
-    <ClInclude Include="ListUI.h" />
+    <ClInclude Include="ListUI.h">
+      <Filter>UI\4. ListUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Light2DUI.h">
+      <Filter>UI\3. Inspector\ComponentUI\Light2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2DUI.h">
+      <Filter>UI\3. Inspector\ComponentUI\Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator2DUI.h">
+      <Filter>UI\3. Inspector\ComponentUI\Animator2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dx2D.rc">
@@ -182,6 +193,17 @@
     <ClCompile Include="MeshRenderUI.cpp">
       <Filter>UI\3. Inspector\ComponentUI\MeshRender</Filter>
     </ClCompile>
-    <ClCompile Include="ListUI.cpp" />
+    <ClCompile Include="ListUI.cpp">
+      <Filter>UI\4. ListUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Light2DUI.cpp">
+      <Filter>UI\3. Inspector\ComponentUI\Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2DUI.cpp">
+      <Filter>UI\3. Inspector\ComponentUI\Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2DUI.cpp">
+      <Filter>UI\3. Inspector\ComponentUI\Animator2D</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

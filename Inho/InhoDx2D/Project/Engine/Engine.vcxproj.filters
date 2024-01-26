@@ -282,6 +282,7 @@
     <ClInclude Include="CStructuredBuffer.h">
       <Filter>03. Device\StructuredBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="CTileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -413,6 +414,7 @@
     <ClCompile Include="CStructuredBuffer.cpp">
       <Filter>03. Device\StructuredBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="CTileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="func.fx">
@@ -433,6 +435,7 @@
     <FxCompile Include="postprocess.fx">
       <Filter>ShadeCode\Render</Filter>
     </FxCompile>
+    <FxCompile Include="tilemap.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
