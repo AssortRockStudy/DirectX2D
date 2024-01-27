@@ -30,6 +30,9 @@ public:
     Ptr<CTexture> CreateTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
     Ptr<CTexture> CreateTexture(const wstring& _strKey, ComPtr<ID3D11Texture2D> _tex2D);
 
+public:
+    void GetAssetName(ASSET_TYPE _Type, vector<string>& _out);
+
     template<typename T>
     Ptr<T> Load(const wstring& _strKey, const wstring& _strRelativePath); // asset load: asset mgr·Î °ü¸®
     
@@ -98,6 +101,7 @@ inline void CAssetMgr::AddAsset(const wstring& _strKey, T* _Asset)
     unordered_map<wstring, Ptr<CAsset>>::iterator iter = m_hashAsset[(UINT)Type].find(_strKey);
     assert(iter == m_hashAsset[(UINT)Type].end());
 
+    _Asset->SetKey(_strKey);
     m_hashAsset[(UINT)Type].insert(make_pair(_strKey, _Asset));
 }
 

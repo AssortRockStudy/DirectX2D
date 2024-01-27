@@ -32,6 +32,9 @@ void CGameObject::begin()
 			m_arrCom[i]->begin();
 	}
 
+	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
+	pCurLayer->RegisterGameObject(this);
+
 	for (size_t i = 0; i < m_vecScript.size(); ++i)
 		m_vecScript[i]->begin();
 

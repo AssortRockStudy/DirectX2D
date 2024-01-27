@@ -17,6 +17,8 @@ namespace GamePlayStatic
 	//void DrawDebugSphere();
 }
 
+string wstrToStr(const wstring& _wstr);
+wstring str2Wstr(const string& _str);
 
 template<typename T, UINT SIZE>
 void Delete_Array(T* (&Arr)[SIZE])

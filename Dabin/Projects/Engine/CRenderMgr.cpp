@@ -24,6 +24,9 @@ CRenderMgr::~CRenderMgr()
 {
 	if (m_pDbgObj)
 		delete m_pDbgObj;
+
+	if (m_Light2DBuffer)
+		delete m_Light2DBuffer;
 }
 
 void CRenderMgr::tick()
@@ -43,11 +46,18 @@ void CRenderMgr::tick()
 	Clear();
 
 	// drawing (buffer show)
-	CDevice::GetInst()->Present();
+	// - UI창도 함께 그릴 것이므로 Client에서 ImGUI 그린 후 Present해줌
+	// CDevice::GetInst()->Present(); 
 }
 
 void CRenderMgr::render()
 {
+	// Output Merge State(OM)에 Render Target Texture와 Depth Stencil Texture 전달
+	// ImGUI 붙이면서 renderTarget이 중간에 바뀔 수 있으므로 renderMgr로 옮겨줌
+	Ptr<CTexture> pRTTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	Ptr<CTexture> pDSTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
+	CONTEXT->OMSetRenderTargets(1, pRTTex->GetRTV().GetAddressOf(), pDSTex->GetDSV().Get());
+
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
 		m_vecCam[i]->SortObject();

@@ -1,15 +1,21 @@
-﻿#include "framework.h"
+﻿#include "pch.h"
+#include "framework.h"
 #include "Client.h"
-
 #include <crtdbg.h> // memory lick check
 
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
+#include <Engine/CDevice.h>
 #ifdef _DEBUG
 #pragma comment(lib, "Engine\\Engine_debug.lib")
 #else
 #pragma comment(lib, "Engine\\Engine.lib")
 #endif
+
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
+#include "CImGuiMgr.h"
 
 #define MAX_LOADSTRING 100
 
@@ -20,7 +26,8 @@ HWND hWnd;
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM); 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -33,6 +40,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MyRegisterClass(hInstance);
 
+    // ------------------
+    // Init
+    // ------------------
     // 애플리케이션 초기화를 수행합니다:
     if (!InitInstance (hInstance, nCmdShow))
     {
@@ -49,7 +59,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 0;
     }
 
+    // ImGUI init
+    CImGuiMgr::GetInst()->init(hWnd, DEVICE, CONTEXT);
+
+    // ------------------
     // main loop
+    // ------------------
     while (true)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -64,7 +79,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             }
         }
         else
+        {
             CEngine::GetInst()->progress();
+            CImGuiMgr::GetInst()->progress();
+            CDevice::GetInst()->Present();  // Engine + ImGUI의 렌더링 최종 결과 present
+        }
     }
 
     return (int) msg.wParam;
@@ -126,6 +145,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+    
     switch (message)
     {
     case WM_COMMAND:
@@ -145,16 +167,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-        }
-        break;
+    //case WM_PAINT:
+    //    {
+    //        PAINTSTRUCT ps;
+    //        HDC hdc = BeginPaint(hWnd, &ps);
+    //        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+    //        EndPaint(hWnd, &ps);
+    //    }
+    //    break;
     case WM_DESTROY:
         PostQuitMessage(0);
+        break;
+    case WM_DPICHANGED:
+        // 해상도가 변하는 경우 (듀얼모니터 등)
+        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_DpiEnableScaleViewports)
+        {
+            const RECT* suggested_rect = (RECT*)lParam;
+            ::SetWindowPos(hWnd, nullptr, suggested_rect->left, suggested_rect->top, suggested_rect->right - suggested_rect->left, suggested_rect->bottom - suggested_rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+        }
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

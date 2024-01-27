@@ -37,6 +37,7 @@ public:
     Vec3 GetWorldScale();
     //Vec3 GetWorldRotate(); // Rotation은 world 계산 어려움... 나중에!
     Vec3 GetWorldDir(DIR_TYPE _Type) { return m_arrWorldDir[(UINT)_Type]; }
+    bool IsAbsolute() { return m_bAbsolute; }
 
 public:
     CTransform();

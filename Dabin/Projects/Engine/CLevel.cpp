@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CLevel.h"
 #include "CLayer.h"
+#include "CGameObject.h"
 
 CLevel::CLevel()
 	: m_arrLayer{}
@@ -63,4 +64,31 @@ CLayer* CLevel::GetLayer(const wstring& _strLayerName)
 			return m_arrLayer[i];
 	}
 	return nullptr;
+}
+
+CGameObject* CLevel::FindObjectByName(const wstring& _strName)
+{
+	for (size_t i = 0; i < LAYER_MAX; ++i)
+	{
+		const vector<CGameObject*>& vecObject = m_arrLayer[i]->GetLayerObjects();
+		for (size_t j = 0; j < vecObject.size(); ++j)
+		{
+			if (vecObject[j]->GetName() == _strName)
+				return vecObject[j];
+		}
+	}
+	return nullptr;
+}
+
+void CLevel::FindObjectsByName(const wstring& _strName, vector<CGameObject*>& _out)
+{
+	for (size_t i = 0; i < LAYER_MAX; ++i)
+	{
+		const vector<CGameObject*>& vecObject = m_arrLayer[i]->GetLayerObjects();
+		for (size_t j = 0; j < vecObject.size(); ++j)
+		{
+			if (vecObject[j]->GetName() == _strName)
+				_out.push_back(vecObject[j]);
+		}
+	}
 }

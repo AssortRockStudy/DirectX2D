@@ -42,3 +42,9 @@ Ptr<CTexture> CAssetMgr::CreateTexture(const wstring& _strKey, ComPtr<ID3D11Text
 	AddAsset<CTexture>(_strKey, pTex.Get());
 	return pTex;
 }
+
+void CAssetMgr::GetAssetName(ASSET_TYPE _Type, vector<string>& _out)
+{
+	for (const auto& pair : m_hashAsset[(UINT)_Type])
+		_out.push_back(wstrToStr(pair.first));
+}

@@ -194,7 +194,7 @@ int CDevice::CreateTargetView()
     */
 
     // Output Merge State(OM)에 Render Target Texture와 Depth Stencil Texture 전달
-    m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
+    //m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get()); // ImGUI 붙이면서 renderTarget이 중간에 바뀔 수 있으므로 renderMgr로 옮겨줌
 
     return S_OK;
 }

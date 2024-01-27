@@ -1,7 +1,7 @@
 #pragma once
 #include "CEntity.h"
 
-#define GET_GOMPONENT(Type, TYPE) class C##Type* Type(){return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::##TYPE];}
+#define GET_COMPONENT(Type, TYPE) class C##Type* Type(){return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::##TYPE];}
 
 // =======================================
 // CGameObject: 모든 GameObject가 상속하는 parent class
@@ -45,12 +45,13 @@ public:
     // 대안1 macro:
     // 대안2 getter: 각 타입마다 함수로 만들어 반환형 만들어줌
     CComponent* GetComponents(COMPONENT_TYPE _Type) { return m_arrCom[(UINT)_Type]; }
-    GET_GOMPONENT(Transform, TRANSFORM);
-    GET_GOMPONENT(MeshRender, MESHRENDER);
-    GET_GOMPONENT(Camera, CAMERA);
-    GET_GOMPONENT(Collider2D, COLLIDER2D);
-    GET_GOMPONENT(Animator2D, ANIMATOR2D);
-    GET_GOMPONENT(Light2D, LIGHT2D);
+    GET_COMPONENT(Transform, TRANSFORM);
+    GET_COMPONENT(MeshRender, MESHRENDER);
+    GET_COMPONENT(Camera, CAMERA);
+    GET_COMPONENT(Collider2D, COLLIDER2D);
+    GET_COMPONENT(Animator2D, ANIMATOR2D);
+    GET_COMPONENT(Light2D, LIGHT2D);
+    GET_COMPONENT(TileMap, TILEMAP);
 
 public:
     CGameObject();
