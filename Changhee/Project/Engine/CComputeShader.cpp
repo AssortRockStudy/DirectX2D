@@ -64,6 +64,6 @@ void CComputeShader::Execute()
 	// 컴퓨트 쉐이더 실행
 	CONTEXT->CSSetShader(m_CS.Get(), 0, 0);
 	CONTEXT->Dispatch(m_GroupX, m_GroupY, m_GroupZ);
-
+	 
 	Clear();
 }
