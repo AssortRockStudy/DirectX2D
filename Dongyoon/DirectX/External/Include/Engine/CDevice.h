@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CTexture.h"
-
 class CConstBuffer;
 
 //Directx11 기준 GPU 제어 
@@ -16,9 +14,11 @@ private:
 
 	ComPtr<IDXGISwapChain>				m_SwapChain;	//스왑체인(출력 버퍼 지정)
 
-	//OM(OutputMergetState)
-	Ptr<CTexture>						m_RTTex;
-	Ptr<CTexture>						m_DSTex;
+	ComPtr<ID3D11Texture2D>				m_RTTex;		// 렌더타겟 텍스쳐
+	ComPtr<ID3D11RenderTargetView>		m_RTView;		//렌더 타겟 뷰
+
+	ComPtr<ID3D11Texture2D>				m_DSTex;		// 뎁스 스텐실 텍스쳐
+	ComPtr<ID3D11DepthStencilView>		m_DSView;		// 뎁스 스텐실 뷰
 
 	HWND								m_hRenderWnd;	// 윈도우 핸들
 	Vec2								m_vRenderResolution; // 해상도

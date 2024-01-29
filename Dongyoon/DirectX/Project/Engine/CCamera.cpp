@@ -9,9 +9,6 @@
 #include "CLevel.h"
 #include "CLayer.h"
 #include "CGameObject.h"
-#include "CRenderComponent.h"
-
-#include "CAssetMgr.h"
 
 
 CCamera::CCamera()
@@ -105,97 +102,25 @@ void CCamera::LayerCheck(const wstring& _strLayerName, bool _bCheck)
 }
 
 
-void CCamera::SortObject()
-{
-	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
-
-	for (int i = 0; i < LAYER_MAX; ++i)
-	{
-		//카메라가 찍도록 설정된 Layer가 아니면 무시
-		if (false == (m_LayerCheck & (1 << i)))
-			continue;
-
-		CLayer* pLayer = pCurLevel->GetLayer(i);
-		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
-
-		for (size_t j = 0; j < vecObjects.size(); ++j)
-		{
-			//매쉬 재질 쉐이더 확인
-			if (!(vecObjects[j]->GetRenderComopnent()
-				&& vecObjects[j]->GetRenderComopnent()->GetMesh().Get()
-				&& vecObjects[j]->GetRenderComopnent()->GetMaterial().Get()
-				&& vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader().Get()))
-			{
-				continue;
-			}
-
-
-			SHADER_DOMAIN domain = vecObjects[j]->GetRenderComopnent()->GetMaterial()->GetShader()->GetDomain();
-
-			switch (domain)
-			{
-			case SHADER_DOMAIN::DOMAIN_OPAQUE:
-				m_vecOpaque.push_back(vecObjects[j]);
-				break;
-			case SHADER_DOMAIN::DOMAIN_MASKED:
-				m_vecMaked.push_back(vecObjects[j]);
-				break;
-			case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
-				m_vecTransparent.push_back(vecObjects[j]);
-				break;
-			case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
-				m_vecPostProcess.push_back(vecObjects[j]);
-				break;
-			case SHADER_DOMAIN::DOMAIN_DEBUG:
-				break;
-			}
-
-
-
-		}
-
-	}
-}
-
 void CCamera::render()
 {
 	//계산한 view 행렬과 proj 행렬을 전역변수에 담아둔다.
 	g_Transform.matView = m_matView;
 	g_Transform.matProj = m_matProj;
 
-	// Domain 순서대로 렌더ㅓ링
-	render(m_vecOpaque);
-	render(m_vecMaked);
-	render(m_vecTransparent);
-	render(m_vecPostProcess);
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 
-	//후처리 작업
-	render_postprocess();
-
-}
-
-void CCamera::render(vector<CGameObject*>& _vecObj)
-{
-	for (size_t i = 0; i < _vecObj.size(); ++i)
+	for (int i = 0; i < LAYER_MAX; ++i)
 	{
-		_vecObj[i]->render();
-	}
-	_vecObj.clear();
-}
+		//카메라가 찍도록 설정된 LAYER가 아니면 무시
+		if ((m_LayerCheck & (1 << i)) == false)
+			continue;
 
-void CCamera::render_postprocess()
-{
-	for (size_t i = 0; i < m_vecPostProcess.size(); ++i)
-	{
-		//최종 렌더링 이미지를 후처리 타겟에 복사
-		CRenderMgr::GetInst()->CopyRenderTargetToPostProcessTarget();
-
-		//복사받은 후처리 텍스쳐를 t13 레지스터에 바인딩
-		Ptr<CTexture> pPostProcessTex = CRenderMgr::GetInst()->GetPostProcessTex();
-		pPostProcessTex->UpdateData(13);
-
-		// 후처리 오브젝트 렌더링
-		m_vecPostProcess[i]->render();
+		CLayer* pLayer = pCurLevel->GetLayer(i);
+		const vector<CGameObject*>& vecObjects = pLayer->GetLayerObjects();
+		for (size_t i = 0; i < vecObjects.size(); ++i)
+		{
+			vecObjects[i]->render();
+		}
 	}
 }
-

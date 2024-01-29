@@ -395,9 +395,6 @@
     <ClCompile Include="CBackgroundScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="CAssetMgr_init.cpp">
-      <Filter>04. Manager\AssetMgr</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -418,9 +415,6 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="func.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="postprocess.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

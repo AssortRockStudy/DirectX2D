@@ -2,7 +2,6 @@
 #include "CDevice.h"
 
 #include "CConstBuffer.h"
-#include "CAssetMgr.h"
 
 
 
@@ -110,8 +109,8 @@ int CDevice::Init(HWND _hwnd, Vec2 _vResolution)
 
 void CDevice::ClearRenderTarget(float(&color)[4])
 {
-	m_Context->ClearRenderTargetView(m_RTTex->GetRTV().Get(), color);
-	m_Context->ClearDepthStencilView(m_DSTex->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	m_Context->ClearRenderTargetView(m_RTView.Get(), color);
+	m_Context->ClearDepthStencilView(m_DSView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
 }
 
@@ -161,25 +160,58 @@ int CDevice::CreateSwapChain()
 
 int CDevice::CreateTargetView()
 {
+	//렌더타겟 텍스쳐를 스왑체인으로부터 얻어온다.
+	m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)m_RTTex.GetAddressOf());
+
+	//렌더 타겟 뷰
+	m_Device->CreateRenderTargetView(m_RTTex.Get(), nullptr, m_RTView.GetAddressOf());
+
+	//view
+	//Render TargetView
+	//DepthStencilView
+	//ShaderResourceView
+	//UnorderedAccessView
 
 
-	// 렌더타겟 텍스쳐를 스왚체인으로부터 얻어온다.
-	ComPtr<ID3D11Texture2D> tex2D;
-	m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)tex2D.GetAddressOf());
 
-	// RenderTargetView를 AssetMgr에 등록
-	m_RTTex = CAssetMgr::GetInst()->CreateTexture(L"RenderTargetTex", tex2D);
+	//DepthStencil Texture 생성
+	D3D11_TEXTURE2D_DESC Desc = {};
 
-	// DepthStencilTexture 생성
-	m_DSTex = CAssetMgr::GetInst()->CreateTexture(L"DepthStencilTex"
-													, (UINT)m_vRenderResolution.x
-													, (UINT)m_vRenderResolution.y
-													, DXGI_FORMAT_D24_UNORM_S8_UINT
-													, D3D11_BIND_DEPTH_STENCIL);
+	Desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+	//DepthStenclilState 텍스쳐 해상도는 반드시 RenderTargetTextuire와 동일해야 한다.
+	Desc.Width = (UINT)m_vRenderResolution.x;
+	Desc.Height = (UINT)m_vRenderResolution.y;
+
+	//texture의 용도
+	Desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
 
-	// OM(Output Merge State) 에 RenderTargetTexture 와 DepthStencilTexture 를 전달한다.
-	m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get());
+	//CPU 접근 불가
+	Desc.CPUAccessFlags = 0;
+	Desc.Usage = D3D11_USAGE_DEFAULT;
+
+	//샘플링
+	Desc.SampleDesc.Count = 1;
+	Desc.SampleDesc.Quality = 0;
+
+	// 저퀄리티 버전의 사본 생성 여부
+	Desc.MipLevels = 1;
+	Desc.MiscFlags = 0;
+
+	Desc.ArraySize = 1;
+
+
+	if (FAILED(m_Device->CreateTexture2D(&Desc, nullptr, m_DSTex.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
+
+	//DepthStencilView
+	m_Device->CreateDepthStencilView(m_DSTex.Get(), nullptr, m_DSView.GetAddressOf());
+
+	//OM(Output Merge State) 에 RendeTarget 과 DepthStencilTexture 전달
+	m_Context->OMSetRenderTargets(1, m_RTView.GetAddressOf(), m_DSView.Get());
 
 	return S_OK;
 }

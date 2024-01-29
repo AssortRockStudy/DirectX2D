@@ -189,13 +189,3 @@ enum class LIGHT_TYPE
 	POINT,
 	SPOT,
 };
-
-enum class SHADER_DOMAIN
-{
-	DOMAIN_OPAQUE,		//불투명
-	DOMAIN_MASKED,		//불투명 OR 투명
-	DOMAIN_TRANSPARENT,	//반투명
-	DOMAIN_POSTPROCESS, //후처리
-
-	DOMAIN_DEBUG,
-};

@@ -2,8 +2,6 @@
 
 #include "CSingleton.h"
 
-#include "CTexture.h"
-
 class CCamera;
 class CGameObject;
 class CStructuredBuffer;
@@ -15,8 +13,6 @@ class CRenderMgr :
     SINGLE(CRenderMgr);
 private:
     vector<CCamera*>            m_vecCam;
-
-    Ptr<CTexture>               m_PostProcessTex;
 
     CStructuredBuffer*          m_Light2DBuffer;
     vector<CLight2D*>           m_vecLight2D;
@@ -39,9 +35,6 @@ public:
     bool IsDebugPosition() { return m_DebugPosition; }
 
     void RegisterLight2D(CLight2D* _Light2D) { m_vecLight2D.push_back(_Light2D); }
-
-    void CopyRenderTargetToPostProcessTarget();
-    Ptr<CTexture> GetPostProcessTex() { return m_PostProcessTex; }
 
 public:
     void init();
