@@ -81,11 +81,6 @@ void CAnim::Create(CAnimator2D* _Animator, Ptr<CTexture> _Atlas, Vec2 _vLeftTop
 
 		frm.vBackground = Vec2(_vBackground.x / (float)_Atlas->GetWidth(), _vBackground.y / (float)_Atlas->GetHeight());
 
-		//2 frame hard codding offset
-		//if (i == 1)
-		//{
-		//	frm.vOffset.x = (_vOffset.x + 5.f) / (float)_Atlas->GetWidth();
-		//}
 
 		m_vecFrm.push_back(frm);
 	}

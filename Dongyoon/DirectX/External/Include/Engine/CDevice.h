@@ -16,9 +16,8 @@ private:
 
 	ComPtr<IDXGISwapChain>				m_SwapChain;	//스왑체인(출력 버퍼 지정)
 
-	ComPtr<ID3D11Texture2D>				m_RTTex;		// 렌더타겟 텍스쳐
-	ComPtr<ID3D11RenderTargetView>		m_RTView;		//렌더 타겟 뷰
-
+	//OM(OutputMergetState)
+	Ptr<CTexture>						m_RTTex;
 	Ptr<CTexture>						m_DSTex;
 
 	HWND								m_hRenderWnd;	// 윈도우 핸들
