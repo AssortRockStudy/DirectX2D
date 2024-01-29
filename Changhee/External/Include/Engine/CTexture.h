@@ -13,6 +13,9 @@ private:
     ComPtr<ID3D11ShaderResourceView>        m_SRV;          // 쉐이더에서 사용하는 용도(텍스쳐 레지스터(t) 바인딩)
     ComPtr<ID3D11UnorderedAccessView>       m_UAV;          // GPGPU(General Purpose GPU) - ComputeShader, 읽기 쓰기 동시가능, (Unordered register(u)에 바인딩 가능)
 
+    UINT                                    m_RecentNum_SRV;
+    UINT                                    m_RecentNum_UAV;
+
 private:
     virtual int Load(const wstring& _strFilePath) override;
     int Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
@@ -21,7 +24,14 @@ private:
 
 public:
     void UpdateData(int _RegisterNum);
+
+    int UpdateData_CS_SRV(int _RegisterNum);
+    int UpdateData_CS_UAV(int _RegisterNum);
+
     static void Clear(int _RegisterNum);
+
+    void Clear_CS_SRV();
+    void Clear_CS_UAV();
 
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }

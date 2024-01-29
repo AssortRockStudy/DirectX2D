@@ -52,7 +52,7 @@ public:
     SHADER_DOMAIN GetDomain() { return m_Domain; }
 
 public:
-    virtual void UpdateData() override;
+    virtual int UpdateData() override;
 
 public:
     CGraphicsShader();

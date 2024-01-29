@@ -130,6 +130,18 @@
     <Filter Include="03. Device\StructuredBuffer">
       <UniqueIdentifier>{27d796b6-1607-4f40-8213-ee0d2119f22a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode\Compute">
+      <UniqueIdentifier>{2ee1c285-5f98-4061-9d74-78116ffb8bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Render">
+      <UniqueIdentifier>{cd4770d0-66c6-4830-93f8-27ddb84701c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Util">
+      <UniqueIdentifier>{39decc15-833b-4a7d-848a-2d79b8092005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Compute\SetColor">
+      <UniqueIdentifier>{0910937a-92e6-476a-8688-4b0dee8fcdd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -279,6 +291,12 @@
     <ClInclude Include="CParticleSystem.h">
       <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
     </ClInclude>
+    <ClInclude Include="CComputeShader.h">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorShader.h">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -416,6 +434,12 @@
     <ClCompile Include="CParticleSystem.cpp">
       <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
     </ClCompile>
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSetColorShader.cpp">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -423,26 +447,29 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="std2d.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
     <FxCompile Include="debug.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="value.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="struct.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="func.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="postprocess.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="tilemap.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="setcolor.fx">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

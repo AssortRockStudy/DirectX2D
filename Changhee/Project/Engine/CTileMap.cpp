@@ -85,7 +85,7 @@ void CTileMap::render()
 
 	GetMaterial()->SetScalarParam(VEC2_0, m_vSliceSizeUV);
 
-	m_TileInfoBuffer->SetData(m_vecTileInfo.data(), m_vecTileInfo.size());
+	m_TileInfoBuffer->SetData(m_vecTileInfo.data(), (UINT)m_vecTileInfo.size());
 	m_TileInfoBuffer->UpdateData(20);
 
 	// 재질 업데이트

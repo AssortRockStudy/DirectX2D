@@ -5,12 +5,15 @@
 #include "CGraphicsShader.h"
 #include "CMaterial.h"
 
+#include "CSetColorShader.h"
 
 void CAssetMgr::init()
 {
 	CreateDefaultMesh();
 
 	CreateDefaultGraphicsShader();
+
+	CreateDefaultComputeShader();
 
 	CreateDefaultMaterial();
 }
@@ -245,6 +248,17 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_DEBUG);
 
 	AddAsset(L"DebugShapeShader", pShader);
+}
+
+
+void CAssetMgr::CreateDefaultComputeShader()
+{
+	Ptr<CComputeShader> pShader = nullptr;
+
+	// SetColor Shader
+	pShader = new CSetColorShader;
+	pShader->Create(L"shader\\setcolor.fx", "CS_SetColor");
+	AddAsset(L"SetColorShader", pShader.Get());
 }
 
 void CAssetMgr::CreateDefaultMaterial()
