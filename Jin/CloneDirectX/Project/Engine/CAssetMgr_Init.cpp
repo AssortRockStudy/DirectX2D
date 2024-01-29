@@ -18,6 +18,7 @@ void CAssetMgr::init()
 	CreateDefaultMesh();
 	CreateDefaultGraphicsShader();
 	CreateDefaultMaterial();
+	CreateDefaultComputeShader();
 }
 
 void CAssetMgr::CreateDefaultMesh()
@@ -147,6 +148,17 @@ void CAssetMgr::CreateDefaultMesh()
 	AddAsset(L"CrossMesh", pMesh);
 	vecVtx.clear();
 	vecIdx.clear();
+}
+
+#include "CSetColorShader.h"
+void CAssetMgr::CreateDefaultComputeShader()
+{
+	Ptr<CComputeShader> pShader = nullptr;
+
+	// SetColorShader
+	pShader = new CSetColorShader;
+	pShader->Create(L"shader\\setcolor.fx", "CS_SetColor");
+	AddAsset(L"SetColorShader", pShader.Get());
 }
 
 void CAssetMgr::CreateDefaultGraphicsShader()

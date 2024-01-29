@@ -50,7 +50,7 @@ public:
     void SetDomain(SHADER_DOMAIN _domain) { m_Domain = _domain; }
     SHADER_DOMAIN GetDomain() { return m_Domain; }
 public:
-    virtual void UpdateData();
+    virtual int UpdateData();
 
 public:
     CGraphicsShader();

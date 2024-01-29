@@ -125,7 +125,7 @@ int CGraphicsShader::CreatePixelShader(const wstring& _strRelativePath, const st
 
 }
 
-void CGraphicsShader::UpdateData()
+int CGraphicsShader::UpdateData()
 {
 	CONTEXT->IASetInputLayout(m_Layout.Get());
 	CONTEXT->IASetPrimitiveTopology(m_Topology);
@@ -140,5 +140,7 @@ void CGraphicsShader::UpdateData()
 	CONTEXT->DSSetShader(m_DS.Get(), nullptr, 0);
 	CONTEXT->GSSetShader(m_GS.Get(), nullptr, 0);
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
+
+	return S_OK;
 }
 

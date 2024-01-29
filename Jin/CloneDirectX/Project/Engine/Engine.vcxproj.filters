@@ -267,6 +267,10 @@
       <Filter>08. Component\RenderComponent\02. TileMap</Filter>
     </ClInclude>
     <ClInclude Include="CParticleSystem.h" />
+    <ClInclude Include="CComputeShader.h">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -400,6 +404,10 @@
       <Filter>08. Component\RenderComponent\02. TileMap</Filter>
     </ClCompile>
     <ClCompile Include="CParticleSystem.cpp" />
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSetColorShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
@@ -421,6 +429,9 @@
       <Filter>ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="tilemap.fx">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="setcolor.fx">
       <Filter>ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

@@ -9,7 +9,7 @@ protected:
 
 
 public:
-    virtual void UpdateData() = 0;
+    virtual int UpdateData() = 0;
 
 public:
     CShader(ASSET_TYPE _Type);
