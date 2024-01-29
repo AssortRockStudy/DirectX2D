@@ -17,6 +17,24 @@
     <Filter Include="ImGuiMgr">
       <UniqueIdentifier>{fba0276f-4d06-4cd5-bf60-59947f3a22a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Inspector">
+      <UniqueIdentifier>{a8aa5efc-50be-45a0-9e1b-a9ece49d0e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Content">
+      <UniqueIdentifier>{3cc24657-61b9-44a5-8a0e-da4551c902b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Outliner">
+      <UniqueIdentifier>{6d5e33f2-81bf-4a20-8140-f9ec1d0311bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Inspector\AssetUI">
+      <UniqueIdentifier>{763f037b-605e-46cc-97bc-f5d527d0af34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Inspector\ComponentUI">
+      <UniqueIdentifier>{317fd32f-cb69-4df8-9196-0de2bbf88d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Inspector\ComponentUI\Transform">
+      <UniqueIdentifier>{be572d16-c1d9-4e94-b058-13938615fc24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct_Mimic.h">
@@ -63,6 +81,18 @@
     </ClInclude>
     <ClInclude Include="CImGuiMgr.h">
       <Filter>ImGuiMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>UI\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>UI\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Outliner.h">
+      <Filter>UI\Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformUI.h">
+      <Filter>UI\Inspector\ComponentUI\Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +141,18 @@
     </ClCompile>
     <ClCompile Include="CImGuiMgr.cpp">
       <Filter>ImGuiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>UI\Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>UI\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="Outliner.cpp">
+      <Filter>UI\Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformUI.cpp">
+      <Filter>UI\Inspector\ComponentUI\Transform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #include "CLevel.h"
 
 #include "CLayer.h"
-
+#include "CGameObject.h"
 
 
 
@@ -73,6 +73,72 @@ CLayer* CLevel::GetLayer(const wstring& _strLayerName)
 	}
 
 	return nullptr;
+}
+
+CGameObject* CLevel::FindObjectByName(const wstring& _strName)
+{
+	for (UINT i = 0; i < LAYER_MAX; ++i)
+	{
+		const vector<CGameObject*>& vecParent = m_arrLayer[i]->GetParentObjects();
+
+		for (size_t j = 0; j < vecParent.size(); ++j)
+		{
+			list<CGameObject*> queue;
+			queue.push_back(vecParent[j]);
+
+			//레이어에 입력되는 오브젝트포함, 그 밑에 달린 자식들까지 확인
+			while (!queue.empty())
+			{
+				CGameObject* pObject = queue.front();
+				queue.pop_front();
+
+				const vector<CGameObject*>& vecChild = pObject->GetChild();
+				for (size_t k = 0; k < vecChild.size(); ++k)
+				{
+					queue.push_back(vecChild[k]);
+				}
+
+				if (_strName == pObject->GetName())
+				{
+					return pObject;
+				}
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+void CLevel::FindObjectSByName(const wstring& _strName, vector<CGameObject*>& _vecObj)
+{
+	for (UINT i = 0; i < LAYER_MAX; ++i)
+	{
+		const vector<CGameObject*> vecParent = m_arrLayer[i]->GetParentObjects();
+
+		for (size_t j = 0; j < vecParent.size(); ++j)
+		{
+			list<CGameObject*> queue;
+			queue.push_back(vecParent[j]);
+
+			// 레이어에 입력되는 오브젝트 포함, 그 밑에 달린 자식들까지 모두 확인
+			while (!queue.empty())
+			{
+				CGameObject* pObject = queue.front();
+				queue.pop_front();
+
+				const vector<CGameObject*>& vecChild = pObject->GetChild();
+				for (size_t k = 0; k < vecChild.size(); ++k)
+				{
+					queue.push_back(vecChild[k]);
+				}
+
+				if (_strName == pObject->GetName())
+				{
+					_vecObj.push_back(pObject);
+				}
+			}
+		}
+	}
 }
 
 

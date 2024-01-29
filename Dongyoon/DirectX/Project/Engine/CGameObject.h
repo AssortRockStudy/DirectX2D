@@ -42,6 +42,7 @@ public:
     GET_COMPONENT(Light2D, LIGHT2D);
 
     CGameObject* GetParent() { return m_Parent; }
+    const vector<CGameObject*>& GetChild() { return m_vecChild; }
 
     const vector<CScript*>& GetScripts() { return m_vecScript; }
 
