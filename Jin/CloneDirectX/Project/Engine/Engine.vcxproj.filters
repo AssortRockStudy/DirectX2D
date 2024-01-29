@@ -263,7 +263,9 @@
     <ClInclude Include="CLight2D.h">
       <Filter>08. Component\06. Light2D</Filter>
     </ClInclude>
-    <ClInclude Include="CTileMap.h" />
+    <ClInclude Include="CTileMap.h">
+      <Filter>08. Component\RenderComponent\02. TileMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
