@@ -33,6 +33,7 @@ struct tTileInfo
 
 struct tParticle
 {
+    float4 vLocalPos;
     float4 vWorldPos;       // 위치
     float4 vWorldScale;     // 크기
     float4 vWorldRotation;  // 회전
@@ -56,6 +57,20 @@ struct tParticleModule
     float   MaxLife;        // 최대 수명
     int     SpawnRate;      // 초당 생성 개수
     int     SpaceType;      // 좌표계(0 : LocalSpace, 1 : WorldSpace)
+    
+    int     SpawnShape;     // 스폰 범위 (0 : Sphere, 1 : Box)
+    float   Radius;         // 스폰쉐이프가 Sphere인 경우, 반지름 길이
+    float4  vSpawnBoxScale; // 스폰쉐이프가 Box인 경우, Box의 크기
+    float2  padding;
+    
+    // Add Velocity
+    int     AddVelocityType;    // 0 : From Center, 1 : To Center, 2 : Fix Direction
+    float   MinSpeed;
+    float   MaxSpeed;
+    float   FixedAngle;         // 해당 방향에서 랜덤범위 각도	
+    float4   FixedDirection;     // 지정 방향
+    
+    int     arrModuleCheck[4];
 };
 
 struct tSpawnCount

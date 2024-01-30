@@ -12,7 +12,7 @@
 CParticleSystem::CParticleSystem()
 	: CRenderComponent(COMPONENT_TYPE::PARTICLESYSTEM)
 	, m_ParticleBuffer(nullptr)
-	, m_MaxParticleCount(100)
+	, m_MaxParticleCount(2000)
 {
 	// 전용 메쉬와 전용 머테리얼 사용
 	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
@@ -21,18 +21,9 @@ CParticleSystem::CParticleSystem()
 	// 해상도
 	Vec2 vResol = CDevice::GetInst()->GetRenderResolution();
 
-	tParticle arrParticle[500] = {};
-
-	for (int i = 0; i < m_MaxParticleCount; ++i)
-	{
-		arrParticle[i].vWorldPos = Vec3((vResol.x / -2.f) + (i + 1) * vResol.x / (m_MaxParticleCount + 1), 0.f, 200.f);
-		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
-		arrParticle[i].Active = 0;
-	}
-
 	// 파티클을 저장하는 구조화 버퍼
 	m_ParticleBuffer = new CStructuredBuffer;
-	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticleCount, SB_TYPE::READ_WRITE, true, arrParticle);
+	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticleCount, SB_TYPE::READ_WRITE, true);
 
 	// 파티클 모듈 정보를 저장하는 구조화 버퍼
 	m_ParticleModuleBuffer = new CStructuredBuffer;
@@ -44,6 +35,28 @@ CParticleSystem::CParticleSystem()
 	// SpawnCount를 전달할 구조화 버퍼
 	m_SpawnCountBuffer = new CStructuredBuffer;
 	m_SpawnCountBuffer->Create(sizeof(tSpawnCount), 1, SB_TYPE::READ_WRITE, true);
+
+	// 파티클 모듈값 세팅
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
+
+	m_Module.SpaceType = 1;
+	m_Module.vSpawnColor = Vec4(0.2f, 0.5f, 0.4f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(100.f, 100.f, 1.f, 1.f);
+	m_Module.MinLife = 0.3f;
+	m_Module.MaxLife = 1.2f;
+	m_Module.SpawnShape = 1;
+	m_Module.SpawnRate = 50;
+	m_Module.Radius = 100.f;
+	m_Module.vSpawnBoxScale = Vec4(500.f, 500.f, 0.f, 0.f);
+
+	// Add Velocity
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
+	m_Module.AddVelocityType = 0;
+	m_Module.MinSpeed = 100.f;
+	m_Module.MaxSpeed = 200.f;
+
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
 }
 
 CParticleSystem::~CParticleSystem()
@@ -61,26 +74,22 @@ CParticleSystem::~CParticleSystem()
 
 void CParticleSystem::finaltick()
 {
-	// 파티클 모듈값 세팅
-	m_Module.SpaceType = 1;
-	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.MinLife = 5.f;
-	m_Module.MaxLife = 5.f;
-	m_Module.SpawnRate = 10000;
-
 	m_Time += DT;
 
 	if ((1.f / m_Module.SpawnRate) < m_Time)
 	{
-		tSpawnCount count = tSpawnCount{ 1,};
+		// 누적 시간을 스폰 간격으로 나눈 값
+		float fSpawnCount = m_Time / (1.f / m_Module.SpawnRate);
+
+		// 스폰 간격을 제외한 잔량을 남은 누적시간으로 설정
+		m_Time -= (1.f / m_Module.SpawnRate) * floorf(fSpawnCount);
+
+		tSpawnCount count = tSpawnCount{ (int)fSpawnCount ,0,0,0};
 		m_SpawnCountBuffer->SetData(&count);
-		m_Time = 0.f;
 	}
 	else
 	{
-		tSpawnCount count = tSpawnCount{ 0,};
+		tSpawnCount count = tSpawnCount{ 0,0,0,0};
 		m_SpawnCountBuffer->SetData(&count);
 	}
 
@@ -93,11 +102,9 @@ void CParticleSystem::finaltick()
 	m_CSParticleUpdate->SetParticleBuffer(m_ParticleBuffer);
 	m_CSParticleUpdate->SetParticleModuleBuffer(m_ParticleModuleBuffer);
 	m_CSParticleUpdate->SetParticleSpawnCount(m_SpawnCountBuffer);
+	m_CSParticleUpdate->SetParticleWorldPos(Transform()->GetWorldPos());
 
 	m_CSParticleUpdate->Execute();
-
-	tParticle arrParticle[100] = { };
-	m_ParticleBuffer->GetData(arrParticle);
 }
 
 void CParticleSystem::render()
@@ -110,7 +117,9 @@ void CParticleSystem::render()
 
 	// 파티클 개별 렌더링 -> 인스턴싱
 	GetMaterial()->SetScalarParam(INT_0, 0);
+	GetMaterial()->SetTexParam(TEX_0, m_ParticleTex);
 	GetMaterial()->UpdateData();
+
 	GetMesh()->render_asparticle(m_MaxParticleCount);
 
 	// 렌더링 때 사용한 리소스 바인딩 클리어

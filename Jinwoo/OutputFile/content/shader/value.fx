@@ -105,7 +105,7 @@ StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
 Texture2D g_postprocess : register(t13);
 
-TextureCubeArray g_tex_14 : register(t14);
+Texture2D g_NoiseTex : register(t14);
 
 
 // register(s0)에 등록된 샘플러

@@ -20,6 +20,8 @@ private:
     
     float   m_Time;
 
+    Ptr<CTexture>   m_ParticleTex;
+
 public:
     virtual void UpdateData() override;
     virtual void finaltick() override;

@@ -193,3 +193,14 @@ enum class SHADER_DOMAIN
 
 	DOMAIN_DEBUG,
 };
+
+
+enum class PARTICLE_MODULE
+{
+	SPAWN,	// 파티클 생성 관련
+	DRAW,	// 감속 관련 모듈
+	SCALE,
+	ADD_VELOCITY,
+
+	END,
+};
