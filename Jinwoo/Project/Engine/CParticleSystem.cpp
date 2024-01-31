@@ -27,7 +27,13 @@ CParticleSystem::CParticleSystem()
 
 	// 파티클 모듈 정보를 저장하는 구조화 버퍼
 	m_ParticleModuleBuffer = new CStructuredBuffer;
-	m_ParticleModuleBuffer->Create(sizeof(tParticleModule), 1, SB_TYPE::READ_ONLY, true);
+	UINT ModuleAddSize = 0;
+	if (sizeof(tParticleModule) % 16 != 0)
+	{
+		ModuleAddSize = 16 - (sizeof(tParticleModule) % 16);
+	}
+
+	m_ParticleModuleBuffer->Create(sizeof(tParticleModule) + ModuleAddSize , 1, SB_TYPE::READ_ONLY, true);
 
 	// 파티클 업데이트용 컴퓨트 셰이더 참조
 	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
@@ -41,20 +47,34 @@ CParticleSystem::CParticleSystem()
 
 	m_Module.SpaceType = 1;
 	m_Module.vSpawnColor = Vec4(0.2f, 0.5f, 0.4f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(100.f, 100.f, 1.f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.MinMass = 1.f;
+	m_Module.MaxMass = 1.f;
 	m_Module.MinLife = 0.3f;
 	m_Module.MaxLife = 1.2f;
 	m_Module.SpawnShape = 1;
-	m_Module.SpawnRate = 50;
+	m_Module.SpawnRate = 10;
 	m_Module.Radius = 100.f;
-	m_Module.vSpawnBoxScale = Vec4(500.f, 500.f, 0.f, 0.f);
+	m_Module.vSpawnBoxScale = Vec4(300.f, 300.f, 0.f, 0.f);
 
 	// Add Velocity
-	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 0;
 	m_Module.AddVelocityType = 0;
 	m_Module.MinSpeed = 100.f;
 	m_Module.MaxSpeed = 200.f;
+
+	// Scale
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SCALE] = 0;
+	m_Module.vScaleRatio = Vec3(0.1f, 0.1f, 0.1f);
+
+	// Noise Force
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::NOISE_FORCE] = 1;
+	m_Module.NoiseForceScale = 100.f;
+	m_Module.NoiseForceTerm = 0.3f;
+
+	// Calculate Force
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
 	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
 }

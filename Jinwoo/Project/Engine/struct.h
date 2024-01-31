@@ -113,17 +113,23 @@ struct tPixel
 
 struct tParticle
 {
-	Vec4	vLocalPos;		// 로컬 위치
-	Vec4	vWorldPos;		// 월드 위치
-	Vec4	vWorldScale;	// 크기
-	Vec4	vWorldRotation;	// 회전
-	Vec4	vVelocity;		// 속도
-	Vec4	vColor;			// 색상
+	Vec4	vLocalPos;			// 로컬 위치
+	Vec4	vWorldPos;			// 월드 위치
+	Vec4	vWorldInitScale;	// 초기 크기	
+	Vec4	vWorldScale;		// 크기
+	Vec4	vWorldRotation;		// 회전
+	Vec3	vVelocity;			// 속도
+	Vec4	vColor;				// 색상
+	Vec4	vForce;				// 입자에 적용된 누적 힘 총량
 
-	float	Mass;			// 질량
-	float	Age;			// 현재 나이
-	float	Life;			// 수명
-	int		Active;			// 활성화, 비활성화
+	Vec3	vNoiseForce;		// NoiseForce 모듈로 인한 랜덤 힘
+	float	NoiseForceTime;		// NoiseForce를 세팅받은 시간
+
+	float	NormalizeAge;		// 파티클 수명 정규화
+	float	Mass;				// 질량
+	float	Age;				// 현재 나이
+	float	Life;				// 수명
+	int		Active;				// 활성화, 비활성화
 };
 
 struct tParticleModule
@@ -133,6 +139,8 @@ struct tParticleModule
 	Vec4	vSpawnMinScale;	// 생성 시 최소 크기
 	Vec4	vSpawnMaxScale;	// 생성 시 최대 크기
 	
+	float	MinMass;		// 최소 질량
+	float	MaxMass;		// 최대 질량
 	float	MinLife;		// 최소 수명
 	float	MaxLife;		// 최대 수명
 	int		SpawnRate;		// 초당 생성 개수
@@ -141,7 +149,6 @@ struct tParticleModule
 	int     SpawnShape;     // 스폰 범위 (0 : Sphere, 1 : Box)
 	float   Radius;         // 스폰쉐이프가 Sphere인 경우, 반지름 길이
 	Vec4	vSpawnBoxScale; // 스폰쉐이프가 Box인 경우, Box의 크기
-	Vec2	padding;
 
 	// Add Velocity
 	int		AddVelocityType;	// 0 : From Center, 1 : To Center, 2 : Fix Direction
@@ -150,7 +157,15 @@ struct tParticleModule
 	float	FixedAngle;			// 해당 방향에서 랜덤범위 각도	
 	Vec4	FixedDirection;		// 지정 방향
 
-	int     arrModuleCheck[4];
+	// Scale
+	Vec4	vScaleRatio;
+
+	// Noise Force
+	float	NoiseForceScale;
+	float	NoiseForceTerm;
+
+	// Module On / Off
+	int     arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
 struct tSpawnCount

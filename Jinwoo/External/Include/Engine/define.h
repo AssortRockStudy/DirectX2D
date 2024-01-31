@@ -201,6 +201,8 @@ enum class PARTICLE_MODULE
 	DRAW,	// 감속 관련 모듈
 	SCALE,
 	ADD_VELOCITY,
+	NOISE_FORCE,
+	CALCULATE_FORCE,
 
 	END,
 };
