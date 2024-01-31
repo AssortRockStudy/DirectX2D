@@ -25,9 +25,20 @@ private:
     SB_TYPE                                     m_Type;
     bool                                        m_bSysMemMove;
 
+    UINT                                        m_RecentSRV;
+    UINT                                        m_RecentUAV;
+
+
 public:
     int Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Type = SB_TYPE::READ_ONLY, bool _bSysMemMove = false, void* _pSysMem = nullptr);
     void UpdateData(UINT _RegisterNum);
+    int UpdateData_CS_SRV(UINT _RegisterNum);
+    int UpdateData_CS_UAV(UINT _RegisterNum);
+
+    void Clear(UINT _RegisterNum);
+    void Clear_CS_SRV();
+    void Clear_CS_UAV();
+
 
     void SetData(void* _SysMem, UINT _ElementCount = 0);
     void GetData(void* _Dest, UINT _ElementCount = 0);
