@@ -4,7 +4,7 @@
 #include "value.fx"
 #include "struct.fx"
 
-StructuredBuffer<tParticleModule>   g_Module : register(t31);
+StructuredBuffer<tParticleModule>   g_Module : register(t40);
 RWStructuredBuffer<tParticle>       g_ParticleBuffer : register(u0);
 RWStructuredBuffer<tSpawnCount>     g_SpawnCount : register(u1);
 

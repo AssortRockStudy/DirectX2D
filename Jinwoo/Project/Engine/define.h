@@ -204,5 +204,7 @@ enum class PARTICLE_MODULE
 	NOISE_FORCE,
 	CALCULATE_FORCE,
 
+	RENDER,	// 렌더링 때의 옵션 관련
+
 	END,
 };

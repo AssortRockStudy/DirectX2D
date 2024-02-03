@@ -26,7 +26,7 @@ int CParticleUpdate::UpdateData()
 	m_ParticleBuffer->UpdateData_CS_UAV(0);
 	m_SpawnCountBuffer->UpdateData_CS_UAV(1);
 
-	m_ParticleModuleBuffer->UpdateData_CS_SRV(31);
+	m_ParticleModuleBuffer->UpdateData_CS_SRV(40);
 
 	return S_OK;
 }

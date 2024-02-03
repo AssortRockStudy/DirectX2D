@@ -15,7 +15,7 @@ CParticleSystem::CParticleSystem()
 	, m_MaxParticleCount(2000)
 {
 	// 전용 메쉬와 전용 머테리얼 사용
-	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"PointMesh"));
 	SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"ParticleMtrl"));
 
 	// 해상도
@@ -46,23 +46,23 @@ CParticleSystem::CParticleSystem()
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
 
 	m_Module.SpaceType = 1;
-	m_Module.vSpawnColor = Vec4(0.2f, 0.5f, 0.4f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.vSpawnColor = Vec4(0.2f, 0.5f, 0.8f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
 	m_Module.MinMass = 1.f;
 	m_Module.MaxMass = 1.f;
-	m_Module.MinLife = 0.3f;
-	m_Module.MaxLife = 1.2f;
+	m_Module.MinLife = 1.f;
+	m_Module.MaxLife = 3.f;
 	m_Module.SpawnShape = 1;
-	m_Module.SpawnRate = 10;
 	m_Module.Radius = 100.f;
 	m_Module.vSpawnBoxScale = Vec4(300.f, 300.f, 0.f, 0.f);
+	m_Module.SpawnRate = 50;
 
 	// Add Velocity
-	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 0;
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
 	m_Module.AddVelocityType = 0;
-	m_Module.MinSpeed = 100.f;
-	m_Module.MaxSpeed = 200.f;
+	m_Module.MinSpeed = 10.f;
+	m_Module.MaxSpeed = 20.f;
 
 	// Scale
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SCALE] = 0;
@@ -70,13 +70,19 @@ CParticleSystem::CParticleSystem()
 
 	// Noise Force
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::NOISE_FORCE] = 1;
-	m_Module.NoiseForceScale = 100.f;
+	m_Module.NoiseForceScale = 10.f;
 	m_Module.NoiseForceTerm = 0.3f;
 
 	// Calculate Force
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
-	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
+	// Render 
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::RENDER] = 1;
+	m_Module.VelocityAlignment = 1; // 속도에 따른 방향 정렬
+	m_Module.AlphaBasedLife = 1;
+	m_Module.AlphaMaxAge = 2.f;
+
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png");
 }
 
 CParticleSystem::~CParticleSystem()
@@ -115,7 +121,7 @@ void CParticleSystem::finaltick()
 
 	// 파티클 모듈정보 업데이트
 	m_ParticleModuleBuffer->SetData(&m_Module);
-	m_ParticleModuleBuffer->UpdateData_CS_SRV(31);
+	m_ParticleModuleBuffer->UpdateData_CS_SRV(40);
 
 	// 파티컬 업데이트
 	// 어떤 버퍼를 업데이트할지 설정
@@ -134,6 +140,7 @@ void CParticleSystem::render()
 
 	// ParticleBuffer 바인딩
 	m_ParticleBuffer->UpdateData(30);
+	m_ParticleModuleBuffer->UpdateData(31);
 
 	// 파티클 개별 렌더링 -> 인스턴싱
 	GetMaterial()->SetScalarParam(INT_0, 0);
@@ -144,6 +151,7 @@ void CParticleSystem::render()
 
 	// 렌더링 때 사용한 리소스 바인딩 클리어
 	m_ParticleBuffer->Clear(30);
+	m_ParticleModuleBuffer->Clear(31);
 }
 
 

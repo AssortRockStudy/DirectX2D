@@ -39,7 +39,7 @@ public:
     int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
     int CreateHullShader();
     int CreateDomainShader();
-    int CreateGeometryShader();
+    int CreateGeometryShader(const wstring& _strRelativePath, const string& _strFuncName);
     int CreatePixelShader(const wstring& _strRelativePath, const string& _strFuncName);
 
     void SetTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology) { m_Topology = _Topology; }

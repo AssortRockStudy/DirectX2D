@@ -21,6 +21,13 @@ void CAssetMgr::CreateDefaultMesh()
 {
 	CMesh* pMesh = nullptr;
 
+	Vtx vPoint;
+	UINT Idx = 0;
+	pMesh = new CMesh;
+	pMesh->Create(&vPoint, 1, &Idx, 1);\
+	AddAsset(L"PointMesh", pMesh);
+
+
 	Vtx arrVtx[4] = {};
 
 	// 전역변수에 삼각형 위치 설정
@@ -200,8 +207,10 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	// 파티클 렌더 셰이더 생성
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\particle.fx", "VS_Particle");
+	pShader->CreateGeometryShader(L"shader\\particle.fx", "GS_Particle");
 	pShader->CreatePixelShader(L"shader\\particle.fx", "PS_Particle");
 
+	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::NO_WRITE);		// 깊이 테스트 진행은 하지만, 기록하지는 않는다
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
