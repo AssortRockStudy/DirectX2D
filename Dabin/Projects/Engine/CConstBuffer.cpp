@@ -61,3 +61,8 @@ void CConstBuffer::UpdatePipeline()
 	CONTEXT->GSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
 	CONTEXT->PSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());	// Pram0: register 등록 (~2^12 byte)
 }
+
+void CConstBuffer::UpdatePipeline_CS()
+{
+	CONTEXT->CSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+}

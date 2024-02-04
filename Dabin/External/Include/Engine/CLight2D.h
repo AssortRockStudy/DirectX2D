@@ -8,13 +8,13 @@ class CLight2D :
     public CComponent
 {
 private:
-    tLightInfo  m_Info;
+    FLightInfo  m_Info;
 
 public:
     virtual void finaltick() override;
 
 public:
-    const tLightInfo& GetLightInfo() { return m_Info; }
+    const FLightInfo& GetLightInfo() { return m_Info; }
 
     void SetLightType(LIGHT_TYPE _type) { m_Info.LightType = (int)_type; }
     void SetLightColor(Vec3 _vColor) { m_Info.vColor = _vColor; }

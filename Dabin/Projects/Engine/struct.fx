@@ -24,4 +24,27 @@ struct tLightInfo
     float3 vPadding;
 };
 
+struct FTileInfo
+{
+    float2  vLeftTopUV;
+    int     bRender;
+    int     padding;
+};
+
+
+struct FParticle
+{
+    float4  vWorldPos;
+    float4  vWorldScale;
+    float4  vWorldRotation;
+    float4  vVelocity;
+    float4  vColor;
+
+    float   Mass;
+    float   Age;
+    float   Life;
+    int     Active;
+};
+
+
 #endif

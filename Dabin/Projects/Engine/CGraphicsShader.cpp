@@ -145,7 +145,7 @@ int CGraphicsShader::CreatePixelShader(const wstring& _strRelativePath, const st
 	return S_OK;
 }
 
-void CGraphicsShader::UpdatePipeline()
+int CGraphicsShader::UpdatePipeline()
 {
 	// rendering pipeline
 	// - 세팅하지 않은 shader도 무조건 set
@@ -162,4 +162,6 @@ void CGraphicsShader::UpdatePipeline()
 	CONTEXT->DSSetShader(m_DS.Get(), nullptr, 0);
 	CONTEXT->GSSetShader(m_GS.Get(), nullptr, 0);
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
+
+	return S_OK;
 }

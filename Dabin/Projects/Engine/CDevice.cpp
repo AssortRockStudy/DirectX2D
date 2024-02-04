@@ -369,16 +369,16 @@ int CDevice::CreateSamplerState()
 int CDevice::CreateConstBuffer()
 {
     m_arrCB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer(CB_TYPE::TRANSFORM);
-    m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
+    m_arrCB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(FTransform), 1);
 
     m_arrCB[(UINT)CB_TYPE::MATERIAL_CONST] = new CConstBuffer(CB_TYPE::MATERIAL_CONST);
-    m_arrCB[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(tMtrlConst), 1);
+    m_arrCB[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(FMtrlConst), 1);
 
     m_arrCB[(UINT)CB_TYPE::ANIM2D_DATA] = new CConstBuffer(CB_TYPE::ANIM2D_DATA);
-    m_arrCB[(UINT)CB_TYPE::ANIM2D_DATA]->Create(sizeof(tAnimData2D), 1);
+    m_arrCB[(UINT)CB_TYPE::ANIM2D_DATA]->Create(sizeof(FAnimData2D), 1);
 
     m_arrCB[(UINT)CB_TYPE::GLOBAL_DATA] = new CConstBuffer(CB_TYPE::GLOBAL_DATA);
-    m_arrCB[(UINT)CB_TYPE::GLOBAL_DATA]->Create(sizeof(tGlobalData), 1);
+    m_arrCB[(UINT)CB_TYPE::GLOBAL_DATA]->Create(sizeof(FGlobalData), 1);
 
     return S_OK;
 }

@@ -103,9 +103,6 @@
     <Filter Include="04. Manager\CGCMgr">
       <UniqueIdentifier>{9d20f400-e9f4-4c78-ae76-9d9f65770239}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Manager\RenderMgr">
-      <UniqueIdentifier>{f27e517c-96cd-487e-b8f0-11aba96b4c55}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. Component\04. Animator2D">
       <UniqueIdentifier>{46db433b-6b40-41df-b469-9566577e8f08}</UniqueIdentifier>
     </Filter>
@@ -130,6 +127,18 @@
     </Filter>
     <Filter Include="ShaderCode\Util">
       <UniqueIdentifier>{db2e13ee-af40-459a-91e7-e1c549b14517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Compute">
+      <UniqueIdentifier>{60297f10-1d56-4b83-a5fa-c31c397263c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Compute\SetColor">
+      <UniqueIdentifier>{1fa72adc-dccd-4780-b9a9-54a9491b32d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Compute\ParticleUpdate">
+      <UniqueIdentifier>{130ce27a-db21-4da6-bafe-110a4e4295f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\AssetMgr\RenderMgr">
+      <UniqueIdentifier>{f27e517c-96cd-487e-b8f0-11aba96b4c55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -252,7 +261,7 @@
       <Filter>06. Asset</Filter>
     </ClInclude>
     <ClInclude Include="CRenderMgr.h">
-      <Filter>04. Manager\RenderMgr</Filter>
+      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
     </ClInclude>
     <ClInclude Include="CCollider2D.h">
       <Filter>08. Component\02. Collider2D</Filter>
@@ -274,6 +283,18 @@
     </ClInclude>
     <ClInclude Include="CTileMap.h">
       <Filter>08. Component\RenderCompononet\02. TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleSystem.h">
+      <Filter>08. Component\RenderCompononet\03. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CComputeShader.h">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorShader.h">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
+    </ClInclude>
+    <ClInclude Include="CUpdateParticle.h">
+      <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -378,10 +399,10 @@
       <Filter>06. Asset\Material</Filter>
     </ClCompile>
     <ClCompile Include="CRenderMgr.cpp">
-      <Filter>04. Manager\RenderMgr</Filter>
+      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
     </ClCompile>
     <ClCompile Include="CRenderMgr_init.cpp">
-      <Filter>04. Manager\RenderMgr</Filter>
+      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
     </ClCompile>
     <ClCompile Include="CCollider2D.cpp">
       <Filter>08. Component\02. Collider2D</Filter>
@@ -406,6 +427,18 @@
     </ClCompile>
     <ClCompile Include="CTileMap.cpp">
       <Filter>08. Component\RenderCompononet\02. TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleSystem.cpp">
+      <Filter>08. Component\RenderCompononet\03. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSetColorShader.cpp">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
+    </ClCompile>
+    <ClCompile Include="CUpdateParticle.cpp">
+      <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,6 +465,15 @@
     </FxCompile>
     <FxCompile Include="tilemap.fx">
       <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="setcolor.fx">
+      <Filter>ShaderCode\Compute\SetColor</Filter>
+    </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="particle_update.fx">
+      <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

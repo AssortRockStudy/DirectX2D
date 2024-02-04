@@ -5,5 +5,5 @@
 // extern: extern 변수를 모아 관리
 // =======================================
 
-tTransform g_Transform = {};
-tGlobalData g_Global = {};
+FTransform g_Transform = {};
+FGlobalData g_Global = {};

@@ -5,6 +5,7 @@ void CAssetMgr::init()
 {
 	CreateDefaultMesh();
 	CreateDefaultGraphicsShader();
+	CreateDefaultComputeShader();
 	CreateDefaultMaterial();
 }
 
@@ -151,11 +152,11 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	// --------------------------
 	// Shader »ý¼º
 	// --------------------------
-	// Std2DShader
+	// Std2D Shader
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
 	AddAsset(L"Std2DShader", pShader);
 
-	// EffectShader
+	// Effect Shader
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
 	pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D_Effect");
@@ -166,7 +167,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	AddAsset(L"EffetShader", pShader);
 
-	// TileMapShader
+	// TileMap Shader
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\tilemap.fx", "VS_TileMap");
 	pShader->CreatePixelShader(L"shader\\tilemap.fx", "PS_TileMap");
@@ -176,6 +177,17 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
 
 	AddAsset(L"TileMapShader", pShader);
+
+	// Particle Shader
+	pShader = new CGraphicsShader;
+	pShader->CreateVertexShader(L"shader\\particle.fx", "VS_Particle");
+	pShader->CreatePixelShader(L"shader\\particle.fx", "PS_Particle");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDSType(DS_TYPE::NO_WRITE);
+	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
+
+	AddAsset(L"ParticleRenderShader", pShader);
 
 	// PostProcess Shader - GrayFilter
 	pShader = new CGraphicsShader;
@@ -221,6 +233,21 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	AddAsset(L"DebugShapeShader", pShader);
 }
 
+#include "CSetColorShader.h"
+#include "CUpdateParticle.h"
+void CAssetMgr::CreateDefaultComputeShader()
+{
+	Ptr<CComputeShader> pShader = nullptr;
+
+	// SetColorShader
+	pShader = new CSetColorShader;
+	AddAsset(L"SetColorShader", pShader.Get());
+
+	// SetColorShader
+	pShader = new CUpdateParticle;
+	AddAsset(L"UpdateParticleShader", pShader.Get());
+}
+
 void CAssetMgr::CreateDefaultMaterial()
 {
 	CMaterial* pMat;
@@ -229,6 +256,11 @@ void CAssetMgr::CreateDefaultMaterial()
 	pMat = new CMaterial;
 	pMat->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
 	AddAsset(L"Std2DMat", pMat);
+
+	// Particle Mat
+	pMat = new CMaterial;
+	pMat->SetShader(FindAsset<CGraphicsShader>(L"ParticleRenderShader"));
+	AddAsset(L"ParticleMat", pMat);
 
 	// Background Mat
 	pMat = new CMaterial;

@@ -22,11 +22,12 @@ private:
     void*                   m_IdxSysMem;
 
 private:
-    void UpdateData();
+    void UpdatePipeline();
 
 public:
     int Create(void* _Vtx, UINT _VtxCount, void* _Idx, UINT _IdxCount);
     void render();
+    void renderInstanced(UINT _Count);
 
 public:
     CMesh();

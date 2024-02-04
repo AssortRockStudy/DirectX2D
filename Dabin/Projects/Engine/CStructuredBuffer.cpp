@@ -7,6 +7,8 @@ CStructuredBuffer::CStructuredBuffer()
     , m_bSysMemMove(false)
     , m_ElementCount(0)
     , m_ElementSize(0)
+    , m_RecentSRV(0)
+    , m_RecentUAV(0)
 {
 }
 
@@ -34,6 +36,8 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
     D3D11_BUFFER_DESC tDesc = {};
     tDesc.ByteWidth = m_ElementSize * m_ElementCount;
     tDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;               // Texture Register로 전달하므로
+    if (m_Type == SB_TYPE::READ_WRITE)
+        tDesc.BindFlags |= D3D11_BIND_UNORDERED_ACCESS;
     tDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;    // Structured Buffer Flag
     tDesc.StructureByteStride = m_ElementSize;
     tDesc.Usage = D3D11_USAGE_DEFAULT;                          // Strcutured Buffer은 Usage가 default여야만 생성됨;;
@@ -60,18 +64,32 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
     hr = DEVICE->CreateShaderResourceView(m_SB.Get(), &SRVDesc, m_SRV.GetAddressOf());
     if (FAILED(hr)) return E_FAIL;
 
+    // create unordered access view
+    if (_Type == SB_TYPE::READ_WRITE)
+    {
+        D3D11_UNORDERED_ACCESS_VIEW_DESC UAVDesc = {};
+        UAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+        UAVDesc.Buffer.NumElements = m_ElementCount;
+
+        hr = DEVICE->CreateUnorderedAccessView(m_SB.Get(), &UAVDesc, m_UAV.GetAddressOf());
+        if (FAILED(hr)) return E_FAIL;
+    }
+
     // system memory access 위한 ReadWrite Buffer 생성
     if (m_bSysMemMove)
     {
         // 쓰기용 버퍼
         tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
         tDesc.Usage = D3D11_USAGE_DYNAMIC;
-        DEVICE->CreateBuffer(&tDesc, nullptr, m_SB_Write.GetAddressOf());
+        tDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+        hr = DEVICE->CreateBuffer(&tDesc, nullptr, m_SB_Write.GetAddressOf());
+        if (FAILED(hr)) return E_FAIL;
 
         // 읽기용 버퍼
         tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
         tDesc.Usage = D3D11_USAGE_DEFAULT;
-        DEVICE->CreateBuffer(&tDesc, nullptr, m_SB_Read.GetAddressOf());
+        hr = DEVICE->CreateBuffer(&tDesc, nullptr, m_SB_Read.GetAddressOf());
+        if (FAILED(hr)) return E_FAIL;
     }
 
     return S_OK;
@@ -84,6 +102,53 @@ void CStructuredBuffer::UpdatePipeline(UINT _RegisterNum)
     CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
     CONTEXT->GSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
     CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+}
+
+int CStructuredBuffer::UpdatedCS_SRV(UINT _RegisterNum)
+{
+    if (!m_SRV)
+        return E_FAIL;
+
+    m_RecentSRV = _RegisterNum;
+    CONTEXT->CSGetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+
+    return S_OK;
+}
+
+int CStructuredBuffer::UpdatedCS_UAV(UINT _RegisterNum)
+{
+    if (!m_UAV)
+        return E_FAIL;
+
+    m_RecentUAV = _RegisterNum;
+    UINT i = -1;
+    CONTEXT->CSSetUnorderedAccessViews(_RegisterNum, 1, m_UAV.GetAddressOf(), &i);
+   
+    return S_OK;
+}
+
+void CStructuredBuffer::Clear(UINT _RegisterNum)
+{
+    ID3D11ShaderResourceView* pSRV = nullptr;
+
+    CONTEXT->VSSetShaderResources(_RegisterNum, 1, &pSRV);
+    CONTEXT->HSSetShaderResources(_RegisterNum, 1, &pSRV);
+    CONTEXT->DSSetShaderResources(_RegisterNum, 1, &pSRV);
+    CONTEXT->GSSetShaderResources(_RegisterNum, 1, &pSRV);
+    CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
+}
+
+void CStructuredBuffer::ClearCS_SRV()
+{
+    ID3D11ShaderResourceView* pSRV = nullptr;
+    CONTEXT->CSGetShaderResources(m_RecentSRV, 1, &pSRV);
+}
+
+void CStructuredBuffer::ClearCS_UAV()
+{
+    ID3D11UnorderedAccessView* pUAV = nullptr;
+    UINT i = -1;
+    CONTEXT->CSSetUnorderedAccessViews(m_RecentUAV, 1, &pUAV, &i);
 }
 
 void CStructuredBuffer::SetData(void* _SysMem, UINT _ElementCount)

@@ -20,7 +20,7 @@ private:
     Ptr<CTexture>           m_PostProcessTex;
     vector<CLight2D*>       m_vecLight2D;
     CStructuredBuffer*      m_Light2DBuffer;
-    list<tDebugShapeInfo>   m_DbgShapeInfo;
+    list<FDebugShapeInfo>   m_DbgShapeInfo;
     CGameObject*            m_pDbgObj;
     bool                    m_DebugPosition;
 
@@ -37,7 +37,7 @@ public:
 public:
     void RegisterCamera(CCamera* _Cam, int _idx);
     void RegisterLight2D(CLight2D* _Light) { m_vecLight2D.push_back(_Light); }
-    void AddDebugShapeInfo(const tDebugShapeInfo& _info) { m_DbgShapeInfo.push_back(_info); }
+    void AddDebugShapeInfo(const FDebugShapeInfo& _info) { m_DbgShapeInfo.push_back(_info); }
     void SetDebugPosition(bool _OnOff) { m_DebugPosition = _OnOff; }
 
     Ptr<CTexture> GetPostProcessTex() { return m_PostProcessTex; }

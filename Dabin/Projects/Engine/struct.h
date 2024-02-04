@@ -10,7 +10,7 @@ struct Vtx
 	Vec2 vUV;		// UV 좌표계 or Texture Coodinate
 };
 
-struct tDebugShapeInfo
+struct FDebugShapeInfo
 {
 	DEBUG_SHAPE	ShapeType;
 	Vec3		vWorldPos;
@@ -24,7 +24,7 @@ struct tDebugShapeInfo
 	bool		bDepthTest;
 };
 
-struct tLightInfo
+struct FLightInfo
 {
 	int		LightType;	// 광원 타입
 	Vec4	vColor;		// 빛의 색상		(광원의 순수 색상)
@@ -39,11 +39,31 @@ struct tLightInfo
 	Vec3	vPadding;
 };
 
+struct FPixel
+{
+	BYTE r, g, b, a;
+};
+
+struct FParticle
+{
+	Vec4	vWorldPos;
+	Vec4	vWorldScale;
+	Vec4	vWorldRotation;
+	Vec4	vVelocity;
+	Vec4	vColor;
+
+	float	Mass;
+	float	Age;
+	float	Life;
+	int		Active;
+};
+
+
 //---------------------------------
 // Constant Buffer 대응 구조체
 //---------------------------------
 // - constant buffer는 정렬을 위해 반드시 16Byte 크기 사용
-struct tTransform
+struct FTransform
 {
 	Matrix matWorld;
 	Matrix matWorldInv;
@@ -57,11 +77,11 @@ struct tTransform
 	Matrix matWV;	// World * View
 	Matrix matWVP;	// World * View * Proj
 };
-extern tTransform g_Transform;	// 외부 변수 (전역 변수)
+extern FTransform g_Transform;	// 외부 변수 (전역 변수)
 
 // tMatrlConst: material에서 사용할 params 모아둔 구조체
 // SCALAR_PARAM: define const paramater type that can be transffered to mateiral
-struct tMtrlConst
+struct FMtrlConst
 {
 	int iArr[4];
 	float fArr[4];
@@ -75,7 +95,7 @@ struct tMtrlConst
 	int iPadding[2];
 };
 
-struct tAnimData2D
+struct FAnimData2D
 {
 	Vec2 vLeftTop;
 	Vec2 vCutSize;
@@ -85,7 +105,7 @@ struct tAnimData2D
 	Vec3 vPadding;
 };
 
-struct tGlobalData		// 자주 사용하는 정보들 전달
+struct FGlobalData		// 자주 사용하는 정보들 전달
 {
 	Vec2	g_RenderResolution;
 	float	g_dt;
@@ -94,4 +114,4 @@ struct tGlobalData		// 자주 사용하는 정보들 전달
 	int		g_Light3DCount;
 	Vec2	g_vPadding;
 };
-extern tGlobalData g_Global;
+extern FGlobalData g_Global;

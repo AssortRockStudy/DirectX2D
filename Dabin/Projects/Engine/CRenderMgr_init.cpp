@@ -11,7 +11,7 @@ void CRenderMgr::init()
 {
 	// create structured buffer
 	m_Light2DBuffer = new CStructuredBuffer;
-	m_Light2DBuffer->Create(sizeof(tLightInfo), 10, SB_TYPE::READ_ONLY, true);
+	m_Light2DBuffer->Create(sizeof(FLightInfo), 10, SB_TYPE::READ_ONLY, true);
 
 	// create debug object
 	m_pDbgObj = new CGameObject;

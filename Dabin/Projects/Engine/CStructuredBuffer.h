@@ -8,8 +8,8 @@
 
 enum class SB_TYPE
 {
-    READ_ONLY,  // default
-    READ_WRITE,
+    READ_ONLY,  // SRV (default)
+    READ_WRITE, // SRV + UAV
 };
 
 class CStructuredBuffer :
@@ -19,15 +19,23 @@ private:
     SB_TYPE                             m_Type;
     ComPtr<ID3D11Buffer>                m_SB;
     ComPtr<ID3D11ShaderResourceView>    m_SRV;
+    ComPtr<ID3D11UnorderedAccessView>   m_UAV;
     ComPtr<ID3D11Buffer>                m_SB_Read;      // SB는 CPU Access 및 수정 막았으므로 ReadWrite용 Buffer 따로 생성 (GPU에서 접근하기 위함)
     ComPtr<ID3D11Buffer>                m_SB_Write;
     UINT                                m_ElementSize;
     UINT                                m_ElementCount;
     bool                                m_bSysMemMove;
+    UINT                                m_RecentSRV;
+    UINT                                m_RecentUAV;
 
 public:
     int Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Type, bool _bSysMemMove = false, void* _pSysMem = nullptr);
     void UpdatePipeline(UINT _RegisterNum);
+    int UpdatedCS_SRV(UINT _RegisterNum);
+    int UpdatedCS_UAV(UINT _RegisterNum);
+    void Clear(UINT _RegisterNum);
+    void ClearCS_SRV();
+    void ClearCS_UAV();
     
 public:
     void SetData(void* _SysMem, UINT _ElementCount = 0);

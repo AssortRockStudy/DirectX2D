@@ -12,7 +12,7 @@ class CMaterial :
     public CAsset
 {
 private:
-    tMtrlConst              m_Const;                        // param을 전달해 material을 런타임에 세부적으로 제어할 수 있음
+    FMtrlConst              m_Const;                        // param을 전달해 material을 런타임에 세부적으로 제어할 수 있음
     Ptr<CTexture>           m_arrTex[(UINT)TEX_PARAM::END]; // 한 material이 다양한 texture를 사용할 수도 있음
     Ptr<CGraphicsShader>  m_pShader;
 

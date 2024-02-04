@@ -153,3 +153,44 @@ void CTexture::ClearPipeline(int _registerNum)
 	CONTEXT->GSSetShaderResources(_registerNum, 1, &pSRV);
 	CONTEXT->PSSetShaderResources(_registerNum, 1, &pSRV);
 }
+
+int CTexture::UpdateCS_SRV(int _registerNum)
+{
+	if (!m_SRV)
+		return E_FAIL;
+
+	m_RecentCSRegNum_SRV = _registerNum;
+	CONTEXT->CSSetShaderResources(_registerNum, 1, m_SRV.GetAddressOf());
+	return S_OK;
+}
+
+int CTexture::UpdateCS_UAV(int _registerNum)
+{
+	if (!m_UAV)
+		return E_FAIL;
+
+	m_RecentCSRegNum_UAV = _registerNum;
+	UINT i = -1; // -1 값은 현재 오프셋을 유지함
+	CONTEXT->CSSetUnorderedAccessViews(_registerNum, 1, m_UAV.GetAddressOf(), &i);
+	return S_OK;
+}
+
+void CTexture::ClearCS_SRV()
+{
+	ID3D11ShaderResourceView* pSRV = nullptr;
+	CONTEXT->CSSetShaderResources(m_RecentCSRegNum_SRV, 1, &pSRV);
+}
+
+void CTexture::ClearCS_UAV()
+{
+	ID3D11UnorderedAccessView* pUAV = nullptr;
+	UINT i = -1;
+	CONTEXT->CSSetUnorderedAccessViews(m_RecentCSRegNum_UAV, 1, &pUAV, &i);
+}
+
+FPixel* CTexture::GetPixels()
+{
+	if (!m_Image.GetPixels())										// 픽셀의 빨강, 녹색, 파랑(RGB) 색 값 arr return
+		CaptureTexture(DEVICE, CONTEXT, m_Tex2D.Get(), m_Image);	// Captures a Direct3D render target and returns an image
+	return (FPixel*)m_Image.GetPixels();
+}

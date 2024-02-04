@@ -74,7 +74,7 @@ void CRenderMgr::render_debug()
 	g_Transform.matView = m_vecCam[0]->GetViewMat();
 	g_Transform.matProj = m_vecCam[0]->GetProjMat();
 
-	list<tDebugShapeInfo>::iterator iter = m_DbgShapeInfo.begin();
+	list<FDebugShapeInfo>::iterator iter = m_DbgShapeInfo.begin();
 	while (iter!=m_DbgShapeInfo.end())
 	{
 		// 보유한 Debug obj마다 type 별로 transform, mesh 바꿔가며 render해줌
@@ -121,7 +121,7 @@ void CRenderMgr::render_debug()
 
 void CRenderMgr::UpdatePipeline()
 {
-	static vector<tLightInfo> vecLight2DInfo;
+	static vector<FLightInfo> vecLight2DInfo;
 	g_Global.g_Light2DCount = (int)m_vecLight2D.size();
 	//g_Global.g_Light3DCount = (int)m_vecLight3D.size();
 
@@ -135,7 +135,7 @@ void CRenderMgr::UpdatePipeline()
 	{
 		for (size_t i = 0; i < m_vecLight2D.size(); ++i)
 		{
-			const tLightInfo& info = m_vecLight2D[i]->GetLightInfo();
+			const FLightInfo& info = m_vecLight2D[i]->GetLightInfo();
 			vecLight2DInfo.push_back(info);
 		}
 		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());

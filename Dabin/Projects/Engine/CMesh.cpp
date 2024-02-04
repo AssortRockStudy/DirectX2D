@@ -21,7 +21,7 @@ CMesh::~CMesh()
 		delete m_IdxSysMem;
 }
 
-void CMesh::UpdateData()
+void CMesh::UpdatePipeline()
 {
 	// IA - VB, IB Update
 	UINT iStride = sizeof(Vtx);
@@ -89,6 +89,12 @@ int CMesh::Create(void* _Vtx, UINT _VtxCount, void* _Idx, UINT _IdxCount)
 
 void CMesh::render()
 {
-	UpdateData();
+	UpdatePipeline();
 	CONTEXT->DrawIndexed(m_IdxCount, 0, 0);
+}
+
+void CMesh::renderInstanced(UINT _Count)
+{
+	UpdatePipeline();
+	CONTEXT->DrawIndexedInstanced(m_IdxCount, _Count, 0, 0, 0);
 }

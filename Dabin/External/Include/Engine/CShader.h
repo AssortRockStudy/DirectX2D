@@ -13,7 +13,7 @@ protected:
 	ComPtr<ID3DBlob>	m_ErrBlob;
 
 public:
-	virtual void UpdatePipeline() = 0;
+	virtual int UpdatePipeline() = 0;
 
 public:
 	CShader(ASSET_TYPE _Type);

@@ -12,6 +12,7 @@
 
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
+#include "CSetColorShader.h"
 
 CLevelMgr::CLevelMgr()
 	: m_CurLevel(nullptr)
@@ -36,6 +37,18 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(4)->SetName(L"Monster");
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
+
+	// Computer Shader Test
+	/*Ptr<CTexture> pTestTex = CAssetMgr::GetInst()->CreateTexture(L"TestTex", 1600, 900
+		, DXGI_FORMAT_R8G8B8A8_UNORM
+		, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"SetColorShader").Get();
+	pCS->SetColor(Vec3(1.f, 1.f, 1.f));
+	pCS->SetTargetTexture(pTestTex);
+	pCS->Execute();
+	 
+	FPixel* pPixel = pTestTex->GetPixels();
+	FPixel pixel = pPixel[0];*/
 
 	// set collision
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
@@ -80,13 +93,13 @@ void CLevelMgr::init()
 
 	pLight->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
 	pLight->Light2D()->SetLightColor(Vec3(1.f));
-	pLight->Light2D()->SetAmbient(Vec3(0.2f));
+	pLight->Light2D()->SetAmbient(Vec3(1.f));
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 	m_CurLevel->AddObject(pLight, L"Light");
 	
 	// Light2
-	pLight = new CGameObject;
+	/*pLight = new CGameObject;
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
@@ -96,10 +109,10 @@ void CLevelMgr::init()
 	pLight->Light2D()->SetRadius(300.f);
 
 	pLight->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 200.f));
-	m_CurLevel->AddObject(pLight, L"Light");
+	m_CurLevel->AddObject(pLight, L"Light");*/
 
 	// Light3
-	pLight = new CGameObject;
+	/*pLight = new CGameObject;
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
@@ -109,10 +122,10 @@ void CLevelMgr::init()
 	pLight->Light2D()->SetRadius(300.f);
 
 	pLight->Transform()->SetRelativePos(Vec3(200.f, 0.f, 200.f));
-	m_CurLevel->AddObject(pLight, L"Light");
+	m_CurLevel->AddObject(pLight, L"Light");*/
 
 	// Light4
-	pLight = new CGameObject;
+	/*pLight = new CGameObject;
 	pLight->AddComponent(new CTransform);
 	pLight->AddComponent(new CMeshRender);
 	pLight->AddComponent(new CLight2D);
@@ -124,11 +137,13 @@ void CLevelMgr::init()
 
 	pLight->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 	pLight->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, XM_PI / 2.f));
-	m_CurLevel->AddObject(pLight, L"Light");
+	m_CurLevel->AddObject(pLight, L"Light");*/
 
 	// Create Background
-	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTexture", L"texture\\Background.png");
 	CGameObject* pObj = new CGameObject;
+	Ptr<CTexture> pTex = nullptr;
+	
+	pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTexture", L"texture\\Background.png");
 	pObj->SetName(L"Background");
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
@@ -143,7 +158,7 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
 	// Create Tilemap
-	pObj = new CGameObject();
+	/*pObj = new CGameObject();
 	pObj->SetName(L"TileMap");
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CTileMap);
@@ -152,13 +167,15 @@ void CLevelMgr::init()
 
 	Ptr<CTexture> pTileAtlas = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlas", L"texture\\TILE.bmp");
 	pObj->TileMap()->SetAtlas(pTileAtlas, Vec2(64.f, 64.f));
+	pObj->TileMap()->SetMap(1, 1);
+	pObj->TileMap()->SetTileImgIdx(0, 0, 0);
 
-	m_CurLevel->AddObject(pObj, L"Tile", false);
+	m_CurLevel->AddObject(pObj, L"Tile", false);*/
 
-	// Create GameObject
-	pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp");
+	// Create Player
 	pObj = new CGameObject;
 	pObj->SetName(L"Player");
+	pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp");
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
@@ -233,7 +250,7 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pObj, L"UI", false);
 
 	// PostProcess Object Create
-	pObj = new CGameObject;
+	/*pObj = new CGameObject;
 	pObj->SetName(L"Distortion");
 
 	pObj->AddComponent(new CTransform);
@@ -245,6 +262,16 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMat"));
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_PARAM::TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"NoiseTex", L"texture\\noise\\noise_03.jpg"));
+
+	m_CurLevel->AddObject(pObj, L"Default", false);*/
+
+	// Particle object
+	pObj = new CGameObject;
+	pObj->SetName(L"Particle");
+
+	pObj->AddComponent(new CTransform);
+	pObj->AddComponent(new CParticleSystem);
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
 	m_CurLevel->AddObject(pObj, L"Default", false);
 }

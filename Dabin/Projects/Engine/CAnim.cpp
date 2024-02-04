@@ -35,7 +35,7 @@ void CAnim::UpdatePipeline()
 {
 	// constant buffer: 현재 프레임 정보
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::ANIM2D_DATA);
-	tAnimData2D data = {};
+	FAnimData2D data = {};
 	data.UseAnim2D = true;
 	data.vLeftTop = m_vecFrm[m_CurFrmIdx].vLeftTopUV;
 	data.vOffset = m_vecFrm[m_CurFrmIdx].vOffsetUV;
@@ -52,7 +52,7 @@ void CAnim::UpdatePipeline()
 void CAnim::Clear()
 {
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::ANIM2D_DATA);
-	tAnimData2D data = {};
+	FAnimData2D data = {};
 	data.UseAnim2D = false;
 
 	pCB->SetData(&data);

@@ -17,6 +17,9 @@ private:
     ComPtr<ID3D11ShaderResourceView>    m_SRV;      // texture register(t) - for Shader
     ComPtr<ID3D11UnorderedAccessView>   m_UAV;      // GPGPU(General Purpose GPU) - for ComputeShader
 
+    UINT                                m_RecentCSRegNum_SRV;
+    UINT                                m_RecentCSRegNum_UAV;
+
 private:
     virtual int Load(const wstring& _strFilePath) override;
     int Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _USAGE);
@@ -24,7 +27,11 @@ private:
 
 public:
     void UpdatePipeline(int _registerNum);
+    int UpdateCS_SRV(int _registerNum);
+    int UpdateCS_UAV(int _registerNum);
     static void ClearPipeline(int _registerNum);
+    void ClearCS_SRV();
+    void ClearCS_UAV();
 
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
@@ -33,6 +40,7 @@ public:
     ComPtr<ID3D11DepthStencilView> GetDSV() { return m_DSV; }
     ComPtr<ID3D11ShaderResourceView> GetSRV() { return m_SRV; }
     ComPtr<ID3D11UnorderedAccessView> GetUAV() { return m_UAV; }
+    FPixel* GetPixels();
 
 public:
     CTexture();

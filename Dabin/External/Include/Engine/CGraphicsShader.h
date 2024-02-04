@@ -34,7 +34,7 @@ private:
     SHADER_DOMAIN   m_Domain;
 
 public:
-    virtual void UpdatePipeline();
+    virtual int UpdatePipeline();
 
     int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
     int CreateHullShader();
