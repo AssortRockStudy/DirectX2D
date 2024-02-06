@@ -17,8 +17,9 @@ int CParticleUpdate::UpdateData()
 		return E_FAIL;
 
 	m_Const.iArr[0] = m_ParticleBuffer->GetElementCount();
-	m_ParticleBuffer->UpdateData_CS_UAV(0);
+	m_Const.v4Arr[0] = m_vParticleWorldPos;
 
+	m_ParticleBuffer->UpdateData_CS_UAV(0);
 	m_SpawnCountBuffer->UpdateData_CS_UAV(1);
 
 	m_ParticleModuleBuffer->UpdateData_CS_SRV(20);
