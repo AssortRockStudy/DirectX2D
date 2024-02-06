@@ -24,6 +24,9 @@ private:
     CGameObject*            m_DebugObj;
     bool                    m_bDebugPosition;
 
+    // NoiseTexture
+    vector<Ptr<CTexture>>   m_vecNoiseTex;
+
 public:
     void RegisterCamera(CCamera* _Cam, int _Idx);
     void AddDebugShapeInfo(const tDebugShapeInfo& _info)
