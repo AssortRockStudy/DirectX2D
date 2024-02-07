@@ -88,13 +88,13 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11
 
     CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
     CGameObject* pObject = pCurLevel->FindObjectByName(L"Player");
-    ((Inspector*)FindUI("##Inspector"))->SetTaretObject(pObject);
+    ((Inspector*)FindUI("##Inspector"))->SetTargetObject(pObject);
 
-    pObject = pCurLevel->FindObjectByName(L"MainCamera");
-    ((Inspector*)FindUI("##CameraInspector"))->SetTaretObject(pObject);
+    //pObject = pCurLevel->FindObjectByName(L"MainCamera");
+    //((Inspector*)FindUI("##CameraInspector"))->SetTargetObject(pObject);
 
-    pObject = pCurLevel->FindObjectByName(L"Light2D");
-    ((Inspector*)FindUI("##Light2DInspector"))->SetTaretObject(pObject);
+    //pObject = pCurLevel->FindObjectByName(L"Light2D");
+    //((Inspector*)FindUI("##Light2DInspector"))->SetTargetObject(pObject);
 }
 
 void CImGuiMgr::progress()
@@ -149,13 +149,13 @@ void CImGuiMgr::create_UI()
     pUI = new Inspector;
     AddUI(pUI->GetID(), pUI);
 
-    // Camera Inspector
-    pUI = new Inspector("Camera","##CameraInspector");
-    AddUI(pUI->GetID(), pUI);
+    //// Camera Inspector
+    //pUI = new Inspector("Camera","##CameraInspector");
+    //AddUI(pUI->GetID(), pUI);
 
-    // Light2D Inspector
-    pUI = new Inspector("Light2D", "##Light2DInspector");
-    AddUI(pUI->GetID(), pUI);
+    //// Light2D Inspector
+    //pUI = new Inspector("Light2D", "##Light2DInspector");
+    //AddUI(pUI->GetID(), pUI);
 
     // Content
     pUI = new Content;

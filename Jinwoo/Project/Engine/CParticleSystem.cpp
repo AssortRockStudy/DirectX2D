@@ -47,11 +47,11 @@ CParticleSystem::CParticleSystem()
 
 	m_Module.SpaceType = 1;
 	m_Module.vSpawnColor = Vec4(0.2f, 0.5f, 0.8f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(50.f, 20.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(50.f, 20.f, 1.f, 1.f);
 	m_Module.MinMass = 1.f;
 	m_Module.MaxMass = 1.f;
-	m_Module.MinLife = 1.f;
+	m_Module.MinLife = 3.f;
 	m_Module.MaxLife = 3.f;
 	m_Module.SpawnShape = 1;
 	m_Module.Radius = 100.f;
@@ -61,8 +61,8 @@ CParticleSystem::CParticleSystem()
 	// Add Velocity
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
 	m_Module.AddVelocityType = 0;
-	m_Module.MinSpeed = 10.f;
-	m_Module.MaxSpeed = 20.f;
+	m_Module.MinSpeed = 100.f;
+	m_Module.MaxSpeed = 200.f;
 
 	// Scale
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SCALE] = 0;
@@ -73,6 +73,10 @@ CParticleSystem::CParticleSystem()
 	m_Module.NoiseForceScale = 10.f;
 	m_Module.NoiseForceTerm = 0.3f;
 
+	// Drag Module
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::DRAG] = 1;
+	m_Module.DragTime = 0.5f;
+
 	// Calculate Force
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
@@ -82,7 +86,7 @@ CParticleSystem::CParticleSystem()
 	m_Module.AlphaBasedLife = 1;
 	m_Module.AlphaMaxAge = 2.f;
 
-	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png");
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\ray.png", L"texture\\particle\\ray.png");
 }
 
 CParticleSystem::~CParticleSystem()

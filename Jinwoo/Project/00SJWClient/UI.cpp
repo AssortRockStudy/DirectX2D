@@ -36,7 +36,7 @@ void UI::render()
 		// Modaless
 		if (!m_bModal)
 		{
-			ImGui::Begin(string(m_strName + m_strID).c_str(), &m_bActive);
+			ImGui::Begin(string(m_strName + m_strID).c_str(), &Active);
 
 			// 활성화, 비활성화 전환이 발생한 경우 Activate / Deactivate를 호출시킨다
 			if (Active != m_bActive)
@@ -112,7 +112,4 @@ void UI::render()
 
 		ImGui::EndChild();
 	}
-
-
-
 }

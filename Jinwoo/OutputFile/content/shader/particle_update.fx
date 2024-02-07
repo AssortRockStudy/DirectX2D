@@ -168,6 +168,22 @@ void CS_ParticleUpdate(uint3 id :SV_DispatchThreadID)
             // Accel 연산
             Particle.vVelocity.xyz += vAccel * g_dt;
 
+            // Drag 모듈이 켜져있다면
+            if (Module.arrModuleCheck[1])
+            {
+                float LimitTime = Module.DragTime - Particle.Age;
+                
+                if (LimitTime <= 0.f)
+                {
+                    Particle.vVelocity = 0.f;
+                }
+                else
+                {
+                    float DT = g_dt / LimitTime;
+                    Particle.vVelocity -= Particle.vVelocity * DT;
+                }
+            }
+            
             if (0 == Module.SpaceType)
             {
                 Particle.vLocalPos.xyz += Particle.vVelocity.xyz * g_dt;

@@ -138,8 +138,16 @@ void CLevelMgr::init()
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTex", L"texture\\link.png");
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
+	// Particle  생성
+	CGameObject* pParticleObj = new CGameObject;
+	pParticleObj->SetName(L"Particle");
+	pParticleObj->AddComponent(new CTransform);
+	pParticleObj->AddComponent(new CParticleSystem);
+	pParticleObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pObj->AddChild(pParticleObj);
+
 	m_CurLevel->AddObject(pObj, L"Player", false);
-	
+
 	// background  생성
 	pObj = new CGameObject;
 	pObj->SetName(L"Background");
@@ -158,14 +166,6 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
-
-	// background  생성
-	pObj = new CGameObject;
-	pObj->SetName(L"Particle");
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CParticleSystem);
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
-	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	//// Monster Object 생성
 	//pObj = new CGameObject;

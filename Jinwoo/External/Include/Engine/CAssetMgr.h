@@ -29,6 +29,11 @@ public:
 
 public:
 	template<typename T>
+	const map<wstring, Ptr<CAsset>>& GetAssets();
+
+	const map<wstring, Ptr<CAsset>>& GetAssets(ASSET_TYPE _Type) { return m_mapAsset[(UINT)_Type]; }
+
+	template<typename T>
 	void AddAsset(const wstring& _strKey, T* _Asset);
 
 	template<typename T>
@@ -77,6 +82,14 @@ ASSET_TYPE GetAssetType()
 	return Type;
 }
 
+
+template<typename T>
+inline const map<wstring, Ptr<CAsset>>& CAssetMgr::GetAssets()
+{
+	ASSET_TYPE Type = GetAssetType<T>();
+
+	return m_mapAsset[(UINT)Type];
+}
 
 template<typename T>
 inline void CAssetMgr::AddAsset(const wstring& _strKey, T* _Asset)

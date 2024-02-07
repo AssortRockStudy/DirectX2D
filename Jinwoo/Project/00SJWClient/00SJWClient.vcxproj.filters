@@ -56,6 +56,33 @@
     <Filter Include="UI\5.EditAnimatorUI">
       <UniqueIdentifier>{e26b321a-f9f2-4926-9658-99018acde9fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\6.Module">
+      <UniqueIdentifier>{0289c95c-6e82-4a40-b3af-700e2b2cfe01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\6.Module\TreeUI">
+      <UniqueIdentifier>{4307a3c3-4e82-41b2-8a79-97be6863b0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\ComputeShader">
+      <UniqueIdentifier>{70dd1945-8780-4b32-a35f-ff8f793fe860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\GraphicsShader">
+      <UniqueIdentifier>{1757a10e-fb65-454d-a6b8-d7a17356044b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\MaterialUI">
+      <UniqueIdentifier>{b048339e-6dcc-4b84-a56c-578a9027df34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\MeshData">
+      <UniqueIdentifier>{0de5498d-7556-4e94-8ec8-8d59172f7ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\MeshUI">
+      <UniqueIdentifier>{f1fbc9db-1c21-4323-8afa-c36651c57137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\Sound">
+      <UniqueIdentifier>{34ea90b3-4e41-4b7f-ad8a-cdfdb44b1a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3.Inspector\AssetUI\TextureUI">
+      <UniqueIdentifier>{f2081958-99ab-4378-8dd6-21659a7f050b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -142,6 +169,33 @@
     <ClInclude Include="stb_image.h">
       <Filter>Default\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="TreeUI.h">
+      <Filter>UI\6.Module\TreeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetUI.h">
+      <Filter>UI\3.Inspector\AssetUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureUI.h">
+      <Filter>UI\3.Inspector\AssetUI\TextureUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundUI.h">
+      <Filter>UI\3.Inspector\AssetUI\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshUI.h">
+      <Filter>UI\3.Inspector\AssetUI\MeshUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshDataUI.h">
+      <Filter>UI\3.Inspector\AssetUI\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialUI.h">
+      <Filter>UI\3.Inspector\AssetUI\MaterialUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsShaderUI.h">
+      <Filter>UI\3.Inspector\AssetUI\GraphicsShader</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShaderUI.h">
+      <Filter>UI\3.Inspector\AssetUI\ComputeShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -223,6 +277,36 @@
     </ClCompile>
     <ClCompile Include="EditAnimator.cpp">
       <Filter>UI\5.EditAnimatorUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeUI.cpp">
+      <Filter>UI\6.Module\TreeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\TextureUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\MeshUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshDataUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\MaterialUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector_init.cpp">
+      <Filter>UI\3.Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsShaderUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\GraphicsShader</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShaderUI.cpp">
+      <Filter>UI\3.Inspector\AssetUI\ComputeShader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

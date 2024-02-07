@@ -32,6 +32,8 @@ enum class ASSET_TYPE
 	END,
 };
 
+extern const char* ASSET_TYPE_STRING[(UINT)ASSET_TYPE::END];
+
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,	// 오브젝트 위치, 크기, 회전
@@ -198,7 +200,7 @@ enum class SHADER_DOMAIN
 enum class PARTICLE_MODULE
 {
 	SPAWN,	// 파티클 생성 관련
-	DRAW,	// 감속 관련 모듈
+	DRAG,	// 감속 관련 모듈
 	SCALE,
 	ADD_VELOCITY,
 	NOISE_FORCE,

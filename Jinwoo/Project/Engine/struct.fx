@@ -84,11 +84,16 @@ struct tParticleModule
     float   NoiseForceScale;
     float   NoiseForceTerm;
     
+   	// Drag
+    float   DragTime;
+    
     int     VelocityAlignment; // 0 : Off, 1 : On
     int     AlphaBasedLife; // 0 : Off, 1 : NormalizeAge, 2 : Age
     float   AlphaMaxAge;
     
     int     arrModuleCheck[7];
+    
+    int3    modulepadding;
 };
 
 struct tSpawnCount
