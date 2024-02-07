@@ -16,7 +16,7 @@ CParticleSystem::CParticleSystem()
 	, m_MaxParticleCount(2000)
 {
 	// 전용 메쉬와 전용 재질 사용
-	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"PointMesh"));
 	SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"ParticleMtrl"));
 
 	// 렌더링 해상도
@@ -47,8 +47,8 @@ CParticleSystem::CParticleSystem()
 
 	m_Module.SpaceType = 1;
 	m_Module.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(100.f, 30.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(100.f, 30.f, 1.f, 1.f);
 	m_Module.MinLife = 3.f;
 	m_Module.MaxLife = 5.f;
 	m_Module.MinMass = 1.f;
@@ -79,8 +79,12 @@ CParticleSystem::CParticleSystem()
 	// Calculate Forec
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
+	// Render 
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::RENDER] = 1;
+	m_Module.VelocityAlignment = 1; // 속도에 따른 방향 정렬
 
-	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
+
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\HardRain.png", L"texture\\particle\\HardRain.png");
 
 }
 
@@ -138,6 +142,7 @@ void CParticleSystem::render()
 
 	// ParticleBuffer 바인딩
 	m_ParticleBuffer->UpdateData(20);
+	m_ParticleModuleBuffer->UpdateData(21);
 
 	// 파티클 개별 랜더링 -> 인스턴싱
 	GetMaterial()->SetScalarParam(INT_0, 0);
@@ -147,4 +152,5 @@ void CParticleSystem::render()
 	GetMesh()->render_asparticle(m_MaxParticleCount);
 
 	m_ParticleBuffer->Clear(20);
+	m_ParticleModuleBuffer->Clear(21);
 }

@@ -82,8 +82,11 @@ struct tParticleModule
     float NoiseForceScale;
     float NoiseForceTerm;
         
+    // Render
+    int VelocityAlignment; // 1 : On, 0 : Off
+    
     // Module Active Check
-    int arrModuleCheck[6];
+    int arrModuleCheck[7];
 };
 
 struct tSpawnCount
