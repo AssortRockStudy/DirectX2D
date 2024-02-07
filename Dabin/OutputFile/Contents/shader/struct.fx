@@ -46,5 +46,24 @@ struct FParticle
     int     Active;
 };
 
+struct FParticleModule
+{
+	// Module: Spawn
+    float4 vSpawnColor;
+    float4 vSpawnScaleMin;
+    float4 vSpawnScaleMax;
+
+    float LifeMin;
+    float LifeMax;
+    int SpawnRate;
+    int SpaceType; // ÁÂÇ¥°è (0: Local, 1: World)
+};
+
+struct FSpawnCount
+{
+    int SpawnCount;
+    int3 iPadding;
+};
+
 
 #endif

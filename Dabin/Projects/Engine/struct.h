@@ -44,6 +44,7 @@ struct FPixel
 	BYTE r, g, b, a;
 };
 
+// FParticle: 입자 하나가 가지는 정보를 담은 구조체
 struct FParticle
 {
 	Vec4	vWorldPos;
@@ -58,6 +59,26 @@ struct FParticle
 	int		Active;
 };
 
+// FParticleModule: Particle System의 세팅을 담은 구조체
+struct FParticleModule
+{
+	// Module: Spawn
+	Vec4	vSpawnColor;
+	Vec4	vSpawnScaleMin;
+	Vec4	vSpawnScaleMax;
+
+	float	LifeMin;
+	float	LifeMax;
+	int		SpawnRate;
+	int		SpaceType;			// 좌표계 (0: Local, 1: World)
+};
+
+// FSpawnCount: Particle Spawn 동기화에 사용
+struct FSpawnCount
+{
+	int SpawnCount;
+	int iPadding[3];
+};
 
 //---------------------------------
 // Constant Buffer 대응 구조체

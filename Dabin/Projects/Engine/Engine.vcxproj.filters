@@ -137,7 +137,7 @@
     <Filter Include="ShaderCode\Compute\ParticleUpdate">
       <UniqueIdentifier>{130ce27a-db21-4da6-bafe-110a4e4295f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Manager\AssetMgr\RenderMgr">
+    <Filter Include="04. Manager\RenderMgr">
       <UniqueIdentifier>{f27e517c-96cd-487e-b8f0-11aba96b4c55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -261,7 +261,7 @@
       <Filter>06. Asset</Filter>
     </ClInclude>
     <ClInclude Include="CRenderMgr.h">
-      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
+      <Filter>04. Manager\RenderMgr</Filter>
     </ClInclude>
     <ClInclude Include="CCollider2D.h">
       <Filter>08. Component\02. Collider2D</Filter>
@@ -399,10 +399,10 @@
       <Filter>06. Asset\Material</Filter>
     </ClCompile>
     <ClCompile Include="CRenderMgr.cpp">
-      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
+      <Filter>04. Manager\RenderMgr</Filter>
     </ClCompile>
     <ClCompile Include="CRenderMgr_init.cpp">
-      <Filter>04. Manager\AssetMgr\RenderMgr</Filter>
+      <Filter>04. Manager\RenderMgr</Filter>
     </ClCompile>
     <ClCompile Include="CCollider2D.cpp">
       <Filter>08. Component\02. Collider2D</Filter>

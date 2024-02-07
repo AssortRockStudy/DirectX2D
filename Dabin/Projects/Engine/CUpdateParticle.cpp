@@ -17,7 +17,10 @@ int CUpdateParticle::UpdatePipeline()
 		return E_FAIL;
 
 	m_Const.iArr[0] = m_ParticleBuffer->GetElementCount();
+
 	m_ParticleBuffer->UpdatedCS_UAV(0);
+	m_SpawnCountBuffer->UpdatedCS_UAV(1);
+	m_ParticleModuleBuffer->UpdatedCS_SRV(20);
 
 	return S_OK;
 }
@@ -35,4 +38,10 @@ void CUpdateParticle::Clear()
 {
 	m_ParticleBuffer->ClearCS_UAV();
 	m_ParticleBuffer = nullptr;
+	
+	m_ParticleModuleBuffer->ClearCS_SRV();
+	m_ParticleModuleBuffer = nullptr;
+
+	m_SpawnCountBuffer->ClearCS_UAV();
+	m_SpawnCountBuffer = nullptr;
 }

@@ -9,6 +9,8 @@ class CUpdateParticle :
 {
 private:
     CStructuredBuffer* m_ParticleBuffer;
+    CStructuredBuffer* m_ParticleModuleBuffer;
+    CStructuredBuffer* m_SpawnCountBuffer;
 
 public:
     virtual int UpdatePipeline() override;
@@ -17,6 +19,8 @@ public:
 
 public:
     void SetParticleBuffer(CStructuredBuffer* _ParticleBuffer) { m_ParticleBuffer = _ParticleBuffer; }
+    void SetParticleModuleBuffer(CStructuredBuffer* _ParticleBuffer) { m_ParticleModuleBuffer = _ParticleBuffer; }
+    void SetParticleSpawnCount(CStructuredBuffer* _ParticleBuffer) { m_SpawnCountBuffer = _ParticleBuffer; }
 
 public:
     CUpdateParticle();

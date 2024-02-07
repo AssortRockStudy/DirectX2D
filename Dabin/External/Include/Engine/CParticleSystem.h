@@ -13,9 +13,17 @@ class CParticleSystem :
     public CRenderComponent
 {
 private:
-    CStructuredBuffer*      m_ParticleBuffer;
-    UINT                    m_MaxParticleCount;
     Ptr<CUpdateParticle>    m_CSParticleUpdate;
+    
+    CStructuredBuffer*      m_ParticleBuffer;
+    UINT                    m_ParticleCountMax;
+
+    FParticleModule         m_Module;
+    CStructuredBuffer*      m_ParticleModuleBuffer;
+
+    // Module: Spawn
+    CStructuredBuffer*      m_SpawnCountBuffer;
+    float                   m_SpawnAccTime;
 
 public:
     virtual void UpdatePipeline() override;

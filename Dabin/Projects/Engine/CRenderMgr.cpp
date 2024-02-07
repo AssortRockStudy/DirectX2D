@@ -129,6 +129,7 @@ void CRenderMgr::UpdatePipeline()
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL_DATA);
 	pCB->SetData(&g_Global);
 	pCB->UpdatePipeline();
+	pCB->UpdatePipeline_CS();
 
 	// SB update: 2D Light
 	if (!m_vecLight2D.empty())
