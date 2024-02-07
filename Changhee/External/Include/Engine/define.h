@@ -206,6 +206,9 @@ enum class PARTICLE_MODULE
 	DRAG,	// 감속 관련 모듈
 	SCALE,
 	ADD_VELOCITY,
+	NOISE_FORCE,
+	CALCULATE_FORCE,// 주어진 힘을 계산하는 모듈
+
 
 	END,
 };

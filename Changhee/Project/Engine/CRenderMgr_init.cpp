@@ -31,6 +31,7 @@ void CRenderMgr::init()
 
 	m_vecNoiseTex[2]->UpdateData(14);
 	m_vecNoiseTex[2]->UpdateData_CS_SRV(14);
+	g_global.g_NoiseTexResolution = Vec2(m_vecNoiseTex[2]->GetWidth(), m_vecNoiseTex[2]->GetHeight());
 }
 
 void CRenderMgr::CopyRenderTargetToPostProcessTarget()
