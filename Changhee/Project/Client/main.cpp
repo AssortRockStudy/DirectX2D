@@ -83,7 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             CEngine::GetInst()->progress();
 
             // Imgui Update
-            CImGuiMgr::GetInst()->progress();
+            //CImGuiMgr::GetInst()->progress();
 
             // Engine 및 ImGui 렌더링 최종 결과를 출력한다.
             CDevice::GetInst()->Present();
