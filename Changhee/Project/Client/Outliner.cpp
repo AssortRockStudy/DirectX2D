@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Outliner.h"
 
+#include "TreeUI.h"
 
 Outliner::Outliner()
 	: UI("Outliner", "##Outliner")

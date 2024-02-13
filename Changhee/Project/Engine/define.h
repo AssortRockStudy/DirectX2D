@@ -43,6 +43,8 @@ enum class ASSET_TYPE
 	END,
 };
 
+extern const char* ASSET_TYPE_STRING[(UINT)ASSET_TYPE::END];
+
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,	// 오브젝트의 위치,크기,회전

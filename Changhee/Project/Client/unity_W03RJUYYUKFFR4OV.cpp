@@ -57,5 +57,8 @@
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\TransformUI.cpp"
 
 
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\TreeUI.cpp"
+
+
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\UI.cpp"
 
