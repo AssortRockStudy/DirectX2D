@@ -9,6 +9,7 @@
 #include "Animator2DUI.h"
 #include "Collider2DUI.h"
 
+#include "AssetUI.h"
 
 Inspector::Inspector()
 	: UI("Inspector", "##Inspector")
@@ -16,20 +17,7 @@ Inspector::Inspector()
 	, m_arrComUI{}
 {
 	// 자식 UI 생성
-	m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM]);
-
-	m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new MeshRenderUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER]);
-
-	m_arrComUI[(UINT)COMPONENT_TYPE::COLLIDER2D] = new Collider2DUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::COLLIDER2D]);
-
-	m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D] = new Light2DUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D]);
-
-	m_arrComUI[(UINT)COMPONENT_TYPE::ANIMATOR2D] = new Animator2DUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::ANIMATOR2D]);
+	CreateChildUI();
 
 }
 
@@ -47,8 +35,11 @@ void Inspector::render_update()
 	if (nullptr == m_TargetObject)
 		return;
 
-	string strName = string(m_TargetObject->GetName().begin(), m_TargetObject->GetName().end());
-	ImGui::Text(strName.c_str());
+	if (nullptr != m_TargetObject)
+	{
+		string strName = string(m_TargetObject->GetName().begin(), m_TargetObject->GetName().end());
+		ImGui::Text(strName.c_str());
+	}
 }
 
 void Inspector::SetTargetObject(CGameObject* _Object)
@@ -66,5 +57,18 @@ void Inspector::SetTargetObject(CGameObject* _Object)
 
 void Inspector::SetTargetAsset(Ptr<CAsset> _Asset)
 {
+	SetTargetObject(nullptr);
+
 	m_TargetAsset = _Asset;
+
+	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; ++i)
+	{
+		m_arrAssetUI[i]->Deactivate();
+	}
+
+	if (nullptr != m_TargetAsset)
+	{
+		m_arrAssetUI[(UINT)m_TargetAsset->GetType()]->Activate();
+		m_arrAssetUI[(UINT)m_TargetAsset->GetType()]->SetAsset(_Asset);
+	}
 }

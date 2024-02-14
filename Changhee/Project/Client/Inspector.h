@@ -6,6 +6,7 @@
 #include <Engine/CAsset.h>
 
 class ComponentUI;
+class AssetUI;
 
 class Inspector
 	: public UI
@@ -15,6 +16,7 @@ private:
 	Ptr<CAsset>			m_TargetAsset;
 
 	ComponentUI*		m_arrComUI[(UINT)COMPONENT_TYPE::END];
+	AssetUI*			m_arrAssetUI[(UINT)ASSET_TYPE::END];
 
 
 public:
@@ -26,6 +28,11 @@ public:
 public:
 	virtual void tick() override;
 	virtual void render_update() override;
+
+private:
+	void CreateChildUI();
+	void CreateComponentUI();
+	void CreateAssetUI();
 
 public:
 	Inspector();

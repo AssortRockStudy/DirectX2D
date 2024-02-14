@@ -56,6 +56,27 @@
     <Filter Include="UI\5. Module\TreeUI">
       <UniqueIdentifier>{dac58d6c-ae50-42e4-8a13-8987ef9e57c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\ComputeShader">
+      <UniqueIdentifier>{7aedc4f6-0481-497c-a2e6-a669517cb2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\GraphicsShader">
+      <UniqueIdentifier>{4cce0f89-fbe1-4bdf-b754-aef8b83e34ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\MaterialUI">
+      <UniqueIdentifier>{5f9ec88c-ba22-4274-86a4-927100a406bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\MeshData">
+      <UniqueIdentifier>{538097c8-7ac3-4697-ad69-0c320dd22a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\Sound">
+      <UniqueIdentifier>{f825002e-4420-40dd-8e60-9ac81fc95132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\TextureUI">
+      <UniqueIdentifier>{fea6eacd-facb-4d64-b314-abf16f05d341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\3. Inspector\AssetUI\MeshUI">
+      <UniqueIdentifier>{9de94f75-c7f0-45a7-abed-bc6983b2f27d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -135,6 +156,30 @@
     </ClInclude>
     <ClInclude Include="TreeUI.h">
       <Filter>UI\5. Module\TreeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetUI.h">
+      <Filter>UI\3. Inspector\AssetUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShaderUI.h">
+      <Filter>UI\3. Inspector\AssetUI\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsShaderUI.h">
+      <Filter>UI\3. Inspector\AssetUI\GraphicsShader</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialUI.h">
+      <Filter>UI\3. Inspector\AssetUI\MaterialUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshDataUI.h">
+      <Filter>UI\3. Inspector\AssetUI\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshUI.h">
+      <Filter>UI\3. Inspector\AssetUI\MeshUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureUI.h">
+      <Filter>UI\3. Inspector\AssetUI\TextureUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundUI.h">
+      <Filter>UI\3. Inspector\AssetUI\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +261,33 @@
     </ClCompile>
     <ClCompile Include="TreeUI.cpp">
       <Filter>UI\5. Module\TreeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector_init.cpp">
+      <Filter>UI\3. Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShaderUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsShaderUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\GraphicsShader</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\MaterialUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshDataUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\MeshUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\TextureUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundUI.cpp">
+      <Filter>UI\3. Inspector\AssetUI\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

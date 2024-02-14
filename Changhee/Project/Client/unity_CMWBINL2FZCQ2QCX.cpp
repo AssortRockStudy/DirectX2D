@@ -3,6 +3,9 @@
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Animator2DUI.cpp"
 
 
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\AssetUI.cpp"
+
+
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\CImGuiMgr.cpp"
 
 
@@ -12,7 +15,13 @@
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ComponentUI.cpp"
 
 
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ComputeShaderUI.cpp"
+
+
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Content.cpp"
+
+
+#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\GraphicsShaderUI.cpp"
 
 
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\imgui.cpp"
@@ -34,31 +43,4 @@
 
 
 #include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\imgui_widgets.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Inspector.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Light2DUI.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\ListUI.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\main.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\MeshRenderUI.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\Outliner.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\TransformUI.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\TreeUI.cpp"
-
-
-#include "C:\Users\changhee\Desktop\study\DirectX2D\Changhee\Project\Client\UI.cpp"
 
