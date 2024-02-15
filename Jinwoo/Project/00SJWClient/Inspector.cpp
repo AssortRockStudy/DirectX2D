@@ -63,6 +63,11 @@ void Inspector::SetTargetObject(CGameObject* _Object)
 			m_arrComUI[i]->SetTargetObject(_Object);
 		}
 	}
+
+	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; ++i)
+	{
+		m_arrAssetUI[i]->Deactivate();
+	}
 }
 
 void Inspector::SetTargetAsset(Ptr<CAsset> _Asset)

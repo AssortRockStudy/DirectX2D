@@ -4,6 +4,7 @@
 #include "CGraphicsShader.h"
 #include "CTexture.h"
 
+
 class CMaterial :
     public CAsset
 {
@@ -23,8 +24,16 @@ public:
 
     void SetTexParam(TEX_PARAM _Param, Ptr<CTexture> _pTex);
 
+	void* GetScalarParam(SCALAR_PARAM _ParamType);
+	Ptr<CTexture> GetTexParam(TEX_PARAM _ParamType) { return m_arrTex[(UINT)_ParamType]; }
+
 public:
-    CMaterial();
+	virtual CMaterial* Clone() { return new CMaterial(*this); }
+	virtual int Save(const wstring& _strRelativePath);
+	virtual int Load(const wstring& _strFilePath);
+
+public:
+    CMaterial(bool _bEngine = false);
     ~CMaterial();
 };
 

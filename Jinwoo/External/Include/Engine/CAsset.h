@@ -11,6 +11,7 @@ private:
     wstring             m_RelativePath;
     int                 m_RefCount;
     const ASSET_TYPE    m_Type;
+    const bool          m_bEngineAsset;
 
 public:
     const wstring& GetKey() { return m_Key; }
@@ -34,10 +35,13 @@ private:
         }
     }
 
+    virtual int Save(const wstring& _strRelativePath) { return E_FAIL; }
     virtual int Load(const wstring& _strFilePath) { return E_FAIL; }
 
+    virtual CAsset* Clone() { return nullptr; }
+
 public:
-    CAsset(ASSET_TYPE _Type);
+    CAsset(ASSET_TYPE _Type, bool _bEngineAsset = false);
     ~CAsset();
 
     friend class CAssetMgr;

@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\imgui_widgets.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Inspector.cpp"
 
 
@@ -21,6 +18,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\MaterialUI.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\MenuUI.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\MeshDataUI.cpp"
 
 
@@ -31,6 +31,9 @@
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Outliner.cpp"
+
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\ParamUI.cpp"
 
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\SoundUI.cpp"

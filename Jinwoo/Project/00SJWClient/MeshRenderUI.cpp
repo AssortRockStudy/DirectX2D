@@ -38,14 +38,39 @@ void MeshRenderUI::render_update()
 		return;
 	}
 
-	string meshName = ToString(pMesh->GetKey()).c_str();
-	string mtrlName = ToString(pMtrl->GetKey()).c_str();
+	string meshname, mtrlname;
+
+	if (nullptr != pMesh)
+	{
+		meshname = ToString(pMesh->GetKey()).c_str();
+	}
+	if (nullptr != pMtrl)
+	{
+		mtrlname = ToString(pMtrl->GetKey()).c_str();
+	}
 
 	ImGui::Text("Mesh");
 	ImGui::SameLine(0, 46);
 	ImGui::SetNextItemWidth(200);
-	ImGui::InputText("##MeshName", (char*)meshName.c_str(), meshName.length(), ImGuiInputTextFlags_ReadOnly);
+	ImGui::InputText("##MeshName", (char*)meshname.c_str(), meshname.length(), ImGuiInputTextFlags_ReadOnly);
 	ImGui::SameLine();
+	// 메쉬 드랍 체크
+	if (ImGui::BeginDragDropTarget())
+	{
+		const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentTree");
+
+		if (payload)
+		{
+			DWORD_PTR data = *((DWORD_PTR*)payload->Data);
+			CAsset* pAsset = (CAsset*)data;
+			if (ASSET_TYPE::MESH == pAsset->GetType())
+			{
+				GetTargetObject()->MeshRender()->SetMesh((CMesh*)pAsset);
+			}
+		}
+
+		ImGui::EndDragDropTarget();
+	}
 	if (ImGui::Button("##MeshBtn", ImVec2(40, 20)))
 	{
 		ListUI* pListUI = (ListUI*)CImGuiMgr::GetInst()->FindUI("##List");
@@ -63,8 +88,25 @@ void MeshRenderUI::render_update()
 	ImGui::Text("Material");
 	ImGui::SameLine(0, 18);
 	ImGui::SetNextItemWidth(200);
-	ImGui::InputText("##Material", (char*)mtrlName.c_str(), mtrlName.length(), ImGuiInputTextFlags_ReadOnly);
+	ImGui::InputText("##Material", (char*)mtrlname.c_str(), mtrlname.length(), ImGuiInputTextFlags_ReadOnly);
 	ImGui::SameLine();
+	// 머테리얼 드랍 체크
+	if (ImGui::BeginDragDropTarget())
+	{
+		const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentTree");
+
+		if (payload)
+		{
+			DWORD_PTR data = *((DWORD_PTR*)payload->Data);
+			CAsset* pAsset = (CAsset*)data;
+			if (ASSET_TYPE::MATERIAL == pAsset->GetType())
+			{
+				GetTargetObject()->MeshRender()->SetMaterial((CMaterial*)pAsset);
+			}
+		}
+
+		ImGui::EndDragDropTarget();
+	}
 	if (ImGui::Button("##MtrlBtn", ImVec2(40, 20)))
 	{
 		ListUI* pListUI = (ListUI*)CImGuiMgr::GetInst()->FindUI("##List");

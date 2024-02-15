@@ -23,6 +23,7 @@ public:
 public:
     COMPONENT_TYPE GetType() { return m_Type; }
     CGameObject* GetOwner() { return m_Owner; }
+    CRenderComponent* GetRenderComponent() { return m_Owner->GetRenderComponent(); }
 
     GET_OTHER_COMPONENT(Transform);
     GET_OTHER_COMPONENT(MeshRender);

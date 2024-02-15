@@ -68,12 +68,17 @@ public:
         }
     }
 
-    void DisconnectWithParent();
-    void DisconnectWithLayer();
+    //void DisconnectWithParent();
+    //void DisconnectWithLayer();
+
+    int DisconnectWithParent();
+    int DisconnectWithLayer();
 
     bool IsDead() { return m_bDead; }
 
     void Destroy();
+
+    bool IsAncestor(CGameObject* _Other);
 
 public:
     CGameObject();

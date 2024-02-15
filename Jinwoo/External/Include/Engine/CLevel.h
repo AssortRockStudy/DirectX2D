@@ -4,6 +4,13 @@
 class CLayer;
 class CGameObject;
 
+enum class LEVEL_STATE
+{
+    PLAY,
+    PAUSE,
+    STOP,
+};
+
 class CLevel :
     public CEntity
 {

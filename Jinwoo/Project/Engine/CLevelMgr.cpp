@@ -37,6 +37,10 @@ CLevelMgr::~CLevelMgr()
 
 void CLevelMgr::init()
 {
+	// 머테리얼 로드 테스트
+	CAssetMgr::GetInst()->Load<CMaterial>(L"TestMtrl", L"material\\testmtrl.mtrl");
+
+
 	// 초기 레벨 구성
 	m_CurLevel = new CLevel;
 	m_CurLevel->GetLayer(0)->SetName(L"Default");
@@ -47,20 +51,6 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
 
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
-
-
-	// ComputeShader 테스트
-	Ptr<CTexture> pTestTex = CAssetMgr::GetInst()->CreateTexture(L"TestTex", 1024, 1024,
-																DXGI_FORMAT_R8G8B8A8_UNORM,
-																D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
-
-	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"SetColorShader").Get();
-	pCS->SetColor(Vec3(0.f, 1.f, 0.f));
-	pCS->SetTargetTexture(pTestTex);
-	pCS->Execute();
-
-
-
 
 	// 충돌 설정
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
@@ -143,29 +133,29 @@ void CLevelMgr::init()
 	pParticleObj->SetName(L"Particle");
 	pParticleObj->AddComponent(new CTransform);
 	pParticleObj->AddComponent(new CParticleSystem);
-	pParticleObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pParticleObj->Transform()->SetRelativePos(Vec3(100.f, 0.f, 200.f));
 	pObj->AddChild(pParticleObj);
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
 	// background  생성
-	pObj = new CGameObject;
-	pObj->SetName(L"Background");
+	CGameObject* pBObj = new CGameObject;
+	pBObj->SetName(L"Background");
 
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
+	pBObj->AddComponent(new CTransform);
+	pBObj->AddComponent(new CMeshRender);
 
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 600.f));
-	pObj->Transform()->SetRelativeScale(Vec3(1800.f, 800.f, 1.f));
+	pBObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 600.f));
+	pBObj->Transform()->SetRelativeScale(Vec3(1800.f, 800.f, 1.f));
 
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
+	pBObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pBObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
+	pBObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 
 	pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+	pBObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
-	m_CurLevel->AddObject(pObj, L"Background", false);
+	m_CurLevel->AddObject(pBObj, L"Background", false);
 
 	//// Monster Object 생성
 	//pObj = new CGameObject;

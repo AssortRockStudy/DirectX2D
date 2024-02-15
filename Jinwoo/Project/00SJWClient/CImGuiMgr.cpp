@@ -12,9 +12,11 @@
 #include "Inspector.h"
 #include "Content.h"
 #include "Outliner.h"
+#include "MenuUI.h"
 #include "ListUI.h"
 #include "EditAnimator.h"
 
+#include "ParamUI.h"
 
 CImGuiMgr::CImGuiMgr()
     : m_bDemoUI(false)
@@ -120,6 +122,7 @@ void CImGuiMgr::tick()
         pair.second->tick();
     }
 
+    ParamUI::ResetID();
 }
 
 void CImGuiMgr::render()
@@ -163,6 +166,10 @@ void CImGuiMgr::create_UI()
 
     // Outliner
     pUI = new Outliner;
+    AddUI(pUI->GetID(), pUI);
+
+    // Menu
+    pUI = new MenuUI;
     AddUI(pUI->GetID(), pUI);
 
     // List

@@ -158,7 +158,7 @@ void CAssetMgr::CreateDefaultMesh()
 void CAssetMgr::CreateDefaultGraphicsShader()
 {
 	// 셰이더 생성
-	CGraphicsShader* pShader = nullptr;
+	Ptr<CGraphicsShader> pShader = nullptr;
 
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
@@ -170,7 +170,11 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
 
-	AddAsset(L"Std2DShader", pShader);
+	// Parameter
+	pShader->AddScalarParam(INT_0, "Test Parameter");
+	pShader->AddTexParam(TEX_0, "Output Texture");
+
+	AddAsset(L"Std2DShader", pShader.Get());
 
 
 	//======================
@@ -185,7 +189,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
 
-	AddAsset(L"EffectShader", pShader);
+	AddAsset(L"EffectShader", pShader.Get());
 
 
 	//======================
@@ -200,7 +204,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
 
-	AddAsset(L"TileMapShader", pShader);
+	AddAsset(L"TileMapShader", pShader.Get());
 
 
 	//======================
@@ -217,7 +221,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
 
-	AddAsset(L"ParticleRenderShader", pShader);
+	AddAsset(L"ParticleRenderShader", pShader.Get());
 
 
 	//======================
@@ -236,7 +240,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
 
-	AddAsset(L"GrayFilterShader", pShader);
+	AddAsset(L"GrayFilterShader", pShader.Get());
 
 
 	//======================
@@ -253,7 +257,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
 
-	AddAsset(L"DistortionShader", pShader);
+	AddAsset(L"DistortionShader", pShader.Get());
 
 
 	//======================
@@ -270,7 +274,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
 
-	AddAsset(L"VCRDistortionShader", pShader);
+	AddAsset(L"VCRDistortionShader", pShader.Get());
 
 
 	//======================
@@ -289,7 +293,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
 
-	AddAsset(L"OutlineShader", pShader);
+	AddAsset(L"OutlineShader", pShader.Get());
 
 	//======================
 	// 디버그쉐이프 셰이더 생성
@@ -304,53 +308,59 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_DEBUG);
 
-	AddAsset(L"DebugShapeShader", pShader);
+	AddAsset(L"DebugShapeShader", pShader.Get());
 }
 
 void CAssetMgr::CreateDefaultMaterial()
 {
 	// 머테리얼 생성
 	CMaterial* pMtrl = nullptr;
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
 	AddAsset<CMaterial>(L"Std2DMtrl", pMtrl);
 
 	// 배경 머테리얼 생성
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
 	AddAsset<CMaterial>(L"BackgroundMtrl", pMtrl);
 
 	// 타일맵 머테리얼 생성
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"TileMapShader"));
 	AddAsset<CMaterial>(L"TileMapMtrl", pMtrl);
 
 	// 파티클 머테리얼 생성
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"ParticleRenderShader"));
 	AddAsset<CMaterial>(L"ParticleMtrl", pMtrl);
 	
-	
+	// TestMtrl
+	pMtrl = new CMaterial(true);
+	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"Std2DShader"));
+	pMtrl->SetTexParam(TEX_0, Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg"));
+	pMtrl->SetScalarParam(INT_0, 10);
+	pMtrl->Save(L"material\\testmtrl.mtrl");
+	AddAsset<CMaterial>(L"TestMtrl", pMtrl);
 	// ============================================================
 
 
 	// GrayFilterMtrl
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"GrayFilterShader"));
 	AddAsset<CMaterial>(L"GrayFilterMtrl", pMtrl);
 
 	// DistortionMtrl
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DistortionShader"));
 	AddAsset<CMaterial>(L"DistortionMtrl", pMtrl);
 
 	// VCRDistortionMtrl
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"VCRDistortionShader"));
 	AddAsset<CMaterial>(L"VCRDistortionMtrl", pMtrl);
 
 	// OutlineMtrl
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"OutlineShader"));
 	AddAsset<CMaterial>(L"OutlineMtrl", pMtrl);
 
@@ -359,7 +369,7 @@ void CAssetMgr::CreateDefaultMaterial()
 
 
 	// 디버그쉐이프 머테리얼 생성
-	pMtrl = new CMaterial;
+	pMtrl = new CMaterial(true);
 	pMtrl->SetShader(FindAsset<CGraphicsShader>(L"DebugShapeShader"));
 	AddAsset<CMaterial>(L"DebugShapeMtrl", pMtrl);
 }

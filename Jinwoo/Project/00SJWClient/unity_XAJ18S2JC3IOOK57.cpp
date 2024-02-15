@@ -47,3 +47,6 @@
 
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\imgui_tables.cpp"
 
+
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\imgui_widgets.cpp"
+

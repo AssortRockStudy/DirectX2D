@@ -6,6 +6,8 @@
 #include <Engine/CLayer.h>
 #include <Engine/CGameObject.h>
 
+#include "CImGuiMgr.h"
+#include "Inspector.h"
 #include "TreeUI.h"
 
 Outliner::Outliner()
@@ -13,8 +15,15 @@ Outliner::Outliner()
 {	
 	m_Tree = new TreeUI("OutlinerTree");
 	m_Tree->ShowRootNode(false);
+	m_Tree->UseDragDrop(true);
+
 	AddChildUI(m_Tree);
 
+	// 트리에 클릭 이벤트 등록
+	m_Tree->AddSelectDelegate(this, (Delegate_1)&Outliner::SelectObject);
+	m_Tree->AddDragDropDelegate(this, (Delegate_2)&Outliner::DragDropObject);
+
+	// 트리 내용을 현재 레벨의 물체들로 구성
 	ResetCurrentLevel();
 }
 
@@ -59,4 +68,54 @@ void Outliner::AddObjectToTree(TreeNode* _Node, CGameObject* _Object)
 	{
 		AddObjectToTree(pNode, vecChild[i]);
 	}
+}
+
+void Outliner::SelectObject(DWORD_PTR _Node)
+{
+	TreeNode* pNode = (TreeNode*)_Node;
+	CGameObject* pObject = (CGameObject*)pNode->GetData();
+
+	if (nullptr == pObject)
+		return;
+
+	Inspector* pInspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+	pInspector->SetTargetObject(pObject);
+}
+
+void Outliner::DragDropObject(DWORD_PTR _Dest, DWORD_PTR _Source)
+{
+	TreeNode* pDestNode = (TreeNode*)_Dest;
+	TreeNode* pSourceNode = (TreeNode*)_Source;
+
+	CGameObject* pDestObj = nullptr;
+	if (nullptr != pDestNode)
+	{
+		pDestObj = (CGameObject*)pDestNode->GetData();
+	}
+
+	CGameObject* pSourceObj = (CGameObject*)pSourceNode->GetData();
+
+	// 부모 오브젝트가 자신의 자식 오브젝트의 자식으로 들어가려는 경우 방지
+	if (pDestObj != nullptr && pDestObj->IsAncestor(pSourceObj))
+	{
+		return;
+	}
+
+	if (nullptr == pDestNode)
+	{
+		int LayerIdx = pSourceObj->DisconnectWithParent();
+
+		// 자신이 가장 최상단 부모 레이어였다면
+		if (LayerIdx == -1)
+			return;
+
+		CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+		pCurLevel->AddObject(pSourceObj, LayerIdx, false);
+	}
+	else
+	{
+		pDestObj->AddChild(pSourceObj);
+	}
+
+	ResetCurrentLevel();
 }
