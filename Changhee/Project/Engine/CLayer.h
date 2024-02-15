@@ -19,7 +19,7 @@ private:
 
 public:
     void DetachGameObject(CGameObject* _Object);
-    void RegisterGameObejct(CGameObject* _Object) { m_vecObjects.push_back(_Object); }
+    void RegisterGameObject(CGameObject* _Object) { m_vecObjects.push_back(_Object); }
 
     int GetLayerIdx() { return m_iLayerIdx; }
 

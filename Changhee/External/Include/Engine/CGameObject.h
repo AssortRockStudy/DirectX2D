@@ -44,6 +44,8 @@ public:
     const vector<CScript*>& GetScripts() { return m_vecScript; }
     CRenderComponent* GetRenderComopnent() { return m_RenderCom; }
 
+    int GetLayerIdx() { return m_iLayerIdx; }
+
     template<typename T>
     T* GetScript()
     {
@@ -55,8 +57,8 @@ public:
         return nullptr;
     }
 
-    void DisconnectWithParent();
-    void DisconnectWithLayer();
+    int  DisconnectWithParent();
+    int  DisconnectWithLayer();
 
     void AddChild(CGameObject* _Child);
     bool IsDead() { return m_bDead; }

@@ -50,7 +50,7 @@ void CTransform::finaltick()
 	}
 
 	// 부모 오브젝트가 있다면
-	while (GetOwner()->GetParent())
+	if (GetOwner()->GetParent())
 	{
 		const Matrix& matParentWorld = GetOwner()->GetParent()->Transform()->GetWorldMat();
 
@@ -60,12 +60,12 @@ void CTransform::finaltick()
 
 			Matrix matParentScaleInv = XMMatrixScaling(1.f / vParentScale.x, 1.f / vParentScale.y, 1.f / vParentScale.z);
 
-			m_matWorld = m_matWorld * matParentScaleInv * matParentWorld;
+			m_matWorld = m_matWorld * matParentScaleInv* matParentWorld;
 		}
 		else
 		{
 			m_matWorld *= matParentWorld;
-		}
+		}		
 
 		for (int i = 0; i < 3; ++i)
 		{

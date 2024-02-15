@@ -81,12 +81,14 @@ void CGameObject::finaltick()
 	}
 
 	CLayer* pCurLayer = CLevelMgr::GetInst()->GetCurrentLevel()->GetLayer(m_iLayerIdx);
-	pCurLayer->RegisterGameObejct(this);
+	pCurLayer->RegisterGameObject(this);
+
 
 	vector<CGameObject*>::iterator iter = m_vecChild.begin();
-
 	for (; iter != m_vecChild.end();)
 	{
+		(*iter)->finaltick();
+
 		if ((*iter)->m_bDead)
 		{
 			CGC::GetInst()->Add(*iter);
@@ -141,8 +143,14 @@ void CGameObject::AddComponent(CComponent* _Component)
 	}
 }
 
-void CGameObject::DisconnectWithParent()
+int CGameObject::DisconnectWithParent()
 {
+	// 부모가 없는 오브젝트에 DisconnectWithParent 함수를 호출했으면
+	if (nullptr == m_Parent)
+		return -1;
+
+	bool bSuccess = false;
+
 	vector<CGameObject*>::iterator iter = m_Parent->m_vecChild.begin();
 	for (; iter != m_Parent->m_vecChild.end(); ++iter)
 	{
@@ -150,23 +158,36 @@ void CGameObject::DisconnectWithParent()
 		{
 			m_Parent->m_vecChild.erase(iter);
 			m_Parent = nullptr;
-			return;
+			bSuccess = true;
+			break;
 		}
 	}
 
-	// 부모가 없는 오브젝트에 DisconnectWithParent 함수를 호출 했거나
-	// 부모는 자식을 가리키기지 않고 있는데, 자식은 부모를 가리키고 있는 경우
-	assert(nullptr);
+	// 부모는 자식을 가리키지 않고 있는데, 자식은 부모를 가리키고 있는 경우
+	if (!bSuccess)
+	{
+		assert(nullptr);
+	}
+
+	int layeridx = m_iLayerIdx;
+
+	m_iLayerIdx = -1;
+
+	return layeridx;
 }
 
-void CGameObject::DisconnectWithLayer()
+int CGameObject::DisconnectWithLayer()
 {
 	if (-1 == m_iLayerIdx)
-		return;
+		return -1;
 
 	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 	CLayer* pCurLayer = pCurLevel->GetLayer(m_iLayerIdx);
+
+	int LayerIdx = m_iLayerIdx;
 	pCurLayer->DetachGameObject(this);
+
+	return LayerIdx;
 }
 
 void CGameObject::AddChild(CGameObject* _Child)
@@ -175,6 +196,12 @@ void CGameObject::AddChild(CGameObject* _Child)
 	{
 		// 이전 부모 오브젝트랑 연결 해제
 		_Child->DisconnectWithParent();
+	}
+	else
+	{
+		int LayerIdx = _Child->m_iLayerIdx;
+		_Child->DisconnectWithLayer();
+		_Child->m_iLayerIdx = LayerIdx;
 	}
 
 	// 부모 자식 연결
