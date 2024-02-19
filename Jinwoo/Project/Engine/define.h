@@ -19,6 +19,9 @@
 
 #define LAYER_MAX 32
 
+#define CLONE(Type) virtual Type* Clone() { return new Type(*this); }
+#define CLONE_DISABLE(Type) Type* Clone() { return nullptr; assert(nullptr); }\
+							Type(const Type& _OriginBuffer) = delete;		
 
 enum class ASSET_TYPE
 {

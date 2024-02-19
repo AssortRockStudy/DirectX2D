@@ -32,6 +32,8 @@ public:
 public:
     virtual void finaltick() override;
 
+    CLONE(CLight2D);
+
 public:
     CLight2D();
     ~CLight2D();

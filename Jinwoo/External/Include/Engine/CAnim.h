@@ -39,8 +39,11 @@ public:
     bool Save(const wstring& _FilePath, const wstring& _strKey);
     bool Load(const wstring& _FilePath);
 
+    CLONE(CAnim);
+
 public:
     CAnim();
+    CAnim(const CAnim& _OriginAnim);
     ~CAnim();
 
     friend class CAnimator2D;

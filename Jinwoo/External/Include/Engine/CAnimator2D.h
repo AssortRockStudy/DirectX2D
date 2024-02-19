@@ -34,8 +34,11 @@ public:
     map<wstring, CAnim*> GetAnimList();
     CAnim* GetCurAnim() { return m_CurAnim; }
 
+    CLONE(CAnimator2D);
+
 public:
     CAnimator2D();
+    CAnimator2D(const CAnimator2D& _OriginAnimator);
     ~CAnimator2D();
 };
 

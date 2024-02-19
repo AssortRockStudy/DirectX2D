@@ -35,7 +35,9 @@ public:
     void FindObjectsByName(const wstring& _strName, vector<CGameObject*>& _vecObj);
 
 public:
+    CLONE(CLevel);
     CLevel();
+    CLevel(const CLevel& _OriginLevel);
     ~CLevel();
 
     friend class CLevelMgr;

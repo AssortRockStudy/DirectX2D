@@ -19,6 +19,7 @@ CCamera::CCamera()
 	, m_AspectRatio(1.f)
 	, m_Far(10000.f)
 	, m_LayerCheck(0)
+	, m_CameraPriority(-1)
 {
 	Vec2 vResol = CDevice::GetInst()->GetRenderResolution();
 	m_AspectRatio = vResol.x / vResol.y;
@@ -28,6 +29,12 @@ CCamera::~CCamera()
 {
 }
 
+
+void CCamera::begin()
+{
+	// 카메라를 우선순위값에 맞게 RenderMgr에 등록시킴
+	CRenderMgr::GetInst()->RegisterCamera(this, m_CameraPriority);
+}
 
 void CCamera::finaltick()
 {
@@ -153,7 +160,7 @@ void CCamera::render(vector<CGameObject*>& _vecObj)
 
 void CCamera::SetCameraPriority(int _Priority)
 {
-	CRenderMgr::GetInst()->RegisterCamera(this, _Priority);
+	m_CameraPriority = _Priority;
 }
 
 void CCamera::LayerCheck(UINT _LayerIdx, bool _bCheck)

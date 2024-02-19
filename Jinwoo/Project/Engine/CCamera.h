@@ -30,6 +30,8 @@ private:
 
     UINT        m_LayerCheck;
 
+    int         m_CameraPriority;
+
 
     // 물체 분류
     vector<CGameObject*>    m_vecOpaque;
@@ -63,6 +65,7 @@ public:
     void AllLayerOff();
 
 public:
+    virtual void begin() override;
     virtual void finaltick() override;
     void render();
     void SortObject();
@@ -70,6 +73,9 @@ public:
 private:
     void render(vector<CGameObject*>& _vecObj);
     void render_postprocess();
+
+public:
+    CLONE(CCamera);
 
 public:
     CCamera();

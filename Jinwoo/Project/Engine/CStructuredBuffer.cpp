@@ -13,6 +13,17 @@ CStructuredBuffer::CStructuredBuffer()
 {
 }
 
+CStructuredBuffer::CStructuredBuffer(const CStructuredBuffer& _OriginBuffer)
+	: m_ElementSize(_OriginBuffer.m_ElementSize)
+	, m_ElementCount(_OriginBuffer.m_ElementCount)
+	, m_Type(_OriginBuffer.m_Type)
+	, m_bSysMemMove(_OriginBuffer.m_bSysMemMove)
+	, m_RecentSRV(0)	// 최근에 바인딩한 t레지스터 번호
+	, m_RecentUAV(0)	// 최근에 바인딩한 u레지스터 번호
+{
+	Create(m_ElementSize, m_ElementCount, m_Type, m_bSysMemMove);
+}
+
 CStructuredBuffer::~CStructuredBuffer()
 {
 }

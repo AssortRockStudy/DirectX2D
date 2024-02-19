@@ -17,10 +17,13 @@
 
 
 #include "CImGuiMgr.h"
+#include "CEditorObjMgr.h"
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+
+//#define _RELEASE_GAME
 
 
 #define MAX_LOADSTRING 100
@@ -65,8 +68,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 0;
     }
 
+#ifndef _RELEASE_GAME
+    // EditorObjectManager 초기화
+    CEditorObjMgr::GetInst()->init();
+
     // ImGui 초기화
     CImGuiMgr::GetInst()->init(hWnd, DEVICE, CONTEXT);
+#endif
 
     // 기본 메시지 루프입니다:
     while (true)
@@ -90,8 +98,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             // Engine Update
             CEngine::GetInst()->progress();
 
+#ifndef _RELEASE_GAME
+            // EditorObj
+            CEditorObjMgr::GetInst()->progress();
+
             // ImGui Update
             CImGuiMgr::GetInst()->progress();
+#endif
 
             // Engine 및 ImGui 렌더링 최종 결과 출력
             CDevice::GetInst()->Present();

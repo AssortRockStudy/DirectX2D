@@ -29,7 +29,7 @@ private:
 public:
     void begin();
     void tick();
-    void finaltick();
+    virtual void finaltick();
     void render();
 
     GET_COMPONENT(Transform, TRANSFORM);
@@ -81,7 +81,9 @@ public:
     bool IsAncestor(CGameObject* _Other);
 
 public:
+    CLONE(CGameObject);
     CGameObject();
+    CGameObject(const CGameObject& _OriginObject);
     ~CGameObject();
 
     friend class CLayer;

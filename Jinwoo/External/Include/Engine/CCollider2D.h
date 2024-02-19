@@ -43,8 +43,11 @@ public:
     void Overlap(CCollider2D* _OtherCollider);
     void EndOverlap(CCollider2D* _OtherCollider);
 
+    CLONE(CCollider2D);
+
 public:
     CCollider2D();
+    CCollider2D(const CCollider2D& _OriginCollider2D);
     ~CCollider2D();
 };
 

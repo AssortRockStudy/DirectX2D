@@ -21,6 +21,39 @@ CGameObject::CGameObject()
 {
 }
 
+CGameObject::CGameObject(const CGameObject& _OriginObject)
+	: CEntity(_OriginObject)
+	, m_arrCom{}
+	, m_RenderCom(nullptr)
+	, m_Parent(nullptr)
+	, m_iLayerIdx(-1)
+	, m_bDead(false)
+{
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
+	{
+		if (nullptr == _OriginObject.m_arrCom[i])
+		{
+			continue;
+		}
+
+		AddComponent(_OriginObject.m_arrCom[i]->Clone());
+	}
+
+	for (size_t i = 0; i < _OriginObject.m_vecScript.size(); ++i)
+	{
+		AddComponent(_OriginObject.m_vecScript[i]->Clone());
+	}
+
+	// 복사되는 GameObject는 부모만 레이어 소속을 -1로 하고
+	// 자식들은 원본객체랑 동일한 레이어 소속을 유지한다
+	for (size_t i = 0; i < _OriginObject.m_vecChild.size(); ++i)
+	{
+		CGameObject* ChildClone = _OriginObject.m_vecChild[i]->Clone();
+		AddChild(ChildClone);
+		ChildClone->m_iLayerIdx = _OriginObject.m_vecChild[i]->m_iLayerIdx;
+	}
+}
+
 CGameObject::~CGameObject()
 {
 	// 명시적으로 적는다면 Delete_Array<CComponent, 14>(m_arrCom)

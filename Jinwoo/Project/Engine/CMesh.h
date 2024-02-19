@@ -26,6 +26,8 @@ public:
     void render();
     void render_asparticle(UINT _ParticleCount);
 
+    CLONE_DISABLE(CMesh);
+
 public:
     CMesh();
     ~CMesh();

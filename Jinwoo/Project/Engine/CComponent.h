@@ -33,8 +33,11 @@ public:
     GET_OTHER_COMPONENT(Light2D);
     GET_OTHER_COMPONENT(TileMap);
 
+    virtual CComponent* Clone() = 0;
+
 public:
     CComponent(COMPONENT_TYPE _Type);
+    CComponent(const CComponent& _OriginComponent);
     ~CComponent();
 
     friend class CGameObject;

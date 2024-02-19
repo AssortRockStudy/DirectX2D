@@ -38,7 +38,7 @@ private:
     virtual int Save(const wstring& _strRelativePath) { return E_FAIL; }
     virtual int Load(const wstring& _strFilePath) { return E_FAIL; }
 
-    virtual CAsset* Clone() { return nullptr; }
+    virtual CAsset* Clone() = 0;
 
 public:
     CAsset(ASSET_TYPE _Type, bool _bEngineAsset = false);

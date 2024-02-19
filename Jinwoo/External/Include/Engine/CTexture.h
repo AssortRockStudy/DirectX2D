@@ -45,6 +45,8 @@ public:
 
     tPixel* GetPixels();
 
+    CLONE_DISABLE(CTexture);
+
 public:
     CTexture();
     ~CTexture();

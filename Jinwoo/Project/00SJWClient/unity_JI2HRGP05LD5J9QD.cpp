@@ -1,5 +1,8 @@
 #include "pch.h"
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\imgui_widgets.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Inspector.cpp"
 
 

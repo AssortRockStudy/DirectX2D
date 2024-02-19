@@ -15,6 +15,8 @@ private:
 public:
     virtual void tick();
 
+    CLONE(CCameraMoveScript);
+
 public:
     CCameraMoveScript();
     ~CCameraMoveScript();

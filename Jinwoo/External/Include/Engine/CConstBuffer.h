@@ -20,6 +20,8 @@ public:
     void UpdateData();
     void UpdateData_CS();
 
+    CLONE_DISABLE(CConstBuffer);
+
 public:
     CConstBuffer(CB_TYPE _Type);
     ~CConstBuffer();

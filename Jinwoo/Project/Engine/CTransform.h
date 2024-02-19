@@ -42,6 +42,8 @@ public:
     Vec3 GetWorldScale();
     //Vec3 GetWorldRot();
 
+    CLONE(CTransform);
+
 public:
     CTransform();
     ~CTransform();

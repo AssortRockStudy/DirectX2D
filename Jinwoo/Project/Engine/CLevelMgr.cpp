@@ -106,7 +106,7 @@ void CLevelMgr::init()
 	// Player 생성
 	CGameObject* pObj = nullptr;
 	pObj = new CGameObject;
-	pObj->SetName(L"Player");
+	pObj->SetName(L"PlayerObj");
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CMeshRender);
@@ -134,8 +134,13 @@ void CLevelMgr::init()
 	pParticleObj->AddComponent(new CTransform);
 	pParticleObj->AddComponent(new CParticleSystem);
 	pParticleObj->Transform()->SetRelativePos(Vec3(100.f, 0.f, 200.f));
+	pParticleObj->SetLayerIdx(4);
 	pObj->AddChild(pParticleObj);
 
+	m_CurLevel->AddObject(pObj, L"Player", false);
+
+	pObj = pObj->Clone();
+	pObj->Transform()->SetRelativePos(Vec3(-500.f, 0.f, 500.f));
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
 	// background  생성
@@ -216,6 +221,12 @@ void CLevelMgr::init()
 	//m_CurLevel->AddObject(pObj, L"Default", false);
 
 
+	// Level 시작
+	//CLevel* pNewLevel = m_CurLevel->Clone();
+	//delete m_CurLevel;
+	//m_CurLevel = pNewLevel;
+
+	// 레벨 플레이
 	m_CurLevel->begin();
 }
 
