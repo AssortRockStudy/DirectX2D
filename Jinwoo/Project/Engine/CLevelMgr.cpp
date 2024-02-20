@@ -4,13 +4,13 @@
 #include "CDevice.h"
 #include "CAssetMgr.h"
 #include "CCollisionMgr.h"
+#include "CTaskMgr.h"
 
 #include "CLevel.h"
 #include "CLayer.h"
 #include "CGameObject.h"
 #include "components.h"
 #include "CPlayerScript.h"
-#include "CCameraMoveScript.h"
 #include "CBackgroundScript.h"
 
 #include "CMesh.h"
@@ -32,7 +32,6 @@ CLevelMgr::~CLevelMgr()
 		delete m_CurLevel;
 	}
 }
-
 
 
 void CLevelMgr::init()
@@ -61,7 +60,6 @@ void CLevelMgr::init()
 	pCamObj->SetName(L"MainCamera");
 	pCamObj->AddComponent(new CTransform);
 	pCamObj->AddComponent(new CCamera);
-	pCamObj->AddComponent(new CCameraMoveScript);
 
 	pCamObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 	pCamObj->Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
@@ -134,7 +132,6 @@ void CLevelMgr::init()
 	pParticleObj->AddComponent(new CTransform);
 	pParticleObj->AddComponent(new CParticleSystem);
 	pParticleObj->Transform()->SetRelativePos(Vec3(100.f, 0.f, 200.f));
-	pParticleObj->SetLayerIdx(4);
 	pObj->AddChild(pParticleObj);
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
@@ -227,7 +224,7 @@ void CLevelMgr::init()
 	//m_CurLevel = pNewLevel;
 
 	// 레벨 플레이
-	m_CurLevel->begin();
+	m_CurLevel->ChangeState(LEVEL_STATE::STOP);
 }
 
 void CLevelMgr::tick()
@@ -242,4 +239,17 @@ void CLevelMgr::tick()
 
 	m_CurLevel->tick();
 	m_CurLevel->finaltick();
+}
+
+
+
+void CLevelMgr::ChangeLevelState(LEVEL_STATE _State)
+{
+	tTask task = {};
+
+	task.Type = TASK_TYPE::CHANGE_LEVELSTATE;
+	task.Param_1 = (DWORD_PTR)m_CurLevel;
+	task.Param_2 = (DWORD_PTR)_State;
+
+	CTaskMgr::GetInst()->AddTask(task);
 }

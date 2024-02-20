@@ -98,6 +98,9 @@
     <Filter Include="01.Manager\02.EditorObjMgr\GameObjectEx">
       <UniqueIdentifier>{299b4e25-824f-4361-8f0c-b4e4ab15edb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Scripts">
+      <UniqueIdentifier>{d429a9b1-82bd-4eb5-87cc-dea6b563db1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -217,11 +220,14 @@
     <ClInclude Include="MenuUI.h">
       <Filter>02.UI\4.MenuUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Engine\CEditorObjMgr.h">
-      <Filter>01.Manager\02.EditorObjMgr</Filter>
-    </ClInclude>
     <ClInclude Include="CGameObjectEx.h">
       <Filter>01.Manager\02.EditorObjMgr\GameObjectEx</Filter>
+    </ClInclude>
+    <ClInclude Include="CEditorObjMgr.h">
+      <Filter>01.Manager\02.EditorObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraMoveScript.h">
+      <Filter>03.Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,11 +347,14 @@
     <ClCompile Include="MenuUI.cpp">
       <Filter>02.UI\4.MenuUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Engine\CEditorObjMgr.cpp">
-      <Filter>01.Manager\02.EditorObjMgr</Filter>
-    </ClCompile>
     <ClCompile Include="CGameObjectEx.cpp">
       <Filter>01.Manager\02.EditorObjMgr\GameObjectEx</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditorObjMgr.cpp">
+      <Filter>01.Manager\02.EditorObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp">
+      <Filter>03.Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

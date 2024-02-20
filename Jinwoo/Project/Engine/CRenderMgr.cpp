@@ -14,8 +14,10 @@ CRenderMgr::CRenderMgr()
 	: m_pDebugObj(nullptr)
 	, m_Light2DBuffer(nullptr)
 	, m_DebugPosition(true)
+	, m_EditorCam(nullptr)
+	, m_RenderFunc(nullptr)
 {
-
+	m_RenderFunc = &CRenderMgr::render_play;
 }
 
 CRenderMgr::~CRenderMgr()
@@ -33,26 +35,25 @@ CRenderMgr::~CRenderMgr()
 
 void CRenderMgr::tick()
 {
+	// 렌더타겟 및 깊이 타겟 설정
+	Ptr<CTexture> pRTTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	Ptr<CTexture> pDSTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
+	CONTEXT->OMSetRenderTargets(1, pRTTex->GetRTV().GetAddressOf(), pDSTex->GetDSV().Get());
+
 	Vec4 vClearColor = Vec4(0.f, 0.f, 0.f, 1.f);
 
 	CDevice::GetInst()->ClearRenderTarget(vClearColor);
 
 	UpdateData();
 
-	render();
-
+	(this->*m_RenderFunc)();
 	render_debug();
 
 	Clear();
 }
 
-void CRenderMgr::render()
+void CRenderMgr::render_play()
 {
-	// 렌더타겟 및 깊이 타겟 설정
-	Ptr<CTexture> pRTTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
-	Ptr<CTexture> pDSTex = CAssetMgr::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
-	CONTEXT->OMSetRenderTargets(1, pRTTex->GetRTV().GetAddressOf(), pDSTex->GetDSV().Get());
-
 	for (size_t i = 0; i < m_vecCam.size(); ++i)
 	{
 		m_vecCam[i]->SortObject();
@@ -60,8 +61,20 @@ void CRenderMgr::render()
 	}
 }
 
+void CRenderMgr::render_editor()
+{
+	if (nullptr == m_EditorCam)
+		return;
+
+	m_EditorCam->SortObject();
+	m_EditorCam->render();
+}
+
 void CRenderMgr::render_debug()
 {
+	if (m_vecCam.empty())
+		return;
+
 	g_Transform.matView = m_vecCam[0]->GetViewMat();
 	g_Transform.matProj = m_vecCam[0]->GetProjMat();
 

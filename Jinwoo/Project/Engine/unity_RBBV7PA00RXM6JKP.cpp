@@ -21,9 +21,6 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CCamera.cpp"
 
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CCameraMoveScript.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CCollider2D.cpp"
 
 

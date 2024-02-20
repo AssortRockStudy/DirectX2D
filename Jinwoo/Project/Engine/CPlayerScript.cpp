@@ -3,7 +3,6 @@
 
 #include "CAssetMgr.h"
 #include "CGameObject.h"
-#include "CMissileScript.h"
 
 #include "CMaterial.h"
 #include "CRenderComponent.h"
@@ -117,7 +116,6 @@ void CPlayerScript::tick()
 		pObj->SetName(L"Missile");
 		pObj->AddComponent(new CTransform);
 		pObj->AddComponent(new CMeshRender);
-		pObj->AddComponent(new CMissileScript);
 
 		pObj->Transform()->SetRelativePos(Transform()->GetRelativePos());
 		pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));

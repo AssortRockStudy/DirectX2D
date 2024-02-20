@@ -16,12 +16,13 @@
 #define KEY_NONE(Key)		KEY_CHECK(Key, NONE)
 
 #define DT CTimeMgr::GetInst()->GetDeltaTime()
+#define DT_ENGINE CTimeMgr::GetInst()->GetEngineDeltaTime()
 
 #define LAYER_MAX 32
 
 #define CLONE(Type) virtual Type* Clone() { return new Type(*this); }
 #define CLONE_DISABLE(Type) Type* Clone() { return nullptr; assert(nullptr); }\
-							Type(const Type& _OriginBuffer) = delete;		
+							Type(const Type& _OriginBuffer) = delete;
 
 enum class ASSET_TYPE
 {
@@ -212,4 +213,13 @@ enum class PARTICLE_MODULE
 	RENDER,	// 렌더링 때의 옵션 관련
 
 	END,
+};
+
+
+enum class LEVEL_STATE
+{
+	PLAY,
+	PAUSE,
+	STOP,
+	NONE,
 };

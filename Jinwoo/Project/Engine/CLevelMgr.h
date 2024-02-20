@@ -12,6 +12,9 @@ private:
     CLevel*     m_CurLevel;
 
 public:
+    void ChangeLevelState(LEVEL_STATE _State);
+
+public:
     void init();
     void tick();
    

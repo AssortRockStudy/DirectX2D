@@ -84,6 +84,9 @@ void Outliner::SelectObject(DWORD_PTR _Node)
 
 void Outliner::DragDropObject(DWORD_PTR _Dest, DWORD_PTR _Source)
 {
+	if (0 == _Source)
+		return;
+
 	TreeNode* pDestNode = (TreeNode*)_Dest;
 	TreeNode* pSourceNode = (TreeNode*)_Source;
 

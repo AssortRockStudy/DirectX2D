@@ -4,18 +4,13 @@
 class CLayer;
 class CGameObject;
 
-enum class LEVEL_STATE
-{
-    PLAY,
-    PAUSE,
-    STOP,
-};
 
 class CLevel :
     public CEntity
 {
 private:
-    CLayer*     m_arrLayer[LAYER_MAX];
+    CLayer*         m_arrLayer[LAYER_MAX];
+    LEVEL_STATE     m_State;
 
 public:
     void begin();
@@ -33,6 +28,9 @@ public:
 
     CGameObject* FindObjectByName(const wstring& _strName);
     void FindObjectsByName(const wstring& _strName, vector<CGameObject*>& _vecObj);
+
+    void ChangeState(LEVEL_STATE _NextState);
+    LEVEL_STATE GetState() { return m_State; }
 
 public:
     CLONE(CLevel);

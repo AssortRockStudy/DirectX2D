@@ -8,6 +8,7 @@ CTimeMgr::CTimeMgr()
 	, m_PrevCount{}
 	, m_CurCount{}
 	, m_fTime(0.f)
+	, m_bLock(true)
 {	
 
 }
@@ -28,7 +29,12 @@ void CTimeMgr::tick()
 {
 	QueryPerformanceCounter(&m_CurCount);
 
-	m_DeltaTime = float(m_CurCount.QuadPart - m_PrevCount.QuadPart) / float(m_Frequency.QuadPart);
+	m_EngineDeltaTime = m_DeltaTime = double(m_CurCount.QuadPart - m_PrevCount.QuadPart) / double(m_Frequency.QuadPart);
+
+	if (m_bLock)
+	{
+		m_DeltaTime = 0.f;
+	}
 
 	m_PrevCount = m_CurCount;
 

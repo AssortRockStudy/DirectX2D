@@ -9,9 +9,6 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMeshRender.cpp"
 
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMissileScript.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleSystem.cpp"
 
 

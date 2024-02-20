@@ -12,14 +12,19 @@ private:
 	LARGE_INTEGER	m_Frequency;
 	LARGE_INTEGER	m_PrevCount;
 	LARGE_INTEGER	m_CurCount;
-	float			m_DeltaTime;
-
+	double			m_DeltaTime;
+	double			m_EngineDeltaTime;
 
 	UINT			m_iCall;
 	float			m_fTime;
 
+	bool			m_bLock;
+
 public:
-	float GetDeltaTime() { return m_DeltaTime; }
+	double GetDeltaTime() { return m_DeltaTime; }
+	double GetEngineDeltaTime() { return m_EngineDeltaTime; }
+
+	void LockDeltaTime(bool _Lock) { m_bLock = _Lock; }
 
 public:
 	void init();
