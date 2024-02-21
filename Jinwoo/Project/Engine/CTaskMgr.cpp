@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CTaskMgr.h"
 
+#include "CAssetMgr.h"
 #include "CLevelMgr.h"
 #include "CLevel.h"
 #include "CLayer.h"
@@ -9,6 +10,10 @@
 #include "CComponent.h"
 
 CTaskMgr::CTaskMgr()
+	: m_bCreateObject(false)
+	, m_bDeleteObject(false)
+	, m_bAssetChange(false)
+	, m_bNameChange(false)
 {
 
 }
@@ -20,6 +25,8 @@ CTaskMgr::~CTaskMgr()
 
 void CTaskMgr::tick()
 {
+	Clear();
+
 	for (size_t i = 0; i < m_vecTask.size(); ++i)
 	{
 		switch (m_vecTask[i].Type)
@@ -32,12 +39,9 @@ void CTaskMgr::tick()
 			CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 			pCurLevel->AddObject(Object, LayerIdx, true);
 
-			/*if (LEVEL_STATE::PLAY == pCurLevel->GetState())
-			{
-				Object->begin();
-			}*/
-			break;
+			m_bCreateObject = true;
 		}
+			break;
 		case TASK_TYPE::DELETE_OBJECT:
 		{
 			CGameObject* pDeadObj = (CGameObject*)m_vecTask[i].Param_1;
@@ -57,9 +61,27 @@ void CTaskMgr::tick()
 				{
 					queue.push_back(pObject->m_vecChild[i]);
 				}
+
+				if (m_DeleteFrameCount == 0)
+					++m_DeleteFrameCount;
+				else if (m_DeleteFrameCount == 2)
+					m_DeleteFrameCount = 1;
 			}
-			break;
 		}
+			break;
+		case TASK_TYPE::ADD_ASSET:
+		{
+			// Param1 : Asset Adress
+			CAsset* pAsset = (CAsset*)m_vecTask[i].Param_1;
+			CAssetMgr::GetInst()->AddAsset(pAsset->GetName(), pAsset);
+			m_bAssetChange = true;
+		}
+			break;
+		case TASK_TYPE::CHANGE_NAME:
+		{
+			m_bNameChange = true;
+		}
+			break;
 		case TASK_TYPE::CHANGE_LEVELSTATE:
 		{
 			CLevel* pLevel = (CLevel*)m_vecTask[i].Param_1;
@@ -84,4 +106,23 @@ void CTaskMgr::tick()
 	}
 
 	m_vecTask.clear();
+}
+
+void CTaskMgr::Clear()
+{
+	m_bCreateObject = false;
+
+	if (1 == m_DeleteFrameCount)
+	{
+		++m_DeleteFrameCount;
+		m_bDeleteObject = true;
+	}
+	else if (2 <= m_DeleteFrameCount)
+	{
+		m_DeleteFrameCount = 0;
+		m_bDeleteObject = false;
+	}
+
+	m_bAssetChange = false;
+	m_bNameChange = false;
 }

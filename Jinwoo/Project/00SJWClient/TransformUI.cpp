@@ -1,11 +1,14 @@
 #include "pch.h"
 #include "TransformUI.h"
 
+#include <Engine\CTaskMgr.h>
 #include <Engine\CTransform.h>
 #include <Engine\CGameObject.h>
 #include <Engine\CLevelMgr.h>
 #include <Engine\CLevel.h>
 #include <Engine\CLayer.h>
+
+#include "Outliner.h"
 
 TransformUI::TransformUI()
 	: ComponentUI("Transform", "##Transform", COMPONENT_TYPE::TRANSFORM)
@@ -71,16 +74,23 @@ void TransformUI::render_update()
 	ImGui::Text("Name");
 	char ObjName[200] = {};
 	string temp = ToString(GetTargetObject()->GetName()).c_str();
+	string prevName = temp;
 
 	for (size_t i = 0; i < temp.length(); ++i)
 	{
 		ObjName[i] = temp[i];
 	}
+	
 
 	ImGui::SameLine(0, 65);
-	ImGui::SetNextItemWidth(100);
+	ImGui::SetNextItemWidth(200);
 	ImGui::InputText("##ObjName", ObjName, 100);
 	GetTargetObject()->SetName(ToWString(ObjName));
+
+	if (prevName != string(ObjName))
+	{
+		GamePlayStatic::ChangeName();
+	}
 
 	// 오브젝트 레이어
 	m_LayerIdx = (OBJECTLAYER)GetTargetObject()->GetLayerIdx();

@@ -16,7 +16,7 @@ private:
     bool    m_bFrame;
     bool    m_bSelected;
 
-public:
+public:   
     void SetName(string& _Name) { m_Name = _Name; }
     void SetFrame(bool _Frame) { m_bFrame = _Frame; }
 
@@ -79,6 +79,9 @@ public:
             m_Root = nullptr;
         }
     }
+
+    TreeNode* GetRootNode() { return m_Root; }
+    TreeNode* GetSelectedNode() { return m_Selected; }
 
 private:
     void SetSelectedNode(TreeNode* _SelectedNode);

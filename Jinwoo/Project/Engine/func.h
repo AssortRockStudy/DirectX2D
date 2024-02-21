@@ -1,6 +1,7 @@
 #pragma once
 
 class CGameObject;
+class CAsset;
 
 namespace GamePlayStatic
 {
@@ -14,6 +15,9 @@ namespace GamePlayStatic
 	void DrawDebugCircle(Vec3 _vWorldPos, float _fRadius, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
 
 	void DrawDebugCross(Vec3 _vWorldPos, float _fScale, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
+
+	void AddAsset(CAsset* _Asset);
+	void ChangeName();
 }
 
 string ToString(const wstring& _str);

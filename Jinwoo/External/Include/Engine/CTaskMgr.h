@@ -9,8 +9,13 @@ enum class TASK_TYPE
 	// Param1 : Object Adress
 	DELETE_OBJECT,
 
+	// Param1 : Asset Adress, Param2 : Asset
+	ADD_ASSET,
+
 	// Param1 : Level, Param2 : LEVEL_STATE
 	CHANGE_LEVELSTATE,
+
+	CHANGE_NAME,
 
 	// Param1 : LEVEL_TYPE
 	LEVEL_CHANGE,
@@ -37,9 +42,22 @@ class CTaskMgr :
 private:
     vector<tTask>   m_vecTask;
 
+	bool	m_bCreateObject;
+	bool	m_bDeleteObject;
+	bool	m_bAssetChange;
+	bool	m_bNameChange;
+
+	int		m_DeleteFrameCount;
+
 public:
 	void tick();
-
 	void AddTask(const tTask& _Task) { m_vecTask.push_back(_Task); }
+
+	bool GetObjectEvent() { return m_bCreateObject || m_bDeleteObject; }
+	bool GetAssetEvent() { return m_bAssetChange; }
+	bool GetNameEvent() { return m_bNameChange; }
+
+private:
+	void Clear();
 };
 

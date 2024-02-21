@@ -107,6 +107,21 @@ void GamePlayStatic::DrawDebugCross(Vec3 _vWorldPos, float _fScale, Vec3 _Color,
 	CRenderMgr::GetInst()->AddDebugShapeInfo(info);
 }
 
+void GamePlayStatic::AddAsset(CAsset* _Asset)
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::ADD_ASSET;
+	task.Param_1 = (DWORD_PTR)_Asset;
+	CTaskMgr::GetInst()->AddTask(task);
+}
+
+void GamePlayStatic::ChangeName()
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::CHANGE_NAME;
+	CTaskMgr::GetInst()->AddTask(task);
+}
+
 
 void Vector3::ToDegree()
 {

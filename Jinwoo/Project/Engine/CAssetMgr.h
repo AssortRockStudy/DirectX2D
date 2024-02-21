@@ -33,6 +33,8 @@ public:
 
 	const map<wstring, Ptr<CAsset>>& GetAssets(ASSET_TYPE _Type) { return m_mapAsset[(UINT)_Type]; }
 
+	void AddAsset(const wstring& _strKey, CAsset* _Asset);
+
 	template<typename T>
 	void AddAsset(const wstring& _strKey, T* _Asset);
 

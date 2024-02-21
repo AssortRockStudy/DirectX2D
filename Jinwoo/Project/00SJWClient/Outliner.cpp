@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Outliner.h"
 
+#include <Engine\CKeyMgr.h>
+#include <Engine\CTaskMgr.h>
 #include <Engine/CLevelMgr.h>
 #include <Engine/CLevel.h>
 #include <Engine/CLayer.h>
@@ -33,6 +35,20 @@ Outliner::~Outliner()
 
 void Outliner::render_update()
 {
+	if (CTaskMgr::GetInst()->GetObjectEvent() || CTaskMgr::GetInst()->GetNameEvent())
+	{
+		ResetCurrentLevel();
+	}
+
+	if (KEY_TAP(DEL))
+	{
+		TreeNode* pNode = m_Tree->GetSelectedNode();
+		if (nullptr != pNode)
+		{
+			CGameObject* pSelectObj = (CGameObject*)pNode->GetData();
+			GamePlayStatic::DestroyGameObject(pSelectObj);
+		}
+	}
 }
 
 void Outliner::ResetCurrentLevel()
