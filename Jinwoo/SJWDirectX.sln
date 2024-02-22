@@ -6,9 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00SJWClient", "Project\00SJWClient\00SJWClient.vcxproj", "{A4ADF28D-9F3F-48DD-9D57-00096B6853D4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7} = {0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5} = {AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Project\Engine\Engine.vcxproj", "{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scripts", "Project\Scripts\Scripts.vcxproj", "{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7} = {0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +40,14 @@ Global
 		{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}.Release|x64.Build.0 = Release|x64
 		{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}.Release|x86.ActiveCfg = Release|Win32
 		{0A0A78DA-B8A3-46E1-85C7-BFB9809E3AB7}.Release|x86.Build.0 = Release|Win32
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Debug|x64.ActiveCfg = Debug|x64
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Debug|x64.Build.0 = Debug|x64
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Debug|x86.Build.0 = Debug|Win32
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Release|x64.ActiveCfg = Release|x64
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Release|x64.Build.0 = Release|x64
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Release|x86.ActiveCfg = Release|Win32
+		{AE44AB60-4BB9-4629-B71C-88C3D73FFCA5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

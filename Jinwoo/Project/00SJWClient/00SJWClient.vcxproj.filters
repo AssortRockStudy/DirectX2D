@@ -101,6 +101,9 @@
     <Filter Include="03.Scripts">
       <UniqueIdentifier>{d429a9b1-82bd-4eb5-87cc-dea6b563db1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CreateTempLevel">
+      <UniqueIdentifier>{8f2c38dd-eb7b-41da-9c6e-134ebc3e5ba8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -229,6 +232,9 @@
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>03.Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CCreateTempLevel.h">
+      <Filter>CreateTempLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -355,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>03.Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CCreateTempLevel.cpp">
+      <Filter>CreateTempLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

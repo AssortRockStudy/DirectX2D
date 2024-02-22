@@ -56,11 +56,13 @@ void Outliner::ResetCurrentLevel()
 	// 트리 내용을 삭제
 	m_Tree->ClearNode();
 
+	// 현재 레벨을 가져옴
+	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+	if (nullptr == pCurLevel)
+		return;
+
 	// 트리에 루트 추가
 	TreeNode* pRootNode = m_Tree->AddTreeNode(nullptr, "DummyRoot", 0);
-
-	// 현재 레벨 가져옴
-	CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
 
 	for (UINT i = 0; i < LAYER_MAX; ++i)
 	{

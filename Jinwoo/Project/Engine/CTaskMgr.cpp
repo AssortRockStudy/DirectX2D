@@ -77,11 +77,6 @@ void CTaskMgr::tick()
 			m_bAssetChange = true;
 		}
 			break;
-		case TASK_TYPE::CHANGE_NAME:
-		{
-			m_bNameChange = true;
-		}
-			break;
 		case TASK_TYPE::CHANGE_LEVELSTATE:
 		{
 			CLevel* pLevel = (CLevel*)m_vecTask[i].Param_1;
@@ -90,11 +85,19 @@ void CTaskMgr::tick()
 			pLevel->ChangeState(NextState);
 		}
 			break;
-		case TASK_TYPE::LEVEL_CHANGE:
+		case TASK_TYPE::CHANGE_NAME:
 		{
-
-			break;
+			m_bNameChange = true;
 		}
+			break;
+		case TASK_TYPE::CHANGE_LEVEL:
+		{
+			CLevel* pNextLevel = (CLevel*)m_vecTask[i].Param_1;
+			LEVEL_STATE State = (LEVEL_STATE)m_vecTask[i].Param_2;
+			CLevelMgr::GetInst()->ChangeLevel_Task(pNextLevel, State);
+			m_bCreateObject = true;
+		}
+			break;
 		case TASK_TYPE::ADD_CHILD:
 
 			break;

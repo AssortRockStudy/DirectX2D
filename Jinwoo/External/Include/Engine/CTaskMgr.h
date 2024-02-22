@@ -6,10 +6,10 @@ enum class TASK_TYPE
 	// Param1 : Layer Index, Param2 : Object Adress
 	CREATE_OBJECT,
 
-	// Param1 : Object Adress
+	// Param1 : Object Address
 	DELETE_OBJECT,
 
-	// Param1 : Asset Adress, Param2 : Asset
+	// Param1 : Asset Address, Param2 : Asset
 	ADD_ASSET,
 
 	// Param1 : Level, Param2 : LEVEL_STATE
@@ -17,8 +17,8 @@ enum class TASK_TYPE
 
 	CHANGE_NAME,
 
-	// Param1 : LEVEL_TYPE
-	LEVEL_CHANGE,
+	// Param1 : Level Address, Param2 : Next Level Start State
+	CHANGE_LEVEL,
 
 	// Param1 : Parent Object, Param2 : Child Object
 	ADD_CHILD,

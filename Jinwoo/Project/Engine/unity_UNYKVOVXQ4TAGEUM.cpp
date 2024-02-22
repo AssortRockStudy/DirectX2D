@@ -15,9 +15,6 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CAssetMgr_Init.cpp"
 
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CBackgroundScript.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CCamera.cpp"
 
 

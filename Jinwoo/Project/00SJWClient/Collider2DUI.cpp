@@ -16,9 +16,6 @@ Collider2DUI::~Collider2DUI()
 
 void Collider2DUI::render_update()
 {
-	if (nullptr == GetTargetObject())
-		return;
-
 	ComponentUI::render_update();
 
 	Vec2 vPos = GetTargetObject()->Collider2D()->GetOffsetPos();

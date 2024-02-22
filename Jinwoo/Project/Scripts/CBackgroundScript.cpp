@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CBackgroundScript.h"
 
-#include "CKeyMgr.h"
+#include <Engine\CKeyMgr.h>
 
 CBackgroundScript::CBackgroundScript()
 {
@@ -28,7 +28,7 @@ void CBackgroundScript::tick()
 	{
 		vAngle += DT * 3.f;
 	}
-	
+
 	if (KEY_PRESSED(N))
 	{
 		vAngle += DT * -3.f;

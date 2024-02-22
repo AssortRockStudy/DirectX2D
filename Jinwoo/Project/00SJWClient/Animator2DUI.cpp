@@ -16,9 +16,6 @@ Animator2DUI::~Animator2DUI()
 
 void Animator2DUI::render_update()
 {
-	if (nullptr == GetTargetObject())
-		return;
-
 	ComponentUI::render_update();
 
 	if (ImGui::Button("Edit Animation", ImVec2(130, 20)))

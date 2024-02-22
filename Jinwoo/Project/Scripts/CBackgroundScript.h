@@ -1,12 +1,9 @@
 #pragma once
-#include "CScript.h"
-
+#include <Engine\CScript.h>
 
 class CBackgroundScript :
     public CScript
 {
-
-
 public:
     virtual void tick() override;
 

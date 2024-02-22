@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "CPlayerScript.h"
 
-#include "CAssetMgr.h"
-#include "CGameObject.h"
+#include <Engine\CAssetMgr.h>
+#include <Engine\CGameObject.h>
 
-#include "CMaterial.h"
-#include "CRenderComponent.h"
+#include <Engine\CMaterial.h>
+#include <Engine\CRenderComponent.h>
 
 CPlayerScript::CPlayerScript()
 	: m_Speed(300.f)
@@ -24,7 +24,7 @@ void CPlayerScript::begin()
 	//Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
 	//Animator2D()->Create(L"test", pAtlasTex, Vec2(0.f, 0.f), Vec2(120, 130), Vec2(0.f, -60.f), Vec2(200.f, 200.f), 3, 1);
 	//Animator2D()->SaveAnimations(L"animdata");
-	
+
 	//Animator2D()->LoadAnimation(L"animdata\\IdleDown.txt");
 	//Animator2D()->LoadAnimation(L"animdata\\i.txt");
 	//Animator2D()->Play(L"i");

@@ -24,9 +24,6 @@ TransformUI::~TransformUI()
 
 void TransformUI::render_update()
 {
-	if (nullptr == GetTargetObject())
-		return;
-
 	ComponentUI::render_update();
 
 	Vec3 vPos = GetTargetObject()->Transform()->GetRelativePos();

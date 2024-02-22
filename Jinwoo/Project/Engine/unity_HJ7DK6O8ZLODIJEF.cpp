@@ -18,9 +18,6 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPathMgr.cpp"
 
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPlayerScript.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CRenderComponent.cpp"
 
 

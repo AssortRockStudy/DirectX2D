@@ -16,9 +16,6 @@
     <Filter Include="Entity">
       <UniqueIdentifier>{e5685132-ffcc-4c72-85c6-0c618d37794c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShaderCode">
-      <UniqueIdentifier>{f164458a-c4d4-4e1e-9c41-19d3d57497b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Level">
       <UniqueIdentifier>{02306903-43c9-4f0d-867c-147bdcd4e17b}</UniqueIdentifier>
     </Filter>
@@ -91,9 +88,6 @@
     <Filter Include="08.Component\Script">
       <UniqueIdentifier>{29968472-3ed7-4f22-a954-f50b8d0a89ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts">
-      <UniqueIdentifier>{7a346582-b154-4b17-8b29-2c8357501a60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="06.Asset\Material">
       <UniqueIdentifier>{851182c5-1126-4b66-8cb9-33abe0e32813}</UniqueIdentifier>
     </Filter>
@@ -130,20 +124,23 @@
     <Filter Include="03.Device\StructuredBuffer">
       <UniqueIdentifier>{defc4c11-ca64-486b-b2bd-0aef8b68aa73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode">
+      <UniqueIdentifier>{b671807d-cbe3-42e5-82f5-a694fcb09321}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ShaderCode\Render">
-      <UniqueIdentifier>{0441eaf5-ff0d-4b64-ad0e-23e128a954fb}</UniqueIdentifier>
+      <UniqueIdentifier>{29adfd76-b33b-422a-a957-4ff86e93f07b}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderCode\Util">
-      <UniqueIdentifier>{8c915c9a-2d01-48af-952a-1df129b43630}</UniqueIdentifier>
+      <UniqueIdentifier>{3eb0f5af-964e-4647-a982-cc0c74c74421}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderCode\Compute">
-      <UniqueIdentifier>{5d964ce7-b9c6-471b-8ee2-f1556a3ca2d4}</UniqueIdentifier>
+      <UniqueIdentifier>{74aa1b62-84e6-4795-a1d9-f00b6336d9de}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderCode\Compute\SetColor">
-      <UniqueIdentifier>{03c33818-c7af-452e-a4d9-9306b43d8b70}</UniqueIdentifier>
+      <UniqueIdentifier>{f849a81a-985d-4cfe-acd8-7a56368c6d24}</UniqueIdentifier>
     </Filter>
     <Filter Include="ShaderCode\Compute\ParticleUpdate">
-      <UniqueIdentifier>{061cea65-8ed9-42ec-a34d-1abc81e037f3}</UniqueIdentifier>
+      <UniqueIdentifier>{fee71095-357b-470a-9134-8c4d107a2f38}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +225,6 @@
     <ClInclude Include="components.h">
       <Filter>01.Header</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayerScript.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="CAssetMgr.h">
       <Filter>04.Manager\AssetMgr</Filter>
     </ClInclude>
@@ -278,9 +272,6 @@
     </ClInclude>
     <ClInclude Include="CLight2D.h">
       <Filter>08.Component\06.Light2D</Filter>
-    </ClInclude>
-    <ClInclude Include="CBackgroundScript.h">
-      <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="CTileMap.h">
       <Filter>08.Component\RenderComponent\02.TileMap</Filter>
@@ -359,9 +350,6 @@
     <ClCompile Include="CScript.cpp">
       <Filter>08.Component\Script</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayerScript.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="CAssetMgr.cpp">
       <Filter>04.Manager\AssetMgr</Filter>
     </ClCompile>
@@ -416,9 +404,6 @@
     <ClCompile Include="CLight2D.cpp">
       <Filter>08.Component\06.Light2D</Filter>
     </ClCompile>
-    <ClCompile Include="CBackgroundScript.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="CAssetMgr_Init.cpp">
       <Filter>04.Manager\AssetMgr</Filter>
     </ClCompile>
@@ -444,11 +429,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="func.fx">
-      <Filter>ShaderCode\Util</Filter>
+    <FxCompile Include="debug.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="std2d.fx">
       <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode\Util</Filter>
     </FxCompile>
     <FxCompile Include="struct.fx">
       <Filter>ShaderCode\Util</Filter>
@@ -456,20 +453,8 @@
     <FxCompile Include="value.fx">
       <Filter>ShaderCode\Util</Filter>
     </FxCompile>
-    <FxCompile Include="debug.fx">
-      <Filter>ShaderCode\Render</Filter>
-    </FxCompile>
-    <FxCompile Include="postprocess.fx">
-      <Filter>ShaderCode\Render</Filter>
-    </FxCompile>
-    <FxCompile Include="tilemap.fx">
-      <Filter>ShaderCode\Render</Filter>
-    </FxCompile>
     <FxCompile Include="setcolor.fx">
       <Filter>ShaderCode\Compute\SetColor</Filter>
-    </FxCompile>
-    <FxCompile Include="particle.fx">
-      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="particle_update.fx">
       <Filter>ShaderCode\Compute\ParticleUpdate</Filter>

@@ -16,9 +16,6 @@ Light2DUI::~Light2DUI()
  
 void Light2DUI::render_update()
 {
-	if (nullptr == GetTargetObject())
-		return;
-
 	ComponentUI::render_update();
 
 	tLightInfo info = GetTargetObject()->Light2D()->GetLightInfo();

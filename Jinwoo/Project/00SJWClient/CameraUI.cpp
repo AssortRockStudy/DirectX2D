@@ -21,9 +21,6 @@ CameraUI::~CameraUI()
 
 void CameraUI::render_update()
 {
-	if (nullptr == GetTargetObject())
-		return;
-
 	ComponentUI::render_update();
 
 	static int ProjType = int(GetTargetObject()->Camera()->GetProjType());
