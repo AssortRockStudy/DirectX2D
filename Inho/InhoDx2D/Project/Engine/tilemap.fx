@@ -3,7 +3,7 @@
 
 #include "value.fx"
 
-#define FACE_X g_int0
+#define FACE_X g_int_0
 #define FACE_Y g_int_1
 
 #define vSliceUV g_vec2_0

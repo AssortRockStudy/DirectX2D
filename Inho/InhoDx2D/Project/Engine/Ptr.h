@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CTexture.h"
 template<typename T>
 class Ptr {
 private:

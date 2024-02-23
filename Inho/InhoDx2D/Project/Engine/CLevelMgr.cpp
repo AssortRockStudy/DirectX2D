@@ -17,6 +17,8 @@
 #include "CTexture.h"
 #include "CCollisionMgr.h"
 
+#include "CSetColorShader.h"
+
 #include "CLight2D.h"
 
 
@@ -43,6 +45,15 @@ void CLevelMgr::init()
 	m_CurLevel->GetLayer(5)->SetName(L"Light");
 	m_CurLevel->GetLayer(6)->SetName(L"Tile");
 	m_CurLevel->GetLayer(31)->SetName(L"UI");
+
+	Ptr<CTexture> pTestTex = CAssetMgr::GetInst()->CreatTexture(L"TestTex"
+		, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
+		, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+
+	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"SetColorShader").Get();
+	pCS->SetColor(Vec3(1.f, 0.f, 0.f));
+	pCS->SetTargetTexture(pTestTex);
+	pCS->Execute();
 
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
 	CCollisionMgr::GetInst()->LayerCheck(L"Monster", L"Monster");

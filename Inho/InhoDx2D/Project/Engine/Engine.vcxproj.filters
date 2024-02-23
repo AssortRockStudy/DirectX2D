@@ -139,6 +139,9 @@
     <Filter Include="ShadeCode\Compute">
       <UniqueIdentifier>{1ae6500b-0020-467e-bb64-b3b08381058f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Asset\Shader\ComputeShader\SetColor">
+      <UniqueIdentifier>{df1ae16a-4f20-4765-b147-5c13ac29797c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -285,7 +288,15 @@
     <ClInclude Include="CTileMap.h">
       <Filter>08. Component\RenderComponent\02. TileMap</Filter>
     </ClInclude>
-    <ClInclude Include="CParticleSystem.h" />
+    <ClInclude Include="CParticleSystem.h">
+      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CComputeShader.h">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorShader.h">
+      <Filter>06. Asset\Shader\ComputeShader\SetColor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -420,7 +431,15 @@
     <ClCompile Include="CTileMap.cpp">
       <Filter>08. Component\RenderComponent\02. TileMap</Filter>
     </ClCompile>
-    <ClCompile Include="CParticleSystem.cpp" />
+    <ClCompile Include="CParticleSystem.cpp">
+      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>06. Asset\Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSetColorShader.cpp">
+      <Filter>06. Asset\Shader\ComputeShader\SetColor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="func.fx">
@@ -441,7 +460,12 @@
     <FxCompile Include="postprocess.fx">
       <Filter>ShadeCode\Render</Filter>
     </FxCompile>
-    <FxCompile Include="tilemap.fx" />
+    <FxCompile Include="tilemap.fx">
+      <Filter>ShadeCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="setcolor.fx">
+      <Filter>ShadeCode\Compute</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
