@@ -121,20 +121,7 @@ void CLevelMgr::init()
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
-	// 타일 맵
-	pObj = new CGameObject;
-	pObj->SetName(L"TileMap");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CTileMap);
-
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
-
-	Ptr<CTexture> pTileAtlas = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
-	pObj->TileMap()->SetTileAtlas(pTileAtlas, Vec2(64.f, 64.f));
-
-	m_CurLevel->AddObject(pObj, L"Tile", false);
-
+	
 	// 플레이어 객체 생성
 	pObj = new CGameObject;
 	pObj->SetName(L"Player");
@@ -163,39 +150,13 @@ void CLevelMgr::init()
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
 	pObj = new CGameObject;
-	pObj->SetName(L"Monster");
+	pObj->SetName(L"Particle");
 
 	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-	pObj->AddComponent(new CCollider2D);
+	pObj->AddComponent(new CParticleSystem);
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
-	pObj->Transform()->SetRelativePos(Vec3(500.0f, 0.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
-
-	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
-
-	m_CurLevel->AddObject(pObj, L"Monster", false);
-	
-
-	pObj = new CGameObject;
-	pObj->SetName(L"UI");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->Transform()->SetRelativePos(Vec3(-590.0f, 310.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-
-	m_CurLevel->AddObject(pObj, L"UI", false);
+	m_CurLevel->AddObject(pObj, L"Default", false);
 
 	m_CurLevel->begin();
 }

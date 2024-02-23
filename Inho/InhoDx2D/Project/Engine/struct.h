@@ -40,6 +40,19 @@ struct tPixel {
 	BYTE r, g, b, a;
 };
 
+struct tParticle {
+	Vec4 vWorldPos;
+	Vec4 vWorldScale;
+	Vec4 vWorldRotation;
+	Vec4 vVelocity;
+	Vec4 vColor;
+
+	float Mass;
+	float Age;
+	float Life;
+	int Active;
+};
+
 // ==================
 // 상수버퍼 대응 구조체
 // ==================

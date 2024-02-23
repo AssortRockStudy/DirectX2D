@@ -3,14 +3,6 @@
 
 #include "CDevice.h"
 
-tPixel* CTexture::GetPixels()
-{
-    if (nullptr == m_Image.GetPixels()) {
-        CaptureTexture(DEVICE, CONTEXT, m_Tex2D.Get(), m_Image);
-    }
-
-    return (tPixel*)m_Image.GetPixels();
-}
 
 CTexture::CTexture()
     :CAsset(ASSET_TYPE::TEXTURE)
@@ -220,4 +212,13 @@ void CTexture::Clear_CS_UAV()
 
     UINT i = -1;
     CONTEXT->CSSetUnorderedAccessViews(m_RecentNum_UAV, 1, &pUAV, &i);
+}
+
+tPixel* CTexture::GetPixels()
+{
+    if (nullptr == m_Image.GetPixels()) {
+        CaptureTexture(DEVICE, CONTEXT, m_Tex2D.Get(), m_Image);
+    }
+
+    return (tPixel*)m_Image.GetPixels();
 }

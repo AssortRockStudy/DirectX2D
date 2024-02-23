@@ -466,6 +466,9 @@
     <FxCompile Include="setcolor.fx">
       <Filter>ShadeCode\Compute</Filter>
     </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>ShadeCode\Compute</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
