@@ -114,7 +114,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTestTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 

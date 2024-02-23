@@ -13,6 +13,9 @@ private:
     ComPtr<ID3D11ShaderResourceView> m_SRV;
     ComPtr<ID3D11UnorderedAccessView> m_UAV;
 
+    UINT m_RecentNum_SRV;
+    UINT m_RecentNum_UAV;
+
 private:
     virtual int Load(const wstring& _strFilePath) override;
     int Create(UINT _Width, UINT _Height
@@ -23,8 +26,12 @@ private:
 
 public:
     void UpdateData(int _RegisterNum);
+    int UpdateData_CS_SRV(int _RegisterNum);
+    int UpdateData_CS_UAV(int _RegisterNum);
 
     static void Clear(int _RegisterNum);
+    void Clear_CS_SRV();
+    void Clear_CS_UAV();
 
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
