@@ -13,8 +13,8 @@ void CS_SetColor(uint3 id: SV_DispatchThreadID)
     if(TEX_WIDTH <= id.x || TEX_HEIGHT <= id.y)
         return;
     
-    if (500 <= id.y && id.y <= 600)
-        g_TargetTex[id.xy] = float4(g_vec4_0.rgb, 1.f);
+    
+    g_TargetTex[id.xy] = float4(g_vec4_0.rgb, 1.f);
 
 }
 

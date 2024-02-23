@@ -26,7 +26,7 @@ int CSetColorShader::UpdateData()
 		return E_FAIL;
 
 	SetGroupX(1 + width / m_ThreadX);
-	SetGroupX(1 + height / m_ThreadY);
+	SetGroupY(1 + height / m_ThreadY);
 	SetGroupZ(1);
 
 	return S_OK;
