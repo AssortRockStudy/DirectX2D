@@ -60,4 +60,10 @@ struct tParticleModule
     tSpawnModule SpawnModule;
 };
 
+struct tSpawnCount
+{
+    int iSpawnCount;
+    int3 iPadding;
+};
+
 #endif
