@@ -18,6 +18,14 @@ void CAssetMgr::init()
 
 void CAssetMgr::CreateDefaultMesh()
 {
+	CMesh* pMesh = nullptr;
+
+	Vtx vPoint;
+	UINT Idx = 0;
+	pMesh = new CMesh;
+	pMesh->Create(&vPoint, 1, &Idx, 1);
+	AddAsset(L"PointMesh", pMesh);
+
 	// 전역변수에 삼각형 위치 설정
 	//      0(Red)
 	//    /    \
@@ -51,7 +59,6 @@ void CAssetMgr::CreateDefaultMesh()
 	arrIdx[4] = 2;
 	arrIdx[5] = 3;
 
-	CMesh* pMesh = nullptr;
 	pMesh = new CMesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"RectMesh", pMesh);
@@ -189,8 +196,10 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	// ==================
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\particle.fx", "VS_Particle");
+	pShader->CreateGeometryShader(L"shader\\particle.fx", "GS_Particle");
 	pShader->CreatePixelShader(L"shader\\particle.fx", "PS_Particle");
 
+	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::NO_WRITE);
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);

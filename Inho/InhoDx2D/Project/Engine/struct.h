@@ -94,11 +94,16 @@ struct tNoiseForce {
 	float NoiseForceTerm;
 };
 
+struct tRenderModule {
+	int VelocityAlignment;
+};
+
 struct tParticleModule {
 	tSpawnModule SpawnModule;
 	tVelocityModule VelocityModule;
 	tScaleModule ScaleModule;
 	tNoiseForce NoiseForce;
+	tRenderModule RenderModule;
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
