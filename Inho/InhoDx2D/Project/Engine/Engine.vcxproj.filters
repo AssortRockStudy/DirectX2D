@@ -478,7 +478,9 @@
     <FxCompile Include="particle.fx">
       <Filter>ShadeCode\Compute</Filter>
     </FxCompile>
-    <FxCompile Include="particle_update.fx" />
+    <FxCompile Include="particle_update.fx">
+      <Filter>ShadeCode\Compute</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

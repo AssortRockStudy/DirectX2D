@@ -57,6 +57,8 @@ void CComputeShader::Execute()
 	if(FAILED(UpdateData()))
 		return;
 
+	UpdateGroupCount();
+
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
 	pCB->SetData(&m_Const);
 	pCB->UpdateData_CS();

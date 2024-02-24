@@ -7,11 +7,12 @@
 #include "CAssetMgr.h"
 #include "CMesh.h"
 #include "CMaterial.h"
+#include "CTransform.h"
 
 CParticleSystem::CParticleSystem()
 	: CRenderComponent(COMPONENT_TYPE::PARTICLESYSTEM)
 	, m_ParticleBuffer(nullptr)
-	, m_MaxParticleCount(5)
+	, m_MaxParticleCount(100)
 {
 	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"ParticleMtrl"));
@@ -19,7 +20,10 @@ CParticleSystem::CParticleSystem()
 	Vec2 vResol = CDevice::GetInst()->GetRenderResolution();
 
 	m_ParticleBuffer = new CStructuredBuffer;
-	m_ParticleBuffer->Create(sizeof(tParticle), 5, SB_TYPE::READ_WRITE, true);
+	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticleCount, SB_TYPE::READ_WRITE, true);
+
+	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
+
 }
 
 CParticleSystem::~CParticleSystem()
@@ -30,6 +34,7 @@ CParticleSystem::~CParticleSystem()
 
 void CParticleSystem::finaltick()
 {
+	m_CSParticleUpdate->Execute();
 }
 
 void CParticleSystem::render()
@@ -38,11 +43,11 @@ void CParticleSystem::render()
 
 	m_ParticleBuffer->UpdateData(20);
 
-	for (int i = 0; i < m_MaxParticleCount; ++i) {
-		GetMaterial()->SetScalarParam(INT_0, i);
-		GetMaterial()->UpdateData();
-		GetMesh()->render();
-	}
+	GetMaterial()->SetScalarParam(INT_0, 0);
+	GetMaterial()->UpdateData();
+	GetMesh()->render_asparticle(20);
+
+	m_ParticleBuffer->Clear(20);
 }
 
 void CParticleSystem::UpdateData()

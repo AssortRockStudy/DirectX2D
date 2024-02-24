@@ -8,6 +8,8 @@ CStructuredBuffer::CStructuredBuffer()
     , m_ElementCount(0)
     , m_Type(SB_TYPE::READ_ONLY)
 	, m_bSysMemMove(false)
+	, m_RecentSRV(0)
+	, m_RecentUAV(0)
 {
 }
 
@@ -76,6 +78,7 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
 	if (m_bSysMemMove) {
 		tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		tDesc.Usage = D3D11_USAGE_DYNAMIC;
+		tDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		hr = DEVICE->CreateBuffer(&tDesc, nullptr, m_SB_Write.GetAddressOf());
 
 		tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
@@ -95,6 +98,55 @@ void CStructuredBuffer::UpdateData(UINT _RegisterNum)
 	CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 	CONTEXT->GSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 	CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+}
+
+int CStructuredBuffer::UpdateData_CS_SRV(UINT _RegisterNum)
+{
+	if (nullptr == m_SRV)
+		return E_FAIL;
+
+	m_RecentSRV = _RegisterNum;
+
+	CONTEXT->CSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	return S_OK;
+}
+
+int CStructuredBuffer::UpdateData_CS_UAV(UINT _RegisterNum)
+{
+	if (nullptr == m_UAV)
+		return E_FAIL;
+
+	m_RecentSRV = _RegisterNum;
+
+	UINT i = -1;
+	CONTEXT->CSSetUnorderedAccessViews(_RegisterNum, 1, m_UAV.GetAddressOf(), &i);
+	return S_OK;
+}
+
+void CStructuredBuffer::Clear(UINT _RegisterNum)
+{
+	ID3D11ShaderResourceView* pSRV = nullptr;
+
+	CONTEXT->VSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->HSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->DSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->GSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
+}
+
+void CStructuredBuffer::Clear_CS_SRV()
+{
+	ID3D11ShaderResourceView* pSRV = nullptr;
+
+	CONTEXT->CSSetShaderResources(m_RecentSRV, 1, &pSRV);
+}
+
+void CStructuredBuffer::Clear_CS_UAV()
+{
+	ID3D11UnorderedAccessView* pUAV = nullptr;
+
+	UINT i = -1;
+	CONTEXT->CSSetUnorderedAccessViews(m_RecentUAV, 1, &pUAV, &i);
 }
 
 void CStructuredBuffer::SetData(void* _SysMem, UINT _ElementCount)
