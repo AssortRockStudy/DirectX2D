@@ -91,6 +91,15 @@ struct tNoiseForce {
 	float NoiseForceScale;
 };
 
+struct tVelocityModule
+{
+	int AddVelocityType; // 0: FromCenter, 1: To Center, 2: FixDirection
+	float MinSpeed; 
+	float MaxSpeed;
+	float FixedAngle;
+	Vec4 FixedDirection;
+};
+
 struct tParticleModule {
 	tSpawnModule SpawnModule;
 	tVelocityModule VelocityModule;
