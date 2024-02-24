@@ -49,6 +49,8 @@ struct tParticle {
 	Vec3 vVelocity;
 	Vec4 vColor;
 	Vec4 vForce;
+	Vec3 vNoiseForce;
+	float NoiseForceTime;
 
 	float NormalizeAge;
 	float Mass;
@@ -89,6 +91,7 @@ struct tScaleModule {
 
 struct tNoiseForce {
 	float NoiseForceScale;
+	float NoiseForceTerm;
 };
 
 struct tParticleModule {
@@ -147,10 +150,10 @@ struct tAnimData2D {
 
 struct tGlobalData {
 	Vec2 g_RenderResolution;
+	Vec2 g_NoiseTexResolution;
 	float g_dt;
 	float g_time;
 	int g_Light2DCount;
 	int g_Light3DCount;
-	Vec2 g_vPaading;
 };
 extern tGlobalData g_global;

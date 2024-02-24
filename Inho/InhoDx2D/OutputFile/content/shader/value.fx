@@ -72,11 +72,11 @@ cbuffer ANIM_DATA2D : register(b2)
 cbuffer GLOBAL_DATA : register(b3)
 {
     float2 g_RenderResolution;
+    float2 g_NoiseTexResolution;
     float g_dt;
     float g_time;
     int g_Light2DCount;
     int g_Light3DCount;
-    float2 globalpadding;
 }
 
 Texture2D g_tex_0 : register(t0);

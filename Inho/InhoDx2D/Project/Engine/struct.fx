@@ -38,6 +38,8 @@ struct tParticle
     float3 vVelocity; // 속도
     float4 vColor; // 색상
     float4 vForce;
+    float3 vNoiseForce;
+    float NoiseForceTime;
 
     float NormalizedAge;
     float Mass; // 질량
@@ -81,6 +83,7 @@ struct tScaleModule
 struct tNoiseForce
 {
     float NoiseForceScale;
+    float NoiseForceTerm;
 };
 struct tParticleModule
 {

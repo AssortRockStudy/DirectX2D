@@ -43,8 +43,8 @@ CParticleSystem::CParticleSystem()
 	m_Module.SpawnModule.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
 	m_Module.SpawnModule.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
 	m_Module.SpawnModule.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
-	m_Module.SpawnModule.MinLife = 0.4f;
-	m_Module.SpawnModule.MaxLife = 1.f;
+	m_Module.SpawnModule.MinLife = 3.f;
+	m_Module.SpawnModule.MaxLife = 5.f;
 	m_Module.SpawnModule.MinMass = 1.f;
 	m_Module.SpawnModule.MaxMass = 1.f;
 	m_Module.SpawnModule.SpawnShape = 1;
@@ -63,7 +63,8 @@ CParticleSystem::CParticleSystem()
 	m_Module.ScaleModule.vScaleRatio = Vec3(0.1f, 0.1f, 0.1f);
 
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::NOISE_FORCE] = 1;
-	m_Module.NoiseForce.NoiseForceScale = 100.f;
+	m_Module.NoiseForce.NoiseForceScale = 50.f;
+	m_Module.NoiseForce.NoiseForceTerm = 0.3f;
 
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
