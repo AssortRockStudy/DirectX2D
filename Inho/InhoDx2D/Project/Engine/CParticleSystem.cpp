@@ -8,13 +8,13 @@
 #include "CMesh.h"
 #include "CMaterial.h"
 #include "CTransform.h"
-
+#include "CRenderMgr.h"
 #include "CTimeMgr.h"
 
 CParticleSystem::CParticleSystem()
 	: CRenderComponent(COMPONENT_TYPE::PARTICLESYSTEM)
 	, m_ParticleBuffer(nullptr)
-	, m_MaxParticleCount(100)
+	, m_MaxParticleCount(2000)
 {
 	SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"ParticleMtrl"));
@@ -35,14 +35,24 @@ CParticleSystem::CParticleSystem()
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
 
 	m_Module.SpawnModule.SpaceType = 1;
-	m_Module.SpawnModule.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	m_Module.SpawnModule.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.SpawnModule.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.SpawnModule.MinLife = 5.f;
-	m_Module.SpawnModule.MaxLife = 5.f;
-	m_Module.SpawnModule.SpawnShape = 0;
+	m_Module.SpawnModule.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
+	m_Module.SpawnModule.vSpawnMinScale = Vec4(50.f, 50.f, 1.f, 1.f);
+	m_Module.SpawnModule.vSpawnMaxScale = Vec4(200.f, 200.f, 1.f, 1.f);
+	m_Module.SpawnModule.MinLife = 0.4f;
+	m_Module.SpawnModule.MaxLife = 1.f;
+	m_Module.SpawnModule.SpawnShape = 1;
 	m_Module.SpawnModule.Radius = 100.f;
 	m_Module.SpawnModule.SpawnRate = 100;
+	m_Module.SpawnModule.vSpawnBoxScale = Vec4(500.f, 500.f, 0.f, 0.f);
+
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
+	m_Module.VelocityModule.AddVelocityType = 0;
+	m_Module.VelocityModule.MinSpeed = 100;
+	m_Module.VelocityModule.MaxSpeed = 200;
+	m_Module.VelocityModule.FixedDirection;
+	m_Module.VelocityModule.FixedAngle;
+
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
 }
 
 CParticleSystem::~CParticleSystem()
@@ -79,8 +89,13 @@ void CParticleSystem::finaltick()
 	m_CSParticleUpdate->SetParticleBuffer(m_ParticleBuffer);
 	m_CSParticleUpdate->SetParticleModuleBuffer(m_ParticleModuleBuffer);
 	m_CSParticleUpdate->SetParticleSpawnCount(m_SpawnCountBuffer);
+	m_CSParticleUpdate->SetParticleWorldPos(Transform()->GetWorldPos());
 
 	m_CSParticleUpdate->Execute();
+
+	if (CRenderMgr::GetInst()->IsDebugPosition()) {
+		GamePlayStatic::DrawDebugCross(Transform()->GetWorldPos(), 20.f, Vec3(0.f, 1.f, 0.f), true);
+	}
 }
 
 void CParticleSystem::render()
@@ -90,8 +105,9 @@ void CParticleSystem::render()
 	m_ParticleBuffer->UpdateData(20);
 
 	GetMaterial()->SetScalarParam(INT_0, 0);
+	GetMaterial()->SetTexParam(TEX_0, m_ParticleTex);
 	GetMaterial()->UpdateData();
-	GetMesh()->render_asparticle(20);
+	GetMesh()->render_asparticle(m_MaxParticleCount);
 
 	m_ParticleBuffer->Clear(20);
 }

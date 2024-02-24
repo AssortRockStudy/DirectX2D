@@ -30,6 +30,7 @@ struct tTileInfo
 
 struct tParticle
 {
+    float4 vLocalPos;
     float4 vWorldPos; // 위치
     float4 vWorldScale; // 크기
     float4 vWorldRotation; // 회전값
@@ -59,9 +60,19 @@ struct tSpawnModule
     float2 padding;
 };
 
+struct tVelocityModule
+{
+    int AddVelocityType; // 0: FromCenter, 1: To Center, 2: FixDirection
+    float MinSpeed;
+    float MaxSpeed;
+    float FixedAngle;
+    float4 FixedDirection;
+};
+
 struct tParticleModule
 {
     tSpawnModule SpawnModule;
+    tVelocityModule VeloctiyModule;
     
     int arrModuleCheck[4];
 };

@@ -41,6 +41,7 @@ struct tPixel {
 };
 
 struct tParticle {
+	Vec4 vLocalPos;
 	Vec4 vWorldPos;
 	Vec4 vWorldScale;
 	Vec4 vWorldRotation;
@@ -69,9 +70,18 @@ struct tSpawnModule {
 	Vec2 padding;
 };
 
+struct tVelocityModule
+{
+	int AddVelocityType; // 0: FromCenter, 1: To Center, 2: FixDirection
+	float MinSpeed; 
+	float MaxSpeed;
+	float FixedAngle;
+	Vec4 FixedDirection;
+};
+
 struct tParticleModule {
 	tSpawnModule SpawnModule;
-
+	tVelocityModule VelocityModule;
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
