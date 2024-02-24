@@ -63,15 +63,21 @@ struct tSpawnModule {
 	float MaxLife;
 	int SpawnRate; // 초당 생성 개수
 	int SpaceType; // 좌표계( 0: LocalSpace, 1: WorldSpace)
+	int SpawnShape; // 스폰 범위 (0: Sphere, 1: WorldSpace)
+	float Radius;
+	Vec4 vSpawnBoxScale;
+	Vec2 padding;
 };
 
 struct tParticleModule {
 	tSpawnModule SpawnModule;
+
+	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
 struct tSpawnCount {
 	int SpawnCount;
-	Vec3 vPadding;
+	int vPadding[3];
 };
 
 // ==================

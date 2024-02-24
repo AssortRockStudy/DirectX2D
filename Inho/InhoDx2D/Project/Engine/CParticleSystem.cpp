@@ -32,6 +32,17 @@ CParticleSystem::CParticleSystem()
 
 	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
 
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
+
+	m_Module.SpawnModule.SpaceType = 1;
+	m_Module.SpawnModule.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	m_Module.SpawnModule.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.SpawnModule.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.SpawnModule.MinLife = 5.f;
+	m_Module.SpawnModule.MaxLife = 5.f;
+	m_Module.SpawnModule.SpawnShape = 0;
+	m_Module.SpawnModule.Radius = 100.f;
+	m_Module.SpawnModule.SpawnRate = 100;
 }
 
 CParticleSystem::~CParticleSystem()
@@ -48,19 +59,13 @@ CParticleSystem::~CParticleSystem()
 
 void CParticleSystem::finaltick()
 {
-	m_Module.SpawnModule.SpaceType = 1;
-	m_Module.SpawnModule.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	m_Module.SpawnModule.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.SpawnModule.vSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.SpawnModule.MinLife = 5.f;
-	m_Module.SpawnModule.MaxLife = 5.f;
-	m_Module.SpawnModule.SpawnRate = 100;
-
 	m_Time += DT;
 
 	if ((1.f / m_Module.SpawnModule.SpawnRate) < m_Time) {
-		m_Time = 0.f;
-		tSpawnCount count = tSpawnCount{ 1, };
+		float fSpawnCount = m_Time / (1.f / m_Module.SpawnModule.SpawnRate);
+		m_Time -= (1.f / m_Module.SpawnModule.SpawnRate) * floorf(fSpawnCount);
+
+		tSpawnCount count = tSpawnCount{ (int)fSpawnCount, 0, 0, 0 };
 		m_SpawnCountBuffer->SetData(&count);
 	}
 	else {

@@ -27,6 +27,8 @@ private:
 
     bool m_DebugPosition;
 
+    vector<Ptr<CTexture>> m_vecNoiseTex;
+
 public:
     void RegisterCamera(CCamera* _Cam, int _Idx);
     void AddDebugShapeInfo(const tDebugShapeInfo& _info) { m_DbgShapeInfo.push_back(_info); }

@@ -4,7 +4,7 @@
 #include "CStructuredBuffer.h"
 
 CParticleUpdate::CParticleUpdate()
-    : CComputeShader(1024, 1, 1)
+    : CComputeShader(32, 1, 1)
 {
     Create(L"shader\\particle_update.fx", "CS_ParticleUpdate");
 }
