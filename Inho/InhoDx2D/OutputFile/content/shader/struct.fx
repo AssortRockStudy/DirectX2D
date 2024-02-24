@@ -42,4 +42,22 @@ struct tParticle
     int Active; // 활성화, 비활성화 여부
 };
 
+struct tSpawnModule
+{
+	// 스폰 모듈
+    float4 vSpawnColor;
+    float4 vSpawnMinScale;
+    float4 vSpawnMaxScale;
+
+    float MinLife;
+    float MaxLife;
+    int SpawnRate; // 초당 생성 개수
+    int SpaceType; // 좌표계( 0: LocalSpace, 1: WorldSpace)
+};
+
+struct tParticleModule
+{
+    tSpawnModule SpawnModule;
+};
+
 #endif

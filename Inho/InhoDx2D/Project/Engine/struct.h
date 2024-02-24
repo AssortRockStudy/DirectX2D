@@ -53,6 +53,27 @@ struct tParticle {
 	int Active;
 };
 
+struct tSpawnModule {
+	// 스폰 모듈
+	Vec4 vSpawnColor;
+	Vec4 vSpawnMinScale;
+	Vec4 vSpawnMaxScale;
+
+	float MinLife;
+	float MaxLife;
+	int SpawnRate; // 초당 생성 개수
+	int SpaceType; // 좌표계( 0: LocalSpace, 1: WorldSpace)
+};
+
+struct tParticleModule {
+	tSpawnModule SpawnModule;
+};
+
+struct tSpawnCount {
+	int SpawnCount;
+	Vec3 vPadding;
+};
+
 // ==================
 // 상수버퍼 대응 구조체
 // ==================
