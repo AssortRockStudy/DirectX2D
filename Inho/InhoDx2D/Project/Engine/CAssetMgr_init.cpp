@@ -266,12 +266,15 @@ void CAssetMgr::CreateDefaultMaterial()
 }
 
 #include "CSetColorShader.h"
+#include "CParticleUpdate.h"
 
 void CAssetMgr::CreateDefaultComputeShader()
 {
 	Ptr<CComputeShader> pShader = nullptr;
 
 	pShader = new CSetColorShader;
-	pShader->Create(L"shader\\setcolor.fx", "CS_SetColor");
 	AddAsset(L"SetColorShader", pShader.Get());
+
+	pShader = new CParticleUpdate;
+	AddAsset(L"ParticleUpdateShader", pShader.Get());
 }

@@ -6,12 +6,13 @@
 
 StructuredBuffer<tParticle> g_ParticleBuffer : register(t20);
 
-#define Particle g_ParticleBuffer[g_int_0]
+#define Particle g_ParticleBuffer[_in.iInstID]
 
 struct VS_IN
 {
     float3 vPos : POSITION;
     float2 vUV : TEXCOORD;
+    uint iInstID : SV_InstanceID;
 };
 
 struct VS_OUT
@@ -23,8 +24,6 @@ struct VS_OUT
 VS_OUT VS_Particle(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
-    
-    g_ParticleBuffer[g_int_0].vWorldPos;
     
     float3 vWorldPos = (_in.vPos * Particle.vWorldScale.xyz) + Particle.vWorldPos.xyz;
 
