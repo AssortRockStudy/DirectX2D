@@ -25,7 +25,12 @@ CParticleSystem::CParticleSystem()
 	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticleCount, SB_TYPE::READ_WRITE, true);
 
 	m_ParticleModuleBuffer = new CStructuredBuffer;
-	m_ParticleModuleBuffer->Create(sizeof(tParticleModule), 1, SB_TYPE::READ_ONLY, true);
+	UINT ModuleAddSize = 0;
+	if (sizeof(tParticleModule) % 16 != 0)
+	{
+		ModuleAddSize = 16 - (sizeof(tParticleModule) % 16);
+	}
+	m_ParticleModuleBuffer->Create(sizeof(tParticleModule) + ModuleAddSize, 1, SB_TYPE::READ_ONLY, true);
 
 	m_SpawnCountBuffer = new CStructuredBuffer;
 	m_SpawnCountBuffer->Create(sizeof(tSpawnCount), 1, SB_TYPE::READ_WRITE, true);
@@ -36,21 +41,31 @@ CParticleSystem::CParticleSystem()
 
 	m_Module.SpawnModule.SpaceType = 1;
 	m_Module.SpawnModule.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
-	m_Module.SpawnModule.vSpawnMinScale = Vec4(50.f, 50.f, 1.f, 1.f);
-	m_Module.SpawnModule.vSpawnMaxScale = Vec4(200.f, 200.f, 1.f, 1.f);
+	m_Module.SpawnModule.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.SpawnModule.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
 	m_Module.SpawnModule.MinLife = 0.4f;
 	m_Module.SpawnModule.MaxLife = 1.f;
+	m_Module.SpawnModule.MinMass = 1.f;
+	m_Module.SpawnModule.MaxMass = 1.f;
 	m_Module.SpawnModule.SpawnShape = 1;
 	m_Module.SpawnModule.Radius = 100.f;
 	m_Module.SpawnModule.SpawnRate = 100;
 	m_Module.SpawnModule.vSpawnBoxScale = Vec4(500.f, 500.f, 0.f, 0.f);
 
-	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 0;
 	m_Module.VelocityModule.AddVelocityType = 0;
 	m_Module.VelocityModule.MinSpeed = 100;
-	m_Module.VelocityModule.MaxSpeed = 200;
+	m_Module.VelocityModule.MaxSpeed = 150;
 	m_Module.VelocityModule.FixedDirection;
 	m_Module.VelocityModule.FixedAngle;
+
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SCALE] = 0;
+	m_Module.ScaleModule.vScaleRatio = Vec3(0.1f, 0.1f, 0.1f);
+
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::NOISE_FORCE] = 1;
+	m_Module.NoiseForce.NoiseForceScale = 100.f;
+
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
 	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
 }

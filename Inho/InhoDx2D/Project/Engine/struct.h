@@ -43,11 +43,14 @@ struct tPixel {
 struct tParticle {
 	Vec4 vLocalPos;
 	Vec4 vWorldPos;
+	Vec4 vWorldInitScale;
 	Vec4 vWorldScale;
 	Vec4 vWorldRotation;
-	Vec4 vVelocity;
+	Vec3 vVelocity;
 	Vec4 vColor;
+	Vec4 vForce;
 
+	float NormalizeAge;
 	float Mass;
 	float Age;
 	float Life;
@@ -62,12 +65,13 @@ struct tSpawnModule {
 
 	float MinLife;
 	float MaxLife;
+	float MinMass;
+	float MaxMass;
 	int SpawnRate; // 초당 생성 개수
 	int SpaceType; // 좌표계( 0: LocalSpace, 1: WorldSpace)
 	int SpawnShape; // 스폰 범위 (0: Sphere, 1: WorldSpace)
 	float Radius;
 	Vec4 vSpawnBoxScale;
-	Vec2 padding;
 };
 
 struct tVelocityModule
@@ -79,9 +83,19 @@ struct tVelocityModule
 	Vec4 FixedDirection;
 };
 
+struct tScaleModule {
+	Vec4 vScaleRatio;
+};
+
+struct tNoiseForce {
+	float NoiseForceScale;
+};
+
 struct tParticleModule {
 	tSpawnModule SpawnModule;
 	tVelocityModule VelocityModule;
+	tScaleModule ScaleModule;
+	tNoiseForce NoiseForce;
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
