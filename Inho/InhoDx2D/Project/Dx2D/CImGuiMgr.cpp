@@ -84,7 +84,7 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device
     create_ui();
 
     CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
-    CGameObject* pObject = pCurLevel->FindObjectByName(L"Player");
+    CGameObject* pObject = pCurLevel->FindObjectByName(L"Particle");
     ((Inspector*)FindUI("##Inspector"))->SetTargetObject(pObject);
 }
 

@@ -117,7 +117,7 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTestTex);
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
 
@@ -154,7 +154,7 @@ void CLevelMgr::init()
 
 	pObj->AddComponent(new CTransform);
 	pObj->AddComponent(new CParticleSystem);
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
 
 	m_CurLevel->AddObject(pObj, L"Default", false);
 
