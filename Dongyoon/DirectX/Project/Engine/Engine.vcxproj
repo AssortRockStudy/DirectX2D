@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -51,6 +52,7 @@
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -74,10 +76,12 @@
     <OutDir>$(SolutionDir)External\Library\Engine\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <ExternalIncludePath>$(SolutionDir)External\Include\;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>$(SolutionDir)External\Library\;$(ExternalIncludePath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)External\Library\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)External\Library\Engine\</OutDir>
+    <ExternalIncludePath>$(SolutionDir)External\Include\;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(SolutionDir)External\Library\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -121,6 +125,9 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MinFilesInUnityFile>10</MinFilesInUnityFile>
+      <MaxFilesInUnityFile>20</MaxFilesInUnityFile>
+      <UnityFilesDirectory>$(ProjectDir)</UnityFilesDirectory>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -142,6 +149,9 @@ call EngineCopy.bat</Command>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MinFilesInUnityFile>10</MinFilesInUnityFile>
+      <MaxFilesInUnityFile>20</MaxFilesInUnityFile>
+      <UnityFilesDirectory>$(ProjectDir)</UnityFilesDirectory>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -194,6 +204,7 @@ call EngineCopy.bat</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTileMap.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
@@ -246,6 +257,7 @@ call EngineCopy.bat</Command>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTileMap.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -279,6 +291,10 @@ call EngineCopy.bat</Command>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="struct.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>

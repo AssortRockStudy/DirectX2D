@@ -1,16 +1,14 @@
 #pragma once
 #include "ComponentUI.h"
 
-#include <Engine\CGameObject.h>
-
-class TransformUI :
+class Light2DUI :
     public ComponentUI
 {
 public:
     virtual void render_update() override;
 
 public:
-    TransformUI();
-    ~TransformUI();
+    Light2DUI();
+    ~Light2DUI();
 };
 

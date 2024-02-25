@@ -37,6 +37,9 @@ public:
     // _Flag : D3D11_BIND_FLAG
     Ptr<CTexture> CreateTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
     Ptr<CTexture> CreateTexture(const wstring& _strKey, ComPtr<ID3D11Texture2D> _tex2D);
+
+public:
+    void GetAssetName(ASSET_TYPE _Type, vector<string>& _Out);
 };
 
 template<typename T>
@@ -68,6 +71,7 @@ inline void CAssetMgr::AddAsset(const wstring& _strKey, T* _Asset)
     map<wstring, Ptr<CAsset>>::iterator iter = m_mapAsset[(UINT)Type].find(_strKey);
     assert(iter == m_mapAsset[(UINT)Type].end());
 
+    _Asset->SetKey(_strKey);
     m_mapAsset[(UINT)Type].insert(make_pair(_strKey, _Asset));
 }
 

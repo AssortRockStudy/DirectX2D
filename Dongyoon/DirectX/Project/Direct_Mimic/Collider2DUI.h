@@ -1,16 +1,13 @@
 #pragma once
 #include "ComponentUI.h"
 
-#include <Engine\CGameObject.h>
-
-class TransformUI :
+class Collider2DUI :
     public ComponentUI
 {
-public:
     virtual void render_update() override;
 
 public:
-    TransformUI();
-    ~TransformUI();
+    Collider2DUI();
+    ~Collider2DUI();
 };
 

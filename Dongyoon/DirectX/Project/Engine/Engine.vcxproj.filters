@@ -124,6 +124,12 @@
     <Filter Include="08. Component\04. Animator2D\Anim">
       <UniqueIdentifier>{64509c2a-bf51-48fd-a617-9c277c32e662}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode\Render">
+      <UniqueIdentifier>{a43ff31f-f8d9-4a35-8821-232fa03349b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCode\Util">
+      <UniqueIdentifier>{73ffc602-cda4-4a19-96c8-6d23706f48cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -267,6 +273,9 @@
     <ClInclude Include="CBackgroundScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CTileMap.h">
+      <Filter>08. Component\RenderComponent\02. Tilemap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -398,6 +407,9 @@
     <ClCompile Include="CAssetMgr_init.cpp">
       <Filter>04. Manager\AssetMgr</Filter>
     </ClCompile>
+    <ClCompile Include="CTileMap.cpp">
+      <Filter>08. Component\RenderComponent\02. Tilemap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -405,23 +417,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="std2d.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="value.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
     <FxCompile Include="debug.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="struct.fx">
-      <Filter>ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="func.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
     <FxCompile Include="postprocess.fx">
-      <Filter>ShaderCode</Filter>
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="std2d.fx">
+      <Filter>ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
+      <Filter>ShaderCode\Render</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
