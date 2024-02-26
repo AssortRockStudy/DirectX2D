@@ -101,8 +101,11 @@
     <Filter Include="03.Scripts">
       <UniqueIdentifier>{d429a9b1-82bd-4eb5-87cc-dea6b563db1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CreateTempLevel">
+    <Filter Include="01.Manager\03.CreateTempLevel">
       <UniqueIdentifier>{8f2c38dd-eb7b-41da-9c6e-134ebc3e5ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\04.LevelSaveLoad">
+      <UniqueIdentifier>{df55fc9a-9059-414c-b910-fab1d2323ac3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +236,7 @@
       <Filter>03.Scripts</Filter>
     </ClInclude>
     <ClInclude Include="CCreateTempLevel.h">
-      <Filter>CreateTempLevel</Filter>
+      <Filter>01.Manager\03.CreateTempLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -363,7 +366,7 @@
       <Filter>03.Scripts</Filter>
     </ClCompile>
     <ClCompile Include="CCreateTempLevel.cpp">
-      <Filter>CreateTempLevel</Filter>
+      <Filter>01.Manager\03.CreateTempLevel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -175,7 +175,7 @@ void CLevel::ChangeState(LEVEL_STATE _NextState)
 		// 레벨 카메라 모드
 		CRenderMgr::GetInst()->ActiveEditorMode(false);
 
-		if (LEVEL_STATE::STOP == m_State)
+		if (LEVEL_STATE::STOP == m_State || LEVEL_STATE::NONE == m_State)
 		{
 			begin();
 		}

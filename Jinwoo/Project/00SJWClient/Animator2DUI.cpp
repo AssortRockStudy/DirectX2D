@@ -81,6 +81,16 @@ void Animator2DUI::render_update()
 				GetTargetObject()->Animator2D()->Play(selectedAnimNameW);
 			}
 		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Stop Animation"))
+		{
+			if (selectedIndex >= 0 && selectedIndex < animNames.size())
+			{
+				GetTargetObject()->Animator2D()->Stop();
+			}
+		}
 	}
 }
 

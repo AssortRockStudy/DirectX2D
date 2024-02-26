@@ -238,6 +238,7 @@ void EditAnimator::render_update()
 		m_AnimName = ToWString(AnimName);
 		GetTargetObject()->Animator2D()->CreateFrm(m_AnimName, m_pAtlasTex, m_vecAnimFrm);
 		GetTargetObject()->Animator2D()->SaveAnimations(L"animdata");
+		MessageBox(nullptr, L"Animation Saved", L"Animation Saved", MB_OK);
 	}
 
 	ImGui::EndChild();

@@ -4,6 +4,7 @@
 #include <Engine\CKeyMgr.h>
 
 CBackgroundScript::CBackgroundScript()
+	: CScript(SCRIPT_TYPE::BACKGROUNDSCRIPT)
 {
 }
 

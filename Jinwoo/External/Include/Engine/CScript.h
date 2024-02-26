@@ -11,7 +11,10 @@ class CScript :
     public CComponent
 {
 private:
-    UINT        m_iScriptType;
+    const UINT m_iScriptType;
+
+public:
+    UINT GetScriptType() { return m_iScriptType; }
 
 public:
     // final을 붙여 스크립트를 상속받는 클래스에서는 finaltick을 사용하지 않겠다고 명시
@@ -24,7 +27,7 @@ public:
     CScript* Clone() = 0;
 
 public:
-    CScript();
+    CScript(UINT _ScriptType);
     ~CScript();
 };
 

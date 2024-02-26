@@ -8,7 +8,8 @@
 #include <Engine\CRenderComponent.h>
 
 CPlayerScript::CPlayerScript()
-	: m_Speed(300.f)
+	: CScript(SCRIPT_TYPE::PLAYERSCRIPT)
+	, m_Speed(300.f)
 {
 
 }

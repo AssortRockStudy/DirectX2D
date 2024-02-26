@@ -6,6 +6,8 @@
 
 CAnimator2D::CAnimator2D()
 	: CComponent(COMPONENT_TYPE::ANIMATOR2D)
+	, m_CurAnim(nullptr)
+	, m_bRepeat(true)
 {
 }
 
@@ -113,6 +115,12 @@ void CAnimator2D::Play(const wstring& _strAnimName, bool _bRepeat)
 
 	m_CurAnim = pAnim;
 	m_CurAnim->Reset();
+}
+
+void CAnimator2D::Stop()
+{
+	m_CurAnim->Reset();
+	m_CurAnim = nullptr;
 }
 
 void CAnimator2D::SaveAnimations(const wstring& _strRelativePath)

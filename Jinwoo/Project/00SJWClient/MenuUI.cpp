@@ -6,6 +6,11 @@
 #include <Engine\CGameObject.h>
 #include <Engine\components.h>
 
+#include <Scripts\CScriptMgr.h>
+#include <Engine\CScript.h>
+
+#include "CImGuiMgr.h"
+#include "Inspector.h"
 
 MenuUI::MenuUI()
 	: UI("Menu", "##Menu")
@@ -126,6 +131,26 @@ void MenuUI::Asset()
             pMtrl->SetName(szPath);
             pMtrl->Save(szPath);
             GamePlayStatic::AddAsset(pMtrl);
+        }
+
+        ImGui::EndMenu();
+    }
+
+    if (ImGui::BeginMenu("Script", ""))
+    {
+        vector<wstring> vecScriptName;
+        CScriptMgr::GetScriptInfo(vecScriptName);
+
+        for (size_t i = 0; i < vecScriptName.size(); ++i)
+        {
+            if (ImGui::MenuItem(ToString(vecScriptName[i]).c_str()))
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(CScriptMgr::GetScript(vecScriptName[i]));
+                }
+            }
         }
 
         ImGui::EndMenu();
