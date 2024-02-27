@@ -126,7 +126,17 @@ void CLevelMgr::init()
 	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
 
 	Ptr<CTexture> pTileAtlas = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
+	
 	pObj->TileMap()->SetTileAtlas(pTileAtlas, Vec2(64.f, 64.f));
+	pObj->TileMap()->SetFace(6, 6);
+
+	for (int i = 0; i < 6; ++i)
+	{
+		for (int j = 0; j < 6; ++j)
+		{
+			pObj->TileMap()->SetTileIndex(i, j, i * 6 + j);
+		}
+	}
 
 	m_CurLevel->AddObject(pObj, L"Tile", false);
 
