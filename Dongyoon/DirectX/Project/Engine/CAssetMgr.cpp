@@ -57,3 +57,4 @@ void CAssetMgr::GetAssetName(ASSET_TYPE _Type, vector<string>& _Out)
 		_Out.push_back((ToString(pair.first)));
 	}
 }
+
