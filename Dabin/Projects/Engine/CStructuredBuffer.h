@@ -31,8 +31,8 @@ private:
 public:
     int Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Type, bool _bSysMemMove = false, void* _pSysMem = nullptr);
     void UpdatePipeline(UINT _RegisterNum);
-    int UpdatedCS_SRV(UINT _RegisterNum);
-    int UpdatedCS_UAV(UINT _RegisterNum);
+    int UpdateCS_SRV(UINT _RegisterNum);
+    int UpdateCS_UAV(UINT _RegisterNum);
     void Clear(UINT _RegisterNum);
     void ClearCS_SRV();
     void ClearCS_UAV();

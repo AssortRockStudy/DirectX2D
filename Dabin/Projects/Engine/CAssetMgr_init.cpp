@@ -234,7 +234,7 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 }
 
 #include "CSetColorShader.h"
-#include "CUpdateParticle.h"
+#include "CParticleUpdate.h"
 void CAssetMgr::CreateDefaultComputeShader()
 {
 	Ptr<CComputeShader> pShader = nullptr;
@@ -244,8 +244,8 @@ void CAssetMgr::CreateDefaultComputeShader()
 	AddAsset(L"SetColorShader", pShader.Get());
 
 	// SetColorShader
-	pShader = new CUpdateParticle;
-	AddAsset(L"UpdateParticleShader", pShader.Get());
+	pShader = new CParticleUpdate;
+	AddAsset(L"ParticleUpdateShader", pShader.Get());
 }
 
 void CAssetMgr::CreateDefaultMaterial()

@@ -36,7 +36,7 @@
 #include "C:\Users\DVYH\Desktop\DV\STUDY\DirectX_2D\DirectX_2D\Projects\Engine\CParticleSystem.cpp"
 
 
-#include "C:\Users\DVYH\Desktop\DV\STUDY\DirectX_2D\DirectX_2D\Projects\Engine\CUpdateParticle.cpp"
+#include "C:\Users\DVYH\Desktop\DV\STUDY\DirectX_2D\DirectX_2D\Projects\Engine\CParticleUpdate.cpp"
 
 
 #include "C:\Users\DVYH\Desktop\DV\STUDY\DirectX_2D\DirectX_2D\Projects\Engine\CRenderMgr.cpp"

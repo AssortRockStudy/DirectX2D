@@ -1,6 +1,6 @@
 #pragma once
 #include "CRenderComponent.h"
-#include "CUpdateParticle.h"
+#include "CParticleUpdate.h"
 // =======================================
 // CParticleSystem: Particle Group阑 积己, 包府窍绰 Component
 // =======================================
@@ -13,11 +13,14 @@ class CParticleSystem :
     public CRenderComponent
 {
 private:
-    Ptr<CUpdateParticle>    m_CSParticleUpdate;
     
     CStructuredBuffer*      m_ParticleBuffer;
     UINT                    m_ParticleCountMax;
+    
+    // Compute Shader
+    Ptr<CParticleUpdate>    m_CSParticleUpdate;
 
+    // Module
     FParticleModule         m_Module;
     CStructuredBuffer*      m_ParticleModuleBuffer;
 

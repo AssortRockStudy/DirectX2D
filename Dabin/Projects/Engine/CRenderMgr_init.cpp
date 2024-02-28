@@ -21,4 +21,11 @@ void CRenderMgr::init()
 	// create postprocess texture
 	Vec2 vRenderResolution = CDevice::GetInst()->GetRenderResolution();
 	m_PostProcessTex = CAssetMgr::GetInst()->CreateTexture(L"PostProcessTex", (UINT)vRenderResolution.x, (UINT)vRenderResolution.y, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
+
+	// nosie texture load
+	m_vecNoiseTex.push_back(CAssetMgr::GetInst()->Load<CTexture>(L"texture\\noise\\noise_01.png", L"texture\\noise\\noise_01.png"));
+	m_vecNoiseTex.push_back(CAssetMgr::GetInst()->Load<CTexture>(L"texture\\noise\\noise_01.png", L"texture\\noise\\noise_02.png"));
+	m_vecNoiseTex.push_back(CAssetMgr::GetInst()->Load<CTexture>(L"texture\\noise\\noise_01.png", L"texture\\noise\\noise_03.png"));
+	m_vecNoiseTex[0]->UpdatePipeline(14);
+	m_vecNoiseTex[0]->UpdateCS_SRV(14);
 }

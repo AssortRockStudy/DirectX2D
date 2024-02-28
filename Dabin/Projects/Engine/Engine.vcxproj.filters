@@ -293,7 +293,7 @@
     <ClInclude Include="CSetColorShader.h">
       <Filter>ShaderCode\Compute\SetColor</Filter>
     </ClInclude>
-    <ClInclude Include="CUpdateParticle.h">
+    <ClInclude Include="CParticleUpdate.h">
       <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </ClInclude>
   </ItemGroup>
@@ -437,7 +437,7 @@
     <ClCompile Include="CSetColorShader.cpp">
       <Filter>ShaderCode\Compute\SetColor</Filter>
     </ClCompile>
-    <ClCompile Include="CUpdateParticle.cpp">
+    <ClCompile Include="CParticleUpdate.cpp">
       <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </ClCompile>
   </ItemGroup>

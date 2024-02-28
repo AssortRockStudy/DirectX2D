@@ -199,3 +199,13 @@ enum class SHADER_DOMAIN
 
 	DOMAIN_DEBUG
 };
+
+enum class PARTICLE_MODULE
+{
+	SPAWN,
+	DRAG,
+	SCALE,
+	INITAL_VELOCITY,
+
+	END,
+};

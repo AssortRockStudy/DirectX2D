@@ -24,6 +24,8 @@ private:
     CGameObject*            m_pDbgObj;
     bool                    m_DebugPosition;
 
+    vector<Ptr<CTexture>>   m_vecNoiseTex;
+
 public:
     void init();
     void tick();

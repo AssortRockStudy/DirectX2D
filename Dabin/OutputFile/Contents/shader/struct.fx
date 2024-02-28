@@ -56,7 +56,15 @@ struct FParticleModule
     float LifeMin;
     float LifeMax;
     int SpawnRate;
-    int SpaceType; // 좌표계 (0: Local, 1: World)
+    int SpaceType;          // 좌표계 (0: Local, 1: World)
+    
+    int SpawnShape;         // (0: Sphere, 1: Box)
+    float Radius;             // Spawn Shape - Sphere : 반지름 길이
+    float4 vSpawnBoxScale;     // Spawn Shape - Box : Box 크기
+
+    float2 padding;
+
+    int arrModuleCheck[4];
 };
 
 struct FSpawnCount

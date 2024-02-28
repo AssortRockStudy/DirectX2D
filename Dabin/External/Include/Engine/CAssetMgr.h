@@ -19,7 +19,7 @@ class CAssetMgr :
     SINGLE(CAssetMgr)
 
 private:
-    unordered_map<wstring, Ptr<CAsset>> m_hashAsset[(UINT)ASSET_TYPE::END]; // hash를 ASSET_TYPE마다 만들어 관리
+    map<wstring, Ptr<CAsset>> m_hashAsset[(UINT)ASSET_TYPE::END]; // hash를 ASSET_TYPE마다 만들어 관리
 
 private:
     void CreateDefaultMesh();
@@ -102,7 +102,7 @@ inline void CAssetMgr::AddAsset(const wstring& _strKey, T* _Asset)
 {
     ASSET_TYPE Type = GetAssetType<T>();
 
-    unordered_map<wstring, Ptr<CAsset>>::iterator iter = m_hashAsset[(UINT)Type].find(_strKey);
+    map<wstring, Ptr<CAsset>>::iterator iter = m_hashAsset[(UINT)Type].find(_strKey);
     assert(iter == m_hashAsset[(UINT)Type].end());
 
     _Asset->SetKey(_strKey);
@@ -113,7 +113,7 @@ template<typename T>
 inline Ptr<T> CAssetMgr::FindAsset(const wstring& _strKey)
 {
     ASSET_TYPE Type = GetAssetType<T>();
-    unordered_map<wstring, Ptr<CAsset>>::iterator iter = m_hashAsset[(UINT)Type].find(_strKey);
+    map<wstring, Ptr<CAsset>>::iterator iter = m_hashAsset[(UINT)Type].find(_strKey);
 
     if (iter == m_hashAsset[(UINT)Type].end())
         return nullptr;

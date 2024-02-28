@@ -103,7 +103,7 @@ StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
 Texture2D g_postprocess : register(t13);
 
-TextureCubeArray g_tex_14 : register(t14);
+TextureCubeArray g_NoiseTex : register(t14);
 
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);

@@ -97,31 +97,31 @@ int CStructuredBuffer::Create(UINT _ElementSize, UINT _ElementCount, SB_TYPE _Ty
 
 void CStructuredBuffer::UpdatePipeline(UINT _RegisterNum)
 {
-    CONTEXT->VSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
-    CONTEXT->HSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
-    CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
-    CONTEXT->GSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
-    CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	CONTEXT->VSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	CONTEXT->HSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	CONTEXT->GSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+	CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 }
 
-int CStructuredBuffer::UpdatedCS_SRV(UINT _RegisterNum)
+int CStructuredBuffer::UpdateCS_SRV(UINT _RegisterNum)
 {
     if (!m_SRV)
         return E_FAIL;
 
     m_RecentSRV = _RegisterNum;
-    CONTEXT->CSGetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->CSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 
     return S_OK;
 }
 
-int CStructuredBuffer::UpdatedCS_UAV(UINT _RegisterNum)
+int CStructuredBuffer::UpdateCS_UAV(UINT _RegisterNum)
 {
     if (!m_UAV)
         return E_FAIL;
 
-    m_RecentUAV = _RegisterNum;
     UINT i = -1;
+    m_RecentUAV = _RegisterNum;
     CONTEXT->CSSetUnorderedAccessViews(_RegisterNum, 1, m_UAV.GetAddressOf(), &i);
    
     return S_OK;
@@ -129,19 +129,19 @@ int CStructuredBuffer::UpdatedCS_UAV(UINT _RegisterNum)
 
 void CStructuredBuffer::Clear(UINT _RegisterNum)
 {
-    ID3D11ShaderResourceView* pSRV = nullptr;
+	ID3D11ShaderResourceView* pSRV = nullptr;
 
-    CONTEXT->VSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->HSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->DSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->GSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->VSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->HSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->DSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->GSSetShaderResources(_RegisterNum, 1, &pSRV);
+	CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
 }
 
 void CStructuredBuffer::ClearCS_SRV()
 {
     ID3D11ShaderResourceView* pSRV = nullptr;
-    CONTEXT->CSGetShaderResources(m_RecentSRV, 1, &pSRV);
+    CONTEXT->CSSetShaderResources(m_RecentSRV, 1, &pSRV);
 }
 
 void CStructuredBuffer::ClearCS_UAV()

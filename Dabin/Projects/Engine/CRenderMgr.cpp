@@ -140,10 +140,11 @@ void CRenderMgr::UpdatePipeline()
 			vecLight2DInfo.push_back(info);
 		}
 		m_Light2DBuffer->SetData(vecLight2DInfo.data(), (UINT)vecLight2DInfo.size());
-		m_Light2DBuffer->UpdatePipeline(11);
-
-		vecLight2DInfo.clear();
 	}
+	m_Light2DBuffer->UpdatePipeline(11);
+	vecLight2DInfo.clear();
+
+	// SB update: 3D Light
 }
 
 void CRenderMgr::Clear()

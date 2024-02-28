@@ -3,7 +3,7 @@
 #include "CAssetMgr.h"
 #include "CDevice.h"
 #include "CTransform.h"
-#include "CUpdateParticle.h"
+#include "CParticleUpdate.h"
 #include "CTimeMgr.h"
 
 CParticleSystem::CParticleSystem()
@@ -36,7 +36,25 @@ CParticleSystem::CParticleSystem()
 	m_SpawnCountBuffer->Create(sizeof(FSpawnCount), 1, SB_TYPE::READ_WRITE, true);
 
 	// compute shader for particle update
-	m_CSParticleUpdate = (CUpdateParticle*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"UpdateParticleShader").Get();
+	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
+
+	// -------------------------
+	// Module Setting
+	// -------------------------
+	// Spawn
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
+
+	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	m_Module.vSpawnScaleMin = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.vSpawnScaleMax = Vec4(50.f, 20.f, 1.f, 1.f);
+
+	m_Module.LifeMin = 5.f;
+	m_Module.LifeMax = 5.f;
+	m_Module.SpawnRate = 10;
+	m_Module.SpaceType = 1;
+
+	m_Module.SpawnShape = 0;
+	m_Module.Radius = 100.f;
 }
 
 CParticleSystem::~CParticleSystem()
@@ -61,18 +79,16 @@ void CParticleSystem::finaltick()
 	// Set Module
 	// ----------------------
 	// Module: Spawn
-	m_Module.SpaceType = 1;
-	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	m_Module.vSpawnScaleMin = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.vSpawnScaleMax = Vec4(50.f, 20.f, 1.f, 1.f);
-	m_Module.LifeMin = 5.f;
-	m_Module.LifeMax = 10.f;
-	m_Module.SpawnRate = 10;
 	m_SpawnAccTime += DT;
-	if (1.f / (float)m_Module.SpawnRate < m_SpawnAccTime)
+
+	if (m_SpawnAccTime > 1.f / m_Module.SpawnRate)
 	{
-		m_SpawnAccTime = 0.f;
-		FSpawnCount count = FSpawnCount{ 1, };
+		// 누적 처리
+		// - frame이 떨어지면 : DT를 누적시켰다가 한번에 처리해야 함
+		float fSpawnCount = m_SpawnAccTime / (1.f / m_Module.SpawnRate);
+		m_SpawnAccTime -= (1.f / (float)m_Module.SpawnRate) * floor(fSpawnCount);
+		
+		FSpawnCount count = FSpawnCount{ (int)fSpawnCount,0,};
 		m_SpawnCountBuffer->SetData(&count);
 	}
 	else
@@ -83,7 +99,7 @@ void CParticleSystem::finaltick()
 
 	// Update Module
 	m_ParticleModuleBuffer->SetData(&m_Module);
-	m_ParticleModuleBuffer->UpdatedCS_SRV(20);
+	m_ParticleModuleBuffer->UpdateCS_SRV(20);
 
 	// ----------------------
 	// Cacluate

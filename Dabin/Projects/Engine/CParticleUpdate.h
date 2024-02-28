@@ -4,7 +4,7 @@
 // CUpdateParticle: Particle Update Function
 // =======================================
 
-class CUpdateParticle :
+class CParticleUpdate :
     public CComputeShader
 {
 private:
@@ -23,7 +23,7 @@ public:
     void SetParticleSpawnCount(CStructuredBuffer* _ParticleBuffer) { m_SpawnCountBuffer = _ParticleBuffer; }
 
 public:
-    CUpdateParticle();
-    ~CUpdateParticle();
+    CParticleUpdate();
+    ~CParticleUpdate();
 };
 

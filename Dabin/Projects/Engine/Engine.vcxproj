@@ -190,7 +190,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="components.h" />
     <ClInclude Include="CParticleSystem.h" />
-    <ClInclude Include="CUpdateParticle.h" />
+    <ClInclude Include="CParticleUpdate.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CRenderComponent.h" />
@@ -217,7 +217,7 @@ call EngineCopy.bat</Command>
     <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="CParticleSystem.cpp" />
-    <ClCompile Include="CUpdateParticle.cpp" />
+    <ClCompile Include="CParticleUpdate.cpp" />
     <ClCompile Include="CRenderMgr.cpp" />
     <ClCompile Include="CRenderMgr_init.cpp" />
     <ClCompile Include="CSetColorShader.cpp" />
