@@ -142,6 +142,9 @@
     <Filter Include="ShaderCode\Compute\ParticleUpdate">
       <UniqueIdentifier>{fee71095-357b-470a-9134-8c4d107a2f38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Asset\Prefab">
+      <UniqueIdentifier>{ad0d36d0-a59d-42b5-b08a-2270ead18587}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -288,6 +291,9 @@
     <ClInclude Include="CParticleUpdate.h">
       <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
     </ClInclude>
+    <ClInclude Include="CPrefab.h">
+      <Filter>06.Asset\Prefab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -421,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="CParticleUpdate.cpp">
       <Filter>ShaderCode\Compute\ParticleUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="CPrefab.cpp">
+      <Filter>06.Asset\Prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

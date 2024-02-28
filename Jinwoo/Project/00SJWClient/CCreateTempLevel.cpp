@@ -8,6 +8,8 @@
 #include <Engine\CLayer.h>
 #include <Engine\CGameObject.h>
 #include <Engine\components.h>
+#include <Engine\CAssetMgr.h>
+#include <Engine\CPrefab.h>
 
 #include <Engine\CMesh.h>
 #include <Engine\CGraphicsShader.h>
@@ -17,8 +19,15 @@
 #include <Scripts\CPlayerScript.h>
 #include <Scripts\CBackgroundScript.h>
 
+#include "CLevelSaveLoad.h"
+
+
 void CCreateTempLevel::CreateTempLevel()
 {
+	//CLevel* pLevel = CLevelSaveLoad::LoadLevel(L"level\\temp.lv");
+	//CLevelMgr::GetInst()->ChangeLevel(pLevel, LEVEL_STATE::STOP);
+	//return;
+
 	// 초기 레벨 구성
 	CLevel* pTempLevel = new CLevel;
 
@@ -137,4 +146,6 @@ void CCreateTempLevel::CreateTempLevel()
 
 	// 레벨 플레이
 	CLevelMgr::GetInst()->ChangeLevel(pTempLevel, LEVEL_STATE::STOP);
+
+	CLevelSaveLoad::SaveLevel(pTempLevel, L"level\\temp.lv");
 }

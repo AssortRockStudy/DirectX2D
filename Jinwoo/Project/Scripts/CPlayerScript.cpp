@@ -29,6 +29,8 @@ void CPlayerScript::begin()
 	//Animator2D()->LoadAnimation(L"animdata\\IdleDown.txt");
 	//Animator2D()->LoadAnimation(L"animdata\\i.txt");
 	//Animator2D()->Play(L"i");
+
+	//GetRenderComponent()->GetDynamicMaterial();
 }
 
 void CPlayerScript::tick()
@@ -107,26 +109,6 @@ void CPlayerScript::tick()
 		vRot.z += DT * XM_PI;
 	}
 
-	if (KEY_TAP(SPACE))
-	{
-		GetOwner()->Destroy();
-
-		CGameObject* pObj = nullptr;
-
-		pObj = new CGameObject;
-		pObj->SetName(L"Missile");
-		pObj->AddComponent(new CTransform);
-		pObj->AddComponent(new CMeshRender);
-
-		pObj->Transform()->SetRelativePos(Transform()->GetRelativePos());
-		pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
-
-		pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-		pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-
-		GamePlayStatic::SpawnGameObject(pObj, 0);
-	}
-
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeRotation(vRot);
 }
@@ -142,4 +124,14 @@ void CPlayerScript::Overlap(CCollider2D* _Collider, CGameObject* _OtherObj, CCol
 
 void CPlayerScript::EndOverlap(CCollider2D* _Collider, CGameObject* _OtherObj, CCollider2D* _OtherCollider)
 {
+}
+
+void CPlayerScript::SaveToFile(FILE* _File)
+{
+	fwrite(&m_Speed, sizeof(float), 1, _File);
+}
+
+void CPlayerScript::LoadFromFile(FILE* _File)
+{
+	fread(&m_Speed, sizeof(float), 1, _File);
 }

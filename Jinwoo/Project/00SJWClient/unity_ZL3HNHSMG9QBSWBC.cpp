@@ -42,6 +42,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\ParamUI.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\PrefabUI.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\SoundUI.cpp"
 
 

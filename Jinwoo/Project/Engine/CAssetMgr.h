@@ -9,6 +9,7 @@
 #include "CGraphicsShader.h"
 #include "CTexture.h"
 #include "CMaterial.h"
+#include "CPrefab.h"
 
 class CAssetMgr :
 	public CSingleton<CAssetMgr>
@@ -72,6 +73,9 @@ ASSET_TYPE GetAssetType()
 
 	if constexpr (std::is_same_v<CMaterial, T>)
 		Type = ASSET_TYPE::MATERIAL;
+
+	if constexpr (std::is_same_v<CPrefab, T>)
+		Type = ASSET_TYPE::CPrefab;
 
 	return Type;
 }

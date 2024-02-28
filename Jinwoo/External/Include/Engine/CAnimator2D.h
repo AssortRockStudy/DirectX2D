@@ -35,6 +35,10 @@ public:
     map<wstring, CAnim*> GetAnimList();
     CAnim* GetCurAnim() { return m_CurAnim; }
 
+
+    virtual void SaveToFile(FILE* _File) override;
+    virtual void LoadFromFile(FILE* _File) override;
+
     CLONE(CAnimator2D);
 
 public:

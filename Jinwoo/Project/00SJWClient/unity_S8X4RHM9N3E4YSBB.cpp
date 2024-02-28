@@ -24,6 +24,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\CImGuiMgr.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\CLevelSaveLoad.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\00SJWClient\Collider2DUI.cpp"
 
 

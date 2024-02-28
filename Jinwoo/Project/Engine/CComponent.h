@@ -33,6 +33,10 @@ public:
     GET_OTHER_COMPONENT(Light2D);
     GET_OTHER_COMPONENT(TileMap);
 
+
+    virtual void SaveToFile(FILE* _File) = 0;
+    virtual void LoadFromFile(FILE* _File) = 0;
+
     virtual CComponent* Clone() = 0;
 
 public:

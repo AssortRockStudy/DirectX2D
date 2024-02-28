@@ -39,6 +39,10 @@ public:
     bool Save(const wstring& _FilePath, const wstring& _strKey);
     bool Load(const wstring& _FilePath);
 
+
+    void SaveToFile(FILE* _File);
+    void LoadFromFile(FILE* _File);
+
     CLONE(CAnim);
 
 public:

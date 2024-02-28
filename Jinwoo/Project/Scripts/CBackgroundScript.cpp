@@ -46,3 +46,11 @@ Vec3 CBackgroundScript::Rotate(Vec3 _vDir, float _angle)
 
 	return vRotateDir;
 }
+
+void CBackgroundScript::SaveToFile(FILE* _File)
+{
+}
+
+void CBackgroundScript::LoadFromFile(FILE* _File)
+{
+}

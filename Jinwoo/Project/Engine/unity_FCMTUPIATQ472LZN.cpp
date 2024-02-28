@@ -18,6 +18,9 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPathMgr.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPrefab.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CRenderComponent.cpp"
 
 

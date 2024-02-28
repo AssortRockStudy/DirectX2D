@@ -107,6 +107,9 @@
     <Filter Include="01.Manager\04.LevelSaveLoad">
       <UniqueIdentifier>{df55fc9a-9059-414c-b910-fab1d2323ac3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.UI\3.Inspector\AssetUI\Prefab">
+      <UniqueIdentifier>{550fa30a-28ca-48a0-a282-a62fc51be2f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -238,6 +241,12 @@
     <ClInclude Include="CCreateTempLevel.h">
       <Filter>01.Manager\03.CreateTempLevel</Filter>
     </ClInclude>
+    <ClInclude Include="CLevelSaveLoad.h">
+      <Filter>01.Manager\04.LevelSaveLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="PrefabUI.h">
+      <Filter>02.UI\3.Inspector\AssetUI\Prefab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -367,6 +376,12 @@
     </ClCompile>
     <ClCompile Include="CCreateTempLevel.cpp">
       <Filter>01.Manager\03.CreateTempLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelSaveLoad.cpp">
+      <Filter>01.Manager\04.LevelSaveLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="PrefabUI.cpp">
+      <Filter>02.UI\3.Inspector\AssetUI\Prefab</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

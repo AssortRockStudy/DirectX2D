@@ -7,6 +7,7 @@
 #include <Engine\global.h>
 #include <Engine\CEngine.h>
 #include <Engine\CDevice.h>
+#include <Engine\CPrefab.h>
 
 #ifdef _DEBUG
 #pragma comment(lib, "Engine\\Engine_d.lib")
@@ -28,6 +29,7 @@
 
 #include "CImGuiMgr.h"
 #include "CEditorObjMgr.h"
+#include "CLevelSaveLoad.h"
 #include "CCreateTempLevel.h"
 
 
@@ -77,6 +79,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     // 임시 레벨 생성
+    CPrefab::GAMEOBJECT_SAVE = &CLevelSaveLoad::SaveGameObject;
+    CPrefab::GAMEOBJECT_LOAD = &CLevelSaveLoad::LoadGameObject;
     CCreateTempLevel::CreateTempLevel();
 
 #ifndef _RELEASE_GAME

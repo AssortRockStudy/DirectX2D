@@ -19,8 +19,6 @@ private:
     UINT    m_FaceY;            // 세로 타일 개수
     Vec2    m_vTileRenderSize;  // 화면에 그려질 타일 1칸 사이즈
 
-    Vec3    m_vTileMapWorldPos;
-
     Ptr<CTexture>   m_TileAtlas;
     Vec2            m_vTilePixelSize;   // TileAtlas의 타일 하나의 사이즈
     Vec2            m_vSliceSizeUV;
@@ -46,6 +44,9 @@ public:
     virtual void finaltick() override;
     virtual void UpdateData() override;
     virtual void render() override;
+
+    virtual void SaveToFile(FILE* _File) override;
+    virtual void LoadFromFile(FILE* _File) override;
 
     CLONE(CTileMap);
 

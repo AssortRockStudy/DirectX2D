@@ -48,6 +48,7 @@ void Inspector::CreateComponentUI()
 
 #include "TextureUI.h"
 #include "MeshDataUI.h"
+#include "PrefabUI.h"
 #include "MeshUI.h"
 #include "MaterialUI.h"
 #include "GraphicsShaderUI.h"
@@ -62,6 +63,9 @@ void Inspector::CreateAssetUI()
 
 	m_arrAssetUI[(UINT)ASSET_TYPE::MESHDATA] = new MeshDataUI;
 	AddChildUI(m_arrAssetUI[(UINT)ASSET_TYPE::MESHDATA]);
+
+	m_arrAssetUI[(UINT)ASSET_TYPE::PREFAB] = new PrefabUI;
+	AddChildUI(m_arrAssetUI[(UINT)ASSET_TYPE::PREFAB]);
 
 	m_arrAssetUI[(UINT)ASSET_TYPE::TEXTURE] = new TextureUI;
 	AddChildUI(m_arrAssetUI[(UINT)ASSET_TYPE::TEXTURE]);
