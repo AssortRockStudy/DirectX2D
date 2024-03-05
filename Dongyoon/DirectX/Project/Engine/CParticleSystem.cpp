@@ -4,6 +4,8 @@
 #include "CDevice.h"
 #include "CStructuredBuffer.h"
 
+#include "CTimeMgr.h"
+
 #include "CAssetMgr.h"
 #include "CMesh.h"
 #include "CMaterial.h"
@@ -27,26 +29,71 @@ CParticleSystem::CParticleSystem()
 	{
 		arrParticle[i].vWorldPos = Vec3((vResol.x / -2.f) + (i + 1) * vResol.x / (m_MaxParticleCount + 1), 0.f, 200.f);
 		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
-		arrParticle[i].Active = 1;
+		arrParticle[i].Active = 0;
 	}
 
+	// 파티클을 저장하는 구조화 버퍼
 	m_ParticleBuffer = new CStructuredBuffer;
 	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticleCount, SB_TYPE::READ_WRITE, true, arrParticle);
 
+	// 파티클 모듈정보를 저장하는 구조화버퍼
+	m_ParticleModuleBuffer = new CStructuredBuffer;
+	m_ParticleModuleBuffer->Create(sizeof(tParticleModule), 1, SB_TYPE::READ_ONLY, true);
+
 	// 파티클 업데이트용 컴퓨트 쉐이더 참조
 	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
+
+	// SpawnCount 전달용 구조화버퍼
+	m_SpawnCountBuffer = new CStructuredBuffer;
+	m_SpawnCountBuffer->Create(sizeof(tSpawnCount), 1, SB_TYPE::READ_WRITE, true);
 }
 
 CParticleSystem::~CParticleSystem()
 {
 	if (m_ParticleBuffer != nullptr)
 		delete m_ParticleBuffer;
+
+	if (m_ParticleModuleBuffer != nullptr)
+		delete m_ParticleModuleBuffer;
+
+	if (m_SpawnCountBuffer != nullptr)
+		delete m_SpawnCountBuffer;
 }
 
 void CParticleSystem::finaltick()
 {
+	// 파티클 모듈값 세팅
+	m_Module.SpaceType = 1;
+	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.VSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.MinLife = 5.f;
+	m_Module.MaxLife = 5.f;
+	m_Module.SpawnRate = 10;
+
+	m_Time += DT;
+
+	if ((1.f / m_Module.SpawnRate) < m_Time)
+	{
+		m_Time = 0.f;
+		tSpawnCount count = tSpawnCount{ 1,1, 1, 1 };
+		m_SpawnCountBuffer->SetData(&count);
+	}
+	else
+	{
+		tSpawnCount count = tSpawnCount{ 0, 0, 0, 0 };
+		m_SpawnCountBuffer->SetData(&count);
+	}
+
+	// 파티클 모듈정보 업데이트
+	m_ParticleModuleBuffer->SetData(&m_Module);
+	m_ParticleModuleBuffer->UpdateData_CS_SRV(20);
+
 	// 파티컬 업데이트 컴퓨트 쉐이더
 	m_CSParticleUpdate->SetParticleBuffer(m_ParticleBuffer);
+	m_CSParticleUpdate->SetParticleModuleBuffer(m_ParticleModuleBuffer);
+	m_CSParticleUpdate->SetParticleSpawnCount(m_SpawnCountBuffer);
+
 	m_CSParticleUpdate->Execute();
 
 	tParticle arrParticle[100] = {};

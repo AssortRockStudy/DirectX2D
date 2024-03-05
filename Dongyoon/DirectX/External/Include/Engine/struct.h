@@ -60,6 +60,24 @@ struct tParticle
 
 };
 
+struct tParticleModule
+{
+	//Spawn 모듈
+	Vec4	vSpawnColor; // 초기 컬러
+	Vec4	vSpawnMinScale; // 초기 최소 크기
+	Vec4	VSpawnMaxScale; // 초기 최대 크기
+
+	float MinLife; // 최소 수명
+	float MaxLife; // 최대 수명
+	int SpawnRate; // 초당 생성 개수
+	int SpaceType; // 좌표계(0 : LocalSpace, 1 : WorldSpace)
+};
+
+struct tSpawnCount
+{
+	int SpawnCount;
+	int iPadding[3];
+};
 //======================
 //상수 버퍼 대응 구조체
 //=======================
