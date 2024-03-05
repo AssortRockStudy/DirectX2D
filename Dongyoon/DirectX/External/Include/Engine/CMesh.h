@@ -26,6 +26,8 @@ public:
 
     void Render();
 
+    void Render_As_Particle(UINT _ParticleCount);
+
 public:
     CMesh();
     ~CMesh();
