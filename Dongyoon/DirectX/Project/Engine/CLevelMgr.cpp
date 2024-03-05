@@ -56,6 +56,9 @@ void CLevelMgr::init()
 	pCS->SetTargetTexture(pTestTex);
 	pCS->Execute();
 
+	tPixel* pPixel = pTestTex->GetPixels();
+	tPixel pixel = pPixel[pTestTex->GetWidth() * 1 + 5];
+
 
 	// 충돌 설정
 	CCollisionMgr::GetInst()->LayerCheck(L"Player", L"Monster");
@@ -124,35 +127,9 @@ void CLevelMgr::init()
 	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"BackgroundMtrl"));
 
 	Ptr<CTexture> pTex = CAssetMgr::GetInst()->Load<CTexture>(L"BackgroundTex", L"texture\\Background.jpg");
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTestTex);
+	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, pTex);
 
 	m_CurLevel->AddObject(pObj, L"Background", false);
-	
-	// TileMap Object
-	pObj = new CGameObject;
-	pObj->SetName(L"TileMap");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CTileMap);
-
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
-
-	Ptr<CTexture> pTileAtlas = CAssetMgr::GetInst()->Load<CTexture>(L"TileAtlasTex", L"texture\\TILE.bmp");
-	
-	pObj->TileMap()->SetTileAtlas(pTileAtlas, Vec2(64.f, 64.f));
-	pObj->TileMap()->SetFace(6, 6);
-
-	for (int i = 0; i < 6; ++i)
-	{
-		for (int j = 0; j < 6; ++j)
-		{
-			pObj->TileMap()->SetTileIndex(i, j, i * 6 + j);
-		}
-	}
-
-	m_CurLevel->AddObject(pObj, L"Tile", false);
-
-
 
 	// Player Object 생성
 
@@ -179,76 +156,21 @@ void CLevelMgr::init()
 	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
 	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"PlayerTexture", L"texture\\Fighter.bmp"));
 
-
-
 	pObj->Animator2D()->Play(L"Explosion");
 
 	m_CurLevel->AddObject(pObj, L"Player", false);
 
-	//Monster Obj 생성
+	//Particle Object
+
 	pObj = new CGameObject;
-	pObj->SetName(L"Monster");
+	pObj->SetName(L"Particle");
 
 	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-	pObj->AddComponent(new CCollider2D);
+	pObj->AddComponent(new CParticleSystem);
 
-	pObj->Transform()->SetRelativePos(Vec3(500.f, 0.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
-
-	pObj->Collider2D()->SetAbsolute(true);
-	pObj->Collider2D()->SetOffsetScale(Vec2(100.f, 100.f));
-	pObj->Collider2D()->SetOffsetPos(Vec2(0.f, 0.f));
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_0, 0.f);
-
-
-	m_CurLevel->AddObject(pObj, L"Monster", false);
-
-	// PostProcess 오브젝트 추가
-	/*pObj = new CGameObject;
-	pObj->SetName(L"GrayFilter");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"GrayFilterMtrl"));
-
-	m_CurLevel->AddObject(pObj, L"Default", false);*/
-
-	// Distortion 효과 추가
-	/*pObj = new CGameObject;
-	pObj->SetName(L"Distortion Object");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
-	pObj->Transform()->SetRelativeScale(Vec3(300.f, 300.f, 1.f));
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"DistortionMtrl"));
-	pObj->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetMgr::GetInst()->Load<CTexture>(L"NoiseTex", L"texture\\noise\\noise_03.jpg"));
+	pObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
 	m_CurLevel->AddObject(pObj, L"Default", false);
-
-	pObj = new CGameObject;
-	pObj->SetName(L"UI");
-
-	pObj->AddComponent(new CTransform);
-	pObj->AddComponent(new CMeshRender);
-
-	pObj->Transform()->SetRelativePos(Vec3(-590.f, 310.f, 500.f));
-	pObj->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
-
-	pObj->MeshRender()->SetMesh(CAssetMgr::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObj->MeshRender()->SetMaterial(CAssetMgr::GetInst()->FindAsset<CMaterial>(L"Std2DMtrl"));
-
-	m_CurLevel->AddObject(pObj, L"UI", false);*/
-
 
 	// Level 시작
 	m_CurLevel->begin();

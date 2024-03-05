@@ -465,5 +465,8 @@
     <FxCompile Include="setcolor.fx">
       <Filter>ShaderCode\Compute\SetColor</Filter>
     </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>ShaderCode\Util</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
