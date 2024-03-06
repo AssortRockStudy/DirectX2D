@@ -55,38 +55,8 @@
     <Filter Include="07. GameObject">
       <UniqueIdentifier>{dc0adf31-8f14-4799-ad7a-b6fc94222462}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Component">
-      <UniqueIdentifier>{53242875-15fd-4e70-9402-c6824ce49840}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\01. Transform">
-      <UniqueIdentifier>{22f5a265-772a-4566-9b95-9bec2094c9da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\02. Collider2D">
-      <UniqueIdentifier>{bd63f02a-899b-4482-ab44-75db3951d0ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\06. Light2D">
-      <UniqueIdentifier>{74361a49-4f55-4337-8219-a2e189b3607f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\08. Camera">
-      <UniqueIdentifier>{0cd5a600-d54a-4f86-9e32-4dc1a1061758}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\RenderComponent">
-      <UniqueIdentifier>{6328dcc2-dc24-464d-9258-4bb30b86895e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\RenderComponent\01. MeshRender">
-      <UniqueIdentifier>{5b889c73-fcb8-42ff-9146-a64624e7dc63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\RenderComponent\02. Tilemap">
-      <UniqueIdentifier>{f40c244a-6c4e-448e-9e0d-26fbb94d4e07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\RenderComponent\03. ParticleSystem">
-      <UniqueIdentifier>{167975e0-470f-4726-b9a8-e65351b52fa1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Device\ConstBuffer">
       <UniqueIdentifier>{6076eeda-4145-4f3a-93f9-43e399b9254e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\Script">
-      <UniqueIdentifier>{80ef9c47-119b-41cc-a484-7f524a49b1eb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scripts">
       <UniqueIdentifier>{d788e6bc-5797-484c-a7c9-073f4b6a1bb8}</UniqueIdentifier>
@@ -118,12 +88,6 @@
     <Filter Include="03. Device\StructedBuffer">
       <UniqueIdentifier>{1c32dc20-4120-480c-b212-b6b13a177b85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08. Component\04. Animator2D">
-      <UniqueIdentifier>{8fbe1c15-df2a-4db6-8144-7fc2f474ffc1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08. Component\04. Animator2D\Anim">
-      <UniqueIdentifier>{64509c2a-bf51-48fd-a617-9c277c32e662}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShaderCode\Render">
       <UniqueIdentifier>{a43ff31f-f8d9-4a35-8821-232fa03349b4}</UniqueIdentifier>
     </Filter>
@@ -138,6 +102,42 @@
     </Filter>
     <Filter Include="ShaderCode\Compute\ParticleUpdate">
       <UniqueIdentifier>{f9e19e87-b13c-47a9-a30d-047a8f6d8dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component">
+      <UniqueIdentifier>{53242875-15fd-4e70-9402-c6824ce49840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\01. Transform">
+      <UniqueIdentifier>{22f5a265-772a-4566-9b95-9bec2094c9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\02. Collider2D">
+      <UniqueIdentifier>{bd63f02a-899b-4482-ab44-75db3951d0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\06. Light2D">
+      <UniqueIdentifier>{74361a49-4f55-4337-8219-a2e189b3607f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\08. Camera">
+      <UniqueIdentifier>{0cd5a600-d54a-4f86-9e32-4dc1a1061758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\RenderComponent">
+      <UniqueIdentifier>{6328dcc2-dc24-464d-9258-4bb30b86895e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\RenderComponent\01. MeshRender">
+      <UniqueIdentifier>{5b889c73-fcb8-42ff-9146-a64624e7dc63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\RenderComponent\02. Tilemap">
+      <UniqueIdentifier>{f40c244a-6c4e-448e-9e0d-26fbb94d4e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\RenderComponent\03. ParticleSystem">
+      <UniqueIdentifier>{167975e0-470f-4726-b9a8-e65351b52fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\Script">
+      <UniqueIdentifier>{80ef9c47-119b-41cc-a484-7f524a49b1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\04. Animator2D">
+      <UniqueIdentifier>{8fbe1c15-df2a-4db6-8144-7fc2f474ffc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CRenderMgr\08. Component\04. Animator2D\Anim">
+      <UniqueIdentifier>{64509c2a-bf51-48fd-a617-9c277c32e662}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -199,22 +199,22 @@
       <Filter>07. GameObject</Filter>
     </ClInclude>
     <ClInclude Include="CComponent.h">
-      <Filter>08. Component</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component</Filter>
     </ClInclude>
     <ClInclude Include="CTransform.h">
-      <Filter>08. Component\01. Transform</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\01. Transform</Filter>
     </ClInclude>
     <ClInclude Include="func.h">
       <Filter>01. Header</Filter>
     </ClInclude>
     <ClInclude Include="CRenderComponent.h">
-      <Filter>08. Component\RenderComponent</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent</Filter>
     </ClInclude>
     <ClInclude Include="CMeshRender.h">
-      <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\01. MeshRender</Filter>
     </ClInclude>
     <ClInclude Include="CScript.h">
-      <Filter>08. Component\Script</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerScript.h">
       <Filter>Scripts</Filter>
@@ -232,7 +232,7 @@
       <Filter>04. Manager\LevelMgr</Filter>
     </ClInclude>
     <ClInclude Include="CCamera.h">
-      <Filter>08. Component\08. Camera</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\08. Camera</Filter>
     </ClInclude>
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
@@ -259,16 +259,16 @@
       <Filter>06. Asset\Material</Filter>
     </ClInclude>
     <ClInclude Include="CCollider2D.h">
-      <Filter>08. Component\02. Collider2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\02. Collider2D</Filter>
     </ClInclude>
     <ClInclude Include="CCollisionMgr.h">
       <Filter>04. Manager\ColMgr</Filter>
     </ClInclude>
     <ClInclude Include="CAnimator2D.h">
-      <Filter>08. Component\04. Animator2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="CAnim.h">
-      <Filter>08. Component\04. Animator2D\Anim</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\04. Animator2D\Anim</Filter>
     </ClInclude>
     <ClInclude Include="CStructuredBuffer.h">
       <Filter>03. Device\StructedBuffer</Filter>
@@ -277,16 +277,16 @@
       <Filter>03. Device\ConstBuffer</Filter>
     </ClInclude>
     <ClInclude Include="CLight2D.h">
-      <Filter>08. Component\06. Light2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\06. Light2D</Filter>
     </ClInclude>
     <ClInclude Include="CBackgroundScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="CTileMap.h">
-      <Filter>08. Component\RenderComponent\02. Tilemap</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\02. Tilemap</Filter>
     </ClInclude>
     <ClInclude Include="CParticleSystem.h">
-      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\03. ParticleSystem</Filter>
     </ClInclude>
     <ClInclude Include="CComputeShader.h">
       <Filter>06. Asset\Shader\ComputeShader</Filter>
@@ -342,19 +342,19 @@
       <Filter>07. GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CComponent.cpp">
-      <Filter>08. Component</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component</Filter>
     </ClCompile>
     <ClCompile Include="CTransform.cpp">
-      <Filter>08. Component\01. Transform</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\01. Transform</Filter>
     </ClCompile>
     <ClCompile Include="CRenderComponent.cpp">
-      <Filter>08. Component\RenderComponent</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent</Filter>
     </ClCompile>
     <ClCompile Include="CMeshRender.cpp">
-      <Filter>08. Component\RenderComponent\01. MeshRender</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\01. MeshRender</Filter>
     </ClCompile>
     <ClCompile Include="CScript.cpp">
-      <Filter>08. Component\Script</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerScript.cpp">
       <Filter>Scripts</Filter>
@@ -369,7 +369,7 @@
       <Filter>04. Manager\LevelMgr</Filter>
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
-      <Filter>08. Component\08. Camera</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\08. Camera</Filter>
     </ClCompile>
     <ClCompile Include="extern.cpp">
       <Filter>01. Header</Filter>
@@ -402,16 +402,16 @@
       <Filter>06. Asset\Material</Filter>
     </ClCompile>
     <ClCompile Include="CCollider2D.cpp">
-      <Filter>08. Component\02. Collider2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\02. Collider2D</Filter>
     </ClCompile>
     <ClCompile Include="CCollisionMgr.cpp">
       <Filter>04. Manager\ColMgr</Filter>
     </ClCompile>
     <ClCompile Include="CAnimator2D.cpp">
-      <Filter>08. Component\04. Animator2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="CAnim.cpp">
-      <Filter>08. Component\04. Animator2D\Anim</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\04. Animator2D\Anim</Filter>
     </ClCompile>
     <ClCompile Include="CStructuredBuffer.cpp">
       <Filter>03. Device\StructedBuffer</Filter>
@@ -420,7 +420,7 @@
       <Filter>03. Device\ConstBuffer</Filter>
     </ClCompile>
     <ClCompile Include="CLight2D.cpp">
-      <Filter>08. Component\06. Light2D</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\06. Light2D</Filter>
     </ClCompile>
     <ClCompile Include="CBackgroundScript.cpp">
       <Filter>Scripts</Filter>
@@ -429,10 +429,10 @@
       <Filter>04. Manager\AssetMgr</Filter>
     </ClCompile>
     <ClCompile Include="CTileMap.cpp">
-      <Filter>08. Component\RenderComponent\02. Tilemap</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\02. Tilemap</Filter>
     </ClCompile>
     <ClCompile Include="CParticleSystem.cpp">
-      <Filter>08. Component\RenderComponent\03. ParticleSystem</Filter>
+      <Filter>04. Manager\CRenderMgr\08. Component\RenderComponent\03. ParticleSystem</Filter>
     </ClCompile>
     <ClCompile Include="CComputeShader.cpp">
       <Filter>06. Asset\Shader\ComputeShader</Filter>

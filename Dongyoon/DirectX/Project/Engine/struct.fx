@@ -33,11 +33,16 @@ struct tParticle
 {
     float4 vLocalPos;
     float4 vWorldPos; // 위치
+    float4 vWorldInitScale; // 초기 크기
     float4 vWorldScale; // 크기
     float4 vWorldRotation; // 회전값
-    float4 vVelocity; // 속도
+    float3 vVelocity; // 속도
     float4 vColor; // 색상
+    float4 vForce; //누적 힘
+    float3 vNoiseForce; // NoiseForce 모듈로 인한 랜덤힘
+    float NoiseForceTime; //NoiseForce를 세팅받은 시간
     
+    float NormalizeAge;
     float Mass; // 질량
     float Age; // 현재 나이
     float Life; // 수명
@@ -53,6 +58,8 @@ struct tParticleMoudle
 
     float MinLife; // 최소 수명
     float MaxLife; // 최대 수명
+    float MinMass; // 최소 질량
+    float MaxMass; // 최대 질량
     int SpawnRate; // 초당 생성 개수
     int SpaceType; // 좌표계(0 : LocalSpace, 1 : WorldSpace)
     
@@ -68,7 +75,15 @@ struct tParticleMoudle
     float FixedAngle; // 해당 방향에서 랜덤범위 각도
     float4 FixedDirection; // 지정 방향
     
-    int arrModuleCheck[4];
+    //Scale
+    float4 vScaleRatio;
+    
+    //Noise Force
+    float NoiseForceScale;
+    float NoiseForceTerm;
+        
+     // Module Active Check
+    int arrModuleCheck[6];
 };
 
 struct tSpawnCount

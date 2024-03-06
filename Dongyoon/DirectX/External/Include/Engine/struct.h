@@ -49,11 +49,16 @@ struct tParticle
 {
 	Vec4 vLocalPos; // 로컬 위치
 	Vec4 vWorldPos; // 월드 위치
+	Vec4 vWorldInitScale; // 초기 크기
 	Vec4 vWorldScale; // 크기
 	Vec4 vWorldRotation; // 회전값
-	Vec4 vVelocity; // 속도
+	Vec3 vVelocity; // 속도
 	Vec4 vColor; // 색상
+	Vec4 vForce; // 입자에 누적된 누적 힘 총량
+	Vec3 vNoiseForce; // NoiseForce 모듈로 인한 랜덤 힘
+	float NoiseForceTime; //NoiseForce를 세팅받은 시간
 
+	float NormalizeAge; //Age를 Life 기준으로 정규화 한 값
 	float Mass; //질량
 	float Age; // 현재 나이
 	float Life; // 수명
@@ -70,6 +75,8 @@ struct tParticleModule
 
 	float MinLife; // 최소 수명
 	float MaxLife; // 최대 수명
+	float MinMass; // 최소 질량
+	float MaxMass; // 최대 질량
 	int SpawnRate; // 초당 생성 개수
 	int SpaceType; // 좌표계(0 : LocalSpace, 1 : WorldSpace)
 	int SpawnShape; // 스폰 범위(0 : Sphere, 1 : Box)
@@ -84,7 +91,16 @@ struct tParticleModule
 	float FixedAngle; // 해당 방향에서 랜덤 범위 각도
 	Vec4 FixedDirection; // 지정 방향
 
+	//Scale
+	Vec4 vScaleRatio;
+
+	//Noise Force
+	float NoiseForceScale;
+	float NoiseForceTerm;
+
+	//Module On / Off
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
+
 };
 
 struct tSpawnCount
@@ -139,11 +155,12 @@ struct tAnimData2D
 struct tGlobalData
 {
 	Vec2 g_RenderResolution;
+	Vec2	g_NoiseTexResolution;
 	float g_dt;
 	float g_time;
 	int g_Light2DCount;
 	int g_Light3DCount;
-	Vec2 g_vPadding;
+
 };
 
 extern tGlobalData g_global;

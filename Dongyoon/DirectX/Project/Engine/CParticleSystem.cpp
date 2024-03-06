@@ -28,7 +28,12 @@ CParticleSystem::CParticleSystem()
 
 	// 파티클 모듈정보를 저장하는 구조화버퍼
 	m_ParticleModuleBuffer = new CStructuredBuffer;
-	m_ParticleModuleBuffer->Create(sizeof(tParticleModule), 1, SB_TYPE::READ_ONLY, true);
+	UINT ModuleAddSize = 0;
+	if (sizeof(tParticleModule) % 16 != 0)
+	{
+		ModuleAddSize = 16 - (sizeof(tParticleModule) % 16);
+	}
+	m_ParticleModuleBuffer->Create(sizeof(tParticleModule) + ModuleAddSize, 1, SB_TYPE::READ_ONLY, true);
 
 	// 파티클 업데이트용 컴퓨트 쉐이더 참조
 	m_CSParticleUpdate = (CParticleUpdate*)CAssetMgr::GetInst()->FindAsset<CComputeShader>(L"ParticleUpdateShader").Get();
@@ -42,22 +47,37 @@ CParticleSystem::CParticleSystem()
 
 	m_Module.SpaceType = 1;
 	m_Module.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(50.f, 50.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(200.f, 200.f, 1.f, 1.f);
-	m_Module.MinLife = 0.4f;
-	m_Module.MaxLife = 1.f;
+	m_Module.vSpawnMinScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(30.f, 30.f, 1.f, 1.f);
+	m_Module.MinLife = 3.f;
+	m_Module.MaxLife = 5.f;
+	m_Module.MinMass = 1.f;
+	m_Module.MaxMass = 1.f;
 	m_Module.SpawnShape = 1; // 0 : Sphere, 1 : Box
 	m_Module.Radius = 100.f;
 	m_Module.vSpawnBoxScale = Vec4(500.f, 500.f, 0.f, 0.f);
 	m_Module.SpawnRate = 50;
 
+
 	// Add Velocity Module
-	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 0;
 	m_Module.AddVelocityType = 0;
 	m_Module.MinSpeed = 100;
-	m_Module.MaxSpeed = 200;
+	m_Module.MaxSpeed = 150;
 	m_Module.FixedDirection;
 	m_Module.FixedAngle;
+
+	// Scale
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SCALE] = 0;
+	m_Module.vScaleRatio = Vec3(0.1f, 0.1f, 0.1f);
+
+	// Noise Force
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::NOISE_FORCE] = 1;
+	m_Module.NoiseForceScale = 50.f;
+	m_Module.NoiseForceTerm = 0.3f;
+
+	// Calculate Forec
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
 	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\CartoonSmoke.png", L"texture\\particle\\CartoonSmoke.png");
 
