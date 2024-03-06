@@ -29,7 +29,7 @@ CParticleSystem::CParticleSystem()
 	{
 		arrParticle[i].vWorldPos = Vec3((vResol.x / -2.f) + (i + 1) * vResol.x / (m_MaxParticleCount + 1), 0.f, 200.f);
 		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
-		arrParticle[i].Active = 0;
+		arrParticle[i].Active = 1;
 	}
 
 	// 파티클을 저장하는 구조화 버퍼
@@ -46,6 +46,21 @@ CParticleSystem::CParticleSystem()
 	// SpawnCount 전달용 구조화버퍼
 	m_SpawnCountBuffer = new CStructuredBuffer;
 	m_SpawnCountBuffer->Create(sizeof(tSpawnCount), 1, SB_TYPE::READ_WRITE, true);
+
+	//초기 모듈 세팅
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
+
+	m_Module.SpaceType = 1;
+	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.VSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
+	m_Module.MinLife = 5.f;
+	m_Module.MaxLife = 5.f;
+	m_Module.SpawnShape = 0; // 0 : Sphere
+	m_Module.Radius = 100.f;
+
+	m_Module.SpawnRate = 100;
+
 }
 
 CParticleSystem::~CParticleSystem()
@@ -62,21 +77,18 @@ CParticleSystem::~CParticleSystem()
 
 void CParticleSystem::finaltick()
 {
-	// 파티클 모듈값 세팅
-	m_Module.SpaceType = 1;
-	m_Module.vSpawnColor = Vec4(1.f, 0.f, 0.f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.VSpawnMaxScale = Vec4(20.f, 20.f, 1.f, 1.f);
-	m_Module.MinLife = 5.f;
-	m_Module.MaxLife = 5.f;
-	m_Module.SpawnRate = 10;
 
 	m_Time += DT;
 
 	if ((1.f / m_Module.SpawnRate) < m_Time)
 	{
-		m_Time = 0.f;
-		tSpawnCount count = tSpawnCount{ 1,1, 1, 1 };
+		// 누적 시간을 스폰 간격으로 나눈 값
+		float fSpawnCount = m_Time / (1.f / m_Module.SpawnRate);
+
+		// 스폰 간격을 제외한 잔량을 남은 누적시간으로 절성
+		m_Time -= (1.f / m_Module.SpawnRate) * floorf(fSpawnCount);
+
+		tSpawnCount count = tSpawnCount{ (int)fSpawnCount, 0, 0, 0 };
 		m_SpawnCountBuffer->SetData(&count);
 	}
 	else
@@ -93,6 +105,7 @@ void CParticleSystem::finaltick()
 	m_CSParticleUpdate->SetParticleBuffer(m_ParticleBuffer);
 	m_CSParticleUpdate->SetParticleModuleBuffer(m_ParticleModuleBuffer);
 	m_CSParticleUpdate->SetParticleSpawnCount(m_SpawnCountBuffer);
+	//m_CSParticleUpdate->SetParticleWorldPos();
 
 	m_CSParticleUpdate->Execute();
 
