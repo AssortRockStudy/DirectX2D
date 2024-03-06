@@ -47,7 +47,8 @@ struct tPixel
 
 struct tParticle
 {
-	Vec4 vWorldPos; //위치
+	Vec4 vLocalPos; // 로컬 위치
+	Vec4 vWorldPos; // 월드 위치
 	Vec4 vWorldScale; // 크기
 	Vec4 vWorldRotation; // 회전값
 	Vec4 vVelocity; // 속도
@@ -65,7 +66,7 @@ struct tParticleModule
 	//Spawn 모듈
 	Vec4	vSpawnColor; // 초기 컬러
 	Vec4	vSpawnMinScale; // 초기 최소 크기
-	Vec4	VSpawnMaxScale; // 초기 최대 크기
+	Vec4	vSpawnMaxScale; // 초기 최대 크기
 
 	float MinLife; // 최소 수명
 	float MaxLife; // 최대 수명
@@ -75,6 +76,13 @@ struct tParticleModule
 	float Radius; // SpawnShape 가 Sphere 인 경우, 반지름 길이
 	Vec4 vSpawnBoxScale; //SpawnShape가 Box인 경우, Box의 크기
 	Vec2 padding;
+
+	// Add Velocity
+	int AddVelocityType; // 0: From Center, 1 : To Center, 2: Fix Direction
+	float MinSpeed;
+	float MaxSpeed;
+	float FixedAngle; // 해당 방향에서 랜덤 범위 각도
+	Vec4 FixedDirection; // 지정 방향
 
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
