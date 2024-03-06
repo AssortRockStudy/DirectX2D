@@ -105,8 +105,29 @@ int CGraphicsShader::CreateDomainShader()
 	return 0;
 }
 
-int CGraphicsShader::CreateGeometryShader()
+int CGraphicsShader::CreateGeometryShader(const wstring& _strRelativePath, const string& _strFuncName)
 {
+	wstring strContentPath = CPathMgr::GetContentPath();
+	wstring strFilePath = strContentPath + _strRelativePath;
+
+	// compile shader code
+	if (FAILED(D3DCompileFromFile(strFilePath.c_str()
+		, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, _strFuncName.c_str(), "gs_5_0", D3DCOMPILE_DEBUG, 0
+		, m_GSBlob.GetAddressOf(), m_ErrBlob.GetAddressOf())))
+	{
+		if (m_ErrBlob)
+		{
+			char* pErrMsg = (char*)m_ErrBlob->GetBufferPointer();
+			MessageBoxA(nullptr, pErrMsg, "Failed to Compile Shader", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	// create gemotery shader
+	DEVICE->CreateGeometryShader(m_GSBlob->GetBufferPointer(), m_GSBlob->GetBufferSize(), nullptr, m_GS.GetAddressOf());
+
 	return 0;
 }
 
@@ -122,7 +143,7 @@ int CGraphicsShader::CreatePixelShader(const wstring& _strRelativePath, const st
 	wstring strContentPath = CPathMgr::GetContentPath();
 	wstring strFilePath = strContentPath + _strRelativePath;
 
-	// Pixel Shader Functio Compile
+	// Pixel Shader Function Compile
 	if (FAILED(D3DCompileFromFile(strFilePath.c_str()
 		, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 		, _strFuncName.c_str(), "ps_5_0", D3DCOMPILE_DEBUG, 0

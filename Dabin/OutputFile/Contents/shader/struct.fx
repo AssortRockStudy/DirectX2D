@@ -34,37 +34,67 @@ struct FTileInfo
 
 struct FParticle
 {
-    float4  vWorldPos;
-    float4  vWorldScale;
-    float4  vWorldRotation;
-    float4  vVelocity;
-    float4  vColor;
+    float4 vLocalPos;
+    float4 vWorldPos;
+    float4 vWorldInitScale;     // 초기 크기
+    float4 vWorldScale;         // 현재 크기
+    float4 vWorldRotation;
+    float3 vVelocity;
+    float4 vColor;
+    float4 vForce;              // 입자에 누적된 힘 총량
 
-    float   Mass;
-    float   Age;
-    float   Life;
-    int     Active;
+    float3 vNosieForce;         // NosieForce 모듈로 인한 랜덤 힘
+    float NosieForceTime;       // NosieForce 세팅받은 시간
+
+    float Mass;
+    float Life;                 // 총 수명
+    float Age;                  // 현재 수명
+    float NormalizedAge;         // Life 기준으로 정규화된 Age
+    int Active;
 };
 
 struct FParticleModule
 {
-	// Module: Spawn
+	// Module: Spawn | 파티클 생성
     float4 vSpawnColor;
     float4 vSpawnScaleMin;
     float4 vSpawnScaleMax;
-
     float LifeMin;
     float LifeMax;
+    float MassMin;
+    float MassMax;
     int SpawnRate;
-    int SpaceType;          // 좌표계 (0: Local, 1: World)
+    int SpaceType;              // 좌표계 (0: Local, 1: World)
+
+    int SpawnShape;             // (0: Sphere, 1: Box)
+    float Radius;               // Spawn Shape - Sphere : 반지름 길이
+    float4 vSpawnBoxScale;      // Spawn Shape - Box : Box 크기
+
+	// Module: Drag	| 이동 경로
+
+	// Module: Scale | 크기 변화
+    float4 vScaleRatio;
+
+	// Module: Add Velocity	| 초기 속도 지정
+    int AddVelocityType;        // 0: from center, 1: to center, 2: fix direction
+    float SpeedMin;
+    float SpeedMax;
+    float FixedAngle;
+    float4 FixedDirection;
+
+	// Module: Noise Force | 위치 노이즈
+    float NosieForceScale;
+    float NosieForceTerm;
+
+	// Module: Cacluate Force | 힘 계산
     
-    int SpawnShape;         // (0: Sphere, 1: Box)
-    float Radius;             // Spawn Shape - Sphere : 반지름 길이
-    float4 vSpawnBoxScale;     // Spawn Shape - Box : Box 크기
-
-    float2 padding;
-
-    int arrModuleCheck[4];
+	// Module: Render | 렌더링 옵션
+    int VelocityAlignment;      // 0: Off, 1: On
+    int AlphaBasedLife;         // 0: Off, 1: NormalizedAge, 2: Age
+    float AlphaMaxAge;
+    
+	// Module On / Off
+    int arrModuleCheck[7];
 };
 
 struct FSpawnCount

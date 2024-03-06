@@ -20,6 +20,7 @@ int CParticleUpdate::UpdatePipeline()
 		return E_FAIL;
 
 	m_Const.iArr[0] = m_ParticleBuffer->GetElementCount();	// max count
+	m_Const.v4Arr[0] = m_vParticleWorldPos;
 
 	m_ParticleBuffer->UpdateCS_UAV(0);
 	m_SpawnCountBuffer->UpdateCS_UAV(1);

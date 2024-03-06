@@ -13,6 +13,13 @@ void CAssetMgr::CreateDefaultMesh()
 {
 	CMesh* pMesh = nullptr;
 
+	// Point
+	Vtx vPoint;
+	UINT Idx = 0;
+	pMesh = new CMesh;
+	pMesh->Create(&vPoint, 1, &Idx, 1);
+	AddAsset(L"PointMesh", pMesh);
+
 	// Rectangle
 	// Vertex Buffer에 vertex 위치 설정
 	// - 시계방향
@@ -181,7 +188,10 @@ void CAssetMgr::CreateDefaultGraphicsShader()
 	// Particle Shader
 	pShader = new CGraphicsShader;
 	pShader->CreateVertexShader(L"shader\\particle.fx", "VS_Particle");
+	pShader->CreateGeometryShader(L"shader\\particle.fx", "GS_Particle");
 	pShader->CreatePixelShader(L"shader\\particle.fx", "PS_Particle");
+	
+	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetDSType(DS_TYPE::NO_WRITE);
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);

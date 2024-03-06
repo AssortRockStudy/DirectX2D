@@ -1,6 +1,7 @@
 #pragma once
 #include "CRenderComponent.h"
 #include "CParticleUpdate.h"
+#include "CTexture.h"
 // =======================================
 // CParticleSystem: Particle Group阑 积己, 包府窍绰 Component
 // =======================================
@@ -16,6 +17,7 @@ private:
     
     CStructuredBuffer*      m_ParticleBuffer;
     UINT                    m_ParticleCountMax;
+    Ptr<CTexture>           m_ParticleTex;
     
     // Compute Shader
     Ptr<CParticleUpdate>    m_CSParticleUpdate;

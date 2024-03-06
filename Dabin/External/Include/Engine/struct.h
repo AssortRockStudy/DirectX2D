@@ -47,28 +47,36 @@ struct FPixel
 // FParticle: 입자 하나가 가지는 정보를 담은 구조체
 struct FParticle
 {
+	Vec4	vLocalPos;
 	Vec4	vWorldPos;
-	Vec4	vWorldScale;
+	Vec4	vWorldInitScale;	// 초기 크기
+	Vec4	vWorldScale;		// 현재 크기
 	Vec4	vWorldRotation;
-	Vec4	vVelocity;
+	Vec3	vVelocity;
 	Vec4	vColor;
+	Vec4	vForce;				// 입자에 누적된 힘 총량
+
+	Vec3	vNosieForce;		// NosieForce 모듈로 인한 랜덤 힘
+	float	NosieForceTime;		// NosieForce 세팅받은 시간
 
 	float	Mass;
-	float	Age;
-	float	Life;
+	float	Life;				// 총 수명
+	float	Age;				// 현재 수명
+	float	NormalizedAge;		// Life 기준으로 정규화된 Age
 	int		Active;
 };
 
 // FParticleModule: Particle System의 세팅을 담은 구조체
 struct FParticleModule
 {
-	// Module: Spawn
+	// Module: Spawn | 파티클 생성
 	Vec4	vSpawnColor;
 	Vec4	vSpawnScaleMin;
 	Vec4	vSpawnScaleMax;
-
 	float	LifeMin;
 	float	LifeMax;
+	float	MassMin;
+	float	MassMax;
 	int		SpawnRate;
 	int		SpaceType;			// 좌표계 (0: Local, 1: World)
 
@@ -76,8 +84,30 @@ struct FParticleModule
 	float	Radius;				// Spawn Shape - Sphere : 반지름 길이
 	Vec4	vSpawnBoxScale;		// Spawn Shape - Box : Box 크기
 
-	Vec2	padding;
+	// Module: Drag	| 이동 경로
 
+	// Module: Scale | 크기 변화
+	Vec4	vScaleRatio;
+
+	// Module: Add Velocity	| 초기 속도 지정
+	int		AddVelocityType;	// 0: from center, 1: to center, 2: fix direction
+	float	SpeedMin;
+	float	SpeedMax;
+	float	FixedAngle;
+	Vec4	FixedDirection;
+
+	// Module: Noise Force | 위치 노이즈
+	float	NosieForceScale;
+	float	NosieForceTerm;
+
+	// Module: Cacluate Force | 힘 계산
+
+	// Module: Render | 렌더링 옵션
+	int		VelocityAlignment;	// 0: Off, 1: On 
+	int		AlphaBasedLife;		// 0: Off, 1: NormalizedAge, 2: Age
+	float	AlphaMaxAge;
+
+	// Module On / Off
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];
 };
 
