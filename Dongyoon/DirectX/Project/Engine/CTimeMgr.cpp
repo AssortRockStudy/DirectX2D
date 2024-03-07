@@ -2,6 +2,7 @@
 #include "CTimeMgr.h"
 
 #include "CEngine.h"
+#include "CKeyMgr.h"
 
 CTimeMgr::CTimeMgr()
 	: m_Frequency{}
@@ -51,6 +52,14 @@ void CTimeMgr::tick()
 
 	++m_iCall;
 
-	g_global.g_dt = (float)m_DeltaTime;
+	if (KEY_PRESSED(KEY::LBTN))
+	{
+		g_global.g_dt = 0.f;
+	}
+	else
+	{
+		g_global.g_dt = (float)m_DeltaTime;
+	}
+
 	g_global.g_time += (float)m_DeltaTime;
 }

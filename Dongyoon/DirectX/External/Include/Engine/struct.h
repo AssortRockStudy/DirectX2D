@@ -100,6 +100,8 @@ struct tParticleModule
 
 	// Render
 	int		VelocityAlignment; // 1 : On, 0: Off
+	int		AlphaBaseLife; // 0 : off, 1: NormalizedAge, 2: Age
+	float	AlphaMaxAge;
 
 	//Module On / Off
 	int arrModuleCheck[(UINT)PARTICLE_MODULE::END];

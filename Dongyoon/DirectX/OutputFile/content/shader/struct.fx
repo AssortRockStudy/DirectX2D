@@ -84,6 +84,8 @@ struct tParticleModule
         
     //Render
     int VelocityAlignment; // 1 : On, 0 : Off
+    int AlphaBasedLife;    // 0: off, 1: NormalizedAge, 2: Age
+    float AlphaMaxAge;     // 알파가 0이 되기 까지의 수명
     
      // Module Active Check
     int arrModuleCheck[7];
