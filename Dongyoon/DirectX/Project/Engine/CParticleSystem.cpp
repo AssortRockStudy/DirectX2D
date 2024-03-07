@@ -45,11 +45,14 @@ CParticleSystem::CParticleSystem()
 	//초기 모듈 세팅
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
 
+	// 초기 모듈 세팅		
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::SPAWN] = 1;
+
 	m_Module.SpaceType = 1;
 	m_Module.vSpawnColor = Vec4(0.2f, 0.4f, 0.9f, 1.f);
-	m_Module.vSpawnMinScale = Vec4(10.f, 5.f, 1.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec4(20.f, 10.f, 1.f, 1.f);
-	m_Module.MinLife = 1.f;
+	m_Module.vSpawnMinScale = Vec4(50.f, 25.f, 1.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec4(50.f, 25.f, 1.f, 1.f);
+	m_Module.MinLife = 5.f;
 	m_Module.MaxLife = 5.f;
 	m_Module.MinMass = 1.f;
 	m_Module.MaxMass = 1.f;
@@ -61,8 +64,8 @@ CParticleSystem::CParticleSystem()
 	// Add Velocity Module
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = 1;
 	m_Module.AddVelocityType = 0; // 0 : From Center, 1: To Center, 2: Fix Direction
-	m_Module.MinSpeed = 10;
-	m_Module.MaxSpeed = 10;
+	m_Module.MinSpeed = 500;
+	m_Module.MaxSpeed = 500;
 	m_Module.FixedDirection;
 	m_Module.FixedAngle;
 
@@ -75,18 +78,24 @@ CParticleSystem::CParticleSystem()
 	m_Module.NoiseForceScale = 10.f;
 	m_Module.NoiseForceTerm = 0.3f;
 
-	// Calculate Forec
+	// Drag Module
+	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::DRAG] = 1;
+	m_Module.DragTime = 0.5f;
+
+	// Calculate Force
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::CALCULATE_FORCE] = 1;
 
 	// Render 
 	m_Module.arrModuleCheck[(UINT)PARTICLE_MODULE::RENDER] = 1;
 	m_Module.VelocityAlignment = 1; // 속도에 따른 방향 정렬
-	m_Module.AlphaBaseLife = 1; // 0 : off, 1 : NomrlizedAge, 2: Age
+	m_Module.AlphaBasedLife = 1; // 0 : off, 1 : NomrlizedAge, 2: Age
 	m_Module.AlphaMaxAge = 2.f;
 
-	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\Sparks.png"
-		, L"texture\\particle\\Sparks.png");
 
+
+
+	m_ParticleTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\particle\\Sparks.png"
+		, L"texture\\particle\\ray.png");
 }
 
 CParticleSystem::~CParticleSystem()
@@ -138,13 +147,14 @@ void CParticleSystem::finaltick()
 
 void CParticleSystem::render()
 {
-	//View, Porj 행렬 전달
+	// View, Proj 행렬 전달
 	Transform()->UpdateData();
 
-	//ParticleBuffer 바인딩
+	// ParticleBuffer 바인딩
 	m_ParticleBuffer->UpdateData(20);
 	m_ParticleModuleBuffer->UpdateData(21);
 
+	// 모든 파티클 렌더링
 	// 파티클 개별 랜더링 -> 인스턴싱
 	GetMaterial()->SetScalarParam(INT_0, 0);
 	GetMaterial()->SetTexParam(TEX_0, m_ParticleTex);
@@ -152,7 +162,7 @@ void CParticleSystem::render()
 
 	GetMesh()->Render_As_Particle(m_MaxParticleCount);
 
-	//렌더링 때 사용한 리소스 바인딩 clear
+	// 렌더링때 사용한 리소스 바인딩 Clear
 	m_ParticleBuffer->Clear(20);
 	m_ParticleModuleBuffer->Clear(21);
 }

@@ -82,7 +82,6 @@ struct tParticleModule
 	int SpawnShape; // 스폰 범위(0 : Sphere, 1 : Box)
 	float Radius; // SpawnShape 가 Sphere 인 경우, 반지름 길이
 	Vec4 vSpawnBoxScale; //SpawnShape가 Box인 경우, Box의 크기
-	Vec2 padding;
 
 	// Add Velocity
 	int AddVelocityType; // 0: From Center, 1 : To Center, 2: Fix Direction
@@ -98,9 +97,12 @@ struct tParticleModule
 	float NoiseForceScale;
 	float NoiseForceTerm;
 
+	//Drag
+	float DragTime; //감속시키는게 걸리는 시간
+
 	// Render
 	int		VelocityAlignment; // 1 : On, 0: Off
-	int		AlphaBaseLife; // 0 : off, 1: NormalizedAge, 2: Age
+	int		AlphaBasedLife; // 0 : off, 1: NormalizedAge, 2: Age
 	float	AlphaMaxAge;
 
 	//Module On / Off
