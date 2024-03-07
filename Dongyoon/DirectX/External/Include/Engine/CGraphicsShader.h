@@ -40,9 +40,9 @@ private:
 
 public:
     int CreateVertexShader(const wstring& _strRelativePath, const string& _strFuncName);
-    int CreateHullShader();
-    int CreateDomainShader();
-    int CreateGeometryShader();
+    /*int CreateHullShader();
+    int CreateDomainShader();*/
+    int CreateGeometryShader(const wstring& _strRelativePath, const string& _StrFuncName);
     int CreatePixelShader(const wstring& _strRelativePath, const string& _strFuncName);
 
     D3D11_PRIMITIVE_TOPOLOGY GetTopology() { return m_Topology; }

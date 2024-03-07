@@ -49,7 +49,7 @@ struct tParticle
     int Active; // 활성화, 비활성화 여부
 };
 
-struct tParticleMoudle
+struct tParticleModule
 {
     // Spawn 모듈
     float4 vSpawnColor; // 초기 컬러
@@ -82,8 +82,11 @@ struct tParticleMoudle
     float NoiseForceScale;
     float NoiseForceTerm;
         
+    //Render
+    int VelocityAlignment; // 1 : On, 0 : Off
+    
      // Module Active Check
-    int arrModuleCheck[6];
+    int arrModuleCheck[7];
 };
 
 struct tSpawnCount

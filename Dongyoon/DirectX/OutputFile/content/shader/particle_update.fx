@@ -5,7 +5,7 @@
 #include "struct.fx"
 #include "func.fx"
 
-StructuredBuffer<tParticleMoudle> g_Module : register(t20);
+StructuredBuffer<tParticleModule> g_Module : register(t20);
 RWStructuredBuffer<tParticle> g_ParticleBuffer : register(u0);
 RWStructuredBuffer<tSpawnCount>g_SpawnCount : register(u1);
 
