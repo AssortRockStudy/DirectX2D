@@ -22,7 +22,7 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::begin()
 {
-	//Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"AnimAtlasTex", L"texture\\link.png");
+	//Ptr<CTexture> pAtlasTex = CAssetMgr::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
 	//Animator2D()->Create(L"test", pAtlasTex, Vec2(0.f, 0.f), Vec2(120, 130), Vec2(0.f, -60.f), Vec2(200.f, 200.f), 3, 1);
 	//Animator2D()->SaveAnimations(L"animdata");
 

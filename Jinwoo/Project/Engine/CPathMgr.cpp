@@ -22,3 +22,17 @@ void CPathMgr::init()
 
 	wcscat_s(g_szContent, 255, L"content\\");
 }
+
+wstring CPathMgr::GetRelativePath(const wstring& _FullPath)
+{
+	wstring strContentPath = GetContentPath();
+
+	// 입력된 경로에 content 폴더가 없으면 실패
+	if (-1 == _FullPath.find(strContentPath, 0))
+		return nullptr;
+
+	// content 경로 끝부터 문자열 끝까지를 잘라서 반환
+	wstring strRelativePath = _FullPath.substr(strContentPath.length(), _FullPath.length());
+
+	return strRelativePath;
+}

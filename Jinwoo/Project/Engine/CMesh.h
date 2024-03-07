@@ -29,7 +29,7 @@ public:
     CLONE_DISABLE(CMesh);
 
 public:
-    CMesh();
+    CMesh(bool _Engine = false);
     ~CMesh();
 };
 

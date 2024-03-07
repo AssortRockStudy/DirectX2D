@@ -23,7 +23,7 @@ void CAssetMgr::CreateDefaultMesh()
 
 	Vtx vPoint;
 	UINT Idx = 0;
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(&vPoint, 1, &Idx, 1);\
 	AddAsset(L"PointMesh", pMesh);
 
@@ -60,7 +60,7 @@ void CAssetMgr::CreateDefaultMesh()
 	arrIdx[4] = 2;
 	arrIdx[5] = 3;
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"RectMesh", pMesh);
 
@@ -72,7 +72,7 @@ void CAssetMgr::CreateDefaultMesh()
 	arrIdx[3] = 3;
 	arrIdx[4] = 0;
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(arrVtx, 4, arrIdx, 5);
 	AddAsset(L"RectMesh_Debug", pMesh);
 
@@ -110,7 +110,7 @@ void CAssetMgr::CreateDefaultMesh()
 		vecIdx.push_back(i + 1);
 	}
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh);
 
@@ -123,7 +123,7 @@ void CAssetMgr::CreateDefaultMesh()
 		vecIdx.push_back(i);
 	}
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh_Debug", pMesh);
 	vecVtx.clear();
@@ -148,7 +148,7 @@ void CAssetMgr::CreateDefaultMesh()
 	vecIdx.push_back(0); vecIdx.push_back(1); // 세로줄
 	vecIdx.push_back(2); vecIdx.push_back(3); // 가로줄
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CrossMesh", pMesh);
 	vecVtx.clear();

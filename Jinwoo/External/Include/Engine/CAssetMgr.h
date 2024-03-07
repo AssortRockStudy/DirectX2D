@@ -49,8 +49,17 @@ public:
 	Ptr<CTexture> CreateTexture(const wstring& _strKey, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _Flag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
 	Ptr<CTexture> CreateTexture(const wstring& _strKey, ComPtr<ID3D11Texture2D> _tex2D);
 
-public:
+	// 지정된 타입의 모든 에셋의 이름을 반환
 	void GetAssetName(ASSET_TYPE _Type, vector<string>& _Out);
+
+private:
+	// 지정된 에셋을 삭제
+	template<typename T>
+	void DeleteAsset(const wstring& _strKey);
+
+	void DeleteAsset(ASSET_TYPE _Type, const wstring& _strKey);
+
+	friend class CTaskMgr;
 };
 
 
@@ -75,7 +84,7 @@ ASSET_TYPE GetAssetType()
 		Type = ASSET_TYPE::MATERIAL;
 
 	if constexpr (std::is_same_v<CPrefab, T>)
-		Type = ASSET_TYPE::CPrefab;
+		Type = ASSET_TYPE::PREFAB;
 
 	return Type;
 }
@@ -147,4 +156,16 @@ Ptr<T> CAssetMgr::Load(const wstring& _strKey, const wstring& _strRelativePath)
 	AddAsset<T>(_strKey, (T*)pAsset.Get());
 
 	return (T*)pAsset.Get();
+}
+
+template<typename T>
+inline void CAssetMgr::DeleteAsset(const wstring& _strKey)
+{
+	ASSET_TYPE AssetType = GetAssetType<T>();
+
+	map<wstring, Ptr<CAsset>>::iterator iter = m_mapAsset[(UINT)AssetType].find(_strKey);
+
+	assert(!(iter == m_mapAsset[(UINT)AssetType].end()));
+
+	m_mapAsset[(UINT)AssetType].erase(iter);
 }

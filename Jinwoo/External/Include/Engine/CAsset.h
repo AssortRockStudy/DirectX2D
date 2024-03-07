@@ -19,6 +19,7 @@ public:
     
     int GetRefCount() { return m_RefCount; }
     ASSET_TYPE GetType() { return m_Type; }
+    bool IsEngineAsset() { return m_bEngineAsset; }
 
 private:
     void SetKey(const wstring& _Key) { m_Key = _Key; }
@@ -41,7 +42,7 @@ private:
     virtual CAsset* Clone() = 0;
 
 public:
-    CAsset(ASSET_TYPE _Type, bool _bEngineAsset = false);
+    CAsset(ASSET_TYPE _Type, bool _bEngineAsset);
     ~CAsset();
 
     friend class CAssetMgr;

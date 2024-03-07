@@ -77,6 +77,14 @@ void CTaskMgr::tick()
 			m_bAssetChange = true;
 		}
 			break;
+		case TASK_TYPE::DELETE_ASSET:
+		{
+			ASSET_TYPE Type = (ASSET_TYPE)m_vecTask[i].Param_1;
+			CAsset* pAsset = (CAsset*)m_vecTask[i].Param_2;
+			CAssetMgr::GetInst()->DeleteAsset(Type, pAsset->GetKey());
+			m_bAssetChange = true;
+		}
+			break;
 		case TASK_TYPE::CHANGE_LEVELSTATE:
 		{
 			CLevel* pLevel = (CLevel*)m_vecTask[i].Param_1;

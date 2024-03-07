@@ -5,6 +5,8 @@
 #include <Engine\CLevel.h>
 #include <Engine\CGameObject.h>
 
+#include <Engine\CPathMgr.h>
+
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -20,6 +22,7 @@
 
 CImGuiMgr::CImGuiMgr()
     : m_bDemoUI(false)
+    , m_hNotify(nullptr)
 {
 
 }
@@ -33,6 +36,9 @@ CImGuiMgr::~CImGuiMgr()
 
     // UI 삭제
     Delete_Map(m_mapUI);
+
+    // 디렉토리 변경 감시 종료
+    FindCloseChangeNotification(m_hNotify);
 }
 
 void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11DeviceContext> _Context)
@@ -87,6 +93,12 @@ void CImGuiMgr::init(HWND _hMainWnd, ComPtr<ID3D11Device> _Device, ComPtr<ID3D11
     //IM_ASSERT(font != nullptr);
 
     create_UI();
+
+    // content 폴더 감시
+    wstring strContentPath = CPathMgr::GetContentPath();
+    m_hNotify = FindFirstChangeNotification(strContentPath.c_str(), true
+                                            , FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME
+                                            | FILE_ACTION_ADDED | FILE_ACTION_REMOVED);
 }
 
 void CImGuiMgr::progress()
@@ -94,6 +106,8 @@ void CImGuiMgr::progress()
     tick();
 
     render();
+
+    observe_content();
 }
 
 void CImGuiMgr::tick()
@@ -163,6 +177,7 @@ void CImGuiMgr::create_UI()
     AddUI(pUI->GetID(), pUI);
 }
 
+
 UI* CImGuiMgr::FindUI(const string& _strUIName)
 {
     map<string, UI*>::iterator iter = m_mapUI.find(_strUIName);
@@ -183,6 +198,20 @@ void CImGuiMgr::AddUI(const string& _strKey, UI* _UI)
     m_mapUI.insert(make_pair(_strKey, _UI));
 }
 
+
+void CImGuiMgr::observe_content()
+{
+    // WaitForSingleObject를 이용하여 알림이 있는지 확인
+    // 대기시간을 0으로 설정해서 알림이 있든 없든 바로 반환
+    if (WAIT_OBJECT_0 == WaitForSingleObject(m_hNotify, 0))
+    {
+        FindNextChangeNotification(m_hNotify);
+
+        // ContentUI에 Reload 작업 수행
+        Content* pContentUI = (Content*)FindUI("##Content");
+        pContentUI->ReloadContent();
+    }
+}
 
 // demo
 //{

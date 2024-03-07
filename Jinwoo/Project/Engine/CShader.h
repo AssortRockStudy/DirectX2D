@@ -14,7 +14,7 @@ public:
     CLONE_DISABLE(CShader);
 
 public:
-    CShader(ASSET_TYPE _Type);
+    CShader(ASSET_TYPE _Type, bool _Engine = true);
     ~CShader();
 };
 
