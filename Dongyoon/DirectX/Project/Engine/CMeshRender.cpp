@@ -1,0 +1,66 @@
+#include "pch.h"
+#include "CMeshRender.h"
+
+
+#include "CMesh.h"
+#include "CGraphicsShader.h"
+
+#include "CGameObject.h"
+#include "CAnimator2D.h"
+#include "CTransform.h"
+#include "CMaterial.h"
+
+#include "CRenderMgr.h"
+
+CMeshRender::CMeshRender()
+	: CRenderComponent(COMPONENT_TYPE::MESHRENDER)
+{
+}
+
+CMeshRender::~CMeshRender()
+{
+}
+
+void CMeshRender::UpdateData()
+{
+	if ( GetMaterial() != nullptr)
+	{
+		GetMaterial()->UpdateDate();
+	}
+
+	Transform()->UpdateData();
+	
+}
+
+void CMeshRender::finaltick()
+{
+	if (CRenderMgr::GetInst()->IsDebugPosition())
+	{
+		GamePlayStatic::DrawDebugCross(Transform()->GetWorldPos(), 20.f, Vec3(0.f, 1.f, 0.f), true);
+
+	}
+}
+
+void CMeshRender::render()
+{
+
+	if (GetMesh() == nullptr || GetMaterial() == nullptr)
+	{
+		return;
+	}
+
+	if (Animator2D())
+	{
+		Animator2D()->UpdateData();
+	}
+	else
+	{
+		Animator2D()->Clear();
+	}
+
+	UpdateData();
+
+	GetMesh()->Render();
+}
+
+
