@@ -18,6 +18,9 @@ namespace GamePlayStatic
 
 	void AddAsset(CAsset* _Asset);
 	void ChangeName();
+
+	void Play2DSound(const wstring& _SoundPath, int _Loop, float _Volume, bool _Overlap = false);
+	void Play2DBGM(const wstring& _SoundPath, float _Volume);
 }
 
 string ToString(const wstring& _str);

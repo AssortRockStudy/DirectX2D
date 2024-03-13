@@ -109,6 +109,11 @@ void CPlayerScript::tick()
 		vRot.z += DT * XM_PI;
 	}
 
+	if (KEY_TAP(SPACE))
+	{
+		GamePlayStatic::Play2DSound(L"sound\\DM.wav", 1, 0.5f, true);
+	}
+
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeRotation(vRot);
 }

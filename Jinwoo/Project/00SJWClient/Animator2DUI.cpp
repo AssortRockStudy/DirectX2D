@@ -18,7 +18,7 @@ void Animator2DUI::render_update()
 {
 	ComponentUI::render_update();
 
-	if (ImGui::Button("Edit Animation", ImVec2(130, 20)))
+	if (ImGui::Button("Create Animation", ImVec2(130, 20)))
 	{
 		EditAnimator* pEdit = (EditAnimator*)CImGuiMgr::GetInst()->FindUI("##EditAnimation");
 		CGameObject* pTarget = GetTargetObject();

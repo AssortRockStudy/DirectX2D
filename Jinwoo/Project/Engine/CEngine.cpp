@@ -12,6 +12,7 @@
 #include "CRenderMgr.h"
 #include "CTaskMgr.h"
 #include "CGC.h"
+#include "CSound.h"
 
 CEngine::CEngine()
 	: m_hMainWnd(nullptr)
@@ -22,7 +23,11 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-	
+	if (nullptr != CSound::g_pFMOD)
+	{
+		CSound::g_pFMOD->release();
+		CSound::g_pFMOD = nullptr;
+	}
 }
 
 
@@ -58,6 +63,9 @@ void CEngine::progress()
 	// Manager Update
 	CTimeMgr::GetInst()->tick();
 	CKeyMgr::GetInst()->tick();
+
+	// FMOD Update
+	CSound::g_pFMOD->update();
 
 	// Level Update
 	CLevelMgr::GetInst()->tick();

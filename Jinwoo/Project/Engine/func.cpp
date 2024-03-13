@@ -73,7 +73,7 @@ void GamePlayStatic::DrawDebugCircle(Vec3 _vWorldPos, float _fRadius, Vec3 _Colo
 
 	info.eShape = DEBUG_SHAPE::CIRCLE;
 	info.vWorldPos = _vWorldPos;
-	info.vWorldScale = Vec3(_fRadius, _fRadius, 1.f);
+	info.vWorldScale = Vec3(_fRadius * 2.f, _fRadius * 2.f, 1.f);
 	info.vWorldRot = Vec3(0.f, 0.f, 0.f);
 
 	info.matWorld = XMMatrixScaling(info.vWorldScale.x, info.vWorldScale.y, info.vWorldScale.z)
@@ -120,6 +120,34 @@ void GamePlayStatic::ChangeName()
 	tTask task = {};
 	task.Type = TASK_TYPE::CHANGE_NAME;
 	CTaskMgr::GetInst()->AddTask(task);
+}
+
+void GamePlayStatic::Play2DSound(const wstring& _SoundPath, int _Loop, float _Volume, bool _Overlap)
+{
+	Ptr<CSound> pSound = CAssetMgr::GetInst()->Load<CSound>(_SoundPath, _SoundPath);
+
+	if (nullptr != pSound)
+	{
+		pSound->Play(_Loop, _Volume, _Overlap);
+	}
+}
+
+void GamePlayStatic::Play2DBGM(const wstring& _SoundPath, float _Volume)
+{
+	static Ptr<CSound> CurBGM = nullptr;
+
+	Ptr<CSound> pSound = CAssetMgr::GetInst()->Load<CSound>(_SoundPath, _SoundPath);
+
+	if (nullptr != pSound)
+	{
+		if (nullptr != CurBGM)
+		{
+			CurBGM->Stop();
+		}
+
+		pSound->Play(0, _Volume);
+		CurBGM = pSound;
+	}
 }
 
 

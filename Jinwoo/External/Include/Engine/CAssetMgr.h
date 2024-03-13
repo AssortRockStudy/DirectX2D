@@ -10,6 +10,8 @@
 #include "CTexture.h"
 #include "CMaterial.h"
 #include "CPrefab.h"
+#include "CSound.h"
+#include "CFSM.h"
 
 class CAssetMgr :
 	public CSingleton<CAssetMgr>
@@ -20,6 +22,7 @@ private:
 	map<wstring, Ptr<CAsset>>   m_mapAsset[(UINT)ASSET_TYPE::END];
 
 private:
+	void InitSound();
 	void CreateDefaultMesh();
 	void CreateDefaultGraphicsShader();
 	void CreateDefaultComputeShader();
@@ -85,6 +88,12 @@ ASSET_TYPE GetAssetType()
 
 	if constexpr (std::is_same_v<CPrefab, T>)
 		Type = ASSET_TYPE::PREFAB;
+
+	if constexpr (std::is_same_v<CSound, T>)
+		Type = ASSET_TYPE::SOUND;
+
+	if constexpr (std::is_same_v<CFSM, T>)
+		Type = ASSET_TYPE::FSM;
 
 	return Type;
 }
