@@ -1,29 +1,5 @@
 #include "pch.h"
 
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMesh.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMeshRender.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleSystem.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CParticleUpdate.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPathMgr.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CPrefab.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CRenderComponent.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CRenderMgr.cpp"
-
-
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CRenderMgr_init.cpp"
 
 

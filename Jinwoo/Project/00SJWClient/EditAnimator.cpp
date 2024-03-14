@@ -68,11 +68,13 @@ void EditAnimator::render_update()
 		zoomFactor = max(0.1f, min(zoomFactor, 2.f));
 	}
 
-
 	if (m_textureID != nullptr)
 	{
 		float width = m_pAtlasTex->GetWidth();
 		float height = m_pAtlasTex->GetHeight();
+
+		ImGui::Text("Width: %.2f", width);
+		ImGui::Text("Height: %.2f", height);
 
 		m_ImageSize = ImVec2(width * zoomFactor, height * zoomFactor);
 		ImGui::Image(m_imTexId, m_ImageSize);

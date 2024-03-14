@@ -45,32 +45,8 @@
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CEntity.cpp"
 
 
+#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CFontMgr.cpp"
+
+
 #include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CFSM.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CGameObject.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CGC.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CGraphicsShader.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CKeyMgr.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLayer.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevel.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLevelMgr.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CLight2D.cpp"
-
-
-#include "C:\Users\shin\Desktop\DirectX2D\Jinwoo\Project\Engine\CMaterial.cpp"
 

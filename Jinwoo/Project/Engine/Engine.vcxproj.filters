@@ -157,6 +157,9 @@
     <Filter Include="06.Asset\FSM\State">
       <UniqueIdentifier>{d806843c-5d38-4d5a-96d9-31b03cc4f1fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Manager\FontMgr">
+      <UniqueIdentifier>{a1693beb-b25f-49e8-9979-86998b106149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -321,6 +324,9 @@
     <ClInclude Include="CBlackboard.h">
       <Filter>Module\Blackboard</Filter>
     </ClInclude>
+    <ClInclude Include="CFontMgr.h">
+      <Filter>04.Manager\FontMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -472,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="CBlackboard.cpp">
       <Filter>Module\Blackboard</Filter>
+    </ClCompile>
+    <ClCompile Include="CFontMgr.cpp">
+      <Filter>04.Manager\FontMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
