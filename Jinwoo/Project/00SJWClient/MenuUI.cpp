@@ -8,6 +8,9 @@
 #include <Engine\CLayer.h>
 #include <Engine\CGameObject.h>
 #include <Engine\components.h>
+#include <Engine\CAssetMgr.h>
+#include <Engine\CAsset.h>
+#include <Engine\CPrefab.h>
 
 #include <Scripts\CScriptMgr.h>
 #include <Engine\CScript.h>
@@ -43,6 +46,7 @@ void MenuUI::render_update()
     Level();
     GameObject();
     Asset();
+    Prefab();
 }
 
 
@@ -189,9 +193,54 @@ void MenuUI::GameObject()
 
         if (ImGui::BeginMenu("Component", ""))
         {
-            if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-            if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-            if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+            if (ImGui::MenuItem("Collider"))
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(new CCollider2D);
+                }
+            }
+
+            if (ImGui::MenuItem("MeshRender"))
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(new CMeshRender);
+                }
+            }
+
+            if (ImGui::MenuItem("Animator2D"))
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(new CAnimator2D);
+                }
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Light2D")) 
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(new CLight2D);
+                }
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Camera"))
+            {
+                Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+                if (nullptr != inspector->GetTargetObject())
+                {
+                    inspector->GetTargetObject()->AddComponent(new CCamera);
+                }
+            }
 
             ImGui::EndMenu();
         }
@@ -228,7 +277,7 @@ void MenuUI::Asset()
         ImGui::EndMenu();
     }
 
-    if (ImGui::BeginMenu("Script", ""))
+    if (ImGui::BeginMenu("Script"))
     {
         vector<wstring> vecScriptName;
         CScriptMgr::GetScriptInfo(vecScriptName);
@@ -241,6 +290,52 @@ void MenuUI::Asset()
                 if (nullptr != inspector->GetTargetObject())
                 {
                     inspector->GetTargetObject()->AddComponent(CScriptMgr::GetScript(vecScriptName[i]));
+                }
+            }
+        }
+
+        ImGui::EndMenu();
+    }
+}
+
+void MenuUI::Prefab()
+{
+    if (ImGui::BeginMenu("Prefab"))
+    {
+        if (ImGui::MenuItem("Save Prefab"))
+        {
+            Inspector* inspector = (Inspector*)CImGuiMgr::GetInst()->FindUI("##Inspector");
+            if (nullptr != inspector->GetTargetObject())
+            {
+                wchar_t szSelect[256] = {};
+
+                OPENFILENAME ofn = {};
+
+                ofn.lStructSize = sizeof(ofn);
+                ofn.hwndOwner = nullptr;
+                ofn.lpstrFile = szSelect;
+                ofn.lpstrFile[0] = '\0';
+                ofn.nMaxFile = sizeof(szSelect);
+                ofn.lpstrFilter = L"ALL\0*.*\0Prefab\0*.lv";
+                ofn.nFilterIndex = 1;
+                ofn.lpstrFileTitle = NULL;
+                ofn.nMaxFileTitle = 0;
+
+                // 탐색창 초기 위치 지정
+                wstring strInitPath = CPathMgr::GetContentPath();
+                strInitPath += L"Prefab\\";
+                ofn.lpstrInitialDir = strInitPath.c_str();
+
+                ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+                if (GetSaveFileName(&ofn))
+                {
+                    CGameObject* pObj = inspector->GetTargetObject();
+                    pObj = pObj->Clone();
+                    wstring Key = CPathMgr::GetRelativePath(szSelect);
+                    Ptr<CPrefab> pPrefab = new CPrefab(pObj, false);
+                    CAssetMgr::GetInst()->AddAsset<CPrefab>(Key, pPrefab.Get());
+                    pPrefab->Save(Key);
                 }
             }
         }

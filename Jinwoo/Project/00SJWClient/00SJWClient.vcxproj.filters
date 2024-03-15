@@ -122,6 +122,9 @@
     <Filter Include="02.UI\3.Inspector\AssetUI\FSMUI">
       <UniqueIdentifier>{cf760644-c200-482c-9c39-810dfba3d311}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.UI\3.Inspector\ComponentUI\Script">
+      <UniqueIdentifier>{1b3a8bdb-e5a0-4710-8bb9-e23eba6b663d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="00SJWClient.h">
@@ -268,6 +271,9 @@
     <ClInclude Include="CIdleState.h">
       <Filter>04.State\IdleState</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptUI.h">
+      <Filter>02.UI\3.Inspector\ComponentUI\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="00SJWClient.rc">
@@ -412,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="CIdleState.cpp">
       <Filter>04.State\IdleState</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptUI.cpp">
+      <Filter>02.UI\3.Inspector\ComponentUI\Script</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

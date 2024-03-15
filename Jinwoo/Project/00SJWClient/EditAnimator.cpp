@@ -379,25 +379,28 @@ void EditAnimator::SetTaretObject(CGameObject* _Object)
 
 void EditAnimator::OpenFildDialog()
 {
-	OPENFILENAME ofn;
-	wchar_t szFile[MAX_PATH] = L"";
+	wchar_t szSelect[256] = {};
 
-	ZeroMemory(&ofn, sizeof(ofn));
+	OPENFILENAME ofn = {};
+
 	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = NULL;
-	ofn.lpstrFile = szFile;
+	ofn.hwndOwner = nullptr;
+	ofn.lpstrFile = szSelect;
 	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = sizeof(szFile) / sizeof(*szFile);
-	ofn.lpstrFilter = L"All Files\0*.*\0";
+	ofn.nMaxFile = sizeof(szSelect);
+	ofn.lpstrFilter = L"ALL\0*.*\0Texture\0*.lv";
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFileTitle = NULL;
 	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	// 탐색창 초기 위치 지정
+	wstring strInitPath = CPathMgr::GetContentPath();
+	strInitPath += L"texture\\";
+	ofn.lpstrInitialDir = strInitPath.c_str();
 
 	if (GetOpenFileName(&ofn))
 	{
-		const wstring filePath = szFile;
+		const wstring filePath = szSelect;
 		LoadSpriteFromFile(filePath);
 	}
 }
